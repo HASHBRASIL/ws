@@ -1,0 +1,10 @@
+<?php if ($this->messages) : ?>
+    <div class="messagelist" style="display:none">
+        <?php foreach ($this->messages as $msg):  ?>
+            <div class="msg" data-type="<?php echo key($msg)?>"><?php echo current($msg);?></div>
+        <?php endforeach; ?>
+    </div>
+<?php endif;
+
+
+

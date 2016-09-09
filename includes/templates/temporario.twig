@@ -1,0 +1,84 @@
+{% include 'header-content.html.twig' %}
+<form method="POST" action="home.php">
+
+    {#<input type="hidden" name="servico" id="servico" value="{{  }}"/>#}
+    <input type="hidden" name="id" value="{{ id }}"/>
+
+	<div class="campo-arquivo" id="dropzoneArea">
+		<h2>Arraste o arquivo aqui!</h2>
+		<i class="fa fa-upload fa-6"></i>
+	</div>
+    {% include 'form-action.html.twig' %}        
+</form>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="js/dropzone.js"></script>
+ 
+<script type="text/javascript">
+    var myDropzone = new Dropzone("div#dropzoneArea", { url: "home.php?servico={{ data.servico }}"});
+    Dropzone.options.myDropzone = {
+                previewsContainer: ".dropzone-previews",
+                clickable: ".dropzone-previews",
+                autoProcessQueue: false,
+                uploadMultiple: true,
+                parallelUploads: 100,
+                maxFiles: 500,
+                maxFilesize: 5, // mb
+                paramName: "file",
+                init: function() {
+
+                    var myDropzone = this;
+
+                    // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
+                    // of the sending event because uploadMultiple is set to true.
+                    this.on("sendingmultiple", function() {
+                        // Gets triggered when the form is actually being sent.
+                        // Hide the success button or the complete form.
+                        $('button[type="submit"]').prop("disabled", true);
+                        $('button[type="submit"]').html('<i class="fa fa-spinner fa-spin">Aguarde, enviando imagens...</i>');
+                    });
+                    this.on("successmultiple", function(files, response) {
+                        // Gets triggered when the files have successfully been sent.
+                        // Redirect user or notify of success.
+                        alert('sucesso');
+                    });
+                    this.on("errormultiple", function(files, response) {
+                        // Gets triggered when there was an error sending the files.
+                        // Maybe show form again, and notify user of error
+                        alert('Ocorreu um erro no envio dos arquivos.');
+                    });
+                    this.on("maxfilesexceeded", function(file){
+                        alert("O limite máximo de arquivos foi excedido.");
+                    });
+                    this.on("complete", function (file) {
+                        if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                            alert('foi tudo');
+                        }
+                    });
+                    this.on("addedfile", function(file) {
+                        // Create the remove button
+                        var removeButton = Dropzone.createElement("<button class='btn red btn-xs btn-block'>Excluir</button>");
+                        
+                        // Capture the Dropzone instance as closure.
+                        var _this = this;
+
+                        // Listen to the click event
+                        removeButton.addEventListener("click", function(e) {
+                          // Make sure the button click doesn't submit the form:
+                          e.preventDefault();
+                          e.stopPropagation();
+
+                          // Remove the file preview.
+                          _this.removeFile(file);
+                          // If you want to the delete the file on the server as well,
+                          // you can do the AJAX request here.
+                        });
+
+                        // Add the button to the file preview element.
+                        file.previewElement.appendChild(removeButton);
+                    });
+
+                }            
+            }
+</script>

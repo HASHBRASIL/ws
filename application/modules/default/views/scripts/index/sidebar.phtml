@@ -1,0 +1,120 @@
+<?php $identity = Zend_Auth::getInstance()->getIdentity(); ?>
+<aside class="area-sidebar visible-md visible-lg hidden-sm hidden-xs">
+    <section class="area-usuario" style="background-image: url(<?=$this->ws_avatar; ?>)">
+        <figure>
+            <img id="user-avatar" src="<?php echo $this->avatar;?>" alt="Imagem do usuário">
+            <figcaption><i class="fa fa-circle"></i><?php echo $identity->pessoa->nome; ?></figcaption>
+        </figure>
+
+        <a href="#" class="btn-show-user-menu" data-trigger="dropdown-user" title="Seus serviços HASH">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            <!-- MENU DE NAVEGACAO -->
+        </a>
+    </section>
+
+    <section class="container-scrollable-areas">
+        <section class="area-nav-times">
+            <nav>
+                <header>
+                    <h1 class="">
+                        <a href="#" class="btn-show-times" title="Selecione seu time">
+                            <i class="ico-hash" aria-hidden="true"></i>
+                            <?php echo $identity->time['nome']; ?>
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            <!-- <span class="badge"><?php //echo count($identity->times); ?></span> -->
+                        </a>
+                        <!-- <a href="#" class="btn-add"><i class="fa fa-plus-circle"></i></a> -->
+                    </h1>
+                </header>
+                <ul class="lista-times closed">
+                    <span>Selecione seu time</span>
+                    <?php foreach ($identity->times as $key => $times):?>
+                        <?php if($times["id"] != $identity->time['id']): ?>
+                            <li>
+                                <a class="time" name ="<?php echo $times["nome"];?>" id="<?php echo $times['id']?>" href="#">
+                                    <?php echo $times["nome"]; ?>
+                                </a>
+                            </li>
+                    <?php endif;
+                    endforeach;?>
+                </ul>
+            </nav>
+
+            <nav>
+                <header>
+                    <h1>
+                        <a href="#" title="Selecione seu grupo" class="btn-show-grupos">
+<!--                             <i class="fa fa-hashtag img-item" ></i>
+ -->                        #<?php echo $identity->grupo['nome']; ?>
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            <!-- <span class="badge"><?php //echo count($identity->grupos); ?></span> -->
+                        </a>
+                        <!-- <a href="#" class="btn-add"><i class="fa fa-plus-circle"></i></a> -->
+                    </h1>
+                </header>
+                <ul class="lista-grupos closed">
+                    <span>Selecione seu grupo</span>
+                    <?php foreach ($identity->grupos as $key => $grupo):?>
+                        <?php if($grupo["id"] != $identity->grupo['id']): ?>
+                            <li>
+                                <a class="grupo" name ="<?php echo $grupo["nome"];?>" id="<?php echo $grupo['id']?>" href="#">
+                                    #<?php echo $grupo["nome"];  ?>
+                                </a>
+                            </li>
+                        <?php endif;
+                    endforeach;?>
+                </ul>
+            </nav>
+        </section>
+        <section class="area-nav-menu">
+            <!--
+            <header>
+                <h1>
+                    <a href="#" data-trigger="dropdown-modulos">
+                        <i class="img-item icon-cog"></i>
+                        <?php //echo $identity->modulo['nome'] ?>
+                       <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </h1>
+            </header> -->
+            <nav class="menu-servicos-modulo">
+                <!-- <header>
+                    <span>Lista de Módulos</span>
+                </header> -->
+                <ul>
+                    <?php
+                    foreach ($identity->time['modulos'] as $key => $modulo):
+                        if ($this->isAllowed($modulo['id_servico'])) : ?>
+                            <li>
+                                <a class="modulo <?php if($identity->modulo['id'] == $modulo['id_servico']){ echo 'active'; } ?>"
+                                   name="<?php echo $identity->servicos[$modulo['id_servico']]['nome']; ?>"
+                                   id="<?php echo $modulo['id_servico']?>"
+                                   href="#">
+                                    <i class="img-item <?php echo isset($identity->servicos[$modulo['id_servico']]['metadata']['ws_icon']) ? $identity->servicos[$modulo['id_servico']]['metadata']['ws_icon'] : 'icon-cog' ?>"></i>
+                                    <span><?php echo $identity->servicos[$modulo['id_servico']]['nome']; ?><?php if(!empty($identity->servicos[$modulo['id_servico']]['metanome'])){ ?></span><i class="icofont icofont-question-circle" aria-hidden="true" title="<?php echo Zend_Registry::get('Zend_Translate')->translate($identity->servicos[$modulo['id_servico']]['metanome']); ?>"></i><?php } ?>
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                </a>
+                                <div class="submenu">
+                                    <?php echo $this->partial('menu_novo.phtml', 'default', array('idModulo' => $modulo['id_servico']))?>
+                                </div>
+                            </li>
+                        <?php endif;
+                    endforeach;?>
+                </ul>
+            </nav>
+        </section>
+    </section>
+    <div class="hash-area-publicidade-sidebar">
+        <div class="content-publicidade">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- lateral HASH WS -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:275px;height:150px"
+                 data-ad-client="ca-pub-5801760315108975"
+                 data-ad-slot="1644572649"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+</aside>

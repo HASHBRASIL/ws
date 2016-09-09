@@ -1,0 +1,168 @@
+<link rel="stylesheet" type="text/css" href="/assets/plugins/bootstrap-datepicker/css/datepicker.css" />
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+a i.acao{
+	padding: 5px;
+	color: #000;
+	cursor: pointer;
+}
+a i.acao:HOVER{
+	text-decoration: none;
+}
+div.pesquisa-grid{
+	background: #f9f9f9;
+	padding: 10px;
+	display: none;
+}
+-->
+</style>
+<div class="row-fluid">
+     <div class="span12">
+     <a href="#" class="icon-btn span3 oletires">
+		<i class="icon-bar-chart"></i>
+		<div style="font-size: 12px;font-weight: 500;"> Olerites </div>
+	</a>
+     <a href="#" class="icon-btn span3 totalizacao">
+		<i class="icon-bar-chart"></i>
+		<div style="font-size: 12px;font-weight: 500;"> Totalização </div>
+	</a>
+</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box darkorange">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-group"></i>Folha de Pagamento</div>
+				<div class="tools">
+					<a href="javascript:;" class="config"></a>
+		        	<a href="javascript:;" class="collapse"></a>
+		        </div>
+				<div class="actions">
+					<a href="<?php echo $this->baseUrl('rh/folha-de-pagamento/form')?>" class="btn">Novo</a>
+				</div>
+			</div>
+			<div class="pesquisa-grid">
+				<div class="row-fluid">
+					<div class="span4">
+						<labe>Funcionário</label>
+						<?php echo $this->formSelect('id_funcionario', null, array('class' => 'span12'), $this->comboPessoa);?>
+					</div>
+					<div class="span4">
+						<labe>Referente ao mês</label>
+						<?php echo $this->formText('dt_referencia', null, array('class' => 'span12 datepickerMonth', 'placeholder'=>'referente ao mês'));?>
+					</div>
+					<div class="span4">
+						<labe>Tipo de folha</label>
+						<?php echo $this->formSelect('id_tp_pagamento', null, array('class' => 'span12'), $this->comboTpPagamento);?>
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid" style="display: none">
+					<table class="table-bordered table-striped table-condensed flip-content" id="perfisTable">
+						<thead class="flip-content">
+							<tr>
+								<th class="hidden-480">Código</th>
+					            <th class="hidden-480">Funcionário</th>
+					            <th class="hidden-480">Tipo folha</th>
+					            <th class="hidden-480">Descrição</th>
+					            <th class="hidden-480">Referente ao mês</th>
+					            <th class="hidden-480">Data</th>
+					            <th style="width: 85px;" class="hidden-480 action">Ação</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<?php if (count($this->folha) > 0):?>
+				        <?php foreach ($this->folha as $folha):?>
+			            <tr class="odd gradeX">
+			                <td class="hidden-480" style="width:30px"><?php echo $folha->id_rh_folha_de_pagamento; ?></td>
+			                <td><?php echo $folha->getEmpresa()->nome_razao; ?></td>
+			                <td><?php echo $folha->getTipoPagamento()->nome; ?></td>
+			                <td><?php echo $folha->descricao; ?></td>
+			                <td class="hidden-480"  style="width:150px"><?php echo $this->date($folha->dt_competencia); ?></td>
+			                <td class="hidden-480"  style="width:150px"><?php echo $this->date($folha->dt_criacao); ?></td>
+			                <td class="acoes">
+		                		<a title="emitir olerite" data-tooltip="" href='<?php echo $this->baseUrl("rh/folha-de-pagamento/olerite/id/{$folha->id_rh_folha_de_pagamento}")?>' target="_blank">
+						            	<i class="acao icon-print" title="Emitir olerite"></i>
+						            </a>
+			                	<a class="duplicarRegistro" value="<?php echo $folha->id_rh_folha_de_pagamento; ?>" valueEmpressa="<?php  echo $folha->getEmpresa()->id; ?>" href="#">
+			                		<i class=" icon-retweet acao" title="Duplicar Folha de Pagamento"></i>
+			                	</a>
+			                	<a href="<?php echo $this->baseUrl('rh/folha-de-pagamento/form/id_rh_folha_de_pagamento/'. $folha->id_rh_folha_de_pagamento)?>" value="<?php echo $folha->id_rh_folha_de_pagamento; ?>">
+			                		<i class="icon-pencil acao" title="Editar"></i>					
+			                	</a>
+			                    <a class="deleteMoldal" value="<?php echo $folha->id_rh_folha_de_pagamento; ?>" href="#">
+	                    			<i class="acao  icon-remove" title="Excluir"></i>
+			                    </a>
+			                </td>
+			            </tr>
+				        <?php endforeach;?>
+					<?php endif;?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir este registro: <span id="valueDelete"></span></p>
+</div>
+<div id="dialogDuplicar" style="display: none;">
+	<form class="form-tk">
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group mes">
+					<label class="control-label" for="">Referente ao mês</label>
+					<div class="controls" id="msgValidate">
+						<?php echo $this->formText('fin_emissao',null, array("class" => "datepickerMonth span12"));?>
+						<?php echo $this->formHidden("id_agrupador_financeiro")?>
+						<?php echo $this->formHidden("userId")?>
+					</div>
+				</div>
+			</div>
+			<div class="span6 ">
+				<div class="control-group ">
+					<label class="control-label" for="">Vencimento</label>
+					<div class="controls">
+						<?php echo $this->formText('fin_vencimento',null, array("class" => "datepicker span12"));?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div id="dialog_olerite" style="display: none;">
+	<div class="row-fluid">
+		<div class="span6">
+			<div class="control-group">
+				<label class="control-label">Referente ao mês</label>
+				<div class="controls"><?php echo $this->formText('dt_competencia',null, array("class" => "datepickerMonth span12"));?></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="dialog_relatorio_total" style="display: none;">
+	<div class="row-fluid">
+		<div class="span6">
+			<div class="control-group">
+				<label class="control-label">Referente ao mês</label>
+				<div class="controls"><?php echo $this->formText('dt_competencia_total',null, array("class" => "datepickerMonth span12"));?></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+    <script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/rh/folhadepagamento.grid.js')?>"></script>

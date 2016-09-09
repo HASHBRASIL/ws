@@ -1,0 +1,14 @@
+<?php if(is_array($this->messages) && count($this->messages)): ?>
+    <?php foreach ($this->messages as $message):?>
+        <div class="row-fluid">
+          <div class="span12">
+          <?php $message->type = $message->type == 'alert'? 'error': $message->type ?>
+            <div class="alert alert-<?php echo $message->type ?>" style="margin-top: 10px;">
+                <?php echo $message->text ?>
+                <button class="close" data-dismiss="alert"></button>
+            </div>
+          </div>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+

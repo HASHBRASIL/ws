@@ -1,0 +1,142 @@
+.box-form-container  						{ background: @cor-branco; padding: 20px; border: 1px fade(@cor-preto, 7%) solid; margin-left: 0px; margin-right: 0px; margin-bottom: 20px; margin-top: 0;
+	.row 									{ margin-left: -5px; margin-right: -5px; }
+	*[class^="col-"] 						{ padding-left: 5px; padding-right: 5px; }
+	header 									{ padding-bottom: 20px;
+		h3 									{ font-size: 16px; margin: 0 0 5px 0; padding: 0; font-family: @openSans; font-weight: 300; color: fade(@cor-preto, 80%);
+			span 							{ font-size: 16px; font-weight: bold; color: fade(@cor-preto, 70%); }
+		}
+		p 									{ color: fade(@cor-preto, 60%); }
+	}
+
+	h4 										{ font-size: 1.2em; font-family: @arimo; font-weight: normal; text-transform: capitalize; color: fade(@cor-preto, 80%); padding: 0 3px; margin: 10px 0; }
+	label 									{ margin-bottom: -10px; font-size: 1em; color: fade(@cor-preto, 70%); font-weight: normal; width: 100%; }
+	input 									{ border: 1px fade(@cor-preto, 20%) solid; box-shadow: none; border-radius: 0px; margin: 4px 0 10px 0; padding: 5px 9px;
+		&:focus 							{ }
+	}
+}
+.cabecalho-titulo-pagina 					{
+	.container-form-action  			    { margin-left: 0px; margin-right: 0px; margin-bottom: 10px; margin-top: 0; text-align: right;
+		.btn 							    { background-color: @cor-branco; color: lighten(@cor-preto, 25%); padding: 3px 15px; border: 1px solid lighten(@cor-preto, 90%); font-family: @arimo; font-weight: normal;
+											  font-size: 1em; height: 30px;
+			&.dropdown-toggle               { border-left: 0px;}
+			&.btn-search 					{ border: 0; border-left: 1px solid lighten(@cor-preto, 90%); color: lighten(@cor-preto, 65%); font-size: 1.8em; .rounded(0px); margin: 0 0 0 10px; padding: 0 0 0 10px;}
+		}
+		*[class^="col-"] 				    { padding: 0;}
+		.tooltips 							{ margin: 0 5px;}
+		.dropdown-menu 						{ min-width: 170px;
+			li 								{
+				.btn 						{ margin: 5px 0; background-color: transparent; border: 0; color: lighten(@cor-preto, 20%); text-align: left; width: 100%; .rounded(0px);
+					&:hover 				{ background-color: lighten(@cor-preto, 95%);}
+				}
+				a 							{ margin: 5px 0; background-color: transparent; color: lighten(@cor-preto, 30%); text-align: left;
+					&:hover 				{ background-color: @cor-padrao; color: @cor-branco;}
+				}
+			}
+		}
+	}
+}
+.input-group 								{ margin-bottom: 5px;
+	span.input-group-addon  				{ background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%); padding: 3px 15px; font-family: @arimo; font-weight: normal; font-size: 1em; .rounded(0px);
+											  cursor: pointer;}
+	input.form-control 						{ border: 1px solid lighten(@cor-preto, 90%); font-size: 1em; height: 30px; padding: 5px 10px;
+		&:hover 							{ border: 1px solid lighten(@cor-preto, 90%);}
+	}
+}
+form.criarGrupo 							{
+	.container-form-action 					{
+		*[class^="col-"] 				    { padding: 0 15px;}
+	}
+}
+.box-table-container 						{
+	a.btn 									{
+		i 									{ color: lighten(@cor-preto, 65%);}
+	}
+	.btn-group 								{
+		button.btn-default 					{ background-color: transparent; color: lighten(@cor-preto, 25%); font-weight: bold; padding: 0 10px;
+			&:hover 						{ background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%);}
+		}
+	}
+	.pagination 							{ padding: 0; margin: 0 0 20px 0;
+		li 									{
+			a 								{ border: 0px; color: lighten(@cor-preto, 10%);
+				span 						{ color: lighten(@cor-preto, 25%);}
+				i 							{ font-size: 1.4em;}
+				&:hover 					{ background-color: transparent; color: lighten(@cor-preto, 25%);}
+			}
+			&:first-child 					{
+				a 							{ border-top-left-radius: 0px; border-bottom-left-radius: 0px;}
+			}
+			&:last-child 					{
+				a 							{ border-top-right-radius: 0px;border-bottom-right-radius: 0px;}
+			}
+			&.active 						{
+				a 							{ background-color: lighten(@cor-preto, 25%);
+					span 					{ color: lighten(@cor-preto, 70%);}
+				}
+			}
+		}
+	}
+	.btn-group 								{
+		label 								{ color: lighten(@cor-preto, 45%); margin: 0 10px 0 0;}
+		.btn-default 						{ background-color: @cor-padrao ; border-bottom: 0; border-right: 0px; border-top: 0px; border-left: 1px solid rgba(255, 255, 255, 0.5); color: @cor-branco;
+											  .rounded(0px); padding: 5px 10px;
+			&:hover 						{ background-color: lighten(@cor-padrao, 5%); color: @cor-branco; }
+			&:first-child 					{ border-left: 0px;}
+		}
+	}
+	table 									{
+		form 								{ margin: 2px 0 4px;
+    		input.form-control 				{ border: 1px solid lighten(@cor-preto, 90%); font-size: 0.9em; font-weight: normal; height: 25px; padding: 5px;}
+    	}
+    	.checkbox-inline 					{ margin: 0 !important;}
+	}
+}
+.select2 									{ margin: 4px 0 10px 0; outline: none;
+	.select2-selection--single 		 		{ .rounded(3px); }
+	.select2-selection  					{ border: 1px fade(@cor-preto, 15%) solid; outline: none; padding: 12px 9px 16px 9px;
+		.select2-selection__rendered 		{ margin-top: -13px; padding-left: 0;
+			.select2-selection__placeholder { font-size: 0.9em; }
+		}
+		&:focus 							{ border: 1px #66afe9 solid; .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6)"); }
+		.select2-selection__arrow 			{ top: 3px; right: 6px; }
+	}
+}
+
+.select2-container 							{ outline: none;
+	.select2-dropdown 						{ border: 1px fade(@cor-preto, 10%) solid; outline: none;
+		.select2-search 					{
+			input 							{ outline: none; }
+		}
+	}
+}
+a[data-duplicate] 			    			{ float: right; margin-right: 5px; text-decoration: none;
+	&:hover 								{ tex-decoration: none;
+		span 								{ display: inline-block; .transition(); color: fade(@cor-preto, 50%); }
+	}
+	&:visited 								{ color: inherit; }
+	span 									{ font-size: 12px; font-weight: normal; text-decoration: none; color: fade(@cor-preto, 0%); .transition();
+		&:hover 							{ text-decoration: none; }
+	}
+	i 										{ font-size: 14px; color: @cor-azul; }
+	i[class*='fa-times-circle'] 			{ color: @cor-vermelho; }
+
+}
+fieldset 									{ padding: 20px 10px 10px !important; margin: 0 0 30px !important; .rounded(5px);
+	legend 									{ font-size: 14px; border: none; display: block; width: inherit; margin-bottom: 0;
+		h5 									{ color: #58748B; font-weight: bold; }
+	}
+	&:last-child 							{ margin-bottom: 0px !important;}
+}
+
+.container-fluid 							{
+	.criarGrupo 							{
+		button.btn 							{ background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%); font-size: 1em; font-weight: bold; padding: 5px;}
+	}
+}
+@media (min-width: 767px) and (max-width: 1025px)               {
+	.cabecalho-titulo-pagina 									{
+		.container-form-action  							    {
+			.tooltips 											{ margin: 0; padding: 3px 5px;}
+		}
+	}
+}

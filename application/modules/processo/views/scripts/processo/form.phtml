@@ -1,0 +1,673 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('/assets/plugins/bootstrap-datetimepicker/css/datetimepicker.css')?>" />
+<link href="<?php echo $this->baseUrl('/assets/plugins/dropzone/css/dropzone.css')?>" rel="stylesheet"/>
+<style>
+i.add-entrega-parcial, i.del-entrega-parcial{
+    font-size: 26px;
+    color: #00CC99;
+    cursor: pointer;
+    margin-left: 2px;
+}
+i.del-entrega-parcial{
+    color: #e02222;
+    margin-left: 4px;
+}
+i.add-lote-baixa, i.del-lote-baixa{
+    font-size: 23px;
+    color: #00CC99;
+    cursor: pointer;
+    margin-left: 2px;
+}
+i.del-lote-baixa{
+    color: #e02222;
+    margin-left: 3px;
+}
+i.comentario{
+    cursor: pointer;
+    display: none;
+
+}
+.dropzone .dz-default.dz-message{
+    background-image: url("images/bg-drag-drop-file.png");
+    margin-left: 0;
+    left: 35%;
+}
+.span3.altera-codigo:focus {
+    background-color: rgba(0,0,0,0.2);
+}
+.span3.altera-codigo {
+    background-color: transparent;
+    border-color: transparent;
+    color: #fff;
+    box-shadow: none;
+    padding: 0px;
+    margin: 0;
+    font-size: 16px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+<?php if($this->vo->pro_id):?>
+    i.comentario{
+        display: inline;
+    }
+<?php endif;?>
+</style>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="row-fluid">
+        <?php if($this->vo->pro_id):?>
+            <a target="_blank" href="processo/processo/ordem-servico/pro_id/<?php echo $this->vo->pro_id?>" class="icon-btn span2">
+                <i class="icon-truck"></i>
+                <div> Ordem de serviço </div>
+            </a>
+            <a target="_blank" href="processo/processo/ordem-producao/pro_id/<?php echo $this->vo->pro_id?>" class="icon-btn span2">
+                <i class="icon-legal"></i>
+                <div> Ordem de produção </div>
+            </a>
+        <?php endif;?>
+            <a href="processo/processo/grid" class="icon-btn span2">
+                <i class="icon-cogs"></i>
+                <div> Registro de pedido industrial </div>
+            </a>
+            <a href="processo/processo/form" class="icon-btn span2">
+                <i class="icon-cog"></i>
+                <div> Novo pedido industrial </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row-fluid" style="margin-top:10px">
+    <div class="span12">
+        <div class="portlet box caribbean-green" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-reorder"></i>  Cadastro de pedido industrial <?php echo $this->formText('altera-codigo', $this->vo->pro_codigo, array('class' => 'span3 altera-codigo', 'data-pro-codigo' => $this->vo->pro_codigo))?> <span class="step-title">Passo 1 de 4</span>
+                </div>
+                <div class="tools hidden-phone">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="form-pedido" method="post">
+
+                    <div class="form-wizard">
+                        <div class="navbar steps">
+                            <div class="navbar-inner">
+                                <ul class="row-fluid">
+                                    <li class="span3" id-tab="1">
+                                        <a href="#tab1" data-toggle="tab" class="step active" >
+                                        <span class="number">1</span>
+                                        <span class="desc"><i class="icon-ok"></i> Principal</span>
+                                        </a>
+                                    </li>
+                                    <li class="span3" id-tab="2">
+                                        <a href="#tab2" data-toggle="tab" class="step">
+                                        <span class="number">2</span>
+                                        <span class="desc"><i class="icon-ok"></i> Transação financeira</span>
+                                        </a>
+                                    </li>
+                                    <li class="span3" id-tab="3">
+                                        <a href="#tab3" data-toggle="tab" class="step">
+                                        <span class="number">3</span>
+                                        <span class="desc"><i class="icon-ok"></i> Material</span>
+                                        </a>
+                                    </li>
+                                    <li class="span3" id-tab="4">
+                                        <a href="#tab4" data-toggle="tab" class="step" >
+                                        <span class="number">4</span>
+                                        <span class="desc"><i class="icon-ok"></i> Serviço</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="bar" class="progress progress-success progress-striped">
+                            <div class="bar"></div>
+                        </div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <?php echo $this->formHidden('pro_id', $this->vo->pro_id);?>
+                                <?php $identity = Zend_Auth::getInstance()->getIdentity(); ?>
+
+				                 <?php echo $this->vo->pro_id ? $this->formHidden("id_grupo",$this->vo->id_grupo) : $this->formHidden("id_grupo",$identity->time['id']); ?>
+                                  <div class="row-fluid">
+                                  <?php if($this->vo->getProcessoPai()):?>
+                                      <div class="span1">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Pedido pai')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('pedido_pai', $this->vo->getProcessoPai()->pro_codigo, array('class' => 'span12', 'disabled'=> 'disabled'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  <?php endif;?>
+                                      <div class="span4">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Status')?><span class="required">*</span></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formSelect('sta_id',$this->vo->sta_id, array('class' => 'span12'), $this->comboStatusProcesso);?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span6">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Entidade')?><span class="required">*</span> <i class="icon-comments-alt comentario"></i></label>
+                                              <div class="controls">
+
+                                                  <?php echo $this->formText("empresa_sacado",$this->vo->empresas_id ? $this->vo->getEmpresa()->nome : "", array( "class" => "span12"));?>
+                                                  <?php echo $this->formHidden("empresas_id",$this->vo->empresas_id);?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row-fluid">
+                                      <div class="span2">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Quantidade a produzir')?><span class="required">*</span></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('pro_quantidade',$this->vo->pro_quantidade, array('class' => 'span12 int'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span2">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Valor unitário produção')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('pro_vlr_unt',$this->vo->pro_vlr_unt, array('class' => 'span12 decimal'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span2">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Valor total produção')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('pro_vlr_pedido',$this->formatDecimal($this->vo->pro_vlr_pedido), array('class' => 'span12  decimal'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span2">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Entrega')?></label>
+                                              <div class="controls">
+                                              	<label class="radio"><input type="radio" class="entrega" <?php echo count($this->vo->getLoteProducaoList()) > 0 ? null : 'checked="checked"'?> name="entrega" value="0">Total</label>
+                                              	<label class="radio"><input type="radio" class="entrega" <?php echo count($this->vo->getLoteProducaoList()) > 0 ? 'checked="checked"' : null?> name="entrega" value="1">Parcial</label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                      <?php if(count($this->vo->getLoteProducaoList()) > 0):?>
+                                          <?php foreach ($this->vo->getLoteProducaoList() as $key => $loteProducao):?>
+                                          <div class="row-fluid entrega_parcial" >
+                                              <div class="span1">
+                                              	  <div class="control-group">
+                                                      <label class="control-label"><?php echo $this->translate('Lote')?></label>
+                                                      <div class="controls">
+                                                          <?php echo $this->formText('lote[]',$this->vo->pro_codigo.'-'.$loteProducao->cod_lote, array('class' => 'span12', 'disabled'=> 'disabled'));?>
+                                                          <?php echo $this->formHidden('id_lote_producao[]',$loteProducao->id_lote_producao);?>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="span2">
+                                              	  <div class="control-group">
+                                                      <label class="control-label"><?php echo $this->translate('Quantidade')?></label>
+                                                      <div class="controls">
+                                                          <?php echo $this->formText('quantidade[]',$loteProducao->quantidade, array('class' => 'span12 int quantidade_entrega'));?>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="span2">
+                                              	  <div class="control-group">
+                                                      <label class="control-label"><?php echo $this->translate('Data e hora de entrega')?></label>
+                                                      <div class="controls">
+                                                      	<?php echo $this->formText('dt_entrega[]',$this->dateHour($loteProducao->dt_entrega), array('class' => 'dt_entrega span12'));?>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="span6">
+                                              	  <div class="control-group">
+                                                      <label class="control-label"><?php echo $this->translate('Entidade de entrega')?> <i class="icon-comments-alt comentario"></i></label>
+                                                      <div class="controls">
+                                                      	<?php echo $this->formText('empresa_entrega[]',$loteProducao->getEmpresa()->nome_razao, array('class' => 'span8 empresa_entrega'));?>
+                                                      	<?php echo $this->formHidden('id_empresa_entrega[]', $loteProducao->id_empresa, array('class' => 'id_empresa_entrega'));?>
+                                                      	<?php if($key == 0):?>
+                                                          <i class="icon-plus add-entrega-parcial"></i>
+                                                      	<?php else:?>
+                                                          <i class="icon-remove del-entrega-parcial"></i>
+                                                      	<?php endif;?>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <?php endforeach;?>
+                                      <?php else:?>
+                                      <div class="row-fluid entrega_parcial" style="display: none" >
+                                              <div class="span1">
+                                              	  <div class="control-group">
+                                                      <label class="control-label"><?php echo $this->translate('Lote')?></label>
+                                                      <div class="controls">
+                                                          <?php echo $this->formText('lote[]',null, array('class' => 'span12', 'disabled'=> 'disabled'));?>
+                                                          <?php echo $this->formHidden('id_lote_producao[]',null);?>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          <div class="span2">
+                                          	  <div class="control-group">
+                                                  <label class="control-label"><?php echo $this->translate('Quantidade')?></label>
+                                                  <div class="controls">
+                                                  	<?php echo $this->formText('quantidade[]',null, array('class' => 'span12 int quantidade_entrega'));?>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="span2">
+                                          	  <div class="control-group">
+                                                  <label class="control-label"><?php echo $this->translate('Data e hora de entrega')?></label>
+                                                  <div class="controls">
+                                                  	<?php echo $this->formText('dt_entrega[]',null, array('class' => 'dt_entrega span12'));?>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="span6">
+                                          	  <div class="control-group">
+                                                  <label class="control-label"><?php echo $this->translate('Entidade de entrega')?> <i class="icon-comments-alt"></i></label>
+                                                  <div class="controls">
+                                                  	<?php echo $this->formText('empresa_entrega[]',null, array('class' => 'span8 empresa_entrega'));?>
+                                                  	<?php echo $this->formHidden('id_empresa_entrega[]', null, array('class' => 'id_empresa_entrega'));?> <i class="icon-plus add-entrega-parcial"></i>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <?php endif;?>
+                                  <div class="row-fluid entrega_total" <?php echo count($this->vo->getLoteProducaoList()) > 0 ? 'style="display:none"' : null?> >
+                                      <div class="span2">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Data e hora de entrega')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('pro_data_entrega',$this->dateHour($this->vo->pro_data_entrega), array('class' => 'span12'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span10">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Observações de prazo de entrega')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formTextarea('pro_prazo_entrega',$this->vo->pro_prazo_entrega, array('class' => 'span12', 'rows'=> 2));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row-fluid">
+                                      <div class="span12">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Descrição de produção (Informações para produção)')?><span class="required">*</span></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formTextarea('pro_desc_produto',$this->vo->pro_desc_produto, array('class' => 'span12', 'rows'=> 4, 'maxlength' => 1000));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                            </div>
+                            <div class="tab-pane" id="tab2">
+                                <div class="row-fluid">
+                                    <?php if($this->vo->pro_id && $this->vo->pro_desc_produto):?>
+                                        <p><a href="#" class="btn financial"><i class="icon-money"></i> Novo transação financeira</a></p>
+                                    <?php endif;?>
+                                </div>
+                                <div class="grid-financeiro">
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab3">
+                                <div class="row-fluid">
+                                    <?php if($this->vo->pro_id):?>
+                                        <p><a href="#" class="btn add-material"><i class="icon-legal"></i> Novo Material</a></p>
+                                    <?php endif;?>
+                                </div>
+                                <div class="grid-material">
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab4">
+                                <div class="row-fluid">
+                                    <?php if($this->vo->pro_id):?>
+                                        <p><a href="#" class="btn add-servico"><i class="icon-truck"></i> Novo Serviço</a></p>
+                                    <?php endif;?>
+                                </div>
+                                <div id="grid-servico">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions clearfix">
+                            <a href="javascript:;" class="btn button-previous">
+                                <i class="m-icon-swapleft"></i> Voltar
+                            </a>
+                            <?php if($this->vo->pro_id):?>
+                                <a href="javascript:;" class="btn blue button-next">
+                                    Continuar <i class="m-icon-swapright m-icon-white"></i>
+                                </a>
+                            <?php endif;?>
+                            <button class="btn green" type="submit">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row-fluid" style="display:<?php echo $this->vo->pro_id ? 'block': 'none'?>">
+    <div class="span12">
+        <!--BEGIN TABS-->
+        <div class="tabbable tabbable-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#grid-arquivo" data-toggle="tab">Arquivo</a></li>
+                <li><a href="#grid-historico" data-toggle="tab">Histórico</a></li>
+                <li><a href="#grid-pcp" data-toggle="tab">PCP</a></li>
+                <li><a href="#grid-comentario" data-toggle="tab">Comentário</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="grid-arquivo">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="dropzone" id="my-awesome-dropzone"></div>
+                        </div>
+                        <div class="span6" id="div-grid-arquivo">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="grid-historico">
+                </div>
+                <div class="tab-pane" id="grid-pcp">
+                </div>
+                <div class="tab-pane" id="grid-comentario">
+                </div>
+            </div>
+        </div>
+        <!--END TABS-->
+    </div>
+</div>
+
+<div id="alert-pedido">
+    <span>
+    </span>
+</div>
+<div id="agrupador-financeiro-box" style="display: none">
+    <form id="agrupador-financeiro-form" style="margin-bottom: 0">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label">Tipo de movimento<span class="required">*</span></label>
+                    <div class="control">
+                        <?php echo $this->formSelect('tmv_id', null, array('class' => 'span12'), $this->comboTipoMovimento)?>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label">Nota fiscal</label>
+                    <div class="control">
+                        <?php echo $this->formText('fin_nota_fiscal', null, array('class' => 'span12'))?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label">Moeda<span class="required">*</span></label>
+                    <div class="control">
+                        <?php echo $this->formSelect('moe_id', null, array('class' => 'span12'), $this->comboMoedas)?>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label">Valor</label>
+                    <div class="control">
+                        <?php echo $this->formText('fin_valor', null, array('class' => 'span12 decimal'))?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label">Plano de contas</label>
+                    <div class="control">
+                        <?php echo $this->formSelect('plc_id', null, array('class' => 'span12'), array(null => '----Selecione----'))?>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label">Centro de custo</label>
+                    <div class="control">
+                        <?php echo $this->formSelect('cec_id', null, array('class' => 'span12'), $this->comboCentroCusto)?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label">Grupo de operação</label>
+                    <div class="control">
+                        <?php echo $this->formSelect('ope_id', null, array('class' => 'span12'), $this->comboGrupoOperacao)?>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label">Faturado (contra/por)</label>
+                    <div class="control">
+                        <?php echo $this->formSelect('grupo_id', null, array('class' => 'span12'), $this->comboEmpresasGrupo)?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="dialog-material" style="display: none">
+    <form id="material-form" style="margin-bottom: 0" action="<?php echo $this->baseUrl('material/estoque/form')?>">
+        <?php echo $this->formHidden('id_material_processo');?>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label">Tipo de material<span class="required">*</span></label>
+                    <div class="controls">
+                        <?php foreach ($this->tpMaterialCombo as $id => $nome):?>
+                        <label class="radio"><input type="radio" class="tipoMaterial" name="tipoMaterial" value="<?php echo $id?>"><?php echo $nome ?></label>
+                        <?php endforeach;?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label">produto<span class="required">*</span></label>
+                    <div class="controls">
+                        <?php echo $this->formHidden('id_item') ?>
+                        <?php echo $this->formText('nome_item', null, array('class' => 'span10', 'placeholder' => 'Digite o produto'));?>
+                        <a href="#" class="btn icn-only blue add_item" title="Procurar produto" style="margin-bottom: 10px; padding: 5px 14px"><i class="icon-sitemap"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label">Unidade</label>
+                    <div class="controls">
+                        <?php echo $this->formSelect('id_unidade',null, array('class' => 'span12', 'disabled'=>'disabled'), $this->tpUnidadeCombo);?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-atributo">
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">Quantidade <span class="required">*</span></label>
+                    <div class="controls">
+                        <?php echo $this->formText('quantidade_material', null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">Valor unitário</label>
+                    <div class="controls">
+                        <?php echo $this->formText('vl_unitario_material', null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">Total</label>
+                    <div class="controls">
+                        <?php echo $this->formText('total_material', null, array('class' => 'span12 decimal', 'alt'=> 'decimal'))?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label">Observação</label>
+                    <div class="controls">
+                        <?php echo $this->formTextarea('observacao_cliente', null, array('maxlength' => 300, 'class'=>'span12', 'rows' => 3, 'style'=>'margin-bottom:2px'));?>
+                        <span id="countObservMaterial"></span> Caracteres restantes
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row-fluid" id="dialog_add_item">
+    <div class="span12">
+    </div>
+</div>
+
+<div id="delete-agrupador-financeiro" style="display: none">
+    <div class="row-fluid">
+        <div class="span12">
+            Deseja realmente excluir este Agrupador financeiro?
+        </div>
+    </div>
+</div>
+<div class="remover_lote">
+    <form class="form_baixa" style="margin: 0">
+    </form>
+</div>
+<div id="grid_historico_material">
+</div>
+
+<div class="dialog-servico" style="display: none">
+    <form id="servico-form" style="margin-bottom: 0" action="<?php echo $this->baseUrl('processo/processo-servico/form')?>">
+        <?php echo $this->formHidden('id_processo_servico');?>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label">Serviço<span class="required">*</span></label>
+                    <div class="controls">
+                        <?php echo $this->formText('servico', null, array('class' => 'span12', 'placeholder'=> 'Digite o nome do serviço')) ?>
+                        <?php echo $this->formHidden('id_servico_selected')?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">Quantidade<span class="required">*</span></label>
+                    <div class="controls">
+                        <?php echo $this->formText('quantidade_servico', null, array('class' => 'span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">Valor unitário</label>
+                    <div class="controls">
+                        <?php echo $this->formText('vl_unitario_servico', null, array('class' => 'span12 decimal'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">Total</label>
+                    <div class="controls">
+                        <?php echo $this->formText('total_servico', null, array('class' => 'span12 decimal'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="delete-servico" style="display: none">
+    <div class="row-fluid">
+        <div class="span12">
+            Deseja realmente excluir este serviço?
+        </div>
+    </div>
+</div>
+<div class="dialog_cancelar_material" style="display: none">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">Observação</label>
+                <div class="controls">
+                    <?php echo $this->formTextarea('observacao_cancelar_material', null, array('class'=>'span12', 'rows'=>5, 'style'=> 'margin-bottom:0'))?>
+                    <span id="countObservCancelarMaterial"></span> Caracteres restantes
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialog-comentario">
+</div>
+
+<div id="dialog_delete_arquivo" style="display: none;">
+	<p style="font-size: 16px;padding-top: 6px;margin-bottom: 0;">Deseja realmente excluir este arquivo?</p>
+</div>
+<div  id="delete-comentario" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="comentarioLabel" aria-hidden="false">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h3 id="comentarioLabel">Excluir comentário</h3>
+    </div>
+    <div class="modal-body">
+        <p>Deseja realmente excluir este comentário?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+        <button class="btn red" id="btn-excluir-comentario">Excluir</button>
+    </div>
+</div>
+<?php //plugins ?>
+<link rel="stylesheet" href="styles/jquery.treeview.css">
+<script src="scripts/lib/treeview/jquery.treeview.async.js"></script>
+<script src="scripts/lib/treeview/jquery.treeview.js"></script>
+<script src="scripts/lib/treeview/jquery.treeview.edit.js"></script>
+<script src="scripts/lib/treeview/jquery.treeview.sortable.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl('/scripts/lib/jquery.limit-1.2.source.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/jquery-validation/dist/jquery.validate.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/jquery-validation/dist/additional-methods.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>" charset="UTF-8"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/assets/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js')?>" charset="UTF-8"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/assets/plugins/dropzone/dropzone.js')?>"></script>
+<?php //endplugins?>
+
+<?php //script da pagina?>
+<script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/processo/processo.form-wizard.js")?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/processo/processo.form.financeiro.js")?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/processo/processo.form.material.js")?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/processo/processo.form.servico.js")?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/processo/processo.form.comentario.js")?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/processo/processo.form.arquivo.js")?>"></script>
+<?php //end script da pagina?>

@@ -1,0 +1,151 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+<table style="width: 100%;" class="table-bordered table-striped table-condensed flip-content financialTable">
+	<thead class="flip-content">
+		<tr>
+			<th>Código</th>
+			<th>Workspace</th>
+			<th>Entidade</th>
+            <th>Descrição</th>
+            <th>Emissão</th>
+            <th>Compensação</th>
+            <th>Vencimento</th>
+            <th>Conta</th>
+            <th>Valor</th>
+            <th style="width: 45px;" class="action">Ação</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php if (count($this->financialList) > 0):?>
+        <?php foreach ($this->financialList as $financial):?>
+            <tr id="<?php echo "fin_{$financial['fin_id']}"; ?>" class="odd gradeX">
+                <td style="width:30px; text-align: center;"><?php echo $financial['fin_id']?></td>
+                <td><?php echo $financial['nome']?></td>
+                <td><?php echo $financial['nome_razao'];?></td>
+                <td><?php echo $financial['fin_descricao'];?></td>
+                <td><?php echo $this->Date($financial['fin_emissao']);?></td>
+                <td><?php echo $this->Date($financial['fin_compensacao']);?></td>
+                <td><?php echo $this->Date($financial['fin_vencimento']);?></td>
+                <td><?php echo $financial['con_codnome'];?></td>
+                <td style="text-align: right;" ><?php echo $this->formatDecimal($financial['fin_valor']);?></td>
+			                <td class="acoes">
+                                <a title='Editar' data-tooltip href=' <?php echo $this->baseUrl("/financial/agrupador-financeiro/form/fin_id/{$financial['fin_id']}/id_agrupador_financeiro/{$financial['id_agrupador_financeiro']}") ?>'    >
+                                    <img src='<?php echo $this->baseUrl("/images/edit.png") ?>'  />
+                                </a>
+                                <a href="#" class='deleteMoldal' data-tooltip title='Excluir' id="<?php echo $financial['fin_id']?>" >
+                                    <img src='<?php echo $this->baseUrl("/images/delete.png")?>' />
+                                </a>
+                            </td>
+			            </tr>
+			        <?php endforeach;?>
+<?php endif;?>
+	</tbody>
+</table>
+</div>
+
+<script type="text/javascript">
+
+ $('.financialTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     "bDestroy": true,
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+
+
+	$('.deleteMoldal').on("click", function(e){
+
+		e.preventDefault();
+		var id = $(this).attr("id");
+		$("#valueDelete").prepend(id);
+        $('#dialog_delete').dialog({
+            modal: true,
+            dialogClass: 'ui-dialog-grey',
+            position: [($(window).width() / 2) - (450 / 2), 200],
+            resizable: true,
+            title: "Excluir Pagamento",
+            width: 450,
+            height: 200,
+            buttons: [
+                      {
+		                 'class' : 'btn gree',
+		                 "text" : "Cancelar",
+		                click: function() {
+		                  $( this ).dialog( "close" );
+		                }
+                      },
+                      {
+		                 'class' : 'btn red',
+		                 "text" : "Excluir",
+                    	  click: function() {
+                    		  e.preventDefault();
+                    			$.ajax({
+                    	            type: "POST",
+                    	            url: 'financial/financial/delete',
+                    	            data: { fin_id: id},
+                    	            success: function(data){
+
+                    	            	if (data[0].type == "success"){
+
+                    	            		alert("Registro Excluído Com Sucesso");
+                    	            		$("#fin_"+id).fadeOut("slow").remove();
+
+
+                    	            	}else{
+                    	            		alert("Contacte o administrador. O Registro não pode ser excluído AjaxErr2");
+                    	            	}
+                    	            },
+                    	            complete: function(){
+
+                    	            	$( '#dialog_delete' ).dialog( "close" );
+                    	            }
+                    	        });
+		                }
+        		}
+              ],
+              close: function(){
+            	  $("#valueDelete").empty();
+              }
+        });
+	});
+
+</script>

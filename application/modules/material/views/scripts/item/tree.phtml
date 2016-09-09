@@ -1,0 +1,112 @@
+<?php
+    /**
+     * visualização da arvore de grupo podendo adicionar um grupo, subgrupo e uma classe
+     * é adicionar um produto
+    */
+?>
+<style>
+<!--
+div.action{
+     text-align: right;
+     position: absolute;
+     left: 60%;
+    display: inline;
+}
+div.subAction{
+     text-align: right;
+     position: absolute;
+     left: 40%;
+    display: inline;
+}
+div.classe{
+     text-align: right;
+     position: absolute;
+     left: 30%;
+    display: inline;
+    }
+.add-subClass, .add{
+    cursor:pointer;
+}
+div.row-message{
+    display:none;
+}
+li.item:hover{
+    background-color: rgba(17, 83, 8, 0.17);
+}
+li.item.last:hover{
+    background-color: rgba(17, 83, 8, 0.17);
+}
+li.item{
+    color: #1C539B;
+    cursor:pointer;
+    padding: 0 20px;
+    display: block;
+    background: url(/images/add_small.png) 100% 0 no-repeat,
+                url(/images/treeview-default-line.gif) 0 0 no-repeat;
+}
+li.item.last{
+    color: #1C539B;
+    cursor:pointer;
+    padding: 0 20px;
+    display: block;
+    background: url(/images/add_small.png) 100% 0 no-repeat,
+                url(/images/treeview-default-line.gif) 0 -1766px no-repeat;
+}
+-->
+</style>
+<div class="row-fluid" style="max-width: 100%">
+<div class="panel">
+    <div id="sidetree">
+    <div class="treeheader">&nbsp;</div>
+    <div id="sidetreecontrol"><a href="?#">Minimizar</a> | <a href="?#">Expandir</a></div>
+
+            <ul id="tree">
+                <?php foreach ($this->listGrupo as $grupo):?>
+                <li class="id_grupo_<?php echo $grupo['id_grupo']?>">
+                    <strong><?php echo $grupo['nome']?></strong>
+                    <?php if(count($grupo->getListSubGrupo()) > 0):?>
+                        <ul>
+                            <?php foreach ($grupo->getListSubGrupo() as $subGrupo):?>
+                                <li class="subclass id_subgrupo_<?php echo $subGrupo['id_subgrupo']?>"><?php echo $subGrupo['nome']?>
+                                <?php if(count($subGrupo->getListClasse()) > 0):?>
+                                    <ul>
+                                        <?php foreach ($subGrupo->getListClasse() as $classe):?>
+                                            <li class="class id_classe_<?php echo $classe['id_classe']?>"><?php echo $classe['nome']?>
+                                                <?php if(count($classe->getListItem()) > 0):?>
+                                                    <ul>
+                                                        <?php foreach ($classe->getListItem() as $item):?>
+                                                            <li class="item" id-item="<?php echo $item['id_item']?>" id_unidade_compra="<?php echo $item['id_tipo_unidade_compra']?>" id_unidade_consumo="<?php echo $item['id_tipo_unidade_consumo']?>" ncm_sh="<?php echo $item['ncm_sh']?>" ><?php echo $item['nome']?>
+                                                            </li>
+                                                        <?php endforeach;?>
+                                                    </ul>
+                                                <?php endif;?>
+                                            </li>
+                                        <?php endforeach;?>
+                                    </ul>
+                                <?php elseif(count($subGrupo->getListItem()) > 0):?>
+                                    <ul>
+                                        <?php foreach ($subGrupo->getListItem() as $item):?>
+                                            <li class="item" id-item="<?php echo $item['id_item']?>" id_unidade_compra="<?php echo $item['id_tipo_unidade_compra']?>" id_unidade_consumo="<?php echo $item['id_tipo_unidade_consumo']?>" ncm_sh="<?php echo $item['ncm_sh']?>" ><?php echo $item['nome']?>
+                                            </li>
+                                        <?php endforeach;?>
+                                    </ul>
+                                <?php endif;?>
+                                </li>
+                            <?php endforeach;?>
+                        </ul>
+                    <?php elseif(count($grupo->getListItem()) > 0):?>
+                        <ul>
+                            <?php foreach ($grupo->getListItem() as $item):?>
+                                <li class="item" id-item="<?php echo $item['id_item']?>" id_unidade_compra="<?php echo $item['id_tipo_unidade_compra']?>" id_unidade_consumo="<?php echo $item['id_tipo_unidade_consumo']?>" ncm_sh="<?php echo $item['ncm_sh']?>" ><?php echo $item['nome']?>
+                                </li>
+                            <?php endforeach;?>
+                        </ul>
+                    <?php endif;?>
+                </li>
+                <?php endforeach;?>
+            </ul>
+    </div>
+    </div>
+</div>
+
+<script src="<?php echo $this->baseUrl('scripts/material/group.index.js')?>"  > </script>

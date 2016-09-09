@@ -1,0 +1,42 @@
+{% include 'header-content.html.twig' %}
+{% set paginacao = false %}
+{% for filho in servico.filhos %}
+    {% if filho.metadata.ws_comportamento == 'paginacao' %}
+        {% set paginacao = filho %}
+    {% endif %}
+{% endfor %}
+<div class="panel panel-white">
+    <div class="row box-table-container panel-body table-responsive">
+        <table id="sample-table-3" class="table table-striped table-hover paginacao" data-servico="{{ paginacao.id }}" >
+            <thead>
+                {% include 'list-header.html.twig' %}
+            </thead>
+            <tbody>
+                {% include 'rows.html.twig' %}
+            </tbody>
+        </table>
+
+        <div class="row_list_bottom">
+
+            {% include 'pagination.html.twig' %}
+
+            {% if data.getPages(pageCount) is defined %}
+
+                {% if data.getPages.totalItemCount > 3000 %}
+                    {% set valores = [10,25,50,100, 300, 500] %}
+                {% else %}
+                    {% set valores = [10,25,50,100, 300, 500, 'todos'] %}
+                {% endif %}
+
+                <div class="ng-table-counts btn-group pull-right">
+                    <label class="pull-left">Exibir: </label>
+                    {% for valor in valores %}
+                        <button type="button" class="btn btn-default {% if valor == params.itens %} active {% endif %}">
+                            <span class="ng-binding">{{valor}}</span>
+                        </button>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

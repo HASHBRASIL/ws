@@ -1,0 +1,139 @@
+<?php
+    /**
+     * formulario do controller sis para gerenciar as informacoes de sistema da empresa proprietaria
+    */
+?>
+<div class="row-fluid">
+    <div class="span12">
+        <h3 class="page-title">
+            Gerenciar
+             <small>Sistema</small>
+        </h3>
+    </div>
+</div>
+<div class="row-fluid">
+	<div class="portlet box grey">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i> Formulário</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+	<div class="portlet-body form">
+        <form enctype="multipart/form-data" method="post"  class="form-horizontal" >
+        	<?php echo $this->formHidden('id_proprietario', $this->vo->id_proprietario);?>
+        	<?php $workspaceSession = new Zend_Session_Namespace('workspace');?>
+			<?php echo $this->vo->id_proprietario ? $this->formHidden("id_workspace",$this->vo->id_workspace) : $this->formHidden("id_workspace",$workspaceSession->id_workspace); ?>
+            <div class="row-fluid">
+            	<div class="span12">
+                	<div class="control-group">
+	                	<label class="control-label"><?php echo $this->translate('Seu nome ou nome da sua Empresa')?></label>
+	                    <div class="controls">
+	                    	<?php echo $this->formText('nome_empresa',$this->vo->nome_empresa, array('class' => 'span6'));?>
+	                     </div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+            	<div class="span6">
+                	<div class="control-group">
+	                	<label class="control-label"><?php echo $this->translate('CPF/CNPJ')?></label>
+	                    <div class="controls">
+	                    	<?php echo $this->formText('cpf_cnpj',$this->vo->cpf_cnpj, array('class' => 'span8'));?>
+	                     </div>
+					</div>
+				</div>
+				<div class="span6">
+					<div class="control-group">
+						<label class="control-label">Endereço de E-mail</label>
+						<div class="controls">
+							<div class="input-icon left">
+								<i class="icon-envelope"></i>
+								<?php echo $this->formText('email',$this->vo->email, array('class' => 'span8 m-wrap'));?>    
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+            	<div class="span6">
+                	<div class="control-group">
+	                	<label class="control-label"><?php echo $this->translate('Telefone')?></label>
+	                    <div class="controls">
+	                    	<?php echo $this->formText('telefone',$this->vo->telefone, array('class' => 'span8'));?>
+	                     </div>
+					</div>
+				</div>
+				<div class="span6">
+                	<div class="control-group">
+	                	<label class="control-label"><?php echo $this->translate('CEP')?></label>
+	                    <div class="controls">
+	                    	<?php echo $this->formText('cep',$this->vo->cep, array('class' => 'span8'));?>
+	                     </div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12">
+	                <div class="control-group">
+		                <label class="control-label"><?php echo $this->translate('Seu endereço ou da sua empresa')?></label>
+	                    <div class="controls">
+	                    	<?php echo $this->formText('end_proprietario',$this->vo->end_proprietario, array('class' => 'span6'));?>
+	                    </div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+            	<div class="span6">
+            		<label class="control-label"><?php echo $this->translate('Logotipo do Sistema')?></label>
+	                <div class="controls">
+            			<?php echo $this->formFile("logo");?>
+            		</div>
+            	</div>
+            	<div class="span6">
+            		<label class="control-label"><?php echo $this->translate('Logotipo para os Relatórios')?></label>
+	                <div class="controls">
+            			<?php echo $this->formFile("logo_report");?>
+            		</div>
+            	</div>
+            </div>
+			<div class="row-fluid">
+            	<div id = "boxLogo" class="span6">
+            		<?php if ($this->vo->logo != ""):?>
+	            		<label class="control-label"></label>
+		                <div class="controls">
+	            			<img style="width: 30%" alt="" src="<?php echo $this->baseUrl("/uploads/logos/{$this->vo->logo}")?>">
+	            			<span value="<?php echo $this->vo->id_proprietario ?>" title="Excluir Imagem" style="cursor:pointer; position: relative; bottom: -24;" id="deleteLogo" alt="" class="icon-trash"></span>
+            			</div>
+            		<?php endif;?>
+            	</div>
+            	<div id = "boxLogoReport" class="span6">
+					<?php if ($this->vo->logo_report != ""):?>
+	            		<label class="control-label"></label>
+		                <div class="controls">
+            				<img style="width: 30%" alt="" src="<?php echo $this->baseUrl("/uploads/logos/{$this->vo->logo_report}")?>">
+            				<span value="<?php echo $this->vo->id_proprietario ?>" title="Excluir Imagem" style="cursor:pointer; position: relative; bottom: -24;" id="deleteLogoReport" alt="" class="icon-trash"></span>
+	            		</div>
+            			<?php endif;?>
+            	</div>
+            	<div class="row-fluid" >
+	            	<div style="margin-top: 30px;" class="span12">
+	            		<label class="icon-comments-alt control-label">Observação</label>
+	            		<span style="cursor: default;" href="#" class="btn mini red">Somente arquivos de imagem jpg, jpeg, png e gif com largura de 30px a 40px e altura de 50px a 200px </span>
+	            	</div>
+	            </div>
+            <div class="row-fluid">
+            	<div class="span12">
+            	</div>
+            </div>
+            </div>
+            <div class="form-actions">
+            	<button type="submit" class="btn blue"><i class="icon-ok"></i> Salvar</button>
+                	<a onclick="javascript:history.back()" class="btn" >Voltar</a>
+			</div>
+        </form>
+    </div>
+    </div>
+</div>
+<script src="<?php echo $this->baseUrl('assets/scripts/form-validation.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/sis/sis.form.js')?>"></script>

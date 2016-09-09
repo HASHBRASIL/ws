@@ -1,0 +1,63 @@
+<?php
+    /**
+     * formulario de workspace
+    */
+?>
+<div class="row-fluid">
+	<div class="portlet box grey" style="margin-top: 20px">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i> Registro de workspace</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+	<div class="portlet-body form">
+        <form method="post"  class="form-horizontal" id="form_workspace">
+                  <?php echo $this->formHidden('id_workspace', $this->vo->id_workspace);?>
+                  <h3 class="form-section">Workspace</h3>
+                  <div class="row-fluid">
+                      <div class="span5">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Nome')?><span class="required">*</span></label>
+	                          <div class="controls">
+	                          	<?php echo $this->formText('nome',$this->vo->nome, array('class' => 'span10'));?>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span2">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Workspasce Privilegiado')?></label>
+	                          <div class="controls">
+	                          	<?php echo $this->formCheckbox('free_access', $this->vo->free_access,null, array('checked' => '1', 'unChecked' => '0')); ?>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Sigla')?><span class="required">*</span></label>
+	                          <div class="controls">
+	                          	<?php echo $this->vo->id_workspace == "" ? $this->formText('acronym',$this->vo->acronym, array('class' => 'span10')) : $this->formText('acronym',$this->vo->acronym, array('disabled'=> 'disabled','class' => 'span10'));?>
+	                          </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row-fluid">
+                      <div class="span12">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Empresa')?></label>
+	                          <div class="controls">
+	                          	<?php echo $this->formText('empresa',$this->vo->getEmpresa()? $this->vo->getEmpresa()->nome_razao: null, array('class' => 'span6'));?>
+	                          	<?php echo $this->formHidden('id_empresa',$this->vo->id_empresa);?>
+	                          </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-actions">
+                      <a href="<?php echo $this->baseUrl('auth/workspace/grid')?>" class="btn" >Voltar</a>
+                      <button type="submit" class="btn blue"><i class="icon-ok"></i> Salvar</button>
+                  </div>
+        </form>
+        </div>
+    </div>
+</div>
+<script src="/scripts/auth/workspace.form.js" ></script>

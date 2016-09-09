@@ -1,0 +1,90 @@
+
+<div class="content">
+
+    <div id="progressiveBar">
+        <div id="bar"></div>
+    </div>
+
+    <!-- BEGIN LOGIN FORM -->
+    <form class="form-vertical login-form" method="post" id="loginFormId">
+        <input type="hidden" name="redirect" value="<?php echo $this->redirect; ?>" />
+        <h3 class="form-title">Acesse sua Conta no Hash Workspace</h3>
+        <div class="alert alert-error hide">
+            <button class="close" data-dismiss="alert"></button>
+            <span>Insira seu Usuário e Senha.</span>
+        </div>
+        <div class="control-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">Usuário</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-user"></i>
+                    <input class="m-wrap placeholder-no-fix" original-title="" name="usuario" id="usuario" autofocus="" placeholder="Usuário" autocomplete="on" required="" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-ie8 visible-ie9">Senha</label>
+            <div class="controls">
+                <div class="input-icon left">
+                    <i class="icon-lock"></i>
+                    <input class="m-wrap placeholder-no-fix" original-title="" name="senha" id="senha" placeholder="**********" required="" type="password">
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button id="btnSubmit" type="submit" class="btn blue pull-right">
+            Login <i class="m-icon-swapright m-icon-white"></i>
+            </button>
+        </div>
+        <div class="forget-password">
+            <h4>Esqueceu sua senha?</h4>
+            <p>
+                Sem Problemas, clique <a href="<?php echo $this->baseUrl("auth/index/reset-pass/")?>" class="" id="forget-password">aqui</a>
+                para redefini-la.
+            </p>
+        </div>
+    </form>
+    <!-- END LOGIN FORM -->
+</div>
+<script>
+    $(document).ready(function() {
+
+        $("#btnSubmit").click(function(e){
+
+            $( "#bar" ).progressbar({
+                disabled: true
+            });
+
+            e.preventDefault();
+            $(this).text('Validando...').attr('disabled', 'disabled');
+            $.getJSON('<?php echo $this->baseUrl("/auth/index/salt"); ?>',
+                { usuario: $("#usuario").val() },
+                function (data) {
+
+                    var mypbkdf2 = new PBKDF2($("#senha").val(), data.dbsalt, 10000, 20);
+
+                    var status_callback_1 = function(percent_done) {
+                        $( "#bar" ).progressbar({
+                            value: (percent_done/2)
+                        });
+                    };
+                    var status_callback_2 = function(percent_done) {
+                        $( "#bar" ).progressbar({
+                            value: 50 + (percent_done/2)
+                        });
+                    };
+                    var result_callback = function(key) {
+                        var mypbkdf3 = new PBKDF2(key, data.sessionsalt, 10000, 20);
+                        var result_final = function(key) {
+                            $("#senha").val(key);
+                            $("#loginFormId").submit();
+                        };
+                        mypbkdf3.deriveKey(status_callback_2, result_final);
+                    };
+                    mypbkdf2.deriveKey(status_callback_1, result_callback);
+                });
+        });
+    });
+</script>
+

@@ -1,0 +1,21 @@
+<div class="container-inscricao col-md-12">
+    <div class="container-form">
+        <div class="suport-text">
+            <h1>Agora falta pouco, escolha um nome de usuário para que<br/>as pessoas o reconheçam. Fique a vontate para escolher o que achar melhor!</h1>
+            <h2>Escreva no campo abaixo o nome de usuário.</h2>
+        </div>
+        <div class="box-form-inscricao">
+            <form method="POST">
+                <div class="row">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input type="text" name="usuario" title="{{ 'campo_obrig'|zftranslate }}"
+                             pattern="[a-z0-9]+" value="{{ usuario }}" required>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <button type="submit">{{ 'next'|zftranslate }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

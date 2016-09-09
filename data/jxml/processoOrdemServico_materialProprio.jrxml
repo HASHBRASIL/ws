@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="processoOrdemServico_materialProprio" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_processo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+ti.nome descricao,
+tu.nome nome_unidade,
+tsm.nome nome_status,
+	REPLACE(REPLACE(REPLACE(FORMAT(tmp.qtd_baixado, 2),'.', ';'),',', '.'),';',',') AS qtd_baixado,
+	REPLACE(REPLACE(REPLACE(FORMAT(tmp.quantidade, 2),'.', ';'),',', '.'),';',',') AS quantidade,
+	CONCAT('R$ ',REPLACE(REPLACE(REPLACE(FORMAT(tmp.vl_unitario, 2),'.', ';'),',', '.'),';',',')) AS vl_unitario,
+	CONCAT('R$ ',REPLACE(REPLACE(REPLACE(FORMAT(tmp.total, 2),'.', ';'),',', '.'),';',',')) AS total,
+	(SELECT CONCAT('R$ ',REPLACE(REPLACE(REPLACE(FORMAT(SUM(total), 2),'.', ';'),',', '.'),';',',')) FROM tb_gp_material_processo WHERE id_tp_material = 1
+		AND ativo = 1
+		AND id_processo = $P{id_processo} ) AS total_material
+FROM tb_gp_material_processo tmp
+INNER JOIN tb_gm_item ti ON tmp.id_item = ti.id_item
+INNER JOIN tb_gp_status_material tsm ON tmp.id_status_material = tsm.id_status_material
+INNER JOIN tb_tipo_unidade tu ON tmp.id_tipo_unidade = tu.id_tipo_unidade
+WHERE tmp.id_tp_material = 1
+AND tmp.ativo = 1
+AND tmp.id_processo = $P{id_processo};]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="nome_unidade" class="java.lang.String"/>
+	<field name="nome_status" class="java.lang.String"/>
+	<field name="qtd_baixado" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.String"/>
+	<field name="vl_unitario" class="java.lang.String"/>
+	<field name="total" class="java.lang.String"/>
+	<field name="total_material" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="74">
+			<staticText>
+				<reportElement x="0" y="16" width="138" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Material Proprio]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="12" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="222" y="50" width="79" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Unidade"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="50" width="222" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Descrição"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="72" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="301" y="50" width="74" height="20"/>
+				<textElement markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Quantidade"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="50" width="95" height="20"/>
+				<textElement textAlignment="Right" markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["valor Unitário"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="50" width="85" height="20"/>
+				<textElement textAlignment="Right" markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="2" width="221" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="222" y="2" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome_unidade}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="375" y="2" width="95" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vl_unitario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="301" y="2" width="74" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="470" y="2" width="85" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="22">
+			<textField>
+				<reportElement x="391" y="2" width="79" height="20"/>
+				<textElement textAlignment="Right" markup="none">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["TOTAL"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="2" width="85" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{total_material}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="555" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

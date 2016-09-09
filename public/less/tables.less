@@ -1,0 +1,183 @@
+/*
+* @Author: toinsane
+* @Date:   2016-01-29 18:26:10
+* @Last Modified by:   toinsane
+* @Last Modified time: 2016-02-18 18:15:47
+*/
+
+.box-table-container    { background: @cor-branco; .rounded(3px); padding: 20px; border: 1px fade(@cor-preto, 5%) solid; margin-left: 20px; margin-right: 20px; margin-bottom: 20px; margin-top: 0;
+    &.panel-body        { overflow: hidden;}
+}
+
+table.table     { font-family: @arimo;
+    thead       {
+        tr      {
+            th  { background-color: lighten(@cor-preto, 89%); font-family: @arimo; font-weight: bold; font-size: 17px; color: fade(@cor-preto, 65%); border-bottom: none; padding: 15px;}
+        }
+    }
+    tbody                           {
+        tr                          {
+            &:nth-child(even)       { background: fade(@cor-preto, 2%); }
+            td                      { padding: 8px 15px 0px 15px;
+                &:last-child        {  }
+                &.tool-cell         { padding-top: 4px; padding-bottom: 4px;
+                    // button          { margin-left: 5px; width: 25px; height: 25px;
+                    //     // .glyphicon  { left: -4px; }
+                    //     .fa         { left: -4px; }
+                    // }
+                }
+            }
+
+        }
+    }
+    tfoot       {
+        tr      {
+            td  {  }
+        }
+    }
+}
+
+table                               {
+    thead                           {
+        tr                          {
+            th                      { background-color: lighten(@cor-preto, 92%); color: fade(@cor-preto, 65%);
+                span, i             { color: lighten(@cor-preto, 35%);}
+            }
+        }
+    }
+    &.table-striped                 {
+        tbody                       {
+            tr                      {
+                &:nth-of-type(odd)  { background-color: transparent;}
+            }
+        }
+    }
+}
+
+
+// preview - remover daqui depois
+
+.preview                                { border-bottom: 1px solid fade(@cor-preto, 10%); border-top: 1px solid fade(@cor-preto, 10%); padding: 30px 20px 0px; margin-bottom: 0px;
+    table                               {
+        thead                           {
+            tr                          {
+                th                      { font-family: @openSans; font-size: 1.5em; font-weight: lighter; padding: 0;}
+            }
+        }
+        tbody                           {
+            tr                          {
+                td                      { padding: 5px;
+                }
+                &.ativo                 { background-color: #fbf4d5;}
+                &:last-child            { border-bottom: 1px solid fade(@cor-preto, 10%);}
+            }
+        }
+    }
+}
+
+// Carrossel
+
+.carrossel                              { margin-bottom: 20px; position: relative;
+    &:before                            { border: 1px fade(@cor-preto, 5%) solid; border-radius: 2px; content: ''; display: block; .box-shadow(inset 0px 0px 40px @cor-preto); height: 100%; position: absolute; width: 100%; z-index: 1;}
+    .content-carrossel                  { background-color: #909091; border: 1px fade(@cor-preto, 5%) solid; border-radius: 3px; overflow: hidden; padding: 50px 0; position: relative; width: 100%;
+        ul                              { list-style: none; margin: 0; overflow: hidden; padding: 0; position: relative; width: 500%;
+            li                          { display: inline-block; position: relative;
+                img                     { height: 100%; width: 100%;}
+            }
+        }
+    }
+}
+
+
+// thumb - remover daqui depois
+
+.list-thumbs                            { border: 1px fade(@cor-preto, 10%) solid; border-radius: 2px; padding: 50px 0px;
+    ul                                  { display: inline-block; list-style: none; padding: 0; margin: 0;
+        li                              { font-family: @arimo; margin-bottom: 10px;
+            .img-list                   { padding: 5px 0;
+                span                    { border: 1px fade(@cor-preto, 20%) solid; border-radius: 2px; display: block; padding: 5px; .box-shadow(0px 0px 10px #d1d3d6); position: relative;
+                    img                 { border: 1px fade(@cor-preto, 30%) solid; border-radius: 2px; height: 100%; width: 100%;}
+                    i                   { color: @cor-branco; cursor: pointer; position: absolute; text-align: right; right: 7px; text-align: right; width: 0; height: 0;
+                                          border-style: solid; border-width: 0 25px 25px 0; border-color: rgba(0, 0, 0, 0) fade(@cor-preto, 40%) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); top: 6px;
+                    &:before            { position: absolute; right: -20px; top: 1px;}
+                    }
+                }
+            }
+            .info                       {
+                span                    { color: @cor-preto; display: block; font-size: 1em;}
+                small                   { color: #3a9bcd; display: block; font-size: 1em;}
+                ul                      { list-style: none; margin-top: 10px;
+                    li                  { background-color: @cor-vermelho; border-radius: 2px; color: @cor-branco; display: inline-block; font-size: 0.9em; padding: 3px 5px;}
+                    button              { background-color: @cor-vermelho; border: 0; border-radius: 2px; color: @cor-branco; display: inline-block; font-size: 0.9em; padding: 3px 10px;
+                        &:focus         { outline: none;}
+                    }
+                }
+            }
+        }
+    }
+}
+
+table#sample-table-3.table                          {
+    thead                                           {
+        th                                          { padding: 10px 5px;
+            .fa                                     { margin: 0;}
+        }
+    }
+    tbody                                           {
+        .tr-dropdown                                { background-color: fade(@cor-preto, 6%);}
+        td.tool-cell                                {
+            .btn-group                              {
+                .btn                                { background: transparent; border: none; padding: 0px 3px;
+                    i                               { color: lighten(@cor-preto, 65%); font-size: 1.5em;}
+                }
+                ul.dropdown-menu                    {
+                    li                              {
+                        a                           { padding: 0 5px;
+                            i                       { font-size: 1.5em;
+                                &.icofont-bill,
+                                &.icofont-flash     { font-size: 2em;}
+                                &.icofont-users     { font-size: 1.8em;}
+                            }
+                            &:hover, &:focus        { background-color: transparent;}
+                        }
+                    }
+                }
+            }
+        }
+    }
+    button                                          { background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%); font-size: 1em; font-weight: bold;
+        .caret                                      { display: none;}
+    }
+    form                                            {
+        .campo-arquivo                              { border: 0; margin: 0;}
+    }
+}
+
+
+.dropdown-content                           {
+    .form-extra                             { padding: 0;
+        .panel                              { border: 0px; margin: 0;
+            form                            { margin: 0; padding: 10px;
+                fieldset                    { border: 0px; padding: 0 !important; margin: 0 !important;
+                    .form-group             { margin-bottom: 0;
+                        label               { display: block; margin: 0;}
+                        .select2            { margin-bottom: 0;}
+                    }
+                    .btn-salvar             { padding: 20px 0px 0;}
+                }
+            }
+        }
+    }
+}
+
+.area-conteudo-hash                         {
+    fieldset                                {
+        .form-group                         {
+            label                           { display: block;}
+        }
+    }
+    form                                    {
+        button.btn                          { background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%); font-size: 1em; font-weight: bold; margin: 0 20px 20px;}
+    }
+}
+

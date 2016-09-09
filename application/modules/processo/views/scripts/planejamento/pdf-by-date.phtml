@@ -1,0 +1,29 @@
+<h1 style="text-align: center">Planejamento - <?php echo $this->date($this->date)?></h1>
+<table  cellspacing="1" cellpadding="3" border="0" style="width: 570px;">
+        <?php if(count($this->listPlanejamento)> 0):?>
+        <?php foreach ($this->listPlanejamento as $planejamento):?>
+                <tr>
+                    <td style="width: 97px; font-weight: bold;">Cliente:</td>
+                    <td colspan="9"><?php echo $planejamento->getProcesso()->getEmpresa()->nome_razao ?></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Cód. processo:</td>
+                    <td><?php echo $planejamento->getProcesso()->pro_codigo ?></td>
+                    <td style="width: 100px;font-weight: bold;">Quantidade:</td>
+                    <td><?php echo $planejamento->getProcesso()->pro_quantidade ?></td>
+                    <td style="font-weight: bold;">Ordem:</td>
+                    <td><?php echo $planejamento->ordem ?></td>
+                    <td style="width: 100px;font-weight: bold;">Prioridade:</td>
+                    <td><?php echo $planejamento->getPrioridade()->nome ?></td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: 1px solid #241E1E;font-weight: bold;">Descrição:</td>
+                    <td colspan="9" style="text-align: justify;border-bottom: 1px solid #241E1E;"><?php echo $planejamento->getProcesso()->pro_desc_produto ?></td>
+                </tr>
+        <?php endforeach;?>
+        <?php else :?>
+                <tr>
+                    <td colspan="10">Não existem registros!</td>
+                </tr>
+        <?php endif;?>
+</table>

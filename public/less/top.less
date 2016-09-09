@@ -1,0 +1,46 @@
+/*
+* @Author: toinsane
+* @Date:   2016-01-20 14:47:45
+* @Last Modified by:   toinsane
+* @Last Modified time: 2016-01-20 15:29:28
+*/
+
+.nav-grupo-times        { display: inline-block; padding: 5px 0; width: 100%;
+    ul                  { margin: 0; padding: 0;
+        li              { list-style-type: none; display: inline-block;
+            a.btn-fav   { text-decoration: none; float: left; display: inline-block; padding-top: 19px; margin: 0 6px;
+                i.fa    { font-size: 1.2em; color: @cor-amarelo; }
+                &:hover { text-decoration: none; }
+            }
+            a.btn-times                 { font-size: 1em; text-decoration: none; display: inline-block; padding-top: 15px; position: relative; color: lighten(@cor-preto, 40%); font-weight: normal;
+                span                    { font-weight: 600; float: left; margin: 0 5px; }
+                i                       { font-size: 0.9em; display: inline-block; margin-top: 5px; float: left; margin-left: 5px; color: lighten(@cor-preto, 40%); .transition();
+                    &.icofont           { font-size: 1.2em; margin-top: 2px;}
+                }
+                &:hover                 { color: lighten(@cor-preto, 25%); text-decoration: none;
+                    // i.fa                { margin-top: 11px; .transition(); }
+                }
+                i.ico-hash              { background: url('../img/logo-hash-icone.png') no-repeat; background-size: contain; display: inline-block; height: 20px; margin: 0; vertical-align: middle; width: 20px;}
+            }
+        }
+    }
+    .rastro                             {
+        ul                              {
+            li                          {
+                a                       { color: lighten(@cor-preto, 35%); font-weight: 600; font-size: 1em;}
+                &.active                { color: lighten(@cor-preto, 25%); text-decoration: underline;}
+            }
+        }
+    }
+    form                                {
+        .input-group                    {
+            span.input-group-btn        {
+                .search-btn             { background-color: @cor-padrao; color: @cor-branco;}
+            }
+        }
+    }
+}
+
+
+
+

@@ -1,0 +1,105 @@
+<?php
+    // phtml para dar load no twig legado e novos.
+    $loader = new Twig_Loader_Filesystem(array('../application/modules/default/views/twig'));
+    $twig = new Twig_Environment($loader, array('debug' => true));
+    $twig->addExtension(new Twig_Extension_Debug());
+
+    // adicionando diretório dinamico de twig
+    $twigDir = '../application/modules/'
+             . $this->params['module']
+             . '/views/scripts/'
+             . $this->params['controller'];
+
+    if (is_dir($twigDir)) {
+        $loader->addPath($twigDir);
+    }
+
+    $loader->addPath('../includes/templates');
+
+    if (!$this->file) {
+        $this->file = $this->params['action'] . ".html.twig";
+    }
+
+    /* i18n */
+    $twig->addExtension(new Twig_Extensions_Extension_I18n());
+
+    $translate = Zend_Registry::get('Zend_Translate');
+
+    $filter = new Twig_SimpleFilter('zftranslate', function ($string) use ($translate) {
+        return $translate->translate($string);
+    });
+
+    $filterContem = new Twig_SimpleFilter('phpstrpos', function ($string) {
+
+        if (strripos($string, 'jpg')) {
+            return true;
+        } elseif (strripos($string, 'jpeg')) {
+            return true;
+        }elseif (strripos($string, 'png')) {
+            return true;
+        }elseif (strripos($string, 'gif')) {
+            return true;
+        }else {
+            return false;
+        }
+
+    });
+
+    $filterTamanhoImage = new Twig_SimpleFilter('tamanhoimagem', function ($path, $imagem, $defalult) {
+
+        if (file_exists($path . $imagem) ) {
+            $info = getimagesize($path . $imagem);
+
+            if ($info[0] >= $defalult) {
+                return $defalult;
+            } else {
+                return $info[0];
+            }
+        } else {
+            return $defalult;
+        }
+    });
+
+    $applyFilter = new Twig_SimpleFilter('apply_filter', function ($env, $context, $value, $filter) {
+        if (!$filter) {
+            return $value;
+        } else if (is_array($filter)) {
+            return $filter[$value];
+        }
+        $name = 'apply_filter_' . md5($filter);
+        $template = sprintf('{{ %s | %s }}', $name, $filter);
+        $template = $env->createTemplate($template);
+        $context[$name] = $value;
+        return $template->render($context);
+
+    }, array('needs_environment' => true,
+        'needs_context' => true));
+
+    // @todo mudar para quando estiver em outra lingua
+    $twig->getExtension('core')->setDateFormat('d/m/Y', '%d days');
+    $twig->getExtension('core')->setNumberFormat(2, ',', '.');
+
+    $twig->addFilter($filter);
+    $twig->addFilter($filterContem);
+    $twig->addFilter($filterTamanhoImage);
+    $twig->addFilter($applyFilter);
+
+    $identity = Zend_Auth::getInstance()->getIdentity();
+
+    if( isset($identity->{$this->params['servico']} ) && ($identity->{$this->params['servico']}) ) {
+        $this->params = array_merge($this->params, $identity->{$this->params['servico']} );
+    }
+
+    $twig->addGlobal('params', $this->params);
+    $twig->addGlobal('servico', $identity->servicosAtual[$this->params['servico']]);
+    $twig->addGlobal('view', $this);
+
+    $fileJs = "js/{$this->params['module']}/{$this->params['controller']}.{$this->params['action']}.js";
+
+    if (file_exists($fileJs)) {
+        $this->headScript()->appendFile($fileJs, 'text/javascript');
+    }
+
+
+    echo $twig->render($this->file, $this->data);
+

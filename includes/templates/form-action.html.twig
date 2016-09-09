@@ -1,0 +1,20 @@
+{% from 'botoes.html.twig' import botao as gerar_botao %}
+<div class="row container-form-action">
+    <div class="row">
+        <div class="col-md-12">
+            {% for filho in servico.filhos %}
+                {% if filho.metadata.ws_comportamento == 'formaction' %}
+                    {{ gerar_botao(filho, 'formaction', filho.nome) }}
+
+                    {#<button type="submit"#}
+                            {#id="{{ filho.id }}"#}
+                            {#class="btn btn-success btn-sm pull-right formaction"#}
+                            {#data-servico="{{ filho.id }}"#}
+                            {#data-show="{{ filho.metadata.ws_show }}"#}
+                            {#data-reload="{{ filho.metadata.ws_reload }}">{{ filho.nome }}</button>#}
+
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

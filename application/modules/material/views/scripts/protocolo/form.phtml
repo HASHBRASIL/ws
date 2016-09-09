@@ -1,0 +1,376 @@
+<style>
+i.icon-remove {
+    font-size: 26px;
+    color: #e02222;
+    cursor: pointer;
+    margin-left: 2px;
+}
+i.check-form-success{
+    font-size: 26px;
+    color: #35aa47;
+    cursor: pointer;
+    margin-left: 2px;
+}
+i.add_controle_receptora, i.add_controle_fornecedor, i.remove_controle_fornecedor, i.remove_controle_receptora {
+    font-size: 26px;
+    color: #00CC99;
+    cursor: pointer;
+    margin-left: 2px;
+}
+i.remove_controle_fornecedor, i.remove_controle_receptora {
+    color: #e02222;
+    margin-left: 4px;
+}
+div.span4.empresa_transportador, div.span4.funcionario_transportador{
+    display: none;
+}
+<?php if($this->vo->id_tp_transportador == Material_Model_Bo_TipoTransportador::EMPRESA):?>
+div.span4.empresa_transportador{
+    display: block;
+}
+<?php elseif($this->vo->id_tp_transportador == Material_Model_Bo_TipoTransportador::FUNCIONARIO):?>
+div.span4.funcionario_transportador{
+    display: block;
+}
+<?php endif;?>
+</style>
+<div class="row-fluid" style="margin-top: 10px">
+    <div class="portlet box purple">
+        <div class="portlet-title">
+            <div class="caption"><i class="icon-reorder"></i> Formulário de protocolo de materiais <?php if($this->vo->id_protocolo): echo "#{$this->vo->id_protocolo} "; endif; ?></div>
+            <div class="tools">
+                <a href="javascript:;" class="collapse"></a>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form method="post" class="form_protocolo">
+                <?php echo $this->formHidden('id_protocolo', $this->vo->id_protocolo) ?>
+                <?php $workspaceSession = new Zend_Session_Namespace('workspace');?>
+                <?php echo $this->vo->id_protocolo ? $this->formHidden("id_workspace",$this->vo->id_workspace) : $this->formHidden("id_workspace",$workspaceSession->id_workspace); ?>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Tipo de protocolo<span class="required">*</span></label>
+                            <div class="controls">
+                                <?php echo $this->formHidden('id_tp_movimento', $this->vo->getTpProtocolo() ? $this->vo->getTpProtocolo()->id_tp_movimento : null)?>
+                                <?php
+                                $attribs = array('class'=>'span12');
+                                $attribs = $this->vo->hasMovimento()? $attribs+array('disabled' =>'disabled'): $attribs;
+                                ?>
+                                <?php echo $this->formSelect('id_tp_protocolo',$this->vo->id_tp_protocolo, $attribs, $this->tpEntradaCombo);?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="control-group">
+                            <label class="control-label">Data<span class="required">*</span></label>
+                            <div class="controls">
+                                <?php echo $this->formText('dt_entrada', $this->date($this->vo->dt_entrada? $this->vo->dt_entrada : date('d/m/Y')), array('class' => 'span12'));?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="control-group">
+                            <label class="control-label">Hora<span class="required">*</span></label>
+                            <div class="controls">
+                                <?php echo $this->formText('hr_entrada', $this->vo->hr_entrada ? $this->vo->hr_entrada : date('H:i:s'));?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Quem está entregando<span class="required">*</span></label>
+                            <div class="controls">
+                                <?php echo $this->formHidden('id_empresa_fornecedor',$this->vo->id_empresa_fornecedor);?>
+                                <?php echo $this->formText('empresa_fornecedor', $this->vo->getFornecedor() ? $this->vo->getFornecedor()->nome_razao : null, array('placeholder'=> 'Digite a razão Social', 'class'=> 'span12'));?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('CNPJ/CPF')?><span class="required">*</span></label>
+                            <div class="controls">
+                                <?php echo $this->formText('cnpj_fornecedor',$this->vo->getFornecedor() ? $this->cpf($this->vo->getFornecedor()->cnpj_cpf) : null, array('placeholder'=>'CNPJ/CPF', 'class'=>'span12'));?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Requisitante (quem pediu)')?></label>
+                            <div class="controls">
+                                <?php echo $this->formSelect('id_operacao_requisitante', $this->vo->id_operacao_requisitante, array('class' => 'span12'), $this->comboOperacao);?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Código de controle')?></label>
+                            <div class="controls">
+                                <?php if (count($this->controleFornecedor)):?>
+                                          <?php foreach ($this->controleFornecedor as $key => $controle):
+                                          $delete = $key > 0 ? true : false;
+                                          if(is_object($controle)):?>
+                                              <?php echo $this->formText('controle_fornecedor[]', $controle->codigo, array('class'=>'span8'));?>
+                                              <i class="<?php echo $delete ? 'remove_controle_fornecedor icon-remove' : 'add_controle_fornecedor icon-plus'?>" title="<?php echo $delete ? 'Remover controle do receptor' : 'Adicionar controle do receptor'?>"></i>
+                                          <?php else:?>
+                                              <?php echo $this->formText('controle_fornecedor[]', $controle, array('class'=>'span8'));?>
+                                              <i class="<?php echo $delete ? 'remove_controle_fornecedor icon-remove' : 'add_controle_fornecedor icon-plus'?>" title="<?php echo $delete ? 'Remover controle do receptor' : 'Adicionar controle do receptor'?>"></i>
+                                          <?php endif;?>
+                                  <?php endforeach;?>
+
+                              <?php else :?>
+                                  <?php echo $this->formText('controle_fornecedor[]', null, array('class'=>'span8'));?>
+                                  <i class="icon-plus add_controle_fornecedor" title="Adicionar controle do receptor"></i>
+                              <?php endif;?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Quem está recebendo')?><span class="required">*</span></label>
+                            <div class="controls">
+                                <?php echo $this->formHidden('id_empresa_receptora',$this->vo->id_empresa_receptora);?>
+                                <?php echo $this->formText('empresa_receptora',$this->vo->getReceptora() ? $this->vo->getReceptora()->nome_razao : null, array('placeholder'=> 'Digite a razão Social', 'class' => 'span12'));?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span2">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('CNPJ/CPF')?><span class="required">*</span></label>
+                            <div class="controls">
+                                <?php echo $this->formText('cnpj_receptora',$this->vo->getReceptora() ? $this->cpf($this->vo->getReceptora()->cnpj_cpf) : null, array('placeholder'=>'CNPJ/CPF', 'class' => 'span12'));?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Requisitado')?></label>
+                            <div class="controls">
+                                <?php echo $this->formSelect('id_operacao_requisitado', $this->vo->id_operacao_requisitado, array('class' => 'span12'), $this->comboOperacao);?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Código de controle')?></label>
+                            <div class="controls">
+                                <?php if (count($this->controleReceptora)):?>
+                                  <?php foreach ($this->controleReceptora as $key => $controle):
+                                          $delete = $key > 0 ? true : false;
+                                          if(is_object($controle)):?>
+                                              <?php echo $this->formText('controle_receptora[]', $controle->codigo, array('class'=>'span8'));?>
+                                              <i class="<?php echo $delete ? 'remove_controle_receptora icon-remove' : 'add_controle_receptora icon-plus'?>" title="<?php echo $delete ? 'Remover controle do receptor' : 'Adicionar controle do receptor'?>"></i>
+                                          <?php else:?>
+                                              <?php echo $this->formText('controle_receptora[]', $controle, array('class'=>'span8'));?>
+                                              <i class="<?php echo $delete ? 'remove_controle_receptora icon-remove' : 'add_controle_receptora icon-plus'?>" title="<?php echo $delete ? 'Remover controle do receptor' : 'Adicionar controle do receptor'?>"></i>
+                                          <?php endif;?>
+                                  <?php endforeach;?>
+
+                              <?php else :?>
+                                  <?php echo $this->formText('controle_receptora[]', null, array('class'=>'span8'));?>
+                                  <i class="icon-plus add_controle_receptora" title="Adicionar controle do receptor"></i>
+                              <?php endif;?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Tipo de transportadora')?> </label>
+                            <div class="controls">
+                                <?php echo $this->formSelect('id_tp_transportador', $this->vo->id_tp_transportador, array('class' => 'span12'), $this->comboTpTransport);?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4 empresa_transportador">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Empresa transportadora')?> </label>
+                            <div class="controls">
+                                <?php echo $this->formHidden('id_transp_empresa', $this->vo->getTransportador() ? $this->vo->getTransportador()->id_transp_empresa : null);?>
+                                <?php echo $this->formHidden('id_transportador',$this->vo->id_transportador);?>
+                                <?php echo $this->formText('empresa_transportador', $this->vo->getTransportador() ? $this->vo->getTransportador()->getRazao() : null, array('placeholder'=> 'Digite a razão Social', 'class' => 'span12'));?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4 empresa_transportador">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('CNPJ')?> </label>
+                            <div class="controls">
+                                <?php echo $this->formText('cnpj_transportador', $this->vo->getTransportador() ? $this->cpf($this->vo->getTransportador()->getCnpj()) : null, array('placeholder'=>'CNPJ'));?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4 funcionario_transportador">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Funcionário responsável pelo transporte')?> </label>
+                            <div class="controls">
+                                <?php echo $this->formSelect('id_funcionario_transportador',$this->vo->id_funcionario_transportador, array('class' => 'span12'), $this->comboPessoa);?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Pedido')?> </label>
+                            <div class="controls">
+                                <?php echo $this->formSelect('id_processo', $this->vo->id_processo,  $this->vo->hasMovimento()? array('disabled' =>'disabled', 'class' => 'span12'): array('class' => 'span12'), $this->comboProcesso);?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Centro de custo')?> </label>
+                            <div class="controls">
+                                <?php echo $this->formSelect('id_centro_custo',$this->vo->id_centro_custo, array('class' =>'span12'), $this->comboCentroCusto);?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="form-actions">
+                <a href="<?php echo $this->baseUrl('/material/protocolo/grid')?>" class="btn">Voltar</a>
+                <button type="submit" class="btn green"><i class="icon-ok"></i> Salvar</button>
+        	</div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php if($this->vo->getTpProtocolo() && $this->vo->getTpProtocolo()->id_tp_movimento == Material_Model_Bo_TipoMovimento::ENTRADA):?>
+    <div class="row-fluid">
+        <a href="#" class="icon-btn span2 novo-produto">
+            <i class="icon-barcode"></i>
+            <div> Novo Produto </div>
+        </a>
+    </div>
+    <div class ="row-fluid" style="margin-bottom: 10px">
+        <div class="span12">
+            <div id="table_estoque">
+            </div>
+        </div>
+    </div>
+<?php elseif ($this->vo->getTpProtocolo() && $this->vo->getTpProtocolo()->id_tp_movimento == Material_Model_Bo_TipoMovimento::SAIDA):?>
+    <div class="row-fluid">
+        <a href="#" class="icon-btn span2 novo-produto">
+            <i class="icon-barcode"></i>
+            <div> Baixar produto </div>
+        </a>
+    </div>
+    <div class ="row-fluid" style="margin-bottom: 10px">
+        <div class="span12">
+            <div id="table_estoque">
+            </div>
+        </div>
+    </div>
+<?php endif;?>
+<div class="dialog_item" style="display: none">
+    <form action="<?php echo $this->baseUrl('material/estoque/form')?>" class="form_item" method="post" style="margin:0">
+        <?php echo $this->formHidden('id_estoque');?>
+        <div class="row-fluid">
+            <div class="span12">
+                    <div class="control-group">
+                        <label class="control-label"><?php echo $this->translate('Descrição do Produto')?><span class="required">*</span></label>
+                        <div class="controls">
+                            <?php echo $this->formHidden('id_item');?>
+                            <?php echo $this->formText('nome_item', null, array('class'=>'span11', 'placeholder' => 'Digite o produto'));?>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Unidade')?><span class="required">*</span></label>
+                    <div class="controls">
+                        <?php echo $this->formHidden('id_tipo_unidade');?>
+                        <?php echo $this->formSelect('id_unidade',null, array('class'=>'span12', 'disabled'=>'disabled'), $this->tpUnidadeCombo);?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-atributo">
+        </div>
+        <div class="row-fluid">
+            <div class="span4 saida">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Qtd. em estoque')?> </label>
+                    <div class="controls">
+                        <?php echo $this->formText('qtd_estoque',null, array('class' => 'span12', 'disabled'=>'disabled'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span3">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Quantidade')?><span class="required">*</span></label>
+                    <div class="controls">
+                        <?php echo $this->formText('quantidade', null, array('alt'=> 'decimal', 'class' => 'decimal quantidade span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span3 entrada">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Valor Unitário')?> </label>
+                    <div class="controls">
+                        <?php echo $this->formText('vl_unitario', null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span3 entrada">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Valor Total')?> </label>
+                    <div class="controls">
+                        <?php echo $this->formText('vl_total', null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="dialog-adiciona-lote" style="display:none">
+    <?php echo $this->formHidden('lote_manual', 0)?>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">Rastreabilidade<span class="required">*</span></label>
+                <div class="controls">
+                    <label class="checkbox"> <input type="radio" name="rastreabilidade"  class="unidade_compra rastreabilidade" /> Compra (<span class="unidade_compra"></span>)</label>
+                    <label class="checkbox"> <input type="radio" name="rastreabilidade" class="unidade_consumo rastreabilidade" /> Consumo (<span class="unidade_consumo"></span>)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label qtd_unidade"> </label>
+                <div class="controls">
+                    <?php echo $this->formText('quantidade_unidade', null, array('class'=> 'span12 decimal', 'alt' => 'decimal'))?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialog_ver_lote"></div>
+<div id="dialog-lote">
+    <?php echo $this->formHidden('id_movimento')?>
+</div>
+<div id="dialog-lote-automatico" style="display:none; text-align: center;">
+<?php echo $this->formText('porcentage-creation-lote', null, array('data-readOnly'=> 'true'))?>
+</div>
+<div class="remover_lote">
+    <form class="form_baixa" style="margin: 0">
+    </form>
+</div>
+
+<script src="/assets/plugins/jquery-knob/js/jquery.knob.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/material/protocolo.form.js?cache')?>"></script>
+<?php if($this->vo->getTpProtocolo() && $this->vo->getTpProtocolo()->id_tp_movimento == Material_Model_Bo_TipoMovimento::ENTRADA):?>
+    <script type="text/javascript" src="<?php echo $this->baseUrl('scripts/material/protocolo.form.entrada.js?cache')?>"></script>
+<?php elseif ($this->vo->getTpProtocolo() && $this->vo->getTpProtocolo()->id_tp_movimento == Material_Model_Bo_TipoMovimento::SAIDA):?>
+    <script type="text/javascript" src="<?php echo $this->baseUrl('scripts/material/protocolo.form.saida.js')?>"></script>
+<?php endif;?>

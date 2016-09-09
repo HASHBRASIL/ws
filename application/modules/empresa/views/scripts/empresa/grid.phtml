@@ -1,0 +1,134 @@
+<?php
+    /**
+     * grid da empresa aonde visualiza todas as empresas ativa que o grupo se relaciona
+     * com link pra criar, alterar e inativar.
+     */
+?>
+<style>
+<!--
+th.transacao{
+    width: 80px;
+}
+td.transacao{
+    text-align: center !important;
+}
+-->
+</style>
+<div class="row-fluid">
+     <div class="span12">
+	      <h3 class="page-title">
+	       Registros
+	        <small>Corporativos</small>
+	      </h3>
+     </div>
+</div>
+
+	    <?php //view
+    $options = array(
+        'paginator'            => $this->paginator,
+        'title'                => 'Corporativo',
+        'fields'               => array( 'nome_razao' => 'Nome/Razão Social',
+                                         'fantasia'   => 'Fantasia',
+                                         'cnpj_cpf'   => 'CNPJ/CPF',
+                                         App_Model_Dao_Abstract::STRING_SEARCH        => 'Todos'
+                                       ),
+        'caminhoFormBotaoNovo' => $this->baseUrl() . '/empresa/empresa/form-wizard',
+        'columns'              => array( 'transacao'     => "Transação",
+                                         'nome_razao'    => 'Nome/Razão social',
+                                         'fantasia'      => 'Fantasia',
+                                         'cnpj_cpf'      => 'CNPJ/CPF'
+                                       ),
+        'formatter'            => array( 'cnpj_cpf' => 'cpf'),
+        'actions'              => array(
+            "<a title='Detalhe' data-tooltip href='%id%' class='detail'> "
+                . "<img src='" . $this->baseUrl() . "/images/detail.png' />"
+            . "</a>",
+            "<a title='Editar' data-tooltip href='" . $this->baseUrl() . "/empresa/empresa/form-wizard/id/%id%'>"
+                . "<img src='" . $this->baseUrl() . "/images/edit.png' />"
+            . "</a>",
+            "<a class='delete' data-tooltip title='Excluir' href='" . $this->baseUrl() . "/empresa/empresa/delete/id/%id%'>"
+                . "<img src='" . $this->baseUrl() . "/images/delete.png' />"
+            . "</a>"
+        )
+    );
+    echo $this->partial('grid-metronic.phtml', 'default', $options);
+    ?>
+    <div class="dialog_detail" style="background-color: white; display: none;">
+    	<div class="modal-header">
+			<h3>Detalhes Corporativo </h3><h2 class="value_nome_razao_title"></h2>
+		</div>
+		<table style="width: 100%">
+            <tr>
+                <td class="label_nome_razao">Nome/Razão Social</td><td class="value_nome_razao"></td>
+            </tr>
+            <tr class="label_fantasia">
+                <td class="label_fantasia">Fantasia</td><td class="value_fantasia"></td>
+            </tr>
+            <tr>
+                <td class="label_cnpj_cpf">CPF/CNPJ</td><td class="value_cnpj_cpf"></td>
+            </tr>
+            <tr class="label_uasg">
+                <td class="label_uasg">UASG</td><td class="value_uasg"></td>
+            </tr>
+            <tr>
+                <td class="label_estadual">Inscrição Estadual</td><td class="value_estadual"></td>
+            </tr>
+            <tr class="label_municipal">
+                <td class="label_municipal">Inscrição Municipal</td><td class="value_municipal"></td>
+            </tr>
+            <tr>
+                <td class="label_telefone">Telefone</td><td class="value_telefone"></td>
+            </tr>
+            <tr>
+                <td class="label_site">Site</td><td class="value_site"></td>
+            </tr>
+            <tr>
+                <td class="label_email_corporativo">Email Corporativo</td><td class="value_email_corporativo"></td>
+            </tr>
+            <tr>
+                <td class="label_site">Site</td><td class="value_site"></td>
+            </tr>
+            <tr>
+                <td class="label_transportador">Transportador</td><td class="value_transportador"></td>
+            </tr>
+            <tr>
+                <td class="label_cliente">Cliente</td><td class="value_cliente"></td>
+            </tr>
+            <tr>
+                <td class="label_portal">Cadastrado pelo portal</td><td class="value_portal"></td>
+            </tr>
+            <tr>
+                <td class="label_mail_marketing">Mail Marketing</td><td class="value_mail_marketing"></td>
+            </tr>
+            <tr>
+                <td class="label_segmento">Ramo de atividade</td><td class="value_segmento"></td>
+            </tr>
+            <tr>
+                <td class="label_fornecedor">Fornecedor</td><td class="value_fornecedor"></td>
+            </tr>
+            <tr>
+                <td class="label_indicacao">Indicação</td><td class="value_indicacao"></td>
+            </tr>
+            <tr>
+                <td class="label_observ">Observação</td><td class="value_observ"></td>
+            </tr>
+            <tr>
+                <td class="label_tipo_funcionario">Tipo Funcionário</td><td class="value_tipo_funcionario"></td>
+            </tr>
+        </table>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="portlet box white">
+				<div class="portlet-title">
+					<div class="actions">
+						<a class="btn red" href="<?php echo $this->baseUrl("sis/grupo-geografico/grid") ?>"><i class="icon-globe"></i> Gerenciar Grupo Geográfico</a>
+						<a class="btn yellow" href="<?php echo $this->baseUrl("sis/segmento/grid") ?>"><i class="icon-user-md"></i> Gerenciar Ramo de Atividade</a>
+						<a class="btn " href="<?php echo $this->baseUrl("empresa/empresa/grid-inativos") ?>"><i class="icon-user"></i> Reativar Corporativos Excluídos </a>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="<?php echo $this->baseUrl('scripts/empresa/empresa.grid.js')?>"></script>

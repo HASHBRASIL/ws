@@ -1,0 +1,62 @@
+<table class="table-bordered table-striped table-condensed flip-content datatables" style="width: 100%">
+    <thead class="flip-content">
+        <tr>
+            <th>Referência</th>
+            <th>Produto</th>
+            <th style="width: 135px">Valor unitário</th>
+            <th style="width: 60px">Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->listCampanhaItem as $campanhaItem):?>
+            <tr class="odd gradeX">
+                <td><?php echo $campanhaItem->getItem()->referencia ?></td>
+                <td><?php echo $campanhaItem->getItem()->nome ?></td>
+                <td style="text-align: right;"><?php echo $this->formatDecimal($campanhaItem->vl_unitario)?></td>
+                <td>
+                    <a href="<?php echo $this->baseUrl('compra/campanha-item/form/id_campanha_item/'.$campanhaItem->id_campanha_item)?>" id_campanha_item="<?php echo $campanhaItem->id_campanha_item?>" class="edit_produto" >
+                        <img src="<?php echo $this->baseUrl('images/edit.png')?>" data-tooltip title="Editar produto">
+                    </a>
+                    <a href="<?php echo $this->baseUrl('compra/campanha-item/delete/id_campanha_item/'.$campanhaItem->id_campanha_item)?>" class="delete_produto" >
+                        <img src="<?php echo $this->baseUrl('images/delete.png')?>" data-tooltip title="Excluir produto">
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
+<script>
+$(document).ready(function(){
+
+    $('.datatables').dataTable({
+        "aLengthMenu": [
+            [30, 50, 100, -1],
+            [30, 50, 100, "All"] // change per page values here
+        ],
+        // set the initial value
+        "iDisplayLength": 30,
+        "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "oLanguage": {
+            "sProcessing": "Aguarde enquanto os dados são carregados ...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "Não foram encontrados resultados",
+            "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoFiltered": "",
+            "sSearch": "Procurar",
+            "oPaginate": {
+               "sFirst":    "Primeiro",
+               "sPrevious": "Anterior",
+               "sNext":     "Próximo",
+               "sLast":     "Último"
+            }
+         },
+        "aoColumnDefs": [{
+                'bSortable': true,
+                'aTargets': [0]
+            }
+        ],
+    });
+});
+</script>

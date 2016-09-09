@@ -1,0 +1,75 @@
+
+<div class="row wrapper">
+    {% include 'header-content.html.twig' %}
+    <form action="config/permission/save" method="post" id="criarTime" enctype="multipart/form-data" accept-charset="utf-8">
+
+        <input type="hidden" name="id" value="{{ timeId }}" />
+        <input type="hidden" name="usuario" value="{{ idUsuario }}" />
+
+        <div class="col-md-12 content">
+            <div class="form-group-one-unit">
+
+                {% set depth = 1 %}
+
+                <ul>
+                    {% for servico in servicos %}
+
+                        {{ servico.depth == depth ? '</li>' }}
+
+                        {% for quantity in 1..20 %}
+                            {% if servico.depth < depth %}
+                                {% set depth = depth - 1 %}
+                                </li>
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+
+
+                        {{ servico.depth > depth ? '<ul>' }}
+                        <li>
+                            <input type="checkbox" name="servicos[]" value="{{ servico.id }}" {{ servico.id_grupo ? 'checked="checked"' }} />
+                            <label>{{ servico.nome }}
+                                <input type="text" name="dt_expiracao[{{ servico.id }}]"
+                                       value="{{ (servico.dt_expiracao | default("2099-01-01")) | date("d/m/Y") }}"
+                                       class="date" />
+                            </label>
+                            {% set depth = servico.depth %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row container-form-action">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-success btn-sm pull-right "> Salvar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script>
+
+    $('nao form input[type=checkbox]').bind('click', function() {
+
+        if ($(this).is(':checked')) {
+
+            $(this).parents('input[type=checkbox]').prop('checked', true);
+            // true - vai até o pai principal e marca tudo.
+
+        } else {
+
+            $(this).find('input[type=checkbox]').prop('checked', false);
+            // vai em baixo e desmarca tudo
+        }
+
+
+    });
+
+
+</script>
+     {#{{ (texto ?: '<i class="%s"></i>'|format(data.metadata.ws_icon|default("glyphicon glyphicon-edit")))|raw }}#}
+

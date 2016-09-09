@@ -1,0 +1,129 @@
+<style>
+.tile .tile-body > i {
+	margin-top: 0px;
+}
+.no-cursor{
+	 cursor: default;
+}
+</style>
+<h3 class="page-title">
+	Seja Bem Vindo <small>ao modo corporativo</small>
+</h3>
+<div class="row-fluid">
+	<div class="span7 ">
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-reorder"></i>Corporativo</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"></a>
+					<a href="javascript:;" class="remove"></a>
+				</div>
+			</div>
+			<div class="portlet-body" style="display: block;">
+				<div  class="">
+					<div  class="tile double bg-purple no-cursor">
+						<div class="tile-body">
+							<i class="icon-bar-chart"></i>
+							<h3>Corporativos</h3>
+							<p>
+								Cadastramos nos últimos 7 dias <b><?php echo $this->countEmpresasLastDays->days ?></b> registros
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="tile double bg-blue no-cursor">
+					<div class="tile-body">
+						<i class="icon-group"></i>
+						<h3>Estamos com</h3>
+						<p><b><?php echo $this->countEmpresa->num?></b> registros e crescendo...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END Portlet PORTLET-->
+	</div>
+	<div class="span5 ">
+		<!-- BEGIN Portlet PORTLET-->
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-reorder"></i>ERP_WEB</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"></a>
+					<a href="javascript:;" class="remove"></a>
+				</div>
+			</div>
+			<div class="portlet-body hide" style="display: block;">
+				<div class="no-cursor tile double bg-red">
+					<i class="icon-calendar"> data</i>
+					<div class="tile-object">
+						<div class="name">
+							hoje
+						</div>
+						<div class="number">
+							<h1><?php echo date('d/m/Y'); ?></h1>
+						</div>
+					</div>
+				</div>
+				<div class="no-cursor tile double bg-blue">
+					<div class="icon-time"><?php echo $this->timezone ? $this->timezone : "-";?></div>
+					<div class="tile-body">
+						<i class=""></i>
+					</div>
+					<div class="tile-object">
+						<div class="name">
+							agora
+						</div>
+						<div class="number" style="width: 200px">
+							<h1><span id="oclock"></span></h1>
+						</div>
+					</div>
+				</div>
+				<div class="tile bg-green feedback-link">
+					<div class="tile-body">
+						<i class="icon-comments-alt"></i>
+					</div>
+					<div class="tile-object">
+						<div class="name">
+							Fale Conosco
+						</div>
+					</div>
+				</div>
+				<div class="tile bg-blue">
+					server
+					<div class="tile-body">
+						<i class="icon-cloud"></i>
+					</div>
+					<div class="tile-object">
+						<div class="name">
+							<h4>CONECTADO</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END Portlet PORTLET-->
+	</div>
+</div>
+<script type="text/javascript">
+    moveReloj();
+
+    function moveReloj(){
+    	momentoActual = new Date();
+    	hora = momentoActual.getHours();
+    	minuto = checkTime(momentoActual.getMinutes());
+    	segundo = checkTime(momentoActual.getSeconds());
+
+    	horaImprimible = hora + " : " + minuto + " : " + segundo;
+
+    	$("#oclock").text(horaImprimible);
+
+    	setTimeout("moveReloj()",1000);
+    }
+
+    function checkTime(i) {
+        if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+
+</script>

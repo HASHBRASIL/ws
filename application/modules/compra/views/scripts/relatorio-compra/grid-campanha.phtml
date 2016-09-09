@@ -1,0 +1,43 @@
+<div class="span12">
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class=" icon-bookmark"></i>Campanha</div>
+				<div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<table class="table-bordered table-striped table-condensed flip-content" id="datatables">
+                        <thead class="flip-content">
+                            <tr>
+                                <th>Nome</th>
+                                <th style="width: 110px;">data inicio</th>
+                                <th style="width: 110px;">data fim</th>
+                                <th style="width: 110px;">Valor minimo</th>
+                                <th style="width: 110px;">Valor máximo</th>
+                                <th style="width: 60px">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->listCampanha as $campanha):?>
+                                <tr class="odd gradeX">
+                                    <td><?php echo $campanha['nome']?></td>
+                                    <td style="text-align: center;"><?php echo $this->date($campanha['dt_inicio']) ?></td>
+                                    <td style="text-align: center;"><?php echo $this->date($campanha['dt_fim'])?></td>
+                                    <td style="text-align: right;"><?php echo $this->formatDecimal($campanha['vl_min_compra']);?></td>
+                                    <td style="text-align: right;"><?php echo $this->formatDecimal($campanha['vl_max_compra']);?></td>
+                                    <td class="acoes" align="center">
+										                		<a class="Edit" href="<?php echo $this->baseUrl('compra/relatorio-compra/itens-comprado/id_campanha/'.$campanha['id_campanha']);?>">
+										                				<img title="Visualizar" data-tooltip src="<?php echo $this->baseUrl('images/detail.png')?>"/>
+								                				</a>
+										                </td>
+                                </tr>
+                            <?php endforeach;?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="<?php echo $this->baseUrl('scripts/compra/campanha.grid.js')?>"></script>

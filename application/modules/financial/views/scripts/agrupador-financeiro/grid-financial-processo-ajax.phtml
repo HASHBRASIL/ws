@@ -1,0 +1,68 @@
+<?php
+$financialCredit = "0";
+$financialDebit = "0";
+?>
+<style>
+i.acao{
+    color:#000;
+}
+</style>
+<div class="row-fluid">
+    <div class="span12">
+        <table class="table-bordered table-striped table-condensed flip-content" style="width: 100%;">
+            <thead class="flip-content">
+                <tr>
+                    <th style="width: 120px">Código</th>
+                    <th>Tipo financeiro</th>
+                    <th>Nota fiscal</th>
+                    <th>valor</th>
+                    <th class="action" colspan="2">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php if (count($this->financialList) > 0):?>
+            <?php $idAtributo = 0?>
+                <?php foreach ($this->financialList as $financial):?>
+
+                    <?php
+                    if ($financial['tmv_id'] == 2/*credito*/){
+                        $financialCredit = $financialCredit + $financial['fin_valor'];
+                    }else{/*debito*/
+                        $financialDebit = $financialDebit + $financial['fin_valor'];
+                    }
+                    ?>
+                    <tr>
+                        <td style="text-align: center"><?php echo $financial['id_agrupador_financeiro']?></td>
+                        <td><?php echo $financial['tmv_id'] == 1 ? "Débito" : "Crédito" ?></td>
+                        <td style="text-align: center;"><?php echo $financial['fin_nota_fiscal']?></td>
+                        <td style="text-align: right;"><?php echo $this->formatDecimal($financial['fin_valor']);?></td>
+                        <td class="acoes" style="width: 20px">
+                            <a href="<?php echo $this->baseUrl("/financial/agrupador-financeiro/form/id_agrupador_financeiro/{$financial['id_agrupador_financeiro']}") ?>" class="editar_financeiro tooltips" title="Editar financeiro">
+                                <i class="icon-pencil acao"></i>
+                            </a>
+                        </td>
+                        <td class="acoes" style="width: 20px">
+                            <a href="<?php echo $financial['id_agrupador_financeiro']?>" class="delete_financial tooltips" value="<?php echo $financial['id_agrupador_financeiro'] ?>" title="excluir financeiro">
+                                <i class="icon-remove acao"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+            <?php else:?>
+                    <tr>
+                        <td colspan="11" style="text-align: center">Não possui financeiro vinculado a este processo</td>
+                    </tr>
+            <?php endif;?>
+            </tbody>
+        </table>
+        <div class="row-fluid">
+            <div class="span4">
+                <div> Mostrando <?php echo count($this->financialList)?> registros</div>
+            </div>
+            <div class="span8" style="text-align: right;">
+                <?php echo "Valor de financeiro de créditos: <b>".$this->formatDecimal($financialCredit)."</b> Valor de financeiro de débitos: <b>".$this->formatDecimal($financialDebit)."</b>&nbsp-&nbsp<b>Total Líquido ".$this->formatDecimal($financialCredit - $financialDebit)."</b>";?>
+                <?php echo $this->formHidden("financialCredit", $this->formatDecimal($financialCredit));?>
+            </div>
+        </div>
+    </div>
+</div>

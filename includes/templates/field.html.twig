@@ -1,0 +1,191 @@
+{% macro input(campo,servico, filedir) %}
+    {% spaceless %}
+    {% if campo.tipo == 'textarea' %}
+        <textarea
+                {# placeholder="{{ campo.descricao }}" #}
+                id="{{ campo.id }}"
+                class="form-control input-sm "
+                name="{{ campo.id }}_{{ campo.metanome }}{% if campo.multiplo %}[]{% endif %}"
+                autocomplete="off"
+                {#talvez pode tirar essa linha de baixo#}
+                {% if campo.perfil %} data-perfil="{{ campo.perfil }}"{% endif %}
+                {% if campo.id_pai %} data-id-pai="{{ campo.id_pai }}"{% endif %}
+                {% if campo.pesquisa %} data-url="{{ campo.url }}"{% endif %}
+                {% if campo.obrigatorio %} require="require"{% endif %}>{{ campo.valor }}</textarea>
+    {% elseif campo.tipo == 'date' %}
+        <input type="text"
+               {# placeholder="{{ campo.descricao }}" #}
+               value="{{ campo.valor }}"
+               {# id="{{ campo.id }}" #}
+               class="form-control input-sm {{ campo.id }}"
+               name="{{ campo.id }}_{{ campo.metanome }}"
+               data-mask="99/99/9999"/>
+               <script>
+                $(function() {
+                    $( ".{{ campo.id }}" ).datepicker({
+                            dateFormat: 'dd/mm/yy',
+                            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+                            dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+                        });
+                    });
+                </script>
+    {% elseif campo.tipo == 'rich' %}
+       	<textarea
+           	    {# placeholder="{{ campo.descricao }}" #}
+               	id="{{ campo.id }}"
+               	class="form-control input-sm"
+               	name="{{ campo.id }}_{{ campo.metanome }}{% if campo.multiplo %}[]{% endif %}"
+               	autocomplete="off"
+               	{#talvez pode tirar essa linha de baixo#}
+               	{% if campo.perfil %} data-perfil="{{ campo.perfil }}"{% endif %}
+               	{% if campo.id_pai %} data-id-pai="{{ campo.id_pai }}"{% endif %}
+               	{% if campo.pesquisa %} data-url="{{ campo.url }}"{% endif %}
+               	{% if campo.obrigatorio %} require="require"{% endif %}>{{ campo.valor }}</textarea>
+		<script type="text/javascript" src="http://cdn.ckeditor.com/4.5.7/standard-all/ckeditor.js"></script>
+		<script type="text/javascript">
+			window.onload = function()  {
+			CKEDITOR.replace( '{{ campo.id }}' );
+			};
+
+			function trataForm(form){
+				var formNovo = $(form).serializeArray();
+				var nome = $('textarea').attr('id');
+
+				$(formNovo).each(function(i, v){
+					if($(v).attr('name') == '{{ campo.id }}_{{ campo.metanome }}') {
+						var idCampo = v.name.split('_')[0];
+						formNovo[i]['value'] = CKEDITOR.instances[idCampo].getData();
+					}
+				});
+
+				return formNovo;
+			}
+		</script>
+    {% elseif campo.tipo == 'file' %}
+        <input type="file"
+               {# placeholder="{{ campo.descricao }}" #}
+               value="{{ campo.valor }}"
+               id="{{ campo.id }}"
+               class="form-control input-sm"
+               accept="*"
+               name="{{ campo.id }}_{{ campo.metanome }}{% if campo.multiplo %}[]{% endif %}"
+               data-perfil="{{ campo.perfil }}"/>
+    {% elseif campo.tipo == 'image' %}
+        {% include 'config-imagem.html.twig' with {'campo': campo, 'servico': servico, 'filedir' : filedir } only %}
+       {#  <input type="file"
+               placeholder="{{ campo.descricao }}"
+               value="{{ campo.valor }}"
+               id="{{ campo.id }}"
+               class="form-control input-sm" 
+               accept="image/*"
+               name="{{ campo.id }}_{{ campo.metanome }}{% if campo.multiplo %}[]{% endif %}"
+               data-perfil="{{ campo.perfil }}"/> #}
+    {% elseif campo.tipo == 'audio' %}
+        <input type="file"
+               {# placeholder="{{ campo.descricao }}" #}
+               value="{{ campo.valor }}"
+               id="{{ campo.id }}"
+               class="form-control input-sm"
+               accept="audio/*"
+               name="{{ campo.id }}_{{ campo.metanome }}{% if campo.multiplo %}[]{% endif %}"
+               data-perfil="{{ campo.perfil }}"/>
+    {% elseif campo.tipo == 'doc' %}
+        <input type="file"
+               {# placeholder="{{ campo.descricao }}" #}
+               value="{{ campo.valor }}"
+               id="{{ campo.id }}"
+               class="form-control input-sm"
+               accept="application/*"
+               name="{{ campo.id }}_{{ campo.metanome }}{% if campo.multiplo %}[]{% endif %}"
+               data-perfil="{{ campo.perfil }}"/>
+    {% elseif campo.tipo == 'checkbox' %}
+        <input type="checkbox"
+               value="{{ campo.valor }}"
+               id="{{ campo.id }}"
+               class="form-control input-sm"
+               name="{{ campo.id }}_{{ campo.metanome }}{% if campo.multiplo %}[]{% endif %}"
+               data-perfil="{{ campo.perfil }}"
+               {% if campo.valor == '1' %} checked{% endif %}
+               {% if campo.valor == true %} checked{% endif %}/>
+    {% elseif campo.tipo == 'ref_itemBiblioteca' %}
+        <select class="{{campo.metanome|lower}} {% if campo.items is defined %} select2-skin {% endif %} {% if campo.metadatas.ws_style is defined %} {{campo.metadatas.ws_style}} {% endif %}"
+                name="{{ campo.id }}_{{ campo.metanome }}{% if campo.multiplo %}[]{% endif %}"
+                data-class="{{campo.metanome|lower}}"
+                readonly="readonly"
+                {% if campo.multiple %}multiple="multiple"{% endif %}
+                width="100%"
+                {# data-descricao="{{campo.descricao}}" #}
+                {% for filho in servico.filhos %}
+                    {% if filho.metadata.ws_comportamento == 'filter' %}
+                        {% if filho.metadata.ws_campo == '.'~campo.metanome|lower %}
+                            data-metanome="{{ filho.metadata.ws_campo }}"
+                            {# data-tags="{{filho.metadata.ws_selecttags|raw|default(true)}}" #}
+                            data-servico="{{filho.id}}"
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                data->
+            <option value=''></option>
+        {% for item in campo.items %}
+            <option value='{{item.id}}' {% if item.id == campo.valor %} selected {% endif %}>{{item.valor}}</option>
+        {% endfor %}
+        </select>
+        <input type="hidden" class="form-control" name="{{ campo.id }}_{{ campo.metanome }}" value="{{ campo.valor }}"/>
+        <script>
+            $('.{{ campo.metanome|lower }}').on("change", function(e) {
+                $("input[type=hidden][name={{ campo.id }}_{{ campo.metanome }}]").val( $('.{{ campo.metanome|lower }} option:selected').val() );
+            });
+        </script>
+        {% include 'filter.html.twig' with {'campo': campo } only %}
+    {% elseif campo.tipo == 'ref_pessoa' %}
+        <select class="{{campo.metanome|lower}} {% if campo.items is defined %} select2-skin {% endif %}"
+                name="{{ campo.id }}_{{ campo.metanome }}{% if campo.multiplo %}[]{% endif %}"
+                data-class="{{campo.metanome|lower}}"
+                readonly="readonly"
+                width="100%"
+                data-descricao="{{campo.descricao}}"
+                {% for filho in servico.filhos %}
+                    {% if filho.metadata.ws_comportamento == 'filter' %}
+                        {% if filho.metadata.ws_campo == '.'~campo.metanome|lower %}
+                            data-metanome="{{ filho.metadata.ws_campo }}"
+                            data-tags="{{filho.metadata.ws_selecttags|raw|default(true)}}"
+                            data-servico="{{filho.id}}"
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                data->
+            <option value=''></option>
+        {% for item in campo.items %}
+            <option value='{{item.id}}' {% if item.id == campo.valor %} selected {% endif %}>{{item.valor}}</option>
+        {% endfor %}
+        </select>
+        <input type="hidden" class="form-control" name="{{ campo.id }}_{{ campo.metanome }}" value="{{ campo.valor }}"/>
+        <script>
+            $('.{{ campo.metanome|lower }}').on("change", function(e) {
+                $("input[type=hidden][name={{ campo.id }}_{{ campo.metanome }}]").val( $('.{{ campo.metanome|lower }} option:selected').val() );
+            });
+        </script>
+        {% include 'filter.html.twig' with {'campo': campo } only %}
+    {% elseif campo.tipo == 'hidden' %}
+        <input type="hidden" class="form-control" name="{{ campo.id }}_{{ campo.metanome }}" value="{{ campo.valor }}"/>
+    {% else %}
+        <input type="text"
+               {# placeholder="{{ campo.descricao }}" #}
+               value="{{ campo.valor }}"
+               {# id="{{ campo.id }}" #}
+               class="form-control input-sm {{ campo.id }}"
+               name="{{ campo.id }}_{{ campo.metanome }}"
+               {#talvez pode tirar essa linha de baixo#}
+               autocomplete="off"
+               maxlength="{{ campo.tamanho }}"
+               {% if campo.mascara %} data-mask="{{ campo.mascara }}" {% endif %}
+               {% if campo.perfil %} data-perfil="{{ campo.perfil }}"{% endif %}
+               {% if campo.id_pai %} data-id-pai="{{ campo.id_pai }}"{% endif %}
+               {% if campo.pesquisa %} data-url="{{ campo.url }}"{% endif %}
+               {% if campo.obrigatorio %} require="require"{% endif %} />
+    {% endif %}
+    {% endspaceless %}
+{% endmacro %}

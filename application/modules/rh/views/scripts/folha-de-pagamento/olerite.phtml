@@ -1,0 +1,210 @@
+<?php $i = ''; for ($i == 0; $i <= 1; $i++) : ?>
+<table border="0" cellspacing="2" style="width: 695px; border: 1px solid #000; font-size: 9" cellpadding="1">
+    <tr>
+        <td style="text-align: center;" colspan="2"><h3>RECIBO DE PAGAMENTO</h3></td>
+    </tr>
+    <tr>
+        <td width="100">Empregador: </td><td><?php echo $this->dados['sis']['nome_empresa']?></td>
+    </tr>
+    <tr>
+        <td>Endereço: </td><td><?php echo $this->dados['sis']['end_proprietario']?></td>
+    </tr>
+    <tr>
+        <td>CNPJ: </td><td><?php echo $this->dados['sis']['cpf_cnpj']?></td>
+    </tr>
+</table>
+<table border="0" style="width: 695px; border: 1px solid #000; font-size: 9" cellpadding="1">
+	<tr>
+		<td width="50">Chapa</td>
+		<td width="190">Nome</td>
+		<td width="70">CBO</td>
+		<td width="70">Data Pagto</td>
+		<td width="60">Mês</td>
+		<td width="255">Função</td>
+	</tr>
+	<tr>
+		<td width="50"><?php echo $this->dados['corporativo']['id']?></td>
+		<td width="190"><?php echo $this->dados['corporativo']['nome_razao']?></td>
+		<td width="70"><?php echo $this->dados['cbo']['codigo']?></td>
+		<td width="70">
+			<?php
+				//$data = $this->ticket->fin_compensacao;
+				//$data = new Zend_Date($data);
+// 				echo $data->toString('d/MM/yyyy');
+			?>
+		</td>
+		<td width="60">
+			<?php
+				$data = $this->dados['folha']['dt_competencia'];
+				$data = new Zend_Date($data);
+				echo $data->toString('MM/yyyy');
+			?>
+		</td>
+		<td width="255"><?php echo $this->dados['cbo']['nome']?></td>
+	</tr>
+</table>
+<table border="1" style="width: 695px; border: 1px solid #000; font-size: 9" cellpadding="1">
+	<tr>
+		<td width="50" style="text-align: center;">Código</td>
+		<td width="405" style="text-align: center;">Descrição</td>
+		<td width="80" style="text-align: center;">Referência</td>
+		<td width="80" style="text-align: center;">Vencimentos</td>
+		<td width="80" style="text-align: center;">Descontos</td>
+	</tr>
+	<tr>
+		<td width="100%" colspan="5" valign="top" style="height: 190px;">
+			<table  style="width: 100%; font-size: 9" cellpadding="1">
+				<?php foreach ($this->dados['tss'] as $tss) : ?>
+				<tr>
+					<td width="50" valign="top" style="text-align: center;"><?php echo $tss['codigo'];?></td>
+					<td width="403" valign="top"><?php echo str_replace(array("{$tss['codigo']} "), '', $tss['fin_descricao']); ?></td>
+					<td width="80" valign="top" style="text-align: center;"><?php echo $tss['referencia'];?></td>
+					<td width="80" valign="top" style="text-align: right;"><?php echo $this->formatDecimal($tss['fin_valor']);?></td>
+					<td width="80" valign="top" style="text-align: right;"></td>
+				</tr>
+				<?php	endforeach;?>
+				<?php foreach ($this->dados['tse'] as $tse) : ?>
+				<tr>
+					<td width="50" valign="top" style="text-align: center;"><?php echo $tse['codigo'];?></td>
+					<td width="403" valign="top"><?php echo str_replace(array("{$tse['codigo']} "), '', $tse['fin_descricao']); ?></td>
+					<td width="80" valign="top" style="text-align: center;"><?php echo $tse['referencia'];?></td>
+					<td width="80" valign="top" style="text-align: right;"></td>
+					<td width="80" valign="top" style="text-align: right;"><?php echo $this->formatDecimal($tse['fin_valor']);?></td>
+				</tr>
+				<?php	endforeach;?>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td rowspan="2" colspan="3">
+			<table cellpadding="3">
+				<tr>
+					<td style="text-align: center;">Data de Admissão: <?php echo $this->date($this->dados['admissao']['dt_admissao'])?></td>
+					<?php
+        				$data = $this->dados['folha']['dt_competencia'];
+        				$data = new Zend_Date($data);
+        				$data->setDay(1);
+        				$dataInicial = $data->toString('dd/MM/yyyy');
+        				$data->setDay(1)->addMonth(1)->subDay(1);
+        				$dataFinal   = $data->toString('dd/MM/yyyy');
+        			?>
+					<td style="text-align: center;">Período: <?php echo $dataInicial?> a <?php echo $dataFinal?></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center;"></td>
+				</tr>
+			</table>
+		</td>
+		<td><span style="font-size: 8;">Total</span><br/><span style="text-align: right;">
+			<?php
+				if (!empty($this->dados['base']['totalTss'])){
+					echo $this->formatDecimal($this->dados['base']['totalTss']);
+				} else {
+					echo '0,00';
+				}
+			?>
+		</span></td>
+		<td><span style="font-size: 8;">Total</span><br/><span style="text-align: right;">
+			<?php
+				if (!empty($this->dados['base']['totalTse'])){
+					echo $this->formatDecimal($this->dados['base']['totalTse']);
+				} else {
+					echo '0,00';
+				}
+			?>
+		</span></td>
+	</tr>
+	<tr>
+		<td>Valor Líquido</td>
+		<td style="text-align: right;">
+			<?php
+				if (!empty($this->dados['base']['totalTse'])){
+					$total = $this->dados['base']['totalTss'] - $this->dados['base']['totalTse'];
+					echo $this->formatDecimal($total);
+				} else {
+					echo $this->formatDecimal($this->dados['base']['totalTss']);
+				}
+			?>
+		</td>
+	</tr>
+</table>
+<table style="width: 695px; border: 1px solid #000; font-size: 9" cellpadding="1">
+	<tr>
+		<td style="text-align: center;">Salário Base</td>
+		<td style="text-align: center;">Base do INSS</td>
+		<td style="text-align: center;">Base do FGTS</td>
+		<td style="text-align: center;">FGTS a Recolher</td>
+		<td style="text-align: center;">Base do IRRF</td>
+	</tr>
+	<tr>
+		<td style="text-align: center;">
+			<?php
+				if (!empty($this->dados['funcional']['salario'])){
+					echo $this->formatDecimal($this->dados['funcional']['salario']);
+				} else {
+					echo '0,00';
+				}
+			?>
+		</td>
+		<td style="text-align: center;">
+			<?php
+				if (!empty($this->dados['base']['inss'])){
+					echo $this->formatDecimal($this->dados['base']['inss']);
+				} else {
+					echo '0,00';
+				}
+			?>
+		</td>
+		<td style="text-align: center;">
+			<?php
+				if (!empty($this->dados['base']['fgts'])){
+					echo $this->formatDecimal($this->dados['base']['fgts']);
+				} else {
+					echo '0,00';
+				}
+			?>
+		</td>
+		<td style="text-align: center;">
+			<?php
+				if (!empty($this->dados['valorFgts'])){
+					echo $this->formatDecimal($this->dados['valorFgts']);
+				} else {
+					echo '0,00';
+				}
+			?>
+		</td>
+		<td style="text-align: center;">
+			<?php
+				if (!empty($this->dados['base']['irrf'])){
+					echo $this->formatDecimal($this->dados['base']['irrf']);
+				} else {
+					echo '0,00';
+				}
+			?>
+		</td>
+	</tr>
+</table>
+<br/>
+<table border="0" cellspacing="0" style="width: 695px; border: 1px solid #000; font-size: 9" cellpadding="3">
+	<tr>
+		<td colspan="2" style="text-align: center;">DECLARO TER RECEBIDO A IMPORTÂNCIA LÍQUIDA DISCRIMINADA NESTE RECIBO.</td>
+	</tr>
+	<tr>
+		<td width="10"></td>
+		<td width="150" style="border-bottom: 1px dashed #000;"><br/><br/></td>
+		<td width="20"></td>
+		<td width="505" style="border-bottom: 1px dashed #000;"></td>
+		<td width="10"></td>
+	</tr>
+	<tr>
+		<td width="10"></td>
+		<td style="text-align: center;">Data</td>
+		<td width="20"></td>
+		<td style="text-align: center;">Assinatura</td>
+		<td width="10"></td>
+	</tr>
+</table>
+<?php if ($i == 0) : ?>
+<div style="border-bottom: 1px dashed #000; width: 695px;"></div><br/>
+<?php endif;?>
+<?php endfor;?>

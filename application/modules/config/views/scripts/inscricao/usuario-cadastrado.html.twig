@@ -1,0 +1,30 @@
+<pre>
+    {{dump()}}    
+</pre>
+
+
+<div class="container-inscricao col-md-12">
+    <div class="container-form">
+        <div class="suport-text">
+            <h1>Nos parece que esse e-mail já está associado a um usuário.</h1>
+            <h2>Os seguintes usuário estão associados a este e-mail:</h2>
+        </div>
+        <div class="box-form-inscricao">
+		    <ul>
+		        {% for usuario in listausuarios %}
+		        <li>
+		            <i class="fa fa-user" aria-hidden="true"></i> {{ usuario }}
+		        </li>
+		        {% endfor %}
+		    </ul>
+		    <button type="button" class="back">{{ 'back'|zftranslate }}</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+    $('.back').click(function(){
+        location.assign('/config/inscricao?produto=hpc');
+    });
+});
+</script>

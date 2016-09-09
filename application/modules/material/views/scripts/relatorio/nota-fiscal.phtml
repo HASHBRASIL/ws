@@ -1,0 +1,47 @@
+<?php
+    /**
+     * formulario do controller relatorio para configurar um relatório
+    */
+?>
+<div class="row">
+    <div class="large-8 columns large-centered">
+        <form method="post">
+              <fieldset>
+                  <legend><?php echo $this->translate('Filtro de Relatório')?></legend>
+                  <div class="row">
+                      <div class="large-4 columns">
+                          <label>Tipo de Relatório</label>
+                          <div class="large-4 columns">
+                              <label class="inline"><input type="radio" name="tp_relatirio" value="1"> Simples</label>
+                          </div>
+                          <div class="large-4 columns">
+                              <label class="inline"><input type="radio" name="tp_relatirio" value="1"> Analítico</label>
+                          </div>
+                      <div class="small-1 columns">
+                      </div>
+                      </div>
+                      <div class="small-1 columns">
+                      </div>
+                  </div>
+                  <div class="row" style="margin-bottom: 15px;">
+                      <div class="small-4 columns">
+                          <label><?php echo $this->translate('Empresa')?></label>
+                          <?php echo $this->formSelect('empresa_grupo', null, array('style' => 'margin-bottom:10px'), $this->empresaGrupoCompo)?>
+                      </div>
+                      <div class="small-4 columns">
+                          <label><?php echo $this->translate('Recebido por')?></label>
+                          <?php echo $this->formSelect('pes_', null, array('style' => 'margin-bottom:10px'), $this->empresaGrupoCompo)?>
+                      </div>
+                      <div class="small-1 columns">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="large-12 columns">
+                          <input type="submit" value="Gerar PDF" class="button radius success"  />
+                      </div>
+                  </div>
+              </fieldset>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/material/item.form.js')?>"></script>

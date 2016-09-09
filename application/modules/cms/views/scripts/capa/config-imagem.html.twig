@@ -1,0 +1,130 @@
+{% set id_servico       = '' %}
+{% set nome_servico     = '' %}
+{% set metanome_servico = '' %}
+{% set servico_crop     = '' %}
+{% set servico_ratio     = '16/10' %}
+
+{% for serv in servico.filhos %}
+    {% if serv.metadata.ws_campo is defined and serv.metadata.ws_campo == '.' ~ campo.metanome|lower  %}
+        {% set id_servico       = serv.id %}
+        {% set nome_servico     = serv.nome %}
+        {% set metanome_servico = serv.metanome %}
+    {% endif %}
+    {% if serv.metadata.ws_campo is defined and serv.metadata.ws_campo == '.cropimage' %}
+        {% set servico_crop = serv.id %}
+    {% endif %}
+    {% if serv.metadata.ws_ratio is defined %}
+        {% set servico_ratio = serv.metadata.ws_ratio %}
+    {% endif %}
+{% endfor %}
+
+<fieldset class="img-cropper-componente">
+    <legend>
+        <h5>Selecionar imagem</h5>
+    </legend>
+    <p>Escolha uma imagem para o conteúdo selecionado para substituir caso já exista alguma.</p>
+    <div class="row">
+        <button type="button" class="btn btn-sm btn-primary" data-servico='{{ id_servico }}' data-comportamento="modal" data-titulo="{{nome_servico}}" data-metanome='{{ metanome_servico }}'>Escolher imagem</button>
+        <button type="button" class="btn btn-sm btn-primary crop-cropper" data-servico="{{servico_crop}}">Cortar</button>    
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="#" name="imagem_galeria" class="cropper-img hide" />
+        </div>
+        <div class="col-md-6">
+            <div class="preview-cropper"></div>
+        </div>
+    </div>
+</fieldset>
+
+<style type="text/css">
+    @import url("library/cropimg/css/cropper.min.css");
+	.cropper-img { width: 100%; }
+</style>
+<script src="library/cropimg/js/cropper.min.js"></script>
+<script type="text/javascript">
+
+    $('.crop-cropper').on('click', function(e){
+        e.preventDefault();
+        // soltar um ajax que vai na controler... levando a url da imagem orignial + os parametros de resize da imagem para a classe SimpleImage que o sol vai ajustar o composer.phar
+
+        var $serv     = $(this).attr('data-servico');
+        var $dataCrop = cropper_instance.cropper('getData');
+        var image     = cropper_instance.attr('src');
+
+        $.ajax({
+            type: "POST",
+            url:  "home.php?servico=" + $serv,
+            data: {'image': image, 'data': $dataCrop},
+            success: function(response, status, XMLHttpRequest) {
+                console.log(response);
+            }
+        });
+    });
+
+    customEscape = function(){
+        $('button[data-comportamento=""]')
+    }
+
+	callbackTableFilter = function(data){
+        var $previews = $('.preview-cropper');
+        $('.cropper-img').removeClass('hide');
+        
+        data[0].path = 'img/f441816e-cb56-4051-97e9-cdd6a0ad3b65.jpg';
+
+        if ( typeof alteracoesMidia != 'undefined' ) {
+            alteracoesMidia[currentSelected].src = data[0].path;
+        }
+
+        if( typeof cropper_instance != 'undefined') {
+            cropper_instance.cropper('replace', data[0].path);
+
+            $previews.each(function(i, v){
+                $(this).find('img').removeClass('cropper-hidden');
+            });
+
+        }else{
+            $('.cropper-img').attr('src', data[0].path);
+
+            cropper_instance = $('.cropper-img');
+
+            cropper_instance.cropper({
+                zoomable:  false,
+                movable:   false,
+                rotatable: false,
+                scalable:  false,
+                viewMode: 3,
+                aspectRatio: {{servico_ratio}},
+                build: function (e) {
+
+                	if( typeof alteracoesMidia != 'undefined' && alteracoesMidia[currentSelected].data ) {
+                    	cropper_instance.cropper('setData', alteracoesMidia[currentSelected].data);
+                    }
+                    var $clone = $(this).clone();
+                    $clone.css({display: 'block', width: '100%', minWidth: 0, minHeight: 0, maxWidth: 'none', maxHeight: 'none' });
+                    $previews.css({ width: '100%', overflow: 'hidden'}).html($clone);
+                },
+
+                crop: function (e) {
+                    var imageData = $(this).cropper('getImageData');
+                    var previewAspectRatio = e.width / e.height;
+
+                    $previews.each(function () {
+                        var $preview = $(this);
+                        var previewWidth = $preview.width();
+                        var previewHeight = previewWidth / previewAspectRatio;
+                        var imageScaledRatio = e.width / previewWidth;
+
+                        $preview.height(previewHeight).find('img').css({
+                            width: imageData.naturalWidth / imageScaledRatio,
+                            height: imageData.naturalHeight / imageScaledRatio,
+                            marginLeft: -e.x / imageScaledRatio,
+                            marginTop: -e.y / imageScaledRatio
+                        });
+                    });
+                }
+            });
+        }
+    }
+
+</script>

@@ -1,0 +1,19 @@
+{% include 'header-content.html.twig' %}
+{% set paginacao = false %}
+{% for filho in servico.filhos %}
+    {% if filho.metadata.ws_comportamento == 'paginacao' %}
+        {% set paginacao = filho %}
+    {% endif %}
+{% endfor %}
+
+<div class="row box-table-container">
+    <table class="table paginacao"
+           data-servico="{{ paginacao.id }}" >
+        <thead>
+            {% include 'list-header.html.twig' %}
+        </thead>
+        <tbody>
+            {% include 'rows.html.twig' %}
+        </tbody>
+    </table>
+</div>

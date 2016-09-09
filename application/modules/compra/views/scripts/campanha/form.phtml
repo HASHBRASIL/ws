@@ -1,0 +1,373 @@
+<?php
+    /**
+     * formulario de campanha
+    */
+?>
+
+<link rel="stylesheet" href="/assets/plugins/data-tables/DT_bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('/assets/plugins/bootstrap-datetimepicker/css/datetimepicker.css')?>" />
+<link rel="stylesheet" href="<?php echo $this->baseUrl('/styles/jquery.treeview.css')?>" />
+<div class="row-fluid">
+	<div class="span12">
+		<h3 class="page-title">
+			Cadastro
+			 <small> de campanha</small>
+		</h3>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="portlet box green">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i> Formulário</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+	<div class="portlet-body form">
+        <form method="post"  class="horizontal-form" id="form_menu">
+                  <?php echo $this->formHidden('id_campanha', $this->vo->id_campanha);?>
+                  <div class="row-fluid">
+                      <div class="span6">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Nome')?><span class="required">*</span></label>
+	                          <div class="controls">
+	                          	<?php echo $this->formText('nome',$this->vo->nome, array('class' => 'span12'));?>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span6">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Data')?><span class="required">*</span></label>
+	                          <div class="controls">
+	                               <div class="input-append date form_datetime">
+        	                          <?php echo $this->formText('dt_inicio',$this->date($this->vo->dt_inicio,'dd/MM/yyyy HH:mm'), array('class'=>'m-wrap span5','placeholder' => "Início"));?>
+        	                          <span class="add-on" style="margin-right: 5px;"><i class="icon-calendar"></i> </span>
+        	                          <?php echo $this->formText('dt_fim',$this->date($this->vo->dt_fim, 'dd/MM/yyyy HH:mm'), array( 'class'=>'m-wrap span5','placeholder' => "Fim"));?>
+        	                          <span class="add-on"><i class="icon-calendar"></i> </span>
+    	                          </div>
+	                          </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row-fluid">
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Tipo de comissão')?><span class="required">*</span></label>
+	                          <div class="controls">
+	                          	<?php echo $this->formSelect('id_tp_comissao',$this->vo->id_tp_comissao, array('class' => 'span12'), $this->comboTpComissao);?>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Comissão')?><span class="required">*</span></label>
+	                          <div class="controls">
+    	                          <div class="input-append">
+                                    <?php echo $this->formText('porcent_comissao',$this->vo->porcent_comissao, array('class' => 'm-wrap span12', 'style' =>'text-align:right;'));?><span class="add-on">%</span>
+                                  </div>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Multa')?><span class="required">*</span></label>
+	                          <div class="controls">
+    	                          <div class="input-append">
+                                    <?php echo $this->formText('porcent_multa',$this->vo->porcent_multa, array('class' => 'm-wrap span12', 'style' =>'text-align:right;'));?><span class="add-on">%</span>
+                                  </div>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Qtd máxima de compra')?></label>
+	                          <div class="controls">
+                                <?php echo $this->formText('qtd_compra',$this->vo->qtd_compra, array('class' => 'span7'));?>
+	                          </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row-fluid">
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Tipo de moeda')?></label>
+	                          <div class="controls">
+                                    <?php echo $this->formSelect('id_moeda',$this->vo->id_moeda, array('class' => 'span12'), $this->comboMoeda);?>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Valor mínimo')?></label>
+	                          <div class="controls">
+    	                          <div class="input-prepend">
+                                    <span class="add-on sigla_moeda">R$</span><?php echo $this->formText('vl_min_compra',$this->vo->vl_min_compra, array('class' => 'm-wrap span12'));?>
+                                  </div>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Valor máximo')?></label>
+	                          <div class="controls">
+    	                          <div class="input-prepend">
+	                                   <span class="add-on sigla_moeda">R$</span><?php echo $this->formText('vl_max_compra',$this->vo->vl_max_compra, array('class' => 'm-wrap span12'));?>
+	                              </div>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Valor adicional(boleto)')?></label>
+	                          <div class="controls">
+    	                          <div class="input-prepend">
+                                    <span class="add-on sigla_moeda">R$</span><?php echo $this->formText('vl_adicional',$this->vo->vl_adicional, array('class' => 'm-wrap span9'));?>
+                                  </div>
+	                          </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row-fluid">
+                      <div class="span12">
+                          <div class="control-group">
+	                          <label class=" control-label"><?php echo $this->translate('Descrição')?></label>
+	                          <div class="controls">
+                                    <?php echo $this->formTextarea('descricao',$this->vo->descricao, array('class' => 'span12', 'rows' => 5));?>
+	                          </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-actions">
+                      <button type="submit" class="btn blue"><i class="icon-ok"></i> Salvar</button>
+                      <a href="<?php echo $this->baseUrl('compra/campanha/grid')?>" class="btn" >Voltar</a>
+                  </div>
+        </form>
+        </div>
+    </div>
+</div>
+<div class="row-fluid" style="<?php echo $this->vo->id_campanha ? "": 'display:none'?>">
+	<a href="#" class="icon-btn span2 add_produto">
+		<i class="icon-barcode"></i>
+		<div>Adicionar produto</div>
+	</a>
+	<a href="#" class="icon-btn span2 add_consultor">
+		<i class="icon-group"></i>
+		<div>Adicionar consultor</div>
+	</a>
+</div>
+
+<?php if($this->vo->id_campanha):?>
+    <div class="row-fluid">
+        <div class="span12">
+            <!--BEGIN TABS-->
+            <div class="tabbable tabbable-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab-produto" data-toggle="tab"><?php echo $this->translate("Produto")?></a></li>
+                    <li><a href="#tab-consultor" data-toggle="tab"><?php echo $this->translate("Consultor")?></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-produto">
+                    </div>
+                    <div class="tab-pane" id="tab-consultor">
+                    </div>
+                </div>
+            </div>
+            <!--END TABS-->
+        </div>
+    </div>
+<?php endif;?>
+<div class="dialog_pesquisa_produto" style=" display: none">
+    <form action="" id="formPesquisaProduto" style="margin: 0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Filtro')?></label>
+                    <div class="controls">
+                        <?php echo $this->formSelect('id_filtro', null, array('class'=> 'span12'), array('Grupo', 'Referência', 'Nome'))?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid filtro_grupo">
+            <div class="span4 ">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Grupo')?></label>
+                    <div class="controls">
+                        <?php echo $this->formSelect('id_grupo', null, array('class'=> 'span12'), $this->comboGrupo)?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Sub-Grupo')?></label>
+                    <div class="controls">
+                        <?php echo $this->formSelect('id_subgrupo', null, array('class'=> 'span12'), array('---- Selecione ----'))?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Classe')?></label>
+                    <div class="controls">
+                        <?php echo $this->formSelect('id_classe', null, array('class'=> 'span12'), array('---- Selecione -----'))?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6 filtro_nome">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Nome')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('nome_item', null, array('class'=> 'span12'))?>
+                    </div>
+                </div>
+            </div>
+            <div class="span6 filtro_referencia">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Referência')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('referencia', null, array('class'=> 'span12'))?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="dialog-produto" style=" display: none">
+    <form id="formProduto" style="margin: 0;">
+    <table class="table table-hover table-produto">
+		<thead>
+			<tr>
+				<th><input type="checkbox" class="check-all-produto"></th>
+				<th>Produto</th>
+				<th>Valor</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+    </form>
+</div>
+<div id="dialog_edit_produto" style=" display: none">
+    <form action="" id="form-edit-produto" style="margin: 0;">
+        <?php echo $this->formHidden('id_campanha_item')?>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Nome')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('edit_produto', null, array('class'=> 'span12', 'disabled' => 'disabled'))?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Valor unitário')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('vl_unitario', null, array('class'=> 'span6'))?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="dialog_consultor" style=" display: none">
+    <form action="" id="form-consultor" style="margin: 0;">
+        <?php echo $this->formHidden('id_campanha_item')?>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Tipo de pessoa')?></label>
+                    <div class="controls">
+                        <?php echo $this->formSelect('tipo_pessoa', null, array('class'=> 'span6'), $this->comboTpFisica)?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Consultor/Cordenador')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('nome_consultor', null, array('class'=> 'span12'))?>
+                        <?php echo $this->formHidden('id_corporativa')?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="dialog-edit-consultor" style=" display: none">
+    <form action="" id="form-edit-consultor" style="margin: 0;">
+        <?php echo $this->formHidden('id_campanha_corporativa')?>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Consultor/Cordenador')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('edit_consultor', null, array('class'=> 'span12', 'disabled' => 'disabled'))?>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Tipo de comissão')?></label>
+                    <div class="controls">
+                        <?php echo $this->formSelect('id_tp_comissao_cons',null, array('class' => 'span12'), $this->comboTpComissao);?>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Comissão')?></label>
+                    <div class="controls">
+                        <div class="input-append" style="background-color: white;">
+                        <?php echo $this->formText('porcent_comissao_cons',null, array('class' => 'm-wrap span12', 'style' =>'text-align:right;'));?><span class="add-on">%</span>
+                        </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Valor máximo')?></label>
+                      <div class="controls">
+                          <div class="input-prepend" style="background-color: white;">
+                               <span class="add-on sigla_moeda">R$</span><?php echo $this->formText('vl_max_compra_cons',null, array('class' => 'm-wrap span12', 'style' => 'background:white'));?>
+                          </div>
+                      </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Qtd máxima de compra')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('qtd_compra_cons',null, array('class' => 'span7'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="tree-consultor" style=" display: none">
+    <form action="" id="form-tree-consultor" style="margin: 0;">
+    </form>
+</div>
+<div id="dialog-delete-produto" style="display: none;">
+	<p style="font-size: 16px;padding-top: 6px;margin-bottom: 0;">Deseja realmente excluir este produto?</p>
+</div>
+<div id="dialog-delete-consultor" style="display: none;">
+	<p style="font-size: 16px;padding-top: 6px;margin-bottom: 0;">Deseja realmente excluir este consultor?</p>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js')?>" charset="UTF-8"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/assets/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js')?>" charset="UTF-8"></script>
+
+<script src="<?php echo $this->baseUrl('/scripts/lib/treeview/jquery.treeview.js')?>"></script>
+
+<script src="<?php echo $this->baseUrl('scripts/compra/campanha.form.js')?>" type="text/javascript" charset="UTF-8"></script>
+<script src="<?php echo $this->baseUrl('scripts/compra/campanha.form.consultor.js')?>" type="text/javascript" charset="UTF-8"></script>

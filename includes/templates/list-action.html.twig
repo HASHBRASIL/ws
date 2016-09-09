@@ -1,0 +1,7 @@
+{% from 'botoes.html.twig' import botao as gerar_botao %}
+
+{% for filho in servico.filhos %}
+    {% if filho.metadata.ws_comportamento == 'listaction' %}
+        {{ gerar_botao(filho, 'listaction', null) }}
+    {% endif %}
+{% endfor %}

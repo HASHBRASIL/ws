@@ -1,0 +1,60 @@
+<div class='grupoDivMetadados'>
+    <form id="metadados">
+{#        <input type="hidden" name="id" id="id_metanome_filtro" value="{{ id_metanome_filtro }}" />#}
+        <table class="table table-responsive" id="tabela-metadados">
+            <thead>
+            <tr>
+                <th> - </th>
+                <th style="color:black!important">Metadados</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for metadado in metadados %}
+                <tr>
+                    <td>
+                        <button class="btn btn-default remmetadado" type="button" data-idmetadado='{{ metadado.id }}'>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <input type="hidden" class="ws_filtro" name="metadados[{{ loop.index0 }}][campo]" value="{{ metadado.campo }}" />
+                        <input type="hidden" class="ws_filtro" name="metadados[{{ loop.index0 }}][valor]" value="{{ metadado.valor }}" />
+                        <input type="hidden" class="ws_filtro" name="metadados[{{ loop.index0 }}][id]" value="{{ metadado.id }}" />
+                        {{ metadado.campo }} = {{ metadado.valor }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </form>
+    <br/>
+    <form method="post">
+        <fieldset>
+            <legend> Adicionar METADADO </legend>
+                <input name='campo' value='' id="metadado-campo" type="text" /> = 
+                <input name="valor" value='' id="metadado-valor" type="text" />
+                <br />
+            <input value="adicionar" id="adcmetadado" type="button" />
+            <input value="salvar" type="submit" />
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript">
+$(function(){
+    $('#adcmetadado').click(function(){
+        var campo = $('#metadado-campo').val(),
+            valor = $('#metadado-valor').val(),
+            qtd = $('#tabela-metadados>tbody tr').length,
+            botao = '<button class="btn btn-default remmetadado" type="button"><span class="glyphicon glyphicon-remove"></span></button>';
+
+        var filtro = campo + ' = ' + valor;
+        filtro += '<input type="hidden" class="ws_filtro" name="metadados[' + qtd + '][campo]" value="' + campo + '" />'
+               + '<input type="hidden" class="ws_filtro" name="metadados[' + qtd + '][valor]" value="' + valor + '" />';
+
+        $('#tabela-metadados > tbody:last-child').append('<tr><td>' + botao + '</td><td>' + filtro + '</td></tr>');
+        
+        $('#metadado-campo').val('');
+        $('#metadado-valor').val('');
+    });
+});
+</script>

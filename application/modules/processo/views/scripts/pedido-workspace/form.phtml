@@ -1,0 +1,146 @@
+<style>
+.span3.altera-codigo:focus {
+    background-color: rgba(0,0,0,0.2);
+}
+.span3.altera-codigo {
+    background-color: transparent;
+    border-color: transparent;
+    color: #fff;
+    box-shadow: none;
+    padding: 0px;
+    margin: 0;
+    font-size: 16px;
+    border-radius: 6px;
+    text-align: center;
+}
+</style>
+<div class="row-fluid" style="margin-top:20px">
+    <div class="span12">
+        <div class="portlet box caribbean-green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-reorder"></i>  Cadastro de pedido por workspace  <?php echo $this->formText('altera-codigo', $this->processo->pro_codigo, array('class' => 'span3 altera-codigo', 'data-pro-codigo' => $this->vo->pro_codigo))?>
+                </div>
+                <div class="tools hidden-phone">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="form-pedido" method="post">
+                    <?php echo $this->formHidden('id_processo_pai', $this->processo->pro_id);?>
+                      <div class="row-fluid">
+                          <div class="span4">
+                          	  <div class="control-group">
+                                  <label class="control-label"><?php echo $this->translate('Workspace')?><span class="required">*</span></label>
+                                  <div class="controls">
+                                  	<?php echo $this->formSelect('id_workspace',null, array('class' => 'span12'), $this->workspaceCombo);?>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="span2">
+                          	  <div class="control-group">
+                                  <label class="control-label"><?php echo $this->translate('Quantidade a produzir')?><span class="required">*</span></label>
+                                  <div class="controls">
+                                  	<?php echo $this->formText('pro_quantidade',$this->processo->pro_quantidade, array('class' => 'span12 int'));?>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="span2">
+                          	  <div class="control-group">
+                                  <label class="control-label"><?php echo $this->translate('Valor unitário produção')?></label>
+                                  <div class="controls">
+                                  	<?php echo $this->formText('pro_vlr_unt',$this->formatDecimal($this->processo->pro_vlr_unt), array('class' => 'span12 decimal'));?>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="span2">
+                          	  <div class="control-group">
+                                  <label class="control-label"><?php echo $this->translate('Valor total produção')?></label>
+                                  <div class="controls">
+                                  	<?php echo $this->formText('pro_vlr_pedido',$this->formatDecimal($this->processo->pro_vlr_pedido), array('class' => 'span12  decimal'));?>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row-fluid">
+                          <div class="span12">
+                          	  <div class="control-group">
+                                  <label class="control-label"><?php echo $this->translate('Descrição de produção (Informações para produção)')?><span class="required">*</span></label>
+                                  <div class="controls">
+                                  	<?php echo $this->formTextarea('pro_desc_produto',$this->processo->pro_desc_produto, array('class' => 'span12', 'rows'=> 4));?>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-actions clearfix">
+                            <a href="<?php echo $this->baseUrl('processo/processo/grid')?>" class="btn black">
+                                Voltar
+                            </a>
+                                                        <button class="btn green" type="submit">
+                                Salvar
+                            </button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="scripts/lib/treeTable.js"></script>
+
+<table style="width: 100%;" id="table-tree" class="table table-hover">
+    <tr>
+        <th>Código</th>
+        <th>Cliente</th>
+        <th>Status</th>
+        <th>Descrição</th>
+        <th>Quantidade</th>
+        <th style="text-align: right;">Valor Unitário</th>
+        <th style="text-align: right;">Valor pedido</th>
+    </tr>
+    <?php if(count($this->processoPaiList) > 0):?>
+        <?php foreach ($this->processoPaiList as $keyPai => $processoPai):?>
+            <tr data-tt-id="<?php echo $processoPai['pro_id']?>">
+                <td><?php echo $processoPai['pro_codigo']?></td>
+                <td><?php echo $processoPai['nome_razao']?></td>
+                <td><?php echo $processoPai['sta_descricao']?></td>
+                <td><?php echo $processoPai['pro_desc_produto']?></td>
+                <td><?php echo $processoPai['pro_quantidade']?></td>
+                <td style="text-align: right;"><?php echo $this->formatDecimal($processoPai['pro_vlr_unt'])?></td>
+                <td style="text-align: right;"><?php echo $this->formatDecimal($processoPai['pro_vlr_pedido'])?></td>
+            </tr>
+            <?php
+            if(isset($processoPai['children'])){
+                tableChildren($processoPai['children'], $processoPai['pro_id']);
+            }
+            ?>
+        <?php endforeach;?>
+    <?php else :?>
+        <tr>
+            <td colspan="7" style="text-align: center;">Não existe registro</td>
+        </tr>
+    <?php endif;?>
+</table>
+
+<?php
+function tableChildren($processoChildren, $idProcessoPai)
+{
+
+    foreach ($processoChildren as $keyPai => $processo){
+        echo '<tr data-tt-id="'.$processo['pro_id'].'" data-tt-parent-id="'.$idProcessoPai.'">';
+        echo '<td>'.$processo['pro_codigo'].'</td>';
+        echo '<td>'.$processo['nome_razao'].'</td>';
+        echo '<td>'.$processo['sta_descricao'].'</td>';
+        echo '<td>'.$processo['pro_desc_produto'].'</td>';
+        echo '<td>'.$processo['pro_quantidade'].'</td>';
+        echo '<td style="text-align: right;">'.number_format($processo['pro_vlr_unt'], 2, ',', '.').'</td>';
+        echo '<td style="text-align: right;">'.number_format($processo['pro_vlr_pedido'], 2, ',', '.').'</td>';
+        echo '</tr>';
+        if(isset($processo['children'])){
+            tableChildren($processo['children'], $processo['pro_id']);
+        }
+    }
+}
+?>
+
+<script src="<?php echo $this->baseUrl('/scripts/processo/pedido-workspace.form.js')?>"></script>

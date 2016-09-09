@@ -1,0 +1,44 @@
+<?php $totalProduto = 0?>
+    <div class="row-fluid" id="paginato">
+        <div class="span12">
+            <div class="title-datatable">
+                <h4 style="font-weight: bold;"><?php echo count($this->movimentoList->getListMovimento())?> Lotes</h4>
+            </div>
+            <table class="table-bordered table-striped table-condensed flip-content" style="width: 100%" >
+                <thead>
+                    <tr>
+                        <th style="width: 100px">Codigo do Lote</th>
+                        <th>Descrição produto</th>
+                        <th style="width: 120px">Quantidade</th>
+                        <th style="width: 120px">Unidade</th>
+                        <th style="width: 120px">Atributo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if(count($this->movimentoList)):?>
+                        <?php foreach ($this->movimentoList->getListMovimento() as $movimento):?>
+                            <tr>
+                            <?php $estoque = $movimento->getEstoque()?>
+                                <td style="text-align: center"><?php echo $estoque->cod_lote ?></td>
+                                <td><?php echo $estoque->getItem()->nome ?></td>
+                                <td><?php echo $this->real($movimento->quantidade,false) ?></td>
+                                <td><?php echo $estoque->getUnidade()->nome?></td>
+                                <td><?php echo $this->textAtributoByEstoque($estoque->id_estoque)?></td>
+                            </tr>
+                        <?php endforeach;?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="16">Não possui dados</td>
+                        </tr>
+                    <?php endif;?>
+                </tbody>
+            </table>
+            <div class="footer">
+                <div class="pagination grid">
+                <?php if($this->movimentoList->id_tp_movimento != Material_Model_Bo_TipoMovimento::ENTRADA):?>
+                    <h5 style="color: #4D4D4D;">Total: <?php echo $this->real($this->movimentoList->quantidade, false)?></h5>
+                <?php endif;?>
+                </div>
+        </div>
+        </div>
+    </div>

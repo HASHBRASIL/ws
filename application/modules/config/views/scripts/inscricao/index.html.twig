@@ -1,0 +1,31 @@
+<div class="container-inscricao col-md-12">
+    <div class="container-form">
+        <div class="suport-text">
+            <h1>Hash Pré-campanha irá facilitar a sua vida em todos os sentidos,<br/>venha fazer parte você também!</h1>
+            <h2>Insira seu e-mail no campo abaixo para criar sua pré-campanha.</h2>
+        </div>
+        <div class="box-form-inscricao">
+            {# <h1>{{ 'email_novo_usuario'|zftranslate }}:</h1> #}
+            <form method="POST">
+                <div class="row">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input type="email" name="email" title="{{ 'campo_obrig'|zftranslate }}" placeholder="Endereço de e-mail" value="{{ email }}" required />
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <button type="submit">{{ 'Criar'|zftranslate }}</button>
+                    </div>
+                </div>
+                {# <h2>{{ 'produto_novo_usuario'|zftranslate }}:</h2> #}
+                {# {{ 'produto'|zftranslate }}:  #}
+                {#
+                ESSE SELECT TEORICAMENTE JA VIRIA PREENCHIDO AUTOMATICAMENTE POR ISSO O ESCONDI
+                <select name="produto">
+                    <option value="hash">{{ 'hash'|zftranslate }}</option>
+                    <option value="hpc">{{ 'hpc'|zftranslate }}</option>
+                    <option value="elegie">{{ 'elegie'|zftranslate }}</option>
+                </select> #}
+                <input type="hidden" value="{{produto}}" name="produto" />
+            </form>
+        </div>
+    </div>
+</div>

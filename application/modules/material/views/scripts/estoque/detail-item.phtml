@@ -1,0 +1,28 @@
+<table class="table-bordered table-striped table-condensed flip-content" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 100px">Cod. Protocolo</th>
+            <th>Num. Danfe</th>
+            <th style="width: 120px">Vl. unitário</th>
+            <th style="width: 120px">Criado por</th>
+            <th style="width: 120px">Data de criação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if(count($this->listEstoque)):?>
+            <?php foreach ($this->listEstoque as $movimento):?>
+                <tr>
+                    <td style="text-align: center"><?php echo $movimento['cod_protocolo'] ? $movimento['cod_protocolo'] : "-" ?></td>
+                    <td><?php echo $movimento['num_danfe'] ? $movimento['num_danfe'] : "-" ?></td>
+                    <td><?php echo $this->real($movimento['vl_unitario']) ?></td>
+                    <td><?php echo $movimento['nome_pessoa'] ?></td>
+                    <td><?php echo $this->date($movimento['dt_criacao']) ?></td>
+                </tr>
+            <?php endforeach;?>
+        <?php else: ?>
+            <tr>
+                <td colspan="16">Não possui dados</td>
+            </tr>
+        <?php endif;?>
+    </tbody>
+</table>

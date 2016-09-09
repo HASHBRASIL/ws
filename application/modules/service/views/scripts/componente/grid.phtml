@@ -1,0 +1,82 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+
+<div class="row-fluid">
+<a  class="icon-btn span2 new-data" style=" float: left; color: black;"><img style="padding-top: 0px;" src="/images/link-icon-small.png">Componente</a>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box grey">
+			<div class="portlet-title">
+				<div class="caption"></i>Componente</div>
+				<div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<table class="table-bordered table-striped table-condensed flip-content" id="perfisTable">
+          		<?php if(count($this->componenteList)):?>
+              	<?php $id_tp_componente_old = 0?>
+                <?php foreach ($this->componenteList as $componente):?>
+                  <?php if($componente->id_tp_componente != $id_tp_componente_old):?>
+                    	<tr style="background-color: #112F4A !important">
+                      	<td colspan="5"><h5 style="color: white"><?php echo $componente->getTpComponente()->nome ?></h5></td>
+                        <td style="color: white;text-align: right;"><?php echo $this->real($this->sumComponente[$componente->id_tp_componente])?></td>
+                      </tr>
+                  		<?php $id_tp_componente_old = $componente->id_tp_componente ?>
+                  <?php endif;?>
+                    <thead class="flip-content">
+											<tr>
+		                    <th class="hidden-480" >Serviço</th>
+		                    <th class="hidden-480" >Descrição</th>
+		                    <th class="hidden-480" >Características</th>
+		                    <th class="hidden-480" style="width: 130px">Vl. Unitário</th>
+		                    <th class="hidden-480" style="width: 100px">Quantidade</th>
+		                    <th class="hidden-480" style="width: 130px">Total</th>
+	                    </tr>
+										</thead>
+										<tbody>
+                    	<tr>
+		                    <td><?php echo $componente->getTpServico()->nome ?></td>
+	                      <td><?php echo $componente->getServico()->nome ?></td>
+	                      <td><?php echo $componente->caracteristica?></td>
+	                      <td style="text-align: right;"><?php echo $this->real($componente->getValorServico()->vl_unitario)?></td>
+	                      <td><?php echo $componente->quantidade?></td>
+	                      <td style="text-align: right;"><?php echo $this->real($componente->getValorServico()->vl_unitario*$componente->quantidade)?></td>
+                      </tr>
+                    </tbody>
+                    <?php endforeach;?>
+                	<?php else: ?>
+                  <tr><td colspan="16">Não possui dados</td></tr>
+                <?php endif;?>
+						</table>
+				</div>
+				        <div class="footer" style="text-align: right; min-height: 35px; height:70px">
+            <?php $sumExterno = isset($this->sumTpServico[Service_Model_Bo_TipoServico::EXTERNO])? $this->sumTpServico[Service_Model_Bo_TipoServico::EXTERNO]:0;?>
+            <?php $sumInterno = isset($this->sumTpServico[Service_Model_Bo_TipoServico::INTERNO])? $this->sumTpServico[Service_Model_Bo_TipoServico::INTERNO]:0;?>
+            <div style="padding-right: 10px;padding-top: 10px;">
+                    Total Serviço - Externo: <strong><?php echo $this->real($sumExterno)?></strong>
+            </div style="padding-right: 10px;">
+            <div  style="padding-right: 10px;">
+                    Total Serviço - Interno: <strong><?php echo $this->real($sumInterno)?></strong>
+            </div>
+            <div  style="padding-right: 10px; padding-bottom: 10px">
+                    Total do Serviço: <strong><?php echo $this->real($sumExterno+$sumInterno)?></strong>
+            </div>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,91 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('styles/datatable.style.css')?>" />
+<script type="text/javascript" language="javascript" src="<?php echo $this->baseUrl('scripts/lib/dataTable.multi.filter.select.js')?>"></script>
+<div class="row">
+    <div class="small-12 columns">
+        <div class="title-datatable">
+            <h5>Pedidos</h5>
+        </div>
+        <table class="grid grid_datatable">
+            <thead>
+        		<tr class="searchHeader">
+        			<th></th>
+        			<th></th>
+        			<th></th>
+        			<th></th>
+        			<th></th>
+        			<td></td>
+        		</tr>
+                <tr>
+                    <th>Código</th>
+                    <th>Cliente</th>
+                    <th>Descrição</th>
+                    <th>Quantidade</th>
+                    <th>Data de cadastro</th>
+                    <th class="action">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php if (count($this->listPedido) > 0):?>
+                <?php foreach ($this->listPedido as $pedido):?>
+                    <tr>
+                        <td><?php echo $pedido->pro_codigo?></td>
+                        <td><?php echo $pedido->getEmpresa()->nome_razao?></td>
+                        <td style="width:800px"><?php echo $pedido->pro_desc_produto ?></td>
+                        <td><?php echo $pedido->pro_quantidade?></td>
+                        <td><?php echo $this->dateHour($pedido->pro_data_inc)?></td>
+                        <td class="acoes">
+                            <a href="<?php echo $this->baseUrl("processo/processo/form/pro_id/{$pedido->pro_id}")?>" >
+                                <img title="Editar" data-tooltip src="<?php echo $this->baseUrl('images/edit.png')?>" />
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+            <?php endif;?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    var oTable =$('.grid_datatable').dataTable({
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers",
+        "aLengthMenu": [[50, 100, 200], [50, 100, 200]],
+        "iDisplayLength": 50,
+        "aaSorting": [[ 0, "desc" ]],
+        "oLanguage": {
+            "sProcessing": "Aguarde enquanto os dados são carregados ...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "Não foram encontrados resultados",
+            "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoFiltered": "",
+            "sSearch": "Procurar",
+            "oPaginate": {
+               "sFirst":    "Primeiro",
+               "sPrevious": "Anterior",
+               "sNext":     "Próximo",
+               "sLast":     "Último"
+            }
+         }
+    });
+
+    /* Add a select menu for each TH element in the table footer */
+    $("tr.searchHeader th").each( function ( i ) {
+        this.innerHTML = fnCreateSelect( oTable.fnGetColumnData(i) );
+        $('select', this).change( function () {
+            console.log($(this).val());
+            oTable.fnFilter( $(this).val(), i );
+        });
+    });
+});
+function fnCreateSelect( aData )
+{
+    var r='<select><option value=""></option>', i, iLen=aData.length;
+    for ( i=0 ; i<iLen ; i++ )
+    {
+        r += '<option value="'+aData[i]+'">'+aData[i]+'</option>';
+    }
+    return r+'</select>';
+}
+</script>

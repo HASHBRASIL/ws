@@ -1,0 +1,110 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('styles/datatable.style.css')?>" />
+<script type="text/javascript" language="javascript" src="<?php echo $this->baseUrl('scripts/lib/dataTable.multi.filter.select.js')?>"></script>
+<div class="row">
+    <div class="large-12 columns">
+    	<div class="">
+            <a class="button secondary"  style="margin-left:10px; float: left; color: black;" href="<?php echo $this->baseUrl("/financial/credito/form")?>"><img style="padding-top: 5px;" src="<?php echo $this->baseUrl("/images/add_small.png");?>">Fazer Análise de Crédito</a>
+            <img data-tooltip title="Bem, é um prazer tê-lo aqui. Mas parte deste sistema ainda está em desenvolvimento.<br>Havendo inconsistências ou erros contate-nos." style="; float: right;" style="padding-top: 5px;" src="<?php echo $this->baseUrl("/images/beta.png");?>">
+         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+		<div class="title-datatable">
+		    <h5>Contas</h5>
+		</div>
+		<table class="grid grid_datatable">
+		    <thead>
+				<tr class="searchHeader">
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+		        <tr>
+		            <th>Código</th>
+		            <th>Empresa</th>
+		            <th>Crédito Limite</th>
+		            <th>Posição Serasa</th>
+		            <th>Número Protocolo Serasa</th>
+		            <th>Data da consulta</th>
+		            <th>Situação Serasa</th>
+		            <th>Análise de risco</th>
+		            <th class="action">Ação</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    <?php if (count($this->creditoList) > 0):?>
+		        <?php foreach ($this->creditoList as $credito):?>
+		            <tr>
+		                <td><?php echo $credito->id_credito?></td>
+		                <td><?php echo $credito->getEmpresa()->nome_razao?></td>
+		                <td><?php echo $credito->limite_credito ?></td>
+		                <td><?php echo $credito->posicao_serasa?></td>
+		                <td><?php echo $credito->numero_serasa?></td>
+		                <td><?php echo $this->date($credito->data_consulta_serasa)?></td>
+		                <td><?php echo ($credito->situacao_serasa == 1)? "Com restrição":"Sem Restrição" ?></td>
+		                <td style="width: 500px;"><?php echo $credito->analise_risco?></td>
+		                <td class="acoes">
+		                    <a href="<?php echo $this->baseUrl("financial/credito/form/id_credito/{$credito->id_credito}")?>">
+		                        <img title="Editar Financeiro" data-tooltip src="<?php echo $this->baseUrl('images/edit.png')?>" />
+		                    </a>
+		                    <a href="<?php echo $this->baseUrl("financial/credito/delete/id/{$credito->id_credito}")?>">
+		                        <img title="Excluir Financeiro" data-tooltip src="<?php echo $this->baseUrl('images/delete.png')?>" />
+		                    </a>
+		                </td>
+		            </tr>
+		        <?php endforeach;?>
+		    <?php endif;?>
+		    </tbody>
+		</table>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    var oTable =$('.grid_datatable').dataTable({
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers",
+        "aLengthMenu": [[50, 100, 200], [50, 100, 200]],
+        "iDisplayLength": 50,
+        "aaSorting": [[ 0, "desc" ]],
+        "oLanguage": {
+            "sProcessing": "Aguarde enquanto os dados são carregados ...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "Não foram encontrados resultados",
+            "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoFiltered": "",
+            "sSearch": "Procurar",
+            "oPaginate": {
+               "sFirst":    "Primeiro",
+               "sPrevious": "Anterior",
+               "sNext":     "Próximo",
+               "sLast":     "Último"
+            }
+         }
+    });
+
+    /* Add a select menu for each TH element in the table footer */
+    $("tr.searchHeader th").each( function ( i ) {
+        this.innerHTML = fnCreateSelect( oTable.fnGetColumnData(i) );
+        $('select', this).change( function () {
+            console.log($(this).val());
+            oTable.fnFilter( $(this).val(), i );
+        });
+    });
+});
+function fnCreateSelect( aData )
+{
+    var r='<select><option value=""></option>', i, iLen=aData.length;
+    for ( i=0 ; i<iLen ; i++ )
+    {
+        r += '<option value="'+aData[i]+'">'+aData[i]+'</option>';
+    }
+    return r+'</select>';
+}
+</script>

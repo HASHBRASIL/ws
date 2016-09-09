@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+        <title></title>
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css//jquery-ui.css">
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css/style.css">
+        <script src="/HashWS/public/hash-messenger/js/jquery-2.2.1.min.js"></script>
+        <script src="/HashWS/public/hash-messenger/js/bootstrap.min.js"></script>
+        <script src="/HashWS/public/hash-messenger/js//jquery-ui.js"></script>
+        <script src="/HashWS/public/hash-messenger/js/main.js"></script>
+    </head>
+    <body>
+        <div class="modal-default" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span></button>
+                        <h4 class="modal-title">Memo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <ul class="nav nav-tabs" id="tabContent" role="tablist">
+                                <li role="presentation" class="active"><a href="#aba1" aria-controls="aba1" role="tab" data-toggle="tab">Memo</a></li>
+                                <li role="presentation"><a href="#aba2" aria-controls="aba2" role="tab" data-toggle="tab">Lista</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="aba1">
+                                    <form>
+                                        <label>Título</label>
+                                        <input type="text">
+                                        <label>Enviar memo para:</label>
+                                        <div class="box-enviar">
+                                            <span>#Desenvolvimento<a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                                            <span>@Ana<a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                                        </div>
+                                        <label>Recorrência</label>
+                                        <select>
+                                            <option>Todos os dias</option>
+                                        </select>
+                                        <label>Gravar áudio</label>
+                                        <div class="box-arquivo">
+                                            <span class="start"><a href="#"><i class="fa fa-check-circle" aria-hidden="true"></i></a></span>
+                                            <span class="content-arquivo">
+                                                <i class="fa fa-microphone" aria-hidden="true"></i>
+                                                <small>01:20</small>
+                                            </span>
+                                            <span class="stop"><a href="#"><i class="fa fa-times-circle" aria-hidden="true"></i></a></span>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="aba2">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="#"><i class="fa fa-play-circle" aria-hidden="true"></i></a><h3>Memo sobre a criação dos novos templates</h3></td>
+                                                <td><time>21/12/2023 14:34</time></td>
+                                                <td>
+                                                    <a href="#" class="link-acao"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                    <a href="#" class="link-acao"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-play-circle" aria-hidden="true"></i><h3>Apresentação sobre Angular JS</h3></td>
+                                                <td><time>22/10/2020 10:45</time></td>
+                                                <td>
+                                                    <a href="#" class="link-acao"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                    <a href="#" class="link-acao"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-play-circle" aria-hidden="true"></i><h3>Trazer pão</h3></td>
+                                                <td><time>22/12/2023 14:34</time></td>
+                                                <td>
+                                                    <a href="#" class="link-acao"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                    <a href="#" class="link-acao"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <i class="fa fa-pause-circle" aria-hidden="true"></i>
+                                                    <div class="player">
+                                                        <span class="processo">01:45</span>
+                                                        <div id="slider"></div>
+                                                        <span class="time-total">03:34</span>
+                                                    </div>
+                                                </td>
+                                                <td><time>22/12/2023 14:34</time></td>
+                                                <td>
+                                                    <a href="#" class="link-acao"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                    <a href="#" class="link-acao"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-play-circle" aria-hidden="true"></i><h3>Ir atrás das modificações que estão pende...</h3></td>
+                                                <td><time>22/12/2023 14:34</time></td>
+                                                <td>
+                                                    <a href="#" class="link-acao"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                    <a href="#" class="link-acao"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fa fa-play-circle" aria-hidden="true"></i><h3>Memo Teste</h3></td>
+                                                <td><time>22/12/2023 14:34</time></td>
+                                                <td>
+                                                    <a href="#" class="link-acao"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                    <a href="#" class="link-acao"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-limpar" data-dismiss="modal">Limpar</button>
+                        <button type="button" class="btn btn-enviar">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,131 @@
+<?php
+    /**
+     * grid do item aonde visualiza todos os produtos cadastrados no sistemas e ativos
+     * com link pra criar, alterar e inativar.
+    */
+?>
+<?php
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$moduleName         = $request->getModuleName();
+$controllerName     = $request->getControllerName();
+$actionName         = $request->getActionName();
+$caminhoForm        = $this->baseUrl($moduleName.'/'.$controllerName.'/form');
+$select = array(
+    50 => 50,
+    100 => 100,
+    200 => 200,
+    250 => 250
+    );
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$defaultItens = $request->getParam('itens', 250);
+?>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box <?php echo isset($this->colorGrid) ? $this->colorGrid : 'green' ?>">
+            <div class="portlet-title">
+            	<div class="caption"><i class="<?php echo isset($this->icon) ? $this->icon : 'icon-group' ?>"></i><?php echo $this->title?></div>
+            	<div class="actions">
+					<?php if( !$this->desabilitarBotaoNovo):?>
+			                <?php $caminhoFormBotaoNovo = $this->caminhoFormBotaoNovo? $this->caminhoFormBotaoNovo: $caminhoForm; ?>
+			                <a class="btn blue" href="<?php echo $caminhoFormBotaoNovo ?>"><i class="icon-pencil"></i><?php echo $this->nomeBotaoNovo ? $this->nomeBotaoNovo : $this->translate("Novo")?></a>
+			        <?php endif;?>
+				</div>
+			</div>
+			<div class="portlet-body">
+            	<div class="clearfix">
+					<div class="btn-group">
+						<div class="dataTables_length">
+							<?php if ($this->paginator->getTotalItemCount() > $defaultItens): ?>
+				                    <label>Mostrar <?php {echo $this->formSelect('itens', $defaultItens, array(), $select);}?></label>
+				            <?php endif;?>
+						</div>
+					</div>
+					<div class="btn-group pull-right">
+						<div class="dataTables_filter">
+							<?php
+								$this->columns = (array) $this->columns;
+								$this->actions = (array) $this->actions;
+				           	?>
+							<?php if (!$this->desabilitarPesquisa): ?>
+									<?php echo $this->partial('pesquisa.phtml', 'default', array(
+											'fields'       => $this->fields,
+											'actionSearch' => $this->actionSearch
+				                        ))?>
+							<?php endif; ?>
+						</div>
+					</div>
+				</div>
+				<div class="dataTables_wrapper form-inline" role="grid">
+					<table class="table table-striped table-hover table-bordered dataTable" aria-describedby="sample_editable_1_info"">
+			            <thead>
+			                <tr>
+			                    <?php foreach ($this->columns as $col => $alias): ?>
+			                    <th column="<?php echo $col?>"
+			                        class=" <?php echo $col?>"
+			                    >
+			                        <div><?php echo $alias?></div>
+			                    </th>
+			                    <?php endforeach;?>
+			                    <?php if (count($this->actions)): ?>
+			                        <th colspan="<?php echo count($this->actions)?>" class = "align-center action"><?php echo $this->translate("Ações")?></th>
+			                    <?php endif; ?>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                <?php if (count($this->paginator)): ?>
+			                    <?php foreach ($this->paginator as $key => $pageOBJ): ?>
+			                        <tr class="<?php echo $key % 2 ? 'erow' : '' ?>">
+			                            <?php $page = is_object($pageOBJ) && method_exists($pageOBJ, 'toArray')
+			                                        ? $pageOBJ->toArray()
+			                                        : $pageOBJ;
+			                            ?>
+			                            <?php foreach ((array) $this->columns as $col => $alias): ?>
+			                                <?php if (array_key_exists($col, $page)): ?>
+			                                    <?php $prop_nome = ($col == 'prop_nome' ? explode(' ', $page[$col]): array());?>
+			                                    <td style="white-space: normal !important; text-align: justify; padding-right: 5px;" class="<?php echo $col?>" >
+			                                        <?php
+			                                            if('prop_nome' === $col):
+			                                                echo $prop_nome[0];
+			                                            else:
+			                                                if( isset( $this->formatter ) && isset( $this->formatter[ $col ] ) ):
+			                                                    $method = ($this->formatter[ $col ]);
+			                                                    echo $this->$method( $page[$col], $page );
+			                                                else:
+			                                                    echo $page[$col];
+			                                                endif;
+			                                            endif;
+			                                        ?>
+			                                    </td>
+			                                <?php endif;?>
+			                            <?php endforeach;?>
+
+			                            <?php foreach ($this->actions as $acao): ?>
+			                            	<?php if (is_array($acao) && is_object($this->actionHelper)) { $flagAcao = $this->actionHelper->isEnabledAction($pageOBJ,$acao[0]); $acao = $acao[1];} else {$flagAcao = true;}?>
+			                                <?php $columns = array_keys($page);?>
+			                                <?php foreach ($columns as $col): ?>
+			                                    <?php if (strpos($acao, "%$col%")): ?>
+			                                        <?php $acao = str_replace("%$col%", $page[$col], $acao)?>
+			                                    <?php endif; ?>
+			                                <?php endforeach;?>
+			                                <td style="width: 20px;" class="acoes">
+			                                    <?php if ($flagAcao) echo $acao?>
+			                                </td>
+			                            <?php endforeach;?>
+			                        </tr>
+			                    <?php endforeach;?>
+			                <?php else: ?>
+			                    <tr>
+			                        <td colspan="<?php echo count($this->columns) + count($this->actions)?>"><?php echo $this->translate("Não existem registros")?>!</td>
+			                    </tr>
+			                <?php endif; ?>
+			            </tbody>
+			        </table>
+				</div>
+				<?php if ($this->paginator instanceof Zend_Paginator): ?>
+	            		<?php echo $this->paginationControl($this->paginator, 'Elastic', array('pagination-grid-metronic.phtml', 'default'))?>
+        		<?php endif;?>
+			</div>
+		</div>
+	</div>
+</div>

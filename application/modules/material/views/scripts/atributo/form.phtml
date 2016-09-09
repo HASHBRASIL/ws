@@ -1,0 +1,76 @@
+<?php
+    /**
+     * formulario de Atributos com opção
+    */
+?>
+<div class="row-fluid">
+	<div class="span12">
+		<h3 class="page-title">
+			Cadastro
+			 <small> de atributos com opção</small>
+		</h3>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="portlet box purple">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i> Formulário</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+		<div class="portlet-body form">
+	        <form method="post"  class="form-horizontal">
+				<?php echo $this->formHidden('id_atributo', $this->vo->id_atributo);?>
+				<?php $workspaceSession = new Zend_Session_Namespace('workspace');?>
+				<?php echo $this->vo->id_atributo ? $this->formHidden("id_workspace",$this->vo->id_workspace) : $this->formHidden("id_workspace",$workspaceSession->id_workspace); ?>
+				<div class="row-fluid">
+					<div class="span8">
+						<div class="control-group">
+								<label class=" control-label"><?php echo $this->translate('Nome')?> <span class="required">*</span></label>
+		                    <div class="controls">
+								<?php echo $this->formText('nome',$this->vo->nome, array('class' => 'span12'));?>
+							</div>
+						</div>
+					</div>
+                    <div class="span2">
+                        <div class="control-group">
+                            <label class="checkbox">
+                                <input type="checkbox" name="register_public" id="register_public" value="1" <?php echo $this->vo->id_workspace ? '' : 'checked="checked"' ?> /> Registro público
+                            </label>
+                        </div>
+                    </div>
+				</div>
+				<div class="form-actions">
+	            	<a href="javascript:history.back()" class="btn" >Voltar</a>
+	                <button type="submit" class="btn blue"><i class="icon-ok"></i> Salvar</button>
+	        	</div>
+	        </form>
+		</div>
+    </div>
+</div>
+<div class="row-fluid" style=" <?php echo $this->vo->id_atributo ? "": 'display:none'?>">
+	<a href="#" class="icon-btn span2 new opcao">
+		<i class="icon-list-ol"></i>
+		<div>Opção</div>
+	</a>
+</div>
+<div class="dialog_opcao" style=" display: none">
+	<div class="row-fluid">
+		<div class="span12 ">
+			<div class="control-group">
+				<label class="control-label"><?php echo $this->translate('Nome')?></label>
+				<div class="controls">
+					<?php echo $this->formHidden('id_opcao');?>
+					<?php echo $this->formText('nome_opcao',null, array('placeholder' => 'Nome', 'class' => 'span12'));?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p style="font-size: 16px;padding-top: 6px;margin-bottom: 0;">Deseja realmente excluir a opção do código: <span id ="valueDelete" style="font-weight: bold;"></span></p>
+</div>
+
+<div id="grid_opcao"></div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/material/atributo.form.js')?>"></script>

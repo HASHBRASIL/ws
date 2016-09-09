@@ -1,0 +1,102 @@
+<table class="table-bordered table-striped table-condensed flip-content" id="folhaTable">
+	<thead class="flip-content">
+		<tr>
+			<th class="hidden-480">Código</th>
+            <th class="hidden-480">Funcionário</th>
+            <th class="hidden-480">Tipo folha</th>
+            <th class="hidden-480">Descrição</th>
+            <th class="hidden-480">Data</th>
+            <th style="width: 100px;" class="hidden-480 action">Ação</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php if (count($this->folhaList) > 0):?>
+        <?php foreach ($this->folhaList as $folha):?>
+            <tr class="odd gradeX">
+                <td class="hidden-480" style="width:30px; text-align:center;"><?php echo $folha->id_rh_folha_de_pagamento; ?></td>
+                <td><?php echo $folha->getEmpresa()->nome_razao; ?></td>
+                <td><?php echo $folha->getTipoPagamento()->nome; ?></td>
+                <td><?php echo $folha->descricao; ?></td>
+                <td class="hidden-480"  style="width:150px"><?php echo $this->date($folha->dt_criacao); ?></td>
+	                <td class="acoes">
+                		<a title="emitir olerite" data-tooltip="" href='<?php echo $this->baseUrl("rh/folha-de-pagamento/olerite/id/{$folha->id_rh_folha_de_pagamento}")?>' target="_blank">
+			            	<i class="acao icon-print" title="Emitir olerite"></i>
+			            </a>
+                	<a class="duplicarRegistro" value="<?php echo $folha->id_rh_folha_de_pagamento; ?>" valueEmpressa="<?php  echo $folha->getEmpresa()->id; ?>" href="#">
+                		<i class=" icon-retweet acao" title="Duplicar Folha de Pagamento"></i>
+                	</a>
+                	<a href="<?php echo $this->baseUrl('rh/folha-de-pagamento/form/id_rh_folha_de_pagamento/'. $folha->id_rh_folha_de_pagamento)?>" value="<?php echo $folha->id_rh_folha_de_pagamento; ?>">
+                		<i class="icon-pencil acao" title="Editar"></i>					
+                	</a>
+                    <a class="deleteMoldal" value="<?php echo $folha->id_rh_folha_de_pagamento; ?>" href="#">
+                    			<i class="acao  icon-remove" title="Excluir"></i>
+		                    </a>
+		                </td>
+		            </tr>
+			        <?php endforeach;?>
+		<?php endif;?>
+	</tbody>
+</table>
+<script type="text/javascript">
+
+ $('#folhaTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span4'l><'span4 div-periodo'><'span4'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+ $('.dataTables_filter input').addClass("m-wrap medium"); // modify table search input
+ $('.dataTables_length select').addClass("m-wrap small");
+ $('div.span4.div-periodo').css('text-align', 'center')
+ .html("<a href='javascript:;' class='btn icn-only prev-periodo'><i class='icon-chevron-left'></i></a><input type='text' class='m-wrap small' id='dt_periodo'><a href='javascript:;' class='btn icn-only next-periodo'><i class='icon-chevron-right'></i></a>");
+ $('#dt_periodo').css('text-align', 'center').val( '<?php echo $this->dtPeriodo->toString('MMMM/yyyy') ?>');
+ $('a.prev-periodo').attr('data-data','<?php echo $this->prevPeriodo->toString('yyyy-MM-dd') ?>');
+ $('a.next-periodo').attr('data-data','<?php echo $this->nextPeriodo->toString('yyyy-MM-dd') ?>');
+ $( "#dt_periodo").datepicker({
+	  defaultDate: "+1w",
+     changeMonth: true,
+     minViewMode: 1,
+     autoclose: true,
+     format: "MM/yyyy",
+     language: "pt-BR",
+})
+  .on('changeDate', function(ev){
+    var dt_periodo = ev.date.toLocaleDateString()
+	var idFuncionario   = $('#id_funcionario').val();
+	var idTpPagamento 	= $('#id_tp_pagamento').val();
+	$.post('/rh/folha-de-pagamento/table',
+			{id_funcionario:idFuncionario,dt_periodo:dt_periodo,id_tp_pagamento:idTpPagamento}, 
+			function(data){
+				$('div.portlet-body').html(data);
+		})
+	  .fail(function() {
+		  	$('div.portlet-body').html('');
+		    alert( "Ocorreu um erro no servidor." );
+		  });;
+  }).datepicker('update', '<?php echo $this->dtPeriodo->toString('MM/yyyy') ?>');
+</script>

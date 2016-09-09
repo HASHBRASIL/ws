@@ -1,0 +1,153 @@
+
+
+<div class="container-fluid">
+
+						        <div class="row-fluid" style="display: none; margin-top: 10px">
+						          <div class="span12" id="message-box">
+						            <div class="alert ">
+						            	<span class="text-message"></span>
+						                <button class="close" data-dismiss="alert"></button>
+						            </div>
+						          </div>
+						        </div>
+
+<div class="row-fluid">
+					<div class="span12">
+						<h3 class="page-title">
+							Financeiro
+							 <small>Corporativo</small>
+						</h3>
+					</div>
+				</div>
+
+	<div class="portlet box green">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>Filtro Relatório Financeiro</div>
+
+		</div>
+	<div class="portlet-body form">
+        <form target="_blank" method="post" class="form-horizontal" id="frm" action="" >
+                  <input type="hidden" name="id" value="" id="id">
+
+
+
+                <?php echo $this->formHidden('id', null);?>
+
+
+                <div class="row-fluid">
+            	    <div class="span3">
+            	        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Data de Emissão')?> </label>
+            			        <div class="controls">
+                                      <?php echo $this->formText('data_emissao',null,array("class" => "datepicker m-wrap large", "style"=>" margin-bottom: 2px","placeholder" => "DE:" ));?>
+                                      <?php echo $this->formText('data_emissao2',null,array("class" => "datepicker m-wrap large", "style"=>" margin-bottom: 2px", "placeholder" => "ATÉ:" ));?>
+                                      <?php echo $this->formSelect('data_emissaoType',null,array("class"=>"large m-wrap"), array("entre" => "Emissão entre dois valores", "exato" => "Emissão exatamente igual"));?>
+                                </div>
+                        </div>
+            		</div>
+            	</div>
+
+            	 <div class="row-fluid">
+            	    <div class="span3 ">
+            	        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Data de Vencimento')?> </label>
+            			        <div class="controls">
+                                      <?php echo $this->formText('data_vencimento',null,array("class" => "datepicker m-wrap large", "style"=>" margin-bottom: 2px", "placeholder" => "DE:" ));?>
+                                      <?php echo $this->formText('data_vencimento2',null,array("class" => "datepicker m-wrap large", "style"=>" margin-bottom: 2px", "placeholder" => "ATÉ:"  ));?>
+                                      <?php echo $this->formSelect('data_vencimentoType',null,array("class"=>"large m-wrap"),array("entre" => "Vencimento entre dois valores", "exato" => "Vencimento exatamente igual"));?>
+                                </div>
+                        </div>
+            		</div>
+            	</div>
+
+            	 <div class="row-fluid">
+            	    <div class="span3">
+            	        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Data de Compensação')?> </label>
+            			        <div class="controls">
+                                      <?php echo $this->formText('data_compensacao',null,array("class" => "datepicker m-wrap large", "style"=>" margin-bottom: 2px", "placeholder" => "DE:" ));?>
+                                      <?php echo $this->formText('data_compensacao2',null,array("class" => "datepicker m-wrap large", "style"=>" margin-bottom: 2px", "placeholder" => "ATÉ:"  ));?>
+                                      <?php echo $this->formSelect('data_compensacaoType',null,array("class"=>"large m-wrap"),array("entre" => "Compensação entre dois valores", "exato" => "Compensação exatamente igual"));?>
+                                </div>
+                        </div>
+            		</div>
+            	</div>
+
+            	<div class="row-fluid">
+            	    <div class="span3">
+            	        <div class="control-group">
+            	        <label class="control-label"><?php echo $this->translate('Selecione os status financeiros desejados ')?> </label>
+            		        <div class="controls">
+            		        <input type="checkbox" id = "marcarTodos">    <?php echo $this->translate('Marcar todos')?><br>
+                  <?php $count = 0?>
+                  <?php foreach ($this->statusCheck as $id => $descricao){
+                        if($count == $this->linha){
+                            $count = $count + 1;
+                        }?>
+                        <input class="checkbox" type="checkbox"  value="<?php echo $id ?>" name="statusCheck[]" ><?php  echo $descricao ?><br>
+                 <?php $count = $count + 1;}?>
+                            </div>
+                        </div>
+            		</div>
+            	</div>
+
+            	 <div class="row-fluid">
+            	    <div class="span6">
+            	        <div class="control-group">
+                            <label class="control-label"><?php echo $this->translate('Selecione as empresas desejadas')?>  </label>
+            			        <div class="controls">
+                                     <div class="large-6 columns div_fantasia">
+                                          <input type="hidden" name="id_empresa" value="" id="id_empresa" idcompany="">                      <input type="text" name="empresa" id="empresa"  value="" style="display: inline-block; width: 60%;" class="ui-autocomplete-input m-wrap large" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible">2 results are available, use up and down arrow keys to navigate.</span>                      <img id="addEmpresa" src="/images/add.png" style="top:5px; position: relative;cursor:pointer;" data-tooltip="" class="" title="">
+                                      </div>
+                                </div>
+                        </div>
+            		</div>
+            	</div>
+
+            	 <div class="row-fluid">
+            	    <div class="span6">
+            	        <div class="control-group">
+            			        <div class="controls">
+                                     <div class="div_fantasia">
+                                     		 <legend id="companySelected">Empresas Selecionadas: 0</legend>
+                                              		<div id="localCompany">
+                                              		</div>
+                                      </div>
+                                </div>
+                        </div>
+            		</div>
+            	</div>
+
+            	<div class="row-fluid" >
+            	    <div class="span6">
+            	        <div class="control-group">
+            			        <div class="controls" id ="dialog">
+                                     <label class="radio line">
+                							<div class="radio"><span><input class="tgrupo" id="tgrupo" type="radio" name="tgrupo" value="0"></span></div>
+                								 <?php echo $this->translate('Agrupar por Status')?>
+                						</label>
+                						<label class="radio line">
+                							<div class="radio"><span><input class="tgrupo" id="tgrupo" type="radio" name="tgrupo" value="1"></span></div>
+                								 <?php echo $this->translate('Agrupar por Empresa')?>
+                						</label>
+                						<label class="radio line">
+                							<div class="radio"><span><input class="tgrupo" id="tgrupo" type="radio" name="tgrupo" value="2"></span></div>
+                								 <?php echo $this->translate('Agrupar por Plano de Contas')?>
+                						</label>
+                                </div>
+                        </div>
+            		</div>
+            	</div>
+                <div class="controls form-actions">
+                     <div class="div_fantasia">
+                            <a id="opener" class="button radius success btn blue blue">Gerar Relatório</a>
+                            <a href="<?php echo $this->baseUrl('empresa/empresa/index')?>" class="btn green hidden-print">Voltar</a>
+                      </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+					<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/relatorio/financeiro.index.js')?>"></script>

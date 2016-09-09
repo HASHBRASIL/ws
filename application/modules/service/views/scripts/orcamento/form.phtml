@@ -1,0 +1,162 @@
+<script type="text/javascript" src="<?php echo $this->baseUrl("scripts/lib/jquery.pstrength-min.1.2.js");?>"></script>
+<div class="row-fluid">
+	<div class="span12">
+		<h3 class="page-title">
+			<?php echo $this->translate('Orçamento')?>
+			<small>serviço</small>
+		</h3>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="portlet box steelblue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i> Formulário de <?php echo $this->translate('Orçamento')?></div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+	<div class="portlet-body form">
+      <form method="post"  class="form-horizontal" id="form_change_password">
+      <?php echo $this->formHidden('id_orcamento', $this->vo->id_orcamento );?>
+			<div class="row-fluid">
+				<?php if($this->vo->id_orcamento):?>
+					<div class="control-group">
+						<label class="control-label"><?php echo $this->translate('Código')?></label>
+						<div class="controls">
+							<?php echo $this->formText('codigo', $this->vo->id_orcamento, array('disabled' => 'disabled', 'class' => 'm-wrap small'));?>
+						</div>
+					</div>
+        <?php endif;?>
+        <div class="control-group">
+					<label class="control-label"><?php echo $this->translate('Nome')?>*</label>
+						<div class="controls">
+            	<?php echo $this->formText('nome', $this->vo->nome, array('placeholder' => 'Nome'));?>
+					</div>
+				</div>
+        <div class="control-group">
+					<label class="control-label"><?php echo $this->translate('Tipo')?>*</label>
+						<div class="controls">
+            	<?php echo $this->formSelect('id_tp_orcamento', $this->vo->id_tp_orcamento, array('style' => 'margin-bottom: 10px;'), $this->comboTpOrcamento)?>
+            	<img title="Adicionar Tipo" src="<?php echo $this->baseUrl('images/add.png')?>" data-tooltip style="cursor:pointer;position: relative;top: 6;" class="add-tipo">
+					</div>
+				</div>
+        <div class="control-group">
+						<div class="controls">
+            	<label class="inline" style="padding-bottom: 3;"><input type="checkbox" name="modelo" value="1" id="modelo" <?php echo $this->vo->modelo ? "checked='checked'": null?> > Modelo</label>
+              <small class="error notif_modelo" style="display: none">Não existe modelo para este tipo de orçamento</small>
+					</div>
+				</div>
+        <div class="control-group">
+					<label class="control-label"><?php echo $this->translate('Cliente')?>*</label>
+						<div class="controls">
+            	<?php echo $this->formHidden('id_empresa_cliente', $this->vo->id_empresa_cliente);?>
+              <?php echo $this->formText('nome_empresa_cliente',$this->vo->getCliente() ? $this->vo->getCliente()->nome_razao: null, array('placeholder' => 'Cliente'));?>
+					</div>
+				</div>
+        <div class="control-group">
+					<label class="control-label"><?php echo $this->translate('Quantidade')?></label>
+						<div class="controls">
+            	<?php echo $this->formText('quantidade', $this->vo->quantidade, array('placeholder' => 'Quantidade'))?>
+					</div>
+				</div>
+        <div class="control-group">
+					<label class="control-label"><?php echo $this->translate('Especificação')?></label>
+						<div class="controls">
+            	<?php echo $this->formTextarea('especificacao', $this->vo->especificacao, array('placeholder' => 'Especificação', 'style'=> 'width: 410px; height: 113px ;display: inline;'));?>
+              <span id="countEspecif"></span> Caracteres restantes
+					</div>
+				</div>    
+			</div>
+			<div class="form-actions">
+                <button type="submit" class="btn blue"><i class="icon-ok"></i> Salvar</button>
+            	<a href="<?php echo $this->baseUrl('service/orcamento/grid')?>" class="btn" >Voltar</a>
+        	</div>
+        </form>
+        </div>
+    </div>
+</div>
+<div class="dialog_tipo" style="display:none">
+	<div class="control-group">
+		<label class="control-label"><?php echo $this->translate('Nome')?></label>
+						<div class="controls">
+            	<?php echo $this->formText('nome_tp');?>
+		</div>
+	</div>
+</div>
+<div id="table_componente">
+</div>
+
+<div class="dialog_componente" style="display:none">
+<div class="portlet-body form">
+      	<form class="form_componente" style="margin: 0">
+	      	<div class="row-fluid">
+						<div class="control-group">
+							<label class="control-label"><?php echo $this->translate('Serviço')?></label>
+							<div class="controls">
+                <?php echo $this->formHidden('id_servico');?>
+                <?php echo $this->formText('nome_servico');?>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span4">
+								<div class="control-group">
+									<label class="control-label"><?php echo $this->translate('Tipo de Serviço')?></label>
+									<div class="controls">
+		                <?php echo $this->formSelect('id_tp_servico', null, array('style' => 'margin-bottom: 10px;', 'class' => 'm-wrap small'), $this->comboTpServico);?>
+									</div>
+								</div>
+							</div>
+							<div class="span5" style="float: left;">
+								<div class="control-group">
+									<label class="control-label"><?php echo $this->translate('Componente')?></label>
+									<div class="controls">
+										<?php echo $this->formSelect('id_tp_componente', null, array('style' => 'margin-bottom: 10px;', 'class' => 'm-wrap'), $this->comboComponente);?>
+		                <img src="/images/add_small.png" data-tooltip style="position:relative; cursor:pointer" class="add_tp_componente" title="Adicionar tipo de componente">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span4">
+								<div class="control-group">
+									<label class="control-label"><?php echo $this->translate('Valor Unitário')?></label>
+									<div class="controls">
+										<?php echo $this->formText('id_valor_servico', null, array('disabled' => 'disabled', 'style' => 'display:inline-block;',  'class' => 'm-wrap small'));?>
+									</div>
+								</div>
+							</div>
+							<div class="span4">
+								<div class="control-group">
+									<label class="control-label"><?php echo $this->translate('Quantidade')?></label>
+									<div class="controls">
+		                <?php echo $this->formText('quantidade_valor',null, array( 'class' => 'm-wrap small'));?>
+									</div>
+								</div>
+							</div>
+							<div class="span4">
+								<div class="control-group">
+									<label class="control-label"><?php echo $this->translate('Valor Total')?></label>
+									<div class="controls">
+										<?php echo $this->formText('total', null, array('disabled' => 'disabled',  'class' => 'm-wrap small'));?>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"><?php echo $this->translate('Caracteristicas')?></label>
+							<div class="controls">
+								<?php echo $this->formTextarea('caracteristica',null, array( 'style'=> 'width: 395px; height: 113px ;display: inline;'));?>
+							</div>
+						</div>
+		      </div>
+	      </form>
+      </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/service/orcamento.form.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/scripts/lib/jquery.limit-1.2.source.js')?>"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#cec_descricao').limit('255','#especificacao');
+});
+</script>
+

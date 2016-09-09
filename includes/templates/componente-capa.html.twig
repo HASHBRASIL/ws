@@ -1,0 +1,526 @@
+{% import "field.html.twig" as field %}
+<div class="area-conteudo-hash">
+    <div class="row panel panel-white">
+        <div class="panel-heading">
+            <h5>Componente <span>Capa</span></h5>
+            <p>Descrição desse componente para que o usuário saiba do que se trata esse componente.</p>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>
+                            <h5>Modelos de <span>Capa</span></h5>
+                        </legend>
+                        <p>Escolha um modelo de capa para seu portal.</p>
+                        <div class="form-group">
+                            <label for="">Escolha uma Gride</label>
+                            <input type="text" class="form-control input-sm" name="item_selecionado_2" value="1x3">
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>
+                            <h5>Comportamentos</h5>
+                        </legend>
+                        <p>Como deseja preencher a capa de seu site?</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                    <input type="radio" name="pin" value="3" id="pin_1" checked="checked">
+                                    <label for="pin_3">Mais recentes</label>
+                                </div> 
+                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                    <input type="radio" name="pin" value="0" id="pin_2">
+                                    <label for="pin_0">Mais lidas</label>
+                                </div>
+                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                    <input type="radio" name="pin" value="1" id="pin_3">
+                                    <label for="pin_1">Mais visitadas</label>
+                                </div>
+                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                    <input type="radio" name="pin" value="2" id="pin_4">
+                                    <label for="pin_2">Mais comentadas</label>
+                                </div> 
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row panel panel-white">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li class="active" role="presetation"><a data-toggle="tab" href="#tab_publico">Público</a></li>
+                            <li role="presetation"><a data-toggle="tab" href="#tab_privado">Privado</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab_publico" class="tab-pane fade in active">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="panel-title">Visualização</h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="panel-title">Configurações</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>Abaixo temos um espectro do componente para que você possa configurar a capa do site. Utilize o ícone <i class="fa fa-gear"></i> para configurar o conteúdo e formado da área. Utilize o ícone <i class="fa fa-thumb-tack"></i> para fixar um conteúdo na área, ou selecione uma área e configure com as informações ao lado.</p>
+                                        <div class="destaque">
+                                            <section class="noticia-principal">
+                                                <a href="#" class="area-select-item">
+                                                    <figure>
+                                                        <img src="img/no-img-capa.jpg" alt="" width="100%">
+                                                        <figcaption>
+                                                            <cite>
+                                                                texto
+                                                            </cite>
+                                                        </figcaption>
+                                                        
+                                                    </figure>
+                                                </a>
+                                            </section>
+                                            <section class="noticias-secundarias">
+                                                <ul class="row">
+                                                    <li class="col-md-4 col-sm-12 col-xs-12">
+                                                        <a href="#" class="area-select-item">
+                                                            <figure>
+                                                                <img src="img/no-img-capa.jpg" alt="" width="100%">
+                                                                <figcaption class="font-adjust">
+                                                                    <cite>
+                                                                        texto
+                                                                    </cite>
+
+                                                                </figcaption>
+                                                            </figure>
+                                                        </a>
+                                                    </li>
+                                                    <li class="col-md-4 col-sm-12 col-xs-12">
+                                                        <a href="#" class="area-select-item">
+                                                            <figure>
+                                                                <img src="img/no-img-capa.jpg" alt="" width="100%">
+                                                                <figcaption class="font-adjust">
+                                                                    <cite>
+                                                                        texto
+                                                                    </cite>
+
+                                                                </figcaption>
+                                                            </figure>
+                                                        </a>
+                                                    </li>
+                                                    <li class="col-md-4 col-sm-12 col-xs-12">
+                                                        <a href="#" class="area-select-item">
+                                                            <figure>
+                                                                <img src="img/no-img-capa.jpg" alt="" width="100%">
+                                                                <figcaption class="font-adjust">
+                                                                    <cite>
+                                                                        texto
+                                                                    </cite>
+
+                                                                </figcaption>
+                                                            </figure>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Opções para área selecionada.</p>
+                                        {# Aqui entra o twig de comportamento #}
+
+                                        <fieldset>
+                                            <legend>
+                                                <h5>Selecionar imagem</h5>
+                                            </legend>
+                                            <p>Escolha uma imagem para o conteúdo selecionado para substituir caso já exista alguma.</p>
+                                            <img src="http://lorempixel.com/150/150/business/" name="imagem_galeria" />
+                                            <button type="button" class="btn btn-sm btn-primary pull-right" data-servico='{{botoes.deletar_galeria.id}}' data-comportamento="modal" data-titulo="{{botoes.deletar_galeria.nome}}" data-metanome='deletar_galeria'>Escolher imagem</button>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <legend>
+                                                <h5>Link</h5>
+                                            </legend>
+                                            <p>Escolher para onde o usuário será direcionado após ciclar no item selecionado.</p>
+                                            <div class="tabbable">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active" role="presetation"><a data-toggle="tab" href="#url">URL</a></li>
+                                                    <li role="presetation"><a data-toggle="tab" href="#conteudo">Conteúdo</a></li>
+                                                    <li role="presetation"><a data-toggle="tab" href="#componentes">Componentes</a></li>
+                                                    <li role="presetation"><a data-toggle="tab" href="#editoria">Editoria</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div id="url" class="tab-pane fade in active">
+                                                        <div class="form-group">
+                                                            <label for="">URL</label>
+                                                            <input type="text" class="form-control input-sm" placeholder="http://site.com">
+                                                        </div>
+                                                    </div>
+                                                    <div id="conteudo" class="tab-pane fade">
+                                                        <h3>Menu 1</h3>
+                                                        <p>Some content in menu 1.</p>
+                                                    </div>
+                                                    <div id="componentes" class="tab-pane fade">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h5 class="panel-title">
+                                                                    Componentes <span>Página Interna</span>
+                                                                </h5>
+                                                                <p>Escolha um dos modelos de página interna para seu link.</p>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="blog_componente">
+                                                                    <label for="blog_componente">Blog</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="midia_imagem_componente">
+                                                                    <label for="midia_imagem_componente">Mídia - Imagem</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="midia_video_componente">
+                                                                    <label for="midia_video_componente">Mídia - Vídeo</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="midia_audio_componente">
+                                                                    <label for="midia_audio_componente">Mídia - Áudio</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="midia_todos_componente">
+                                                                    <label for="midia_todos_componente">Mídia - Todos</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="agenda_componente">
+                                                                    <label for="agenda_componente">Agenda</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h5 class="panel-title">
+                                                                    Configuração
+                                                                </h5>
+                                                                <p>Configuração para o componente.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="editoria" class="tab-pane fade">
+                                                        <h3>Menu 2</h3>
+                                                        <p>Some content in menu 2.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab_privado" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="panel-title">Visualização</h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="panel-title">Configurações</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p>Abaixo temos um espectro do componente para que você possa configurar a capa do site. Utilize o ícone <i class="fa fa-gear"></i> para configurar o conteúdo e formado da área. Utilize o ícone <i class="fa fa-thumb-tack"></i> para fixar um conteúdo na área, ou selecione uma área e configure com as informações ao lado.</p>
+                                        <div class="destaque">
+                                            <section class="noticia-principal">
+                                                <a href="#" class="area-select-item">
+                                                    <figure>
+                                                        <img src="img/no-img-capa.jpg" alt="" width="100%">
+                                                        <figcaption>
+                                                            <cite>
+                                                                texto
+                                                            </cite>
+                                                        </figcaption>
+                                                        
+                                                    </figure>
+                                                </a>
+                                            </section>
+                                            <section class="noticias-secundarias">
+                                                <ul class="row">
+                                                    <li class="col-md-4 col-sm-12 col-xs-12">
+                                                        <a href="#" class="area-select-item">
+                                                            <figure>
+                                                                <img src="img/no-img-capa.jpg" alt="" width="100%">
+                                                                <figcaption class="font-adjust">
+                                                                    <cite>
+                                                                        texto
+                                                                    </cite>
+
+                                                                </figcaption>
+                                                            </figure>
+                                                        </a>
+                                                    </li>
+                                                    <li class="col-md-4 col-sm-12 col-xs-12">
+                                                        <a href="#" class="area-select-item">
+                                                            <figure>
+                                                                <img src="img/no-img-capa.jpg" alt="" width="100%">
+                                                                <figcaption class="font-adjust">
+                                                                    <cite>
+                                                                        texto
+                                                                    </cite>
+
+                                                                </figcaption>
+                                                            </figure>
+                                                        </a>
+                                                    </li>
+                                                    <li class="col-md-4 col-sm-12 col-xs-12">
+                                                        <a href="#" class="area-select-item">
+                                                            <figure>
+                                                                <img src="img/no-img-capa.jpg" alt="" width="100%">
+                                                                <figcaption class="font-adjust">
+                                                                    <cite>
+                                                                        texto
+                                                                    </cite>
+
+                                                                </figcaption>
+                                                            </figure>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Opções para área selecionada.</p>
+                                        <fieldset>
+                                            <legend>
+                                                <h5>Comportamento</h5>
+                                            </legend>
+                                            <p>Escolha um comportamento para a área selecionada.</p>
+                                            <div class="tabbable">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active" role="presetation"><a data-toggle="tab" href="#comportamento_privado">Comportamento</a></li>
+                                                    <li role="presetation"><a data-toggle="tab" href="#conteudo_privado">Conteúdo - Pinar</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div id="comportamento_privado" class="tab-pane fade in active">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                                                    <input type="radio" name="comportamento" value="0" id="comportamento_1" checked="checked">
+                                                                    <label for="comportamento_1">Mais recentes</label>
+                                                                </div> 
+                                                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                                                    <input type="radio" name="comportamento" value="1" id="comportamento_2">
+                                                                    <label for="comportamento_2">Mais lidas</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                                                    <input type="radio" name="comportamento" value="2" id="comportamento_3">
+                                                                    <label for="comportamento_3">Mais visitadas</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                                                    <input type="radio" name="comportamento" value="3" id="comportamento_4">
+                                                                    <label for="comportamento_4">Mais comentadas</label>
+                                                                </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="conteudo_privado" class="tab-pane fade">
+                                                        <p>Escolher conteúdo para aparecer na área.</p>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Tipo de Conteúdo:</label>
+                                                                    <select class="select2-style" data-servico="fb0e4b95-6e80-4028-adb1-16be7a485723">
+                                                                        <option></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Filtro:</label>
+                                                                    <select class="select2-style" data-servico="fb0e4b95-6e80-4028-adb1-16be7a485723">
+                                                                        <option></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Campo:</label>
+                                                                    <select class="select2-style" data-servico="fb0e4b95-6e80-4028-adb1-16be7a485723">
+                                                                        <option></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="">Data início</label>
+                                                                    <input type="text" placeholder="00/00/0000" class="form-control input-sm">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="">Data fim</label>
+                                                                    <input type="text" placeholder="00/00/0000" class="form-control input-sm">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {# <div class="input-group">
+                                                            <input type="text" class="form-control input-sm" name="item_selecionado"/>
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-sm btn-primary" data-servico='{{botoes.deletar_ZENDSTYLE.id}}' data-comportamento="modal" data-titulo="{{botoes.deletar_ZENDSTYLE.nome}}" data-metanome='deletar_ZENDSTYLE'>Escolher</button>
+                                                            </span>
+                                                        </div> #}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <legend>
+                                                <h5>Selecionar imagem</h5>
+                                            </legend>
+                                            <p>Escolha uma imagem para o conteúdo selecionado para substituir caso já exista alguma.</p>
+                                            <img src="http://lorempixel.com/150/150/business/" name="imagem_galeria" />
+                                            <button type="button" class="btn btn-sm btn-primary pull-right" data-servico='{{botoes.deletar_galeria.id}}' data-comportamento="modal" data-titulo="{{botoes.deletar_galeria.nome}}" data-metanome='deletar_galeria'>Escolher imagem</button>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <legend>
+                                                <h5>Link</h5>
+                                            </legend>
+                                            <p>Escolher para onde o usuário será direcionado após ciclar no item selecionado.</p>
+                                            <div class="tabbable">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active" role="presetation"><a data-toggle="tab" href="#url">URL</a></li>
+                                                    <li role="presetation"><a data-toggle="tab" href="#conteudo">Conteúdo</a></li>
+                                                    <li role="presetation"><a data-toggle="tab" href="#componentes">Componentes</a></li>
+                                                    <li role="presetation"><a data-toggle="tab" href="#editoria">Editoria</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div id="url" class="tab-pane fade in active">
+                                                        <div class="form-group">
+                                                            <label for="">URL</label>
+                                                            <input type="text" class="form-control input-sm" placeholder="http://site.com">
+                                                        </div>
+                                                    </div>
+                                                    <div id="conteudo" class="tab-pane fade">
+                                                        <h3>Menu 1</h3>
+                                                        <p>Some content in menu 1.</p>
+                                                    </div>
+                                                    <div id="componentes" class="tab-pane fade">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <h5 class="panel-title">
+                                                                    Componentes <span>Página Interna</span>
+                                                                </h5>
+                                                                <p>Escolha um dos modelos de página interna para seu link.</p>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="blog_componente">
+                                                                    <label for="blog_componente">Blog</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="midia_imagem_componente">
+                                                                    <label for="midia_imagem_componente">Mídia - Imagem</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="midia_video_componente">
+                                                                    <label for="midia_video_componente">Mídia - Vídeo</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="midia_audio_componente">
+                                                                    <label for="midia_audio_componente">Mídia - Áudio</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="midia_todos_componente">
+                                                                    <label for="midia_todos_componente">Mídia - Todos</label>
+                                                                </div>
+                                                                <div class="radio clip-radio radio-primary radio-sm">
+                                                                    <input type="radio" name="pin" value="3" id="agenda_componente">
+                                                                    <label for="agenda_componente">Agenda</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h5 class="panel-title">
+                                                                    Configuração
+                                                                </h5>
+                                                                <p>Configuração para o componente.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="editoria" class="tab-pane fade">
+                                                        <h3>Menu 2</h3>
+                                                        <p>Some content in menu 2.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //COLOCAR ESSE SCRIPT DEPOIS EM UM ARQUIVO SEPARADO
+    function modalBTNS(metanome) {
+        var botoes = {{botoes|json_encode|raw}};
+        return botoes[metanome];
+    }
+     
+    // esse cara foi removido, mas como ele pode aparecer novamente vou deixa-lo aqui como exemplo :/
+    $('.select2-style').each(function(i, v){
+        var serv = $(v).attr('data-servico');
+        $(v).select2({
+            minimumInputLength: 2,
+            //tags: [],
+            ajax: {
+                url: 'home.php?servico=' + serv,
+                dataType: 'json',
+                type: "GET",
+                quietMillis: 50,
+                data: function (term) {
+                    return {
+                        term: term
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.ronaldo,
+                                id: item.id
+                            }
+                        })
+                    };
+                }
+            },
+            width: '100%'
+        });
+    });
+    
+
+    $('.area-select-item').click(function(e){
+        e.preventDefault();
+        $('.area-select-item').each(function(i, v){
+            $(v).removeClass('selected-item');
+            $(v).find('.overlay-selected').remove();
+        });
+
+        $(this).addClass('selected-item');
+        var overlay   = $(document.createElement('div')).addClass('overlay-selected');
+        var icon_gear = $(document.createElement('i')).addClass('fa fa-gear config-area-selected');
+        var icon_pin  = $(document.createElement('i')).addClass('fa fa-thumb-tack pin-area-selected');
+        $(this).append(overlay);
+        overlay.append(icon_gear);
+        overlay.append(icon_pin);
+
+    });
+</script>
+
+
+

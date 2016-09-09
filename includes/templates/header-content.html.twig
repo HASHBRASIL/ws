@@ -1,0 +1,22 @@
+<div class="cabecalho-titulo-pagina row">
+    {% include 'action.html.twig' %}
+</div>
+{# {% if data is not empty %} #}
+<a name="ancoraPesquisa"></a>
+<div class="list-filter"
+     {% if params.search is empty  %}
+     style="display: none;"
+     {% endif %}>
+    <form method="get" action="">
+        <div class="input-group">
+            <input type="text" aria-describedby="basic-addon2" name="search" value='{{params.search}}'
+                   placeholder="Pesquisar nesse campo..." class="form-control" style="display: inline;">
+            <span class="input-group-addon list-filter-close-button" id="basic-addon2">
+                <i class="icofont icofont-ui-close"></i>
+            </span>
+        </div>
+    </form>
+</div>
+{#<header>{{ servico.nome }}</header>
+{% include 'rastro.html.twig' %}#}
+{# {% endif %} #}

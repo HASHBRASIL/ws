@@ -1,0 +1,55 @@
+<?php //App_Util_Functions::debug($this->estoqueMovimentoList)?>
+<style>
+    tr.entrada{
+        color:blue;
+    }
+    tr.baixa{
+        color:red;
+    }
+</style>
+<div class="row-fluid">
+    <div class="span12">
+        <table class="table table-hover extrato" style="width: 100%;margin: 0;" >
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Movimento</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->estoqueMovimentoList as $estoqueMovimento):?>
+                    <tr class="<?php echo $estoqueMovimento->getMovimento()->id_tp_movimento == Material_Model_Bo_TipoMovimento::ENTRADA? 'entrada': 'baixa'; ?>" >
+                        <td><?php echo $this->dateHour($estoqueMovimento->getMovimento()->dt_criacao)?></td>
+                        <td><?php
+                            if($estoqueMovimento->getMovimento()->transferencia == App_Model_Dao_Abstract::ATIVO){
+                                echo 'Transferência '.$estoqueMovimento->getDeWorkspaceTransfer().' <i class=" icon-long-arrow-right"></i> '.$estoqueMovimento->getParaWorkspaceTransfer();
+                            }elseif (!empty($estoqueMovimento->getMovimento()->id_protocolo)){
+                                echo 'Protocolo '.$estoqueMovimento->getMovimento()->id_protocolo;
+                            }elseif (!empty($estoqueMovimento->getMovimento()->id_nfe)){
+                                echo 'Nota fiscal '.$estoqueMovimento->getMovimento()->id_nfe;
+                            }elseif (!empty($estoqueMovimento->getMovimento()->id_material_processo)){
+                                echo 'Processo '.$estoqueMovimento->getMovimento()->getMaterialProcesso()->getProcesso()->pro_codigo;
+                            }
+                        ?></td>
+                        <td>
+                            <?php echo $estoqueMovimento->getEstoque()->getItem()->nome ?>
+                        </td>
+                        <td>
+                            <?php echo $estoqueMovimento->quantidade.' '.$estoqueMovimento->getEstoque()->getItem()->getUnidadeConsumo()->nome?>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+                <tr>
+                    <td>Agora</td>
+                    <td></td>
+                    <td><?php echo $estoqueMovimento->getEstoque()->getItem()->nome ?></td>
+
+                    <td>
+                        <?php echo $estoqueMovimento->getEstoque()->quantidade.' '.$estoqueMovimento->getEstoque()->getItem()->getUnidadeConsumo()->nome?>
+                    </td>
+            </tbody>
+        </table>
+    </div>
+</div>

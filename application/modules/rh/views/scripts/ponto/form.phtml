@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css');?>" />
+<link rel="stylesheet" href="<?php echo $this->baseUrl('styles/spinner.css');?>" />
+
+<div class="row-fluid" style="margin-bottom: 20px;"></div>
+<div class="row-fluid">
+	<div class="portlet box darkorange">
+		<div class="portlet-title">
+			<div class="caption"><i class="fa fa-reorder"></i>Cadastro do Ponto Eletronico</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+			<div class="actions">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<form action="#" class="form-horizontal" enctype="multipart/form-data" id="form_agrupador" method="post">
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label" id="labelCliente">Local <span style="color: red">*</span></label>
+							<div class="controls">
+								<?php echo $this->formText('local', $this->vo->local, array('class' => 'span12'))?>
+								<?php echo $this->formHidden('id_ponto', $this->vo->id_rh_registro_ponto)?>
+							</div>
+						</div>
+					</div>
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label" id="labelCliente">Arquivo</label>
+							<div class="controls">
+								<div class="fileupload fileupload-new" data-provides="fileupload">
+									<span class="btn btn-file">
+									<span class="fileupload-new">Selecione o Arquivo</span>
+									<span class="fileupload-exists">Alterar o Arquivo</span>
+									<?php echo $this->formFile('arquivo', null, array('class' => 'default'))?>
+									</span>
+									<span class="fileupload-preview"></span>
+									<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none"></a>
+								</div>
+							</div>
+							<div class="controls" id="nome-arquivo">
+								<?php echo $this->vo->arquivo_original?>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label" id="labelCliente">Descrição <span style="color: red">*</span></label>
+							<div class="controls">
+								<?php echo $this->formTextarea('descricao', $this->vo->descricao, array('style' => 'height: 80px', 'class' => 'span12'))?>
+							</div>
+						</div>
+					</div>
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label" id="labelCliente">Observação</label>
+							<div class="controls">
+								<?php echo $this->formTextarea('opcao', $this->vo->opcao, array('style' => 'height: 80px', 'class' => 'span12'))?>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-actions">
+					<a href="<?php echo $this->baseUrl('rh/ponto/grid'); ?>" class="btn button-previous" style="display: inline-block;">
+						<i class="m-icon-swapleft"></i> Voltar
+					</a>
+					<a href=":jascript;" class="btn blue importaMoldal" style="display: inline-block;">
+						Importar
+					</a>
+                    <button class="btn green" type="submit">
+                  	    Salvar
+                	</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div id="dialog_importa" style="display: none;">
+	<p>Deseja realmente importa este documento: <span id="valueArquivo"></span></p>
+</div>
+<div class="spinner" style="display: none;">
+  <div class="cube1"></div>
+  <div class="cube2"></div>
+</div>
+
+	<link rel="stylesheet" type="text/css" href="/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
+	<script type="text/javascript" src="/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js');?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/rh/ponto.form.js')?>"></script>

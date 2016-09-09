@@ -1,0 +1,53 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box purple">
+            <div class="portlet-title">
+                <div class="caption"><i class="halflings-icon white icon-reorder"></i>Opção</div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="javascript:;" class="remove"></a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll">
+                <table class="table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th style="width: 60px">Código</th>
+                            <th>Nome</th>
+                            <th class="action" colspan="2">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php if (count($this->opcaoList) > 0):?>
+                        <?php foreach ($this->opcaoList as $opcao):?>
+                            <tr>
+                                <td><?php echo $opcao->id_opcao ?></td>
+                                <td><?php echo $opcao->nome ?></td>
+                                <td class="acoes" style="width: 20px">
+                                    <a href="<?php echo $opcao->id_opcao?>" id_opcao="<?php echo $opcao->id_opcao?>" class="editar_opcao tooltips" title="Editar opção">
+                                        <img  src="<?php echo $this->baseUrl('images/edit.png')?>" />
+                                    </a>
+                                </td>
+                                <td class="acoes" style="width: 20px">
+                                    <a href="<?php echo $opcao->id_opcao?>" id_opcao="<?php echo $opcao->id_opcao?>" class="delete_opcao tooltips" title="excluir opção">
+                                        <img   src="<?php echo $this->baseUrl('images/delete.png')?>" />
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
+                    <?php else:?>
+                            <tr>
+                                <td colspan="8" style="text-align: center">Não existem registros!</td>
+                            </tr>
+                    <?php endif;?>
+                    </tbody>
+                </table>
+                <div class="row-fluid">
+                    <div class="span6">
+                        <div style="padding-top: 8px;"> Mostrando <?php echo count($this->opcaoList)?> registros</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

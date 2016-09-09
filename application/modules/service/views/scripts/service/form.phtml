@@ -1,0 +1,303 @@
+<link href="<?php echo $this->baseUrl('assets/css/pages/pricing-tables.css')?>" rel="stylesheet" type="text/css">
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+  .ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+  }
+  /* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+  html .ui-autocomplete {
+    height: 300px;
+  }
+<?php if(isset($this->centroCustoList)):?>
+.centro_custo{
+  display: none;
+}
+<?php endif;?>
+<?php if(isset($this->fornecedorList)) :?>
+.fornecedor{
+  display: none;
+}
+<?php endif;?>
+.delete_fornecedor, .delete_centro_custo{
+    margin-left:10px;
+    cursor: pointer;
+}
+#minuto{
+    width: 35px;
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 0;
+    margin: .2em 0;
+    vertical-align: middle;
+    margin-left: .4em;
+    margin-right: 22px;
+    height: 20px;
+}
+-->
+</style>
+<div class="row-fluid">
+     <div class="span12">
+     </div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box steelblue">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-wrench"></i>
+				<?php echo $this->translate('Formulário de Serviço')?> - <?php
+        if(!empty($this->classe->id_classe)):
+            echo $this->classe->nome;
+        elseif (!empty($this->subgrupo->id_subgrupo)):
+            echo $this->subgrupo->nome;
+        elseif (!empty($this->grupo->id_grupo)):
+            echo $this->grupo->nome;
+        endif;
+        ?>
+				</div>
+				<div class="tools"></div>
+			</div>
+			<div class="portlet-body form">
+					<form method="post">
+            <?php echo $this->formHidden('id_servico', $this->servico->id_servico );?>
+            <?php echo $this->formHidden('id_grupo', $this->grupo->id_grupo);?>
+            <?php echo $this->formHidden('id_subgrupo', $this->subgrupo->id_subgrupo);?>
+            <?php echo $this->formHidden('id_classe', $this->classe->id_classe);?>
+            <div class="row-fluid">
+            	<div class="span4">
+	            	<div class="control-group">
+	            		<label class="control-label"><?php echo $this->translate('Nome')?></label>
+	            		<div class="controls">
+	            			<?php echo $this->formText('nome', $this->servico->nome, array('class' => 'm-wrap span12'));?>
+	            		</div>
+	            	</div>
+            	</div>
+            	<div class="span4">
+	            	<div class="control-group">
+	            		<label class="control-label"><?php echo $this->translate('Tipo Serviço')?></label>
+	            		<div class="controls">
+		            		<label style="padding-top: 10px; display: inline-block;"><input TYPE="checkbox" NAME="tipo_servico_interno" VALUE="1" <?php echo $this->servico->tipo_servico_interno ? "checked": ''?> id="tipo_interno" /> <?php echo $this->translate('Interno')?></label>
+	            			<label style="padding-top: 10px; display: inline-block;"> <input id="tipo_externo" TYPE="checkbox" NAME="tipo_servico_externo" VALUE="1" <?php echo $this->servico->tipo_servico_externo ? "checked": ''?> style="margin-left: 15px;" /> <?php echo $this->translate('Externo')?></label>
+	            		</div>
+	            	</div>
+            	</div>
+            	<div class="span4">
+	            	<div class="control-group">
+		            	<?php
+	                if(!empty($this->classe->id_classe)):
+	                    $nomeField = "Classe";
+	                    $valueGrupo = $this->classe->nome;
+	                elseif (!empty($this->subgrupo->id_subgrupo)):
+	                    $nomeField = "Subgrupo";
+	                    $valueGrupo = $this->subgrupo->nome;
+	                elseif (!empty($this->grupo->id_grupo)):
+	                    $nomeField = "Grupo";
+	                    $valueGrupo = $this->grupo->nome;
+	                endif;
+	                ?>
+	            		<label class="control-label"><?php echo $this->translate($nomeField)?></label>
+	            		<div class="controls">
+	            			<?php echo $this->formText('grupo', $valueGrupo, array("disabled" => 'disabled', 'class' => 'm-warp span12;'));?>
+	            		</div>
+	            	</div>
+            	</div>
+            </div>
+        		<div class="row-fluid">
+            	<div class="span4">
+	            	<div class="control-group">
+	            		<label class="control-label"><?php echo $this->translate('Unidade')?></label>
+	            		<div class="controls">
+		            		<?php echo $this->formText('unidade', $this->servico->unidade,  array('style' => 'width:20px; display:inline; margin-bottom: -5px; height: 25px;'));
+	                  echo $this->comboSelect ( 'id_tipo_unidade', $this->servico->id_tipo_unidade, array('class' => 'm-warp span8', 'style' => 'margin-left:10px;'), $this->tipoUnidade );?>
+	                  <img title="Adicionar unidade" src="<?php echo $this->baseUrl('images/add_small.png')?>" data-tooltip style="cursor:pointer" class="add-unidade">
+	            		</div>
+            		</div>
+            	</div>
+            	<div class="span4 centro_custo">
+	            	<div class="control-group">
+	            		<label class="control-label"><?php echo $this->translate('Centro de Custo')?>  <img src="<?php echo $this->baseUrl('images/add_small.png')?>"  class="add_centro_custo" data-tooltip title="Adicionar centro de custo" /></label>
+                  <div class="controls">
+					          <?php if(isset($this->centroCustoList)):?>
+			                <?php foreach ($this->centroCustoList as $centroCusto):?>
+		                    <input type="text" disabled="disabled" value="<?php echo $centroCusto['cec_descricao']?>" class="centro_custo_<?php echo $centroCusto['cec_id']?> span10" style="display: inline-block;">
+		                    <i class="icon-plus delete_centro_custo" title="Deletar centro de custo" data-tooltip id-centro-custo="<?php echo $centroCusto['cec_id'] ?>"></i>
+		                    <input type="hidden" value="<?php echo $centroCusto['cec_id']?>" name="id_centro_custo[]" class="centro_custo_<?php echo $centroCusto['cec_id'] ?>">
+			                <?php endforeach;?>
+				            <?php endif;?>
+                  </div>
+	            	</div>
+            	</div>
+            	<div class="span4 fornecedor">
+	            	<div class="control-group">
+	            		<label class="control-label"><?php echo $this->translate('Fornecedor')?> <img src="<?php echo $this->baseUrl('images/add_small.png')?>" class="add_fornecedor" data-tooltip  title="Adicionar fornecedor" /></label>
+	            		<div class="controls">
+	            			<?php if(isset($this->fornecedorList)) :?>
+			                <?php foreach ($this->fornecedorList as $fornecedor):?>
+		                    <input type="text" disabled="disabled" value="<?php echo $fornecedor['fantasia']?>" class="fornecedor_<?php echo $fornecedor['id']?> span10" style="display: inline-block;">
+		                    <i class="icon-plus delete_fornecedor" data-tooltip title="Deletar fornecedor" id-fornecedor="<?php echo $fornecedor['id']?>"></i>
+		                    <input type="hidden" value="<?php echo $fornecedor['id']?>" name="id_empresa_fornecedor[]" class="fornecedor_<?php echo $fornecedor['id']?>">
+			                <?php endforeach;?>
+				            <?php endif;?>
+	            		</div>
+	            	</div>
+            	</div>
+            </div>
+            <div class="row-fluid">
+            	<div class="span6">
+	            	<div class="control-group">
+	            		<label class="control-label"><?php echo $this->translate('Descrição')?></label>
+	            		<div class="controls">
+										<?php echo $this->formTextarea('descricao',$this->servico->descricao, array('class' => 'span12', 'style'=> 'height: 113px ;display: inline;'))?>
+            				<span id="countDescricao"></span> Caracteres restantes
+	            		</div>
+            		</div>
+            	</div>
+            </div>
+        		<div class="form-actions">
+        			<div class="span6">
+	        			<?php if(!empty($this->servico->id_servico)):?>
+	                <a href="#" id="novoForm" class="btn green" style="display: none;"><?php echo $this->translate('Tarefa')?></a>
+	                <a href="#" id="button_valor" class="btn green"><?php echo $this->translate('Novo Valor')?></a>
+	          		<?php endif;?>
+        			</div>
+        			<div class="span6" style="text-align: right;">
+	        			<button type="submit" class="btn blue"><i class="icon-ok"></i> Salvar</button>
+	            	<a href="<?php echo $this->params('service/service/grid',
+                    array('id_grupo'     => $this->grupo->id_grupo,
+                          'id_subgrupo'  => $this->subgrupo->id_subgrupo,
+                          'id_classe'    => $this->classe->id_classe
+                         )
+                    )?>" class="btn" >Voltar</a>
+        			</div>
+        		</div>
+        	</form>
+     		</div>
+			</div>
+		</div>
+</div>
+<div class="portlet box steelblue fieldset_valor pricing" <?php echo count($this->servico->getListValorServico())? '' : 'style="display: none"' ?>>
+	<div class="portlet-title">
+		<div class="caption"><i class="icon-reorder"></i>Valor do Serviço</div>
+		<div class="tools">
+			<a href="javascript:;" class="collapse"></a>
+		</div>
+	</div>
+	<div class="portlet-body" style="overflow: hidden;">
+		<?php if(count($this->servico->getListValorServico())):?>
+                <?php foreach ($this->servico->getListValorServico() as $vlServico):?>
+                	<div class="span3 valor_<?php echo $vlServico->id_valor_servico?>">
+		                <div class="pricing-table">
+											<h3><?php echo $vlServico->id_empresa? $vlServico->getEmpresa(): "Interno"?></h3>
+											<ul>
+												<li><i class="icon-angle-right"></i><?php echo $vlServico->fixo? 'Fixo':'Variárel'?></li>
+											</ul>
+											<div class="rate">
+												<div class="price">
+													<div class="currency ">
+														R$<br>
+													</div>
+													<div class="amount ">
+														<?php echo $this->real($vlServico->vl_unitario)?>    
+													</div>
+												</div>
+											</div>
+												<div class="">
+													<a href="#" class="btn blue editar_valor" id_valor_servico="<?php echo $vlServico->id_valor_servico?>" href="#" data-tooltip title="Editar Valor">
+														<i class="icon-pencil"></i>
+													</a>  
+													<a href="#" class="btn red delete_valor" id_valor_servico="<?php echo $vlServico->id_valor_servico?>" href="#" data-tooltip title="Excluir Valor">
+														<i class="icon-remove"></i>
+													</a>  
+												</div>
+										</div>
+									</div>
+                <?php endforeach;?>
+            <?php endif;?>
+	</div>
+</div>
+
+<div id="grid-tarefa">
+</div>
+<div id="dialog-form" style="display:none">
+	<div class="row-fluid">
+		<div class="control-group">
+			<label class="control-label"><?php echo $this->translate('Nome')?></label>
+			<div class="controls">
+      	<?php echo $this->formText('nome_tarefa')?>
+        <?php echo $this->formHidden('id_tarefa')?>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label"><?php echo $this->translate('Tempo extimado')?></label>
+			<div class="controls">
+      	<?php echo $this->formText('minuto', null)?> Minuto
+			</div>
+		</div>
+	</div>
+</div>
+<div id="diallog-autocomplete" style="display:none">
+	<div class="row-fluid" style="margin-bottom: 0px">
+		<div class="control-group">
+			<label></label>
+      <div class="controls">
+      	<?php echo $this->formText('autocomplete')?>
+      	<?php echo $this->formHidden('autocomplete_id')?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php
+$arraySelectFornecedor = array();
+if(count($this->fornecedorList)):
+    foreach ($this->fornecedorList as $fornecedor):
+        $arraySelectFornecedor[$fornecedor['id']] = $fornecedor['fantasia'];
+    endforeach;
+endif;
+?>
+<div id="dialog-form-valor" style="display:none">
+	<div class="row-fluid">
+		<div class="control-group">
+			<label style="margin-bottom: 10px; display: inline-block;">
+      	<input type="checkbox" name="fixo" value="1" id="fixo"> Fixo
+      </label>
+      <?php echo $this->formHidden('id_valor_servico')?>
+		</div>
+		<div class="control-group">
+			<label class="control-label"><?php echo $this->translate('Empresa')?></label>
+			<div class="controls">
+      	<?php echo $this->formSelect('id_empresa_vl', null, array('style' => 'margin-bottom:10px'), array(null => '---- Selecione ----')+$arraySelectFornecedor)?>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label"><?php echo $this->translate('Valor Unitário')?>*</label>
+			<div class="controls">
+      	<?php echo $this->formText('vl_unitario')?>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="dialog-form-unidade" style="display:none">
+	<div class="row-fluid">
+		<div class="control-group">
+			<label class="control-label"> <?php echo $this->translate('Nome')?> </label>
+      <div class="controls">
+      	<?php echo $this->formText('nome-unidade')?>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/service/service.form.js?noCache')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/scripts/lib/jquery.limit-1.2.source.js')?>"></script>

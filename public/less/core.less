@@ -1,0 +1,59 @@
+/*
+* @Author: toinsane
+* @Date:   2016-01-20 12:59:48
+* @Last Modified by:   toinsane
+* @Last Modified time: 2016-02-23 16:55:02
+*/
+/*
+    @todo
+    ajustar as imagens do CSS
+*/
+
+
+html, html                      { min-height: 100%; font-size: @font-size; font-family: @arimo; font-weight: normal; position: relative; /*background: url(../img/bg-noise.jpg) */}
+body                            { min-height: 100%; -webkit-font-smoothing: antialiased !important;}
+main                            { height: 100%; position: relative; max-width: 1265px; /* background: url(../img/bg-noise.jpg); */ border-right: 1px solid #efeded;}
+.area-sidebar                   { width: @sidebar-width; z-index: @zindex; float: left; margin-bottom: 55px;}
+.area-top                       { overflow: hidden; height: 60px; border-bottom: 1px solid #efeded;}
+.area-conteudo                  { overflow: hidden; margin-right: 0; min-height: 768px; padding: 20px 0 110px;
+    &.chat-opened               { margin-right: @chat-width; }
+    .content-wrapper            { margin-left: 0; }
+}
+.area-chat                      { background: white; width: @chat-width; position: fixed; top: 0px; right: 0; height: 100%; padding-top: @top-height; .transition(); }
+
+.cabecalho-titulo-pagina        { font-size: @font-size; padding: 0; color: fade(@cor-preto, 50%); margin: 0 0 20px 0; padding: 30px 15px;
+    header                      { font-family: @arimo; font-weight: bold; font-size: 1.85em; color: @cor-preto }
+    .rastro                     { margin-top: 10px;
+        ul                      { margin: 0; padding: 0;
+            li                  { font-size: 0.90em; display: inline-block; list-style-type: none; font-weight: normal;
+                &.active        { font-weight: 500; color: fade(@cor-preto, 70%); font-size: 1em; }
+                a               { font-weight: normal; text-decoration: none;
+                    &:hover     { text-decoration: underline; }
+                }
+                i.fa            { color: red; font-size: 0.9em; color: fade(@cor-preto, 70%); margin: 0 5px; }
+            }
+        }
+    }
+}
+
+.hash-area-publicidade          { width: 191px; position: absolute; top: 136px; right: 20px; background: @cor-branco; .rounded(3px); padding: 10px; border: 1px fade(@cor-preto, 5%) solid; }
+.area-conteudo-hash             { padding-left: 0; padding-bottom: 20px; padding-right: 0;}
+.area-publicidade-topo          { border-bottom: 1px solid #efeded; padding: 20px 0; overflow: hidden;
+    .content-publicidade        { text-align: right; padding-right: 20px;}
+}
+.hash-area-publicidade-sidebar  { bottom: 110px; padding: 5px;}
+// Publicidade
+.content-publicidade            { text-align: center;
+    img                         { padding-bottom: 1em; max-height: 100%; max-width: 100%; }
+}
+
+.area-conteudo-hash             {
+    .container-form-action      {
+        .btn                    { background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%); font-size: 1em; font-weight: bold; padding: 5px 10px;}
+    }
+}
+
+.colorRed                       { color: darken(#d37667, 10%) !important; }
+.colorBlue                      { color: darken(#8087a5, 10%) !important; }
+.colorYellow                    { color: darken(#cea469, 10%) !important;}
+.colorGreen                     { color: darken(#9EC9AA, 18%) !important;}

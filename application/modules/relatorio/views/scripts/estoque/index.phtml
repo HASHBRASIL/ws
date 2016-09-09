@@ -1,0 +1,49 @@
+<?php ?>
+<div class="row-fluid">
+    <div class="span12">
+        <h3 class="page-title">
+            Pesquisa
+             <small>Estoque</small>
+        </h3>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <span class="span12">
+	    <div class="portlet box green" id="">
+    		<div class="portlet-title">
+    			<div class="caption">
+                <i class="icon-reorder"></i> Pesquisa - <span class="step-title">Estoque</span>
+                </div>
+    		</div>
+	        <div class="portlet-body form">
+                <form action="<?php echo $this->baseUrl('relatorio/estoque/relatorio') ?>" method="post" class="form-horizontal" id="form_estoque" novalidate="novalidate">
+                    <div class="form-wizard">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <div class="row-fluid">
+                        	    <div class="span3">
+                        	        <div class="control-group">
+                                        <label class="control-label"><?php echo $this->translate('Por Data')?> </label>
+                        			        <div class="controls">
+                                                  <?php echo $this->formText('dataInicial',null,array("class" => "datepicker m-wrap large", "style"=>" margin-bottom: 2px","placeholder" => "DE:" ));?>
+                                                  <?php echo $this->formText('dataFinal',null,array("class" => "datepicker m-wrap large", "style"=>" margin-bottom: 2px", "placeholder" => "ATÉ:" ));?>
+                                                  <?php echo $this->formSelect('data_condicao',null,array("class"=>"large m-wrap"), array("entre" => "Emissão entre dois valores", "exato" => "Emissão exatamente igual"));?>
+                                            </div>
+                                    </div>
+                        		</div>
+            	                </div>
+                                <br>
+                                <div class="form-actions clearfix">
+                                    <button class="btn blue blue"><i class="icon-print icon-big"></i>Gerar Relatório</button>
+                                    <a href="<?php echo $this->baseUrl('empresa/empresa/index')?>" class="btn green button-previous">Voltar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </span>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/relatorio/estoque.js')?>"></script>

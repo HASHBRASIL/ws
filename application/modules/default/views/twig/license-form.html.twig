@@ -1,0 +1,37 @@
+
+<div class="row wrapper">
+    {% include 'header-content.html.twig' %}
+    <form action="config/license/save" method="post" id="criarTime" enctype="multipart/form-data" accept-charset="utf-8">
+
+        <input type="hidden" name="id" value="{{ timeId }}" />
+
+        <div class="col-md-12 content">
+            <div class="form-group-one-unit">
+
+                {% for modulo in modulos %}
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="">{{ modulo.nome }}: </label>
+                                    <input type="checkbox" class="form-control" name="modulo[]" value="{{ modulo.id_servico }}"
+                                    {{ modulo.id_grupo ? 'checked="checked"' }}>
+                                </div>
+                            </div>
+                        </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="row container-form-action">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-success btn-sm pull-right "> Salvar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+     {#{{ (texto ?: '<i class="%s"></i>'|format(data.metadata.ws_icon|default("glyphicon glyphicon-edit")))|raw }}#}
+

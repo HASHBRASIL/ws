@@ -1,0 +1,32 @@
+<table class="table-bordered table-striped table-condensed flip-content" style="width: 100%">
+    <thead>
+        <tr>
+            <th>Funcionario</th>
+            <th style="width: 20%">Horas trabalhadas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if(count($this->timeList['list'])>0):?>
+        <?php foreach ($this->timeList['list'] as $time):?>
+                <tr>
+                    <td><?php echo $time['pes_nome'] ?></td>
+                    <td style="text-align: center"><?php echo $time['total_hora'] ?></td>
+                </tr>
+        <?php endforeach;?>
+        <?php else :?>
+                <tr>
+                    <td colspan="2" style="text-align: center;">Não há dados</td>
+                </tr>
+        <?php endif;?>
+    </tbody>
+</table>
+<div class="row-fluid">
+    <div class="span6">
+        <div> Mostrando <?php echo count($this->timeList['list'])?> registros</div>
+    </div>
+    <?php if($this->timeList['total_hora']):?>
+        <div class="span6" style="text-align: right;">
+            Total de horas trabalhadas: <b><?php echo $this->timeList['total_hora']?></b>
+        </div>
+    <?php endif;?>
+</div>

@@ -1,0 +1,43 @@
+<h1 style="text-align: center;font-size:14;">Relatório de processo emitido em <?php echo date("d/m/Y");?> às <?php echo date("H:i:s")?> por <?php echo Zend_Auth::getInstance()->getIdentity()->nome; ?></h1>
+<br>
+<hr/>
+<?php $somaProcesso = 0;?>
+<table style="font-size: small;">
+		<tr style="font-weight:bold; background-color:#eeeeee">
+			<th>Código</th>
+            <th>Entidade</th>
+            <th>Status</th>
+            <th style="width: 25%">Descrição</th>
+            <th style="text-align: center;width: 7%;">Quantidade</th>
+            <th style="text-align: right;width: 8%;">Valor unitário</th>
+            <th style="text-align: right;width: 7%;">Valor total</th>
+            <th style="width: 10%">data de emissão</th>
+            <th style="width: 10%">Grupo</th>
+		</tr>
+
+		<?php if (count($this->processoList) > 0):?>
+    <?php foreach ($this->processoList as $key => $processo):
+					$zebra = "#eeeeee";
+		    	    if( $key  % 2 == 0){
+		        	    $zebra = "#ffffff";
+		    	    }?>
+        <tr style="background-color:<?php echo $zebra?>">
+            <td><?php echo $processo['pro_codigo']?></td>
+            <td><?php echo $processo['cliente']?></td>
+            <td><?php echo $processo['sta_descricao']?></td>
+            <td><?php echo $processo['pro_desc_produto']?></td>
+            <td style="text-align: center"><?php echo $processo['pro_quantidade']?></td>
+            <td style="text-align: right;"><?php echo $this->formatDecimal($processo['pro_vlr_unt'])?></td>
+            <td style="text-align: right;"><?php echo $this->formatDecimal($processo['pro_vlr_pedido'])?></td>
+            <td><?php echo $this->date($processo['pro_data_inc'])?></td>
+            <td><?php echo $processo['name_workspace']?></td>
+        </tr>
+        <?php $somaProcesso += $processo['pro_vlr_pedido']?>
+    <?php endforeach;?>
+<?php endif;?>
+</table>
+<div style="text-align: right;">
+	<h4>
+		No período pesquisado de <b><?php echo $this->request["de_pro_data_inc"] ? $this->request["de_pro_data_inc"]: "-" ?></b> até <b><?php echo $this->request["para_pro_data_inc"] ? $this->request["para_pro_data_inc"]: "-"?></b> o saldo é <b><?php echo isset($somaProcesso) ? $this->formatDecimal($somaProcesso) : "0,00"; ?></b>
+	</h4>
+</div>

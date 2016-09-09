@@ -1,0 +1,61 @@
+{% import 'row.html.twig' as row %}
+{% import 'forms.html.twig' as forms %}
+
+<div class="col-md-12 area-conteudo-hash">
+    <div class="row panel panel-white">
+        {#<div class="panel-heading">#}
+        {#<h5>Componente <span>Capa</span></h5>#}
+        {#<p>Descrição desse componente para que o usuário saiba do que se trata esse componente.</p>#}
+        {#</div>#}
+        <div class="panel-body">
+            <form method="POST" action="home.php?servico={{ params.servico }}">
+                {{ forms.input('id_grupo', view.vo.id_grupo, 'hidden') }}
+                {{ forms.input('id', view.vo.plc_id, 'hidden') }}
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset>
+                            <legend>
+                                {{ 'Formulário' | zftranslate }}
+                            </legend>
+                            <div class="row">
+
+                                {{ row.formgroup('Plano de Conta Pai', forms.select('plc_id_pai', view.vo.plc_id_pai, view.planoContasCombo, 'select2-skin', {'required' : ''}), 'col-md-4') }}
+                                {{ row.formgroup('Código Contábil', forms.input('plc_cod_contabil', view.vo.plc_cod_contabil, 'text', '', {'required' : ''}), 'col-md-4') }}
+                                {{ row.formgroup('Código Reduzido', forms.input('plc_cod_reduzido', view.vo.plc_cod_reduzido, 'text', '', {'required' : ''}), 'col-md-4') }}
+
+                                {#'plc_id' => 'Código',#}
+                                {#'plc_descricao' => 'Descricão',#}
+                                {#'plc_id_pai' => 'Plano de Conta Pai',#}
+                                {#'plc_oculta' => 'Oculto',#}
+                                {#'plc_transferencia' => 'Transferência',#}
+                                {#'plc_resultado' => 'Resultado',#}
+                                {#'plc_contabil' => 'Contábil',#}
+                                {#'id_grupo' => 'Time'#}
+
+                            </div>
+                            <div class="row">
+                                {{ row.formgroup('Descrição*', forms.textarea('plc_descricao', view.vo.plc_descricao), 'col-md-4') }}
+                            </div>
+                            <div class="row">
+                                {#{{ row.formgroup('Permitir Lançamentos', forms.checkbox('plc_oculta', view.vo.plc_oculta, {1: 'Sim', 2: 'Não'}), 'col-md-4') }}#}
+                                {{ row.formgroup('Permitir Lançamentos', forms.checkbox('plc_oculta', view.vo.plc_oculta, {1: 'Sim'}), 'col-md-4') }}
+
+                                {{ row.formgroup('Grupo de Contas', forms.select('grc_id', view.vo.grc_id, view.grupoContasCombo, 'select2-skin', {'required' : ''}), 'col-md-4') }}
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

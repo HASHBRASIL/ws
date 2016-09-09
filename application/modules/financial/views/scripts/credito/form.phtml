@@ -1,0 +1,109 @@
+<?php
+    /**
+     * formulario do controller financial para cadastrar e editar os creditos
+    */
+?>
+<div class="row">
+    <div class="large-12 columns">
+              <fieldset>
+                  <legend><?php echo $this->translate('Formulário Crédito')?> <img data-tooltip title="Bem, é um prazer tê-lo aqui. Mas parte deste sistema ainda está em desenvolvimento.<br>Havendo inconsistências ou erros contate-nos." 
+                  																						align="middle" src="<?php echo $this->baseUrl("/images/beta.png");?>" > </legend>
+					<div class="row">
+						<div class="small-5 columns">
+							<div style="padding-left: 10px;" class="row">
+							<?php if ($this->vo->id_credito):?>
+	                  			<a class="button secondary"  style="; float: left; color: black;" href="<?php echo $this->baseUrl("/financial/credito/form")?>"><img style="padding-top: 5px;" src="<?php echo $this->baseUrl("/images/add_small.png");?>">Nova Crédito</a>
+	                  		<?php endif;?>
+	                  			<a class="button secondary"  style="margin-left:10px; float: left; color: black;" href="<?php echo $this->baseUrl("/financial/credito/grid")?>"><img style="padding-top: 5px;" src="<?php echo $this->baseUrl("/images/detail.png");?>">Registro de Crédito</a>
+		        	  		</div>
+		        	  	</div>
+		        	  	<?php if ($this->vo->id_credito):?>
+                		<div class="small-3 columns">
+                				Pesquisa:
+								<?php echo $this->formText("quickSearch",null,array("placeholder" => "Digite o Código que deseja procurar", "style" => "display:inline-block; width: 70%;"));?>								
+								<img style="cursor: pointer;" id = "quickSearchButton" data-tooltip title="Pesquisar" src="<?php echo $this->baseUrl("images/search.png");?>">
+                		</div>
+		        	  	<?php endif;?>
+						<div class="small-2 columns">
+								<a id="nextId" href="" style="display:none; float:right; "><img width="50%" data-tooltip title="Próximo Registro " src="<?php echo $this->baseUrl("images/button-round-dark-arrow-right-icon.png");?>"></a>
+								<a id = "previousId" href="" style="display:none; float:right; "><img width="50%" data-tooltip title="Registro Anterior" src="<?php echo $this->baseUrl("images/button-round-dark-arrow-left-icon.png");?>"></a>
+                		</div>
+                	</div>
+                	<form method="post">
+                  <?php if ($this->vo->id_credito ):?>
+                	<hr>
+                  	<div class="row">
+                    	<div class="large-2 columns">
+                  	 		<label><?php echo $this->translate('Código')?> <img src="<?php echo $this->baseUrl('images/help.png')?>" style="left:162px" data-tooltip title="Código do crédito." class="help"></label>
+                  	 		<?php echo $this->formText('id_credito', $this->vo->id_credito,array("disable" => "disable"));?>
+                  	 		<?php echo $this->formHidden('id_credito', $this->vo->id_credito);?>
+                  	 	</div>
+                 	</div>
+                  <?php else :?>
+                 	 	<?php echo $this->formHidden('id_credito', $this->vo->id_credito);?>
+                  <?php endif;?>
+                  <div class="row">
+                  	  <div class="large-3 columns div_fantasia">
+                          <label><?php echo $this->translate('Empresa')?><span style="color: red">*</span></label>
+                          <?php echo $this->formText("empresa_sacado",$this->vo->empresas_id ? $this->vo->getEmpresa()->nome_razao :"", array("placeholder" => "Digite o nome da empresa"));?>
+                          <?php echo $this->formHidden("empresas_id",$this->vo->empresas_id);?>
+                      </div>	
+                      <div class="large-2 columns div_fantasia">
+                          <label><?php echo $this->translate('Limite de Crédito')?></label>
+                          <?php echo $this->formText('limite_credito', $this->vo->limite_credito, array('alt' => 'decimal','class' =>'decimal')); ?>
+                      </div>
+                      <div class="large-2 columns div_fantasia">
+                          <label><?php echo $this->translate('Data da Consulta ao Serasa')?></label>
+                          <?php echo $this->formText('data_consulta_serasa', $this->date($this->vo->data_consulta_serasa), array("class" => "datepicker")); ?>
+                      </div>
+                      <div class="large-2 columns div_fantasia">
+                          <label><?php echo $this->translate('Posição do Serasa')?></label>
+                          <?php echo $this->formText('posicao_serasa', $this->vo->posicao_serasa); ?>
+                      </div>
+                      <div class="large-2 columns div_fantasia">
+                          <label><?php echo $this->translate('Número do Serasa')?></label>
+                          <?php echo $this->formText('numero_serasa', $this->vo->numero_serasa); ?>
+                      </div>
+                      
+                      <div class="large-1 columns div_fantasia">
+                      </div>
+                  </div>
+                  <div class ="row">
+                  	  <div class="large-2 columns div_fantasia">
+                          <label><?php echo $this->translate('Situação Serasa')?></label>
+                          <?php echo $this->formSelect('situacao_serasa',$this->vo->situacao_serasa,null,array("" => "Selecione", "1" => "Com Restrição", "0" => "Sem Restrição")); ?>
+                      </div>
+                      <div class="large-3 columns">
+                	  	<label><?php echo $this->translate('Análise do Risco')?><span style="color: red">*</span></label>
+                      	<?php echo $this->formTextarea('analise_risco',$this->vo->analise_risco,array( 'rows' => 4, 'cols' => 20, 'style' => 'height: 100px;' ));?>
+                   	  </div>
+                   	  <div class="large-2 columns div_fantasia">
+                          <label><?php echo $this->translate('Consultado por')?><span style="color: red">*</span></label>
+                          <?php echo $this->formSelect('consultado_por',$this->vo->consultado_por,null,array("" => "Selecione")+$this->comboFuncionarios); ?>
+                      </div>
+                      <div class="small-1 columns">
+                      </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                	<div style="padding-top: 50px;"padding-top: 30px" class="large-12 columns">
+                		<input type="submit" id="submit" value="Salvar" class="button radius success" style="float:right" />
+                    	<a href="<?php echo $this->baseUrl('financial/credito/grid')?>" class="button radius alert"  style="float:right; margin-right: 20px;">Voltar</a>
+                	</div>
+                	<div class="large-1 columns">
+                	</div>
+               	</div>
+               	<div class = "row" style="">
+               		<div class="large-12 columns" style="text-align: center;">
+               			<label  style="color: red;">* campos obrigatórios</label>
+                	</div>
+                </div>
+              </form>  
+              </fieldset>
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/financial/credito.form.js")?>">
+<!--
+
+//-->
+</script>

@@ -1,0 +1,126 @@
+<div class="destaque">
+    <section class="noticia-principal">
+        <a href="#" class="{{prefix}}-area-select-item-0">
+            <figure>
+                <div class="">
+                    <img src="{{itens[0].conteudo.twig_imagem|default('img/no-img-capa.jpg')}}" alt="" width="100%">    
+                </div>                
+                <figcaption>
+                    <cite>{{itens[0].conteudo.twig_title}}</cite>
+                </figcaption>
+            </figure>
+        </a>
+    </section>
+    <section class="noticias-secundarias">
+        <ul class="row">
+            <li class="col-md-4 col-sm-12 col-xs-12">
+                <a href="#" class="{{prefix}}-area-select-item-1">
+                    <figure>
+                        <div class="">
+                            <img src="{{itens[1].conteudo.twig_imagem|default('img/no-img-capa.jpg')}}" alt="" width="100%">
+                        </div>
+                        <figcaption class="font-adjust">
+                            <cite>{{itens[1].conteudo.twig_title}}</cite>
+                        </figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-12 col-xs-12">
+                <a href="#" class="{{prefix}}-area-select-item-2">
+                    <figure>
+                        <div class="">
+                            <img src="{{itens[2].conteudo.twig_imagem|default('img/no-img-capa.jpg')}}" alt="" width="100%">
+                        </div>
+                        <figcaption class="font-adjust">
+                            <cite>{{itens[2].conteudo.twig_title}}</cite>
+                        </figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li class="col-md-4 col-sm-12 col-xs-12">
+                <a href="#" class="{{prefix}}-area-select-item-3">
+                    <figure>
+                        <div class="">
+                            <img src="{{itens[3].conteudo.twig_imagem|default('img/no-img-capa.jpg')}}" alt="" width="100%">
+                        </div>
+                        <figcaption class="font-adjust">
+                            <cite>{{itens[3].conteudo.twig_title}}</cite>
+                        </figcaption>
+                    </figure>
+                </a>
+            </li>
+        </ul>
+    </section>
+</div>
+<form id="hidden-actions-component">
+	<input type="hidden" name="item_0" value="378921783891" data-tipo="comportamento" />
+	<input type="hidden" name="img_replace_0" value="replace.jpg" />
+	<input type="hidden" name="link_0" value="www.google.com" data-tipo="url" />
+
+	<input type="hidden" name="item_1" value="378921783891" data-tipo="pinar"/>
+	<input type="hidden" name="img_replace_1" value="replace.jpg" />
+	<input type="hidden" name="link_1" value="www.google.com" data-tipo="conteudo" />
+
+	<input type="hidden" name="item_2" value="378921783891" data-tipo="comportamento"/>
+	<input type="hidden" name="img_replace_2" value="replace.jpg" />
+	<input type="hidden" name="link_2" value="www.google.com" data-tipo="componente" />
+
+	<input type="hidden" name="item_3" value="378921783891" data-tipo="comportamento" />
+	<input type="hidden" name="img_replace_3" value="replace.jpg" />
+	<input type="hidden" name="link_3" value="www.google.com" data-tipo="editoria" />
+</form>
+
+<script type="text/javascript">
+	$('[class^="{{prefix}}-area-select-item"').click(function(e){
+        e.preventDefault();
+
+		var obj = $(this);
+        currentSelected = $(this).attr('class').split(' ')[0].split('-').slice(-1)[0];
+        
+        $('[class^="{{prefix}}-area-select-item"').each(function(i, v){
+        	if ($(v).attr('class') != obj.attr('class')) {
+        		$(v).removeClass('selected-item');
+        		$(v).find('.overlay-selected').remove();
+        	} 
+            $(this).find('figure > div').removeClass('preview-cropper');
+            $(this).find('figure > div > img').removeClass('cropper-img');
+            if ( typeof cropper_instance != 'undefined' ) {
+                alteracoesMidia[currentSelected].data = cropper_instance.cropper('getData');
+                cropper_instance.cropper('destroy');
+                delete window.cropper_instance;
+            }
+        });
+
+        if (!$(this).hasClass('selected-item')) {
+        	$('.{{prefix}}-settings-on').removeClass('hide');
+        	$('.{{prefix}}-settings-off').addClass('hide');
+        	$(this).addClass('selected-item');
+            $(this).find('figure > div').addClass('preview-cropper');
+	        var overlay   = $(document.createElement('div')).addClass('overlay-selected');
+	        var icon_gear = $(document.createElement('i')).addClass('fa fa-gear config-area-selected');
+	        var icon_pin  = $(document.createElement('i')).addClass('fa fa-thumb-tack pin-area-selected');
+	        $(this).append(overlay);
+	        overlay.append(icon_gear);
+	        overlay.append(icon_pin);
+        } else {
+        	$('.{{prefix}}-settings-on').addClass('hide');
+        	$('.{{prefix}}-settings-off').removeClass('hide');
+        	$(this).removeClass('selected-item');
+        	$(this).find('.overlay-selected').remove();
+            //set as previewcropper
+            $(this).find('figure > div').removeClass('preview-cropper');
+            if ( typeof cropper_instance != 'undefined' ) {
+                alteracoesMidia[currentSelected].data = cropper_instance.cropper('getData');
+                cropper_instance.cropper('destroy');
+                delete window.cropper_instance;
+                $(this).find('figure > div > img').removeClass('cropper-img');
+            }
+        }
+
+        console.log(alteracoesMidia[currentSelected].data);
+
+        clearConfiguration(currentSelected);
+                
+    });
+
+</script>

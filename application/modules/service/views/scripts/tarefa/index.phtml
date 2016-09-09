@@ -1,0 +1,43 @@
+<style>
+#minuto{
+    width: 37px;
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 0;
+    margin: .2em 0;
+    vertical-align: middle;
+    margin-left: .4em;
+    margin-right: 22px;
+    height: 20px;
+}
+</style>
+<div class="row">
+    <div class="small-3 columns">
+        <a href="#" id="novoForm" class="button new"><?php echo $this->translate('Nova tarefa')?></a>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 columns">
+        <h3><?php echo $this->translate('Tarefa')?> do serviço <?php echo $this->servico->nome?></h3>
+    </div>
+</div>
+<div id="grid-tarefa">
+</div>
+
+<div id="dialog-form" style="display:none">
+    <div class="row">
+        <div class="small-12 columns">
+            <label><?php echo $this->translate('Nome')?></label>
+            <?php echo $this->formText('nome')?>
+            <?php echo $this->formHidden('id_servico', $this->servico->id_servico)?>
+            <?php echo $this->formHidden('id_tarefa')?>
+        </div>
+        <div class="small-12 columns">
+            <label><?php echo $this->translate('Tempo extimado')?></label>
+            <?php echo $this->formText('minuto', null)?> Minuto
+        </div>
+    </div>
+</div>
+
+<script src="<?php echo $this->baseUrl('scripts/service/tarefa.grid.js')?> "></script>

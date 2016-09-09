@@ -1,0 +1,32 @@
+    <div class="row-fluid" id="movimento-by-processo">
+        <div class="span12">
+            <?php if(count($this->itemList)):?>
+            <table class="table-bordered table-striped table-condensed flip-content" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th style="width: 100px">Cód. do Protocolo</th>
+                        <th>Cód. do Lote</th>
+                        <th style="width: 180px">Produto</th>
+                        <th style="width: 100px">quantidade</th>
+                        <th style="width: 120px">Unidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($this->itemList as $item):?>
+                    <?php foreach ($item['list'] as $produto):?>
+                        <tr>
+                            <td><?php echo $produto['id_protocolo'] ?></td>
+                            <td style="text-align: center"><?php echo $produto['cod_lote'] ?></td>
+                            <td><?php echo $produto['item'] ?></td>
+                            <td style="text-align: center"><?php echo $this->real($produto['quantidade_solicitada'],false) ?></td>
+                            <td><?php echo $produto['nome_unidade'] ?></td>
+                        </tr>
+                    <?php endforeach;?>
+                <?php endforeach;?>
+                </tbody>
+            </table>
+            <?php else:?>
+                <h5>Não possui dados</h5>
+            <?php endif;?>
+        </div>
+    </div>

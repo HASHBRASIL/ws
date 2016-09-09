@@ -1,0 +1,67 @@
+<style>
+i.delete-chat, i.edit-chat{
+    position: relative;
+    top: -5px;
+    left: 115px;
+    cursor: pointer;
+    color: rgb(172, 172, 172);
+    display: none;
+}
+i.delete-chat:hover, i.edit-chat:hover{
+    color: black;
+}
+div.message:hover i.delete-chat{
+    display:inline;
+}
+div.message:hover i.edit-chat{
+    display:inline;
+}
+
+li.in.edit-text div.message{
+    background-color: #bbe2c1;
+}
+</style>
+<div class="portlet-body" id="chats">
+    <div class="scroller" data-height="435px" data-always-visible="1" data-rail-visible1="1">
+		<ul class="chats">
+		    <?php if(count($this->listComentario)):?>
+		        <?php foreach ($this->listComentario as $comentario):?>
+        			<li class="<?php echo Zend_Auth::getInstance()->getIdentity()->usu_id == $comentario->id_criacao_usuario? 'in': 'out' ?>">
+        				<img class="avatar" alt="" src="assets/img/avatar.png" />
+        				<div class="message">
+        					<span class="arrow"></span>
+        					<a href="javascript:;" class="name"><?php echo $comentario->getUsuario()?></a>
+        					<span class="datetime"><?php echo $this->DateHour($comentario->dt_criacao)?></span>
+        					<?php if(Zend_Auth::getInstance()->getIdentity()->usu_id == $comentario->id_criacao_usuario):?>
+            					<i class="icon-pencil edit-chat" title="Editar" id-comentario="<?php echo $comentario->id_comentario?>" ></i>
+            					<i class="icon-remove delete-chat" title="Excluir" id-comentario="<?php echo $comentario->id_comentario?>" ></i>
+        					<?php endif;?>
+        					<span class="body">
+        					    <?php echo $comentario->descricao?>
+        					</span>
+        				</div>
+        			</li>
+    			<?php endforeach;?>
+			<?php endif;?>
+		</ul>
+	</div>
+		<div class="chat-form">
+			<div class="input-cont">
+			    <?php echo $this->formText('descricao_chat', null, array('class'=>'m-wrap', 'placeholder'=>'Digite uma mensagem aqui...'))?>
+			    <?php echo $this->formHidden('id_empresa_chat', $this->idEmpresa)?>
+			    <?php echo $this->formHidden('id_comentario')?>
+			</div>
+			<div class="btn-cont">
+				<span class="arrow"></span>
+				<a href="" class="btn blue icn-only  button-chat"><i class="icon-ok icon-white"></i></a>
+			</div>
+		</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.scroller').slimScroll({
+        height: $('.scroller').attr('data-height')
+    });
+});
+</script>

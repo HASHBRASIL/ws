@@ -1,0 +1,82 @@
+  <div class="row-fluid">
+	<div class="span12">
+		<h3 class="page-title">
+			Gerenciador Financeiro <small>- <?php echo $this->workspaceSession->name_workspace; ?> </small>
+		</h3>
+	</div>
+</div>
+<div class="row-fluid">
+	<p>Preencha os campos para ter o relatório da gerência do financeiro</p>
+</div>
+<div class="row-fluid">
+	<form action="" id="formAjax">
+	<div class="span4">
+		<div class="control-group ">
+			<label class="control-label" for="">Plano de Contas</label>
+			<div class="controls">
+				<?php echo $this->formSelect('plc_id',null,array("class" => "span8"),array("" => "Selecione")+$this->comboPlanoContas);?>
+			</div>
+		</div>
+		<div class="control-group ">
+			<label class="control-label" for="">Contas</label>
+			<div class="controls">
+				<?php echo $this->formSelect('con_id',null,array("class" => "span8"),array("" => "Selecione")+$this->comboContas);?>
+			</div>
+		</div>
+		<div class="control-group ">
+			<label class="control-label" for="">Faturado (contra/por)</label>
+			<div class="controls">
+				<?php echo $this->formSelect('id_pessoa_faturado',null,array("class" => "span8"),array("" => "Selecione")+$this->comboEmpresasGrupo);?>
+			</div>
+		</div>
+	</div>
+	<div class="span4">
+		<div class="control-group ">
+			<label class="control-label" for="">Centro de Custo</label>
+			<div class="controls">
+				<?php echo $this->formSelect('cec_id',null,array("class" => "span8"),array("" => "Selecione")+$this->comboCentroCusto);?>
+			</div>
+		</div>
+		<div class="control-group ">
+			<label class="control-label" for="">Grupo de Operação</label>
+			<div class="controls">
+				<?php echo $this->formSelect('ope_id',null,array("class" => "span8"),array("" => "Selecione")+$this->comboGrupoOperacao);?>
+			</div>
+		</div>
+		<div class="control-group ">
+			<label class="control-label" for="">&nbsp</label>
+			<div class="controls">
+				<a id="pesquisarButton" href="#" class="btn icn-only green">Pesquisar<i class="m-icon-swapright m-icon-white"></i></a>
+			</div>
+		</div>
+	</div>
+	</form>
+
+	<div class="span4">
+		<div class="portlet sale-summary">
+			<div class="portlet-title">
+				<div class="caption">Consolidado por Contas Ativas</div>
+				<div class="tools">
+					<a class="reload" href="javascript:;"></a>
+				</div>
+			</div>
+			<ul id="consolidatedAnAccount_3monthAgoReceive" class="unstyled consolidatedAnAccount">
+			</ul>
+			<ul id="consolidatedAnAccount_6monthAgoReceive" style="display: none;" class="unstyled consolidatedAnAccount">
+			</ul>
+			<ul id="consolidatedAnAccount_12monthAgoReceive" style="display: none;" class="unstyled consolidatedAnAccount">
+			</ul>
+			<ul id="consolidatedAnAccount_3monthAgoPay" style="display: none;" class="unstyled consolidatedAnAccount">
+			</ul>
+			<ul id="consolidatedAnAccount_6monthAgoPay" style="display: none;" class="unstyled consolidatedAnAccount">
+			</ul>
+			<ul id="consolidatedAnAccount_12monthAgoPay" style="display: none;" class="unstyled consolidatedAnAccount">
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="row-fluid" >
+	<div class="span12" id="gridAction">
+	</div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/financial/gerenciador-financeiro.index.js")?>"></script>

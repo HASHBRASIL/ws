@@ -1,0 +1,380 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+h2{
+	
+	line-height: 10px;
+	font-size: 18px;
+}
+
+-->
+</style>
+<div class="tabbable tabbable-custom tabbable-custom-profile">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#tab_1_11" data-toggle="tab">Plano de Contas</a></li>
+		<li class=""><a href="#tab_1_22" data-toggle="tab">Centro de Custo</a></li>
+		<li class=""><a href="#tab_1_33" data-toggle="tab">Contas</a></li>
+		<li class=""><a href="#tab_1_44" data-toggle="tab">Faturado Contra</a></li>
+		<li class=""><a href="#tab_1_55" data-toggle="tab">Grupo de Operação</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="tab_1_11">
+			<div class="portlet-body" style="display: block;">
+			<div class="row-fluid">
+				<div class="span12 responsive" data-tablet="span6" >
+					<div class="dashboard-stat blue">
+						<h2 style="color: white;">Plano de Contas de Transações</h2>
+					</div>
+				</div>
+			</div>
+			<table style="width: 100%" class="table-bordered table-striped table-condensed flip-content gridTable" >
+				<thead class="flip-content">
+					<tr>
+						<th>Código</th>
+			            <th>Nome</th>
+			            <th>Pedido</th>
+			            <th>Tipo de Movimento</th>
+			            <th>Workspace</th>
+			            <th>Valor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php if (count($this->planoContasListTransacao) > 0):?>
+				        <?php foreach ($this->planoContasListTransacao as $planoConta):?>
+				            <tr class="odd gradeX">
+				                <td><?php echo $planoConta->plc_id?></td>
+				                <td><?php echo $planoConta->plc_cod_contabil ?></td>
+				                <td><?php echo $planoConta->pro_id?></td>
+				                <td><?php echo $planoConta->tmv_descricao?></td>
+				                <td><?php echo $planoConta->nome_workspace?></td>
+				                <td style="text-align: right;"><?php echo $this->formatDecimal($planoConta->fin_valor)?></td>
+				            </tr>
+				        <?php endforeach;?>
+					<?php endif;?>
+				</tbody>
+			</table>
+			<div class="row-fluid">
+				<div class="span12 responsive" data-tablet="span6" >
+					<div class="dashboard-stat blue">
+						<h2 style="color: white;">Plano de Contas por ticket</h2>
+					</div>
+				</div>
+			</div>
+			<table style="width: 100%" class="table-bordered table-striped table-condensed flip-content gridTable" >
+				<thead class="flip-content">
+					<tr>
+						<th>Código</th>
+			            <th>Nome</th>
+			            <th>Tipo de Movimento</th>
+			            <th>Workspace</th>
+			            <th>Valor</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php if (count($this->planoContasListTicket) > 0):?>
+				        <?php foreach ($this->planoContasListTicket as $planoConta):?>
+				            <tr class="odd gradeX">
+				                <td><?php echo $planoConta->plc_id?></td>
+				                <td><?php echo $planoConta->plc_cod_contabil ?></td>
+				                <td><?php echo $planoConta->tmv_descricao?></td>
+				                <td><?php echo $planoConta->nome_workspace?></td>
+				                <td style="text-align: right;"><?php echo $this->formatDecimal($planoConta->fin_valor)?></td>
+				            </tr>
+				        <?php endforeach;?>
+					<?php endif;?>
+				</tbody>
+			</table>
+			</div>
+		</div>
+		<!--tab-pane-->
+		<div class="tab-pane" id="tab_1_22">
+			<div class="tab-pane " id="tab_1_1_1">
+				<div class="portlet-body" style="display: block;">
+					<div class="row-fluid">
+						<div class="span12 responsive" data-tablet="span6" >
+							<div class="dashboard-stat blue">
+								<h2 style="color: white;">Centro de Custo por Transação</h2>
+							</div>
+						</div>
+					</div>
+					<table style="width: 100%" class="table-bordered table-striped table-condensed flip-content gridTable" >
+						<thead class="flip-content">
+							<tr>
+								<th>Código</th>
+					            <th>Nome</th>
+					            <th>Tipo de Movimento</th>
+					            <th>Workspace</th>
+					            <th>Valor</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php if (count($this->centroCustoListTransacao) > 0):?>
+						        <?php foreach ($this->centroCustoListTransacao as $centroCusto):?>
+						            <tr class="odd gradeX">
+						                <td><?php echo $centroCusto->cec_id ? $centroCusto->cec_id : ""?></td>
+						                <td><?php echo $centroCusto->cec_descricao  ? $centroCusto->cec_descricao : "" ?></td>
+						                <td><?php echo $centroCusto->tmv_descricao  ? $centroCusto->tmv_descricao : ""?></td>
+						                <td><?php echo $centroCusto->nome_workspace  ? $centroCusto->nome_workspace  : ""?></td>
+						                <td style="text-align: right;"><?php echo $this->formatDecimal($centroCusto->fin_valor)?></td>
+						            </tr>
+						        <?php endforeach;?>
+							<?php endif;?>
+						</tbody>
+					</table>
+					<div class="row-fluid">
+						<div class="span12 responsive" data-tablet="span6" >
+							<div class="dashboard-stat blue">
+								<h2 style="color: white;">Centro de Custo por Ticket</h2>
+							</div>
+						</div>
+					</div>
+					<table style="width: 100%" class="table-bordered table-striped table-condensed flip-content gridTable" >
+						<thead class="flip-content">
+							<tr>
+								<th>Código</th>
+					            <th>Nome</th>
+								<th>Tipo de Movimento</th>
+					            <th>Workspace</th>
+					            <th>Valor</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php if (count($this->centroCustoListTicket) > 0):?>
+						        <?php foreach ($this->centroCustoListTicket as $centroCusto):?>
+						            <tr class="odd gradeX">
+						                <td><?php echo $centroCusto->cec_id ? $centroCusto->cec_id : ""?></td>
+						                <td><?php echo $centroCusto->cec_descricao ? $centroCusto->cec_descricao : "" ?></td>
+						                <td><?php echo $centroCusto->tmv_descricao ? $centroCusto->tmv_descricao : ""?></td>
+						                <td><?php echo $centroCusto->nome_workspace ? $centroCusto->nome_workspace : ""?></td>
+						                <td style="text-align: right;"><?php echo $this->formatDecimal($centroCusto->fin_valor)?></td>
+						            </tr>
+						        <?php endforeach;?>
+							<?php endif;?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--tab-pane-->
+		<div class="tab-pane" id="tab_1_33">
+			<div class="tab-pane " id="">
+				<div class="portlet-body" style="display: block;">
+					<div class="row-fluid">
+						<div class="row-fluid">
+							<div class="span12 responsive" data-tablet="span6" >
+								<div class="dashboard-stat blue">
+									<h2 style="color: white;">Contas</h2>
+								</div>
+							</div>
+						</div>
+						<table style="width: 100%" class="table-bordered table-striped table-condensed flip-content gridTable" >
+							<thead class="flip-content">
+								<tr>
+									<th>Código</th>
+						            <th>Nome</th>
+						            <th>Workspace</th>
+						            <th>Tipo de Movimento</th>
+						            <th>Valor</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php if (count($this->contasListTicket) > 0):?>
+							        <?php foreach ($this->contasListTicket as $conta):?>
+							            <tr class="odd gradeX">
+							                <td><?php echo $conta->con_id?></td>
+							                <td><?php echo $conta->con_codnome ?></td>
+							                <td><?php echo $conta->nome_workspace?></td>
+							                <td><?php echo $conta->tmv_descricao?></td>
+							                <td style="text-align: right;"><?php echo $this->formatDecimal($conta->fin_valor)?></td>
+							            </tr>
+							        <?php endforeach;?>
+								<?php endif;?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane" id="tab_1_44">
+			<div class="tab-pane " id="">
+				<div class="portlet-body" style="display: block;">
+					<div class="row-fluid">
+						<div class="row-fluid">
+							<div class="span12 responsive" data-tablet="span6" >
+								<div class="dashboard-stat blue">
+									<h2 style="color: white;">Faturado Contra de Transação</h2>
+								</div>
+							</div>
+						</div>
+						<table style="width: 100%" class="table-bordered table-striped table-condensed flip-content gridTable" >
+							<thead class="flip-content">
+								<tr>
+									<th>Código</th>
+									<th>Nome</th>
+									<th>Tipo de Movimento</th>
+									<th>Workspace</th>
+									<th>Valor</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php if (count($this->faturadoContraListTransacao) > 0):?>
+						        <?php foreach ($this->faturadoContraListTransacao as $faturadoContra):?>
+						            <tr class="odd gradeX">
+						                <td><?php echo $faturadoContra->id_agrupador_financeiro?></td>
+						                <td><?php echo $faturadoContra->nome_razao ?></td>
+						                <td><?php echo $conta->tmv_descricao?></td>
+						                <td><?php echo $faturadoContra->nome_workspace?></td>
+						                <td style="text-align: right;"><?php echo $this->formatDecimal($faturadoContra->fin_valor)?></td>
+						            </tr>
+						        <?php endforeach;?>
+							<?php endif;?>
+							</tbody>
+						</table>
+						<div class="row-fluid">
+							<div class="span12 responsive" data-tablet="span6" >
+								<div class="dashboard-stat blue">
+									<h2 style="color: white;">Faturado Contra de Ticket</h2>
+								</div>
+							</div>
+						</div>
+						<table style="width: 100%" class="table-bordered table-striped table-condensed flip-content gridTable" >
+							<thead class="flip-content">
+								<tr>
+									<th>Código</th>
+									<th>Nome</th>
+									<th>Tipo de Movimento</th>
+									<th>Workspace</th>
+									<th>Valor</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php if (count($this->faturadoContraListTicket) > 0):?>
+						        <?php foreach ($this->faturadoContraListTicket as $faturadoContra):?>
+						            <tr class="odd gradeX">
+						                <td><?php echo $faturadoContra->fin_id?></td>
+						                <td><?php echo $faturadoContra->nome_razao ?></td>
+						                <td><?php echo $conta->tmv_descricao?></td>
+						                <td><?php echo $faturadoContra->nome_workspace?></td>
+						                <td style="text-align: right;"><?php echo $this->formatDecimal($faturadoContra->fin_valor)?></td>
+						            </tr>
+						        <?php endforeach;?>
+							<?php endif;?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane" id="tab_1_55">
+			<div class="tab-pane " id="">
+				<div class="portlet-body" style="display: block;">
+					<div class="row-fluid">
+						<div class="row-fluid">
+							<div class="span12 responsive" data-tablet="span6" >
+								<div class="dashboard-stat blue">
+									<h2 style="color: white;">Grupo Operação de Transação</h2>
+								</div>
+							</div>
+						</div>
+						<table style="width: 100%" class="table-bordered table-striped table-condensed flip-content gridTable" >
+							<thead class="flip-content">
+								<tr>
+									<th>Código</th>
+									<th>Nome</th>
+									<th>Tipo de Movimento</th>
+									<th>Workspace</th>
+									<th>Valor</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php if (count($this->grupoOperacaoListTransacao) > 0):?>
+						        <?php foreach ($this->grupoOperacaoListTransacao as $grupoOperacao):?>
+						            <tr class="odd gradeX">
+						                <td><?php echo $grupoOperacao->ope_id?></td>
+						                <td><?php echo $grupoOperacao->ope_nome ?></td>
+						                <td><?php echo $conta->tmv_descricao?></td>
+						                <td><?php echo $grupoOperacao->nome_workspace?></td>
+						                <td style="text-align: right;"><?php echo $this->formatDecimal($grupoOperacao->fin_valor)?></td>
+						            </tr>
+						        <?php endforeach;?>
+							<?php endif;?>
+							</tbody>
+						</table>
+						<div class="row-fluid">
+							<div class="span12 responsive" data-tablet="span6" >
+								<div class="dashboard-stat blue">
+									<h2 style="color: white;">Grupo Operação de Ticket</h2>
+								</div>
+							</div>
+						</div>
+						<table style="width: 100%" class="table-bordered table-striped table-condensed flip-content gridTable" >
+							<thead class="flip-content">
+								<tr>
+									<th>Código</th>
+									<th>Nome</th>
+									<th>Tipo de Movimento</th>
+									<th>Workspace</th>
+									<th>Valor</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php if (count($this->grupoOperacaoListTicket) > 0):?>
+						        <?php foreach ($this->grupoOperacaoListTicket as $grupoOperacao):?>
+						            <tr class="odd gradeX">
+						                <td><?php echo $grupoOperacao->ope_id?></td>
+						                <td><?php echo $grupoOperacao->ope_nome ?></td>
+						                <td><?php echo $conta->tmv_descricao?></td>
+						                <td><?php echo $grupoOperacao->nome_workspace?></td>
+						                <td style="text-align: right;"><?php echo $this->formatDecimal($grupoOperacao->fin_valor)?></td>
+						            </tr>
+						        <?php endforeach;?>
+							<?php endif;?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+ $('.gridTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+</script>

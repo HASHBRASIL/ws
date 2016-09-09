@@ -1,0 +1,394 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css')?>" />
+<div class="row-fluid">
+    <div class="span12">
+        <h3 class="page-title">
+            Cadastro
+             <small>Corporativo</small>
+        </h3>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box green" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-reorder"></i> Formulário - <span class="step-title">Passo 1 de 4</span>
+                </div>
+                <div class="tools hidden-phone">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                    <a href="javascript:;" class="reload"></a>
+                    <a href="javascript:;" class="remove"></a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="#" class="form-horizontal" id="form_corporativo" method="post">
+                    <div class="form-wizard">
+                        <div class="navbar steps">
+                            <div class="navbar-inner">
+                                <ul class="row-fluid">
+                                    <li class="span3" id-tab="1">
+                                        <a href="#tab1" data-toggle="tab" class="step active" >
+                                        <span class="number">1</span>
+                                        <span class="desc"><i class="icon-ok"></i> Principal</span>
+                                        </a>
+                                    </li>
+                                    <li class="span3" id-tab="2">
+                                        <a href="#tab2" data-toggle="tab" class="step">
+                                        <span class="number">2</span>
+                                        <span class="desc"><i class="icon-ok"></i> Grupo Geografico</span>
+                                        </a>
+                                    </li>
+                                    <li class="span3" id-tab="3">
+                                        <a href="#tab3" data-toggle="tab" class="step">
+                                        <span class="number">3</span>
+                                        <span class="desc"><i class="icon-ok"></i> Marketing</span>
+                                        </a>
+                                    </li>
+                                    <li class="span3" id-tab="4">
+                                        <a href="#tab4" data-toggle="tab" class="step" >
+                                        <span class="number">4</span>
+                                        <span class="desc"><i class="icon-ok"></i> Característica</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="bar" class="progress progress-success progress-striped">
+                            <div class="bar"></div>
+                        </div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <h3 class="block">Principal</h3>
+                                <?php echo $this->formHidden('id', $this->vo->id);?>
+                                  <div class="row-fluid">
+                                      <div class="span12">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Responsável')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formHidden('empresas_id_pai',$this->vo->empresas_id_pai, array('class' => 'span6'));?>
+                                              	<?php echo $this->formText('responsavel',!empty($this->vo->empresas_id_pai) ? $this->vo->getResponsavel()->nome_razao: "", array('class' => 'span6'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row-fluid">
+                                      <div class="span4">
+                                          <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Tipo de pessoa')?><span class="required">*</span></label>
+                                              <div class="controls">
+                                                  <?php echo $this->formSelect('tps_id', empty($this->vo->tps_id) ? Sis_Model_Bo_TipoPessoa::FISICA : $this->vo->tps_id, array('class' => 'span12'), $this->comboTipoPessoa); ?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row-fluid">
+                                      <div class="span6">
+                                      	  <div class="control-group">
+                                              <label class="label_nome_razao control-label"><?php echo $this->translate('Razão social')?><span class="required">*</span></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('nome_razao',$this->vo->nome_razao, array('class' => 'span12'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span6 div_fantasia">
+                                      	  <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Nome fantasia')?></label>
+                                              <div class="controls">
+                                                  <?php echo $this->formText('fantasia',$this->vo->fantasia,  array('class' => 'span12'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row-fluid">
+
+                                      <div class="span6 div_pessoa_fisica">
+                                          <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Nome do pai')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('nome_pai',$this->vo->nome_pai, array('class' => 'span12'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span6 div_pessoa_fisica">
+                                          <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Nome da mãe')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('nome_mae',$this->vo->nome_mae, array('class' => 'span12'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="row-fluid">
+                                      <div class="span6">
+                                          <div class="control-group">
+                                              <label class="label_cnpj control-label"><?php echo $this->translate('CNPJ')?><span class="required">*</span></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('cnpj_cpf',$this->vo->cnpj_cpf, array('class' => 'span7'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span6 div_uasg">
+                                          <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Uasg')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('uasg',$this->vo->uasg, array('class' => 'span7'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row-fluid">
+                                      <div class="span6 estadual">
+                                          <div class="control-group">
+                                              <label class="label_estadual control-label"><?php echo $this->translate('Inscrição estadual')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('estadual',$this->vo->estadual, array('class' => 'span7'));?>
+                                          	  </div>
+                                          </div>
+                                      </div>
+                                      <div class="span6 municipal">
+                                          <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Inscrição municipal')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('municipal',$this->vo->municipal, array('class' => 'span7'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row-fluid">
+                                      <div class="span3">
+                                          <div class="control-group">
+                                              <label  class="control-label"><?php echo $this->translate('Telefone')?></label>
+                                              <div class="controls telefone">
+                                                  <?php echo $this->formText('telefone1',$this->formatTelefone($this->vo->telefone1), array( 'style' => 'display:inline-block', 'class' => 'telefone span10'));?>
+                                              <img title="Adicionar telefone" src="<?php echo $this->baseUrl('images/add.png')?>" style="cursor: pointer;" class="add-tel tooltips" data-tooltip />
+                                                  <?php if(!empty($this->vo->telefone2)):?>
+                                                      <?php echo $this->formText('telefone2',$this->formatTelefone($this->vo->telefone2), array( 'style' => 'margin-top: 5px;display:inline-block', 'class' => 'telefone span10'));?>
+                                                      <img src='/images/delete.png' data-tooltip title='excluir telefone' class='delete-tel tooltips' id-tel='2' style='cursor:pointer;'>
+                                                  <?php endif;?>
+                                                  <?php if(!empty($this->vo->telefone3)):?>
+                                                      <?php echo $this->formText('telefone3',$this->formatTelefone($this->vo->telefone3), array( 'style' => 'margin-top: 5px;display:inline-block', 'class' => 'telefone span10'));?>
+                                                      <img src='/images/delete.png' data-tooltip title='excluir telefone' class='delete-tel tooltips' id-tel='3' style='cursor:pointer;'>
+                                                  <?php endif;?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span3">
+                                          <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Site')?></label>
+                                              <div class="controls">
+                                              	<?php echo $this->formText('site',$this->vo->site, array('class' => 'span12'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="span3">
+                                          <div class="control-group">
+                                              <label class="control-label"><?php echo $this->translate('Email')?></label>
+                                              <div class="controls">
+                                                  <?php echo $this->formText('email_corporativo',$this->vo->email_corporativo,array('class' => 'span12'));?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                            </div>
+                            <div class="tab-pane" id="tab2">
+                                <h3 class="block">Grupo Geográfico <a href="#" class="btn new_grupo_geo"><i class="icon-plus"></i> Novo grupo</a></h3>
+                                <div class="span12">
+                                    <div class="control-group">
+                                        <div class="controls grupoGeografico">
+                                            <?php echo $this->formSelect('grupo_geografico', $this->valueGrupoGeografico, array('class' => 'grupo_geografico', 'multiple' => 'multiple'), $this->comboGrupoGeografico)?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab3">
+                                <h3 class="block">Marketing</h3>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="control-group">
+                                            <label class="control-label">Mail Marketing</label>
+                                                <div class="controls">
+                                                    <?php echo $this->formSelect('smk_id', $this->vo->smk_id, array('class' => 'span5'), $this->comboMailMkt)?>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="control-group">
+                                            <label class="control-label">Ramo de atividade</label>
+                                                <div class="controls">
+                                                    <?php echo $this->formSelect('seg_id', $this->vo->seg_id, array('class' => 'span5'), $this->comboSegmento)?>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Indicação')?></label>
+                                                <div class="controls">
+                                                    <div class="indicacao-toggle-button">
+                                                        <input type="checkbox" class="toggle" <?php echo !empty($this->vo->id_empresa_indicacao)? 'CHECKED' :'' ?> name="indicacao" id="indicacao" value="1" />
+                                                    </div>
+                                                <?php echo $this->formSelect('ind_id', $this->vo->ind_id, array('class' => 'span12', 'style' => 'display:none'), $this->comboIndicacao); ?>
+                                                <?php echo $this->formText('indicacao_nome', null, array('class' => 'span12', 'style' => 'display:none')); ?>
+                                                <?php echo $this->formHidden('id_empresa_indicacao', $this->vo->id_empresa_indicacao)?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab4">
+                                <h3 class="block">Característica <a href="#" class="btn new_caracteristica"><i class="icon-plus"></i> Nova característica</a></h3>
+                                <div class="row-fluid caracteristica">
+                                    <?php foreach ($this->pairsCaracteristica as $key => $value):?>
+                                        <div class="span3" style="margin-left: 2.564102564102564%;">
+                                            <div class="control-group">
+                                                <label class="control-label"><?php echo $value?></label>
+                                                <div class="controls">
+                                                    <div class="perfil-toggle-button">
+                                                        <input type="checkbox" class="toggle" name="caracteristica[]" <?php echo in_array($key, $this->valueCaracteristica) ? 'CHECKED' : ""; ?>  value="<?php echo $key?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach;?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions clearfix">
+                            <a href="javascript:;" class="btn button-previous">
+                                <i class="m-icon-swapleft"></i> Voltar
+                            </a>
+                            <a href="javascript:;" class="btn blue button-next">
+                                Continuar <i class="m-icon-swapright m-icon-white"></i>
+                            </a>
+                            <button class="btn green" type="submit">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row-fluid" style=" <?php echo $this->vo->id ? "": 'display:none'?>">
+	<a href="#" class="icon-btn span2 new endereco">
+		<i class="icon-globe"></i>
+		<div>Endereço</div>
+	</a>
+	<a href="#" class="icon-btn span2 new contato">
+		<i class="halflings-icon book"></i>
+		<div>Contato</div>
+	</a>
+</div>
+<div class="dialog_combo" style="display: none;">
+    <div>
+        <label>Nome</label>
+        <?php echo $this->formText('nome_combo',null, array('style'=> 'width:260px; display: inline;', 'placeholder'=> 'Nome'));?>
+    </div>
+</div>
+
+<div class=""></div>
+<div class="" style="margin-bottom: 20px">
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        <!--BEGIN TABS-->
+        <div class="tabbable tabbable-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1_1" data-toggle="tab"><?php echo $this->translate("Endereço")?></a></li>
+                <li><a href="#tab_1_2" data-toggle="tab"><?php echo $this->translate("Contato")?></a></li>
+                <li><a href="#tab_1_3" data-toggle="tab"><?php echo $this->translate("Financeiro")?></a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active grid_endereco" id="tab_1_1">
+                </div>
+                <div class="tab-pane grid_contato" id="tab_1_2">
+                </div>
+                <div class="tab-pane grid_financeiro" id="tab_1_3">
+                </div>
+            </div>
+        </div>
+        <!--END TABS-->
+    </div>
+</div>
+
+
+<div class="dialog_endereco " style="display: none;">
+    <form class="form-endereco" style="margin:0 !important;">
+        <input type="hidden" name="id" value="" id="id_endereco">
+        <?php echo $this->formHidden('id_empresas', $this->vo->id);?>
+        <div class="">
+            <label>Tipo de endereço</label>
+            <?php foreach ($this->comboTipoEndereco as $key => $value):?>
+                <label class="inline" style="padding-top: 16.75; padding-right: 10px;display: inline-block;"><input type="checkbox"  name="tipoEndereco[]" class="tipo_endereco" value="<?php echo $key?>" > <?php echo $value?></label>
+            <?php endforeach;?>
+            <?php //echo $this->formSelect('tie_id', null, array('style' => 'width: 200px;margin-bottom: 10px;'), $this->comboTipoEndereco); ?>
+            <label>Cep</label>
+            <?php echo $this->formText('cep',null, array('style'=> 'width: 140px;display: inline;', 'placeholder'=> 'Cep'));?>
+            <img src="<?php echo $this->baseUrl('images/search.png')?>" data-tooltip id="bt_pesquisar_cep" style="cursor: pointer;position: relative;top:-6px" title="Pesquisar Cep">
+            <label>Tipo Logradouro</label>
+            <?php echo $this->formText('tipo_logradouro',null, array('style'=> 'width: 360px;display: inline;', 'placeholder'=> 'Tipo logradouro'));?>
+            <label>Endereço</label>
+            <?php echo $this->formText('nome_logradouro',null, array('style'=> 'width: 300px;display: inline;', 'placeholder'=> 'Endereço'));?>
+            <?php echo $this->formText('numero',null, array('style'=> 'width: 65px;display: inline;', 'placeholder'=> 'Número'));?>
+            <label>Bairro</label>
+            <?php echo $this->formText('bairro',null, array( 'placeholder'=> 'Bairro'));?>
+            <label>Complemento</label>
+            <?php echo $this->formText('complemento',null, array('placeholder'=> 'Complemento'));?>
+            <label>Estado/Cidade</label>
+            <?php echo $this->formHidden('pais_id', 1);?>
+            <?php echo $this->formSelect('ufs_id', null, array('style' => 'width: 90px'), $this->comboEstado); ?>
+            <?php echo $this->formSelect('cid_id', null, array('style' => 'width: 300px'), array('Cidade')); ?>
+        </div>
+    </form>
+</div>
+<div class="dialog_contato row-fluid " style="display: none;">
+    <input type="hidden" name="id" value="" id="id_contato">
+    <div class="span8">
+        <label>Nome</label>
+        <?php echo $this->formText('nome_contato',null, array('placeholder'=> 'Nome', 'class' => 'span12'));?>
+    </div>
+    <div class="span3">
+        <label>Radio</label>
+        <?php echo $this->formText('radio',null, array('placeholder'=> 'Radio', 'class' => 'span12'));?>
+    </div>
+    <div class="span6 email">
+        <label>Email</label>
+        <?php echo $this->formText('email1',null, array('placeholder'=> 'Email', 'class' => 'span10'));?>
+        <img title="Adicionar email" src="<?php echo $this->baseUrl('images/add.png')?>" style="cursor: pointer;margin-bottom: 12px;" class="add-email" />
+    </div>
+    <div class="span5 tel_contato">
+        <label>Telefone</label>
+        <?php echo $this->formText('tel_contato1',null, array('placeholder'=> 'Telefone', 'class' => 'span10 telefone'));?>
+        <img title="Adicionar telefone" src="<?php echo $this->baseUrl('images/add.png')?>" style="cursor: pointer;margin-bottom: 12px;" class="add-tel-cont" />
+    </div>
+    <div class="span6">
+        <label>Data de nascimento</label>
+        <?php echo $this->formText('aniversario',null, array( 'placeholder'=> 'Data de nascimento', 'class' => 'span12'));?>
+    </div>
+    <div class="span5">
+        <label>Referenciamento</label>
+        <?php echo $this->formSelect('cre_id', null, array('class' => 'span12'), $this->comboContatoRef); ?>
+    </div>
+    <div class="span12">
+        <label>Cargo</label>
+        <?php echo $this->formSelect('car_id', null, array('class' => 'span12'), $this->comboCargo); ?>
+    </div>
+    <div class="span12">
+        <label>Departamento</label>
+        <?php echo $this->formSelect('cdp_id', null, array('class' => 'span12'), $this->comboContatoDept); ?>
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('assets/plugins/jquery-multi-select/css/multi-select-metro.css')?>" />
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/jquery-validation/dist/jquery.validate.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/jquery-validation/dist/additional-methods.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/jquery-multi-select/js/jquery.multi-select.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/empresa/empresa.form-wizard.js')?>"></script>

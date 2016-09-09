@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>ERP | Sistemas Integrados de Gestão Empresarial</title>
+		<style type="text/css">
+			#outlook a{padding:0;} /* Force Outlook to provide a "view in browser" button. */
+			body{width:100% !important; margin:0;}
+			body{-webkit-text-size-adjust:none;} /* Prevent Webkit platforms from changing default text sizes. */
+			body{margin:0; padding:0;}
+			img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}
+			table td{border-collapse:collapse;}
+			#backgroundTable{height:100% !important; margin:0; padding:0; width:100% !important;}
+			@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700); /* Loading Open Sans Google font */
+			body, #backgroundTable{ background-color:#FFF; }
+			.TopbarLogo{
+			padding:10px;
+			text-align:left;
+			vertical-align:middle;
+			}
+			h1, .h1{
+			color:#444444;
+			display:block;
+			font-family:Open Sans;
+			font-size:35px;
+			font-weight: 400;
+			line-height:100%;
+			margin-top:2%;
+			margin-right:0;
+			margin-bottom:1%;
+			margin-left:0;
+			text-align:left;
+			}
+			h2, .h2{
+			color:#444444;
+			display:block;
+			font-family:Open Sans;
+			font-size:30px;
+			font-weight: 400;
+			line-height:100%;
+			margin-top:2%;
+			margin-right:0;
+			margin-bottom:1%;
+			margin-left:0;
+			text-align:left;
+			}
+			h3, .h3{
+			color:#444444;
+			display:block;
+			font-family:Open Sans;
+			font-size:24px;
+			font-weight:400;
+			margin-top:2%;
+			margin-right:0;
+			margin-bottom:1%;
+			margin-left:0;
+			text-align:left;
+			}
+			h4, .h4{
+			color:#444444;
+			display:block;
+			font-family:Open Sans;
+			font-size:18px;
+			font-weight:400;
+			line-height:100%;
+			margin-top:2%;
+			margin-right:0;
+			margin-bottom:1%;
+			margin-left:0;
+			text-align:left;
+			}
+			h5, .h5{
+			color:#444444;
+			display:block;
+			font-family:Open Sans;
+			font-size:14px;
+			font-weight:400;
+			line-height:100%;
+			margin-top:2%;
+			margin-right:0;
+			margin-bottom:1%;
+			margin-left:0;
+			text-align:left;
+			}
+			.textdark {
+			color: #444444;
+			font-family: Open Sans;
+			font-size: 13px;
+			line-height: 150%;
+			text-align: left;
+            font-size: 18px;
+			}
+			.textwhite {
+			color: #fff;
+			font-family: Open Sans;
+			font-size: 13px;
+			line-height: 150%;
+			text-align: left;
+			}
+			.fontwhite { color:#fff; }
+			.btn {
+			background-color: #e5e5e5;
+			background-image: none;
+			filter: none;
+			border: 0;
+			box-shadow: none;
+			padding: 7px 14px;
+			text-shadow: none;
+			font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+			font-size: 14px;
+			color: #333333;
+			cursor: pointer;
+			outline: none;
+			-webkit-border-radius: 0 !important;
+			-moz-border-radius: 0 !important;
+			border-radius: 0 !important;
+			}
+			.btn:hover,
+			.btn:focus,
+			.btn:active,
+			.btn.active,
+			.btn[disabled],
+			.btn.disabled {
+			font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+			color: #333333;
+			box-shadow: none;
+			background-color: #d8d8d8;
+			}
+			.btn.red {
+			color: white;
+			text-shadow: none;
+			background-color: #d84a38;
+			}
+			.btn.red:hover,
+			.btn.red:focus,
+			.btn.red:active,
+			.btn.red.active,
+			.btn.red[disabled],
+			.btn.red.disabled {
+			background-color: #bb2413 !important;
+			color: #fff !important;
+			}
+			.btn.green {
+			color: white;
+			text-shadow: none;
+			background-color: #35aa47;
+			}
+			.btn.green:hover,
+			.btn.green:focus,
+			.btn.green:active,
+			.btn.green.active,
+			.btn.green.disabled,
+			.btn.green[disabled]{
+			background-color: #1d943b !important;
+			color: #fff !important;
+			}
+			table.table{
+                border-spacing: 2px;
+                border-color: gray;
+                border-top: 0;
+			}
+			.table th {
+                vertical-align: bottom;
+                border-top: 0;
+            }
+			.table th, .table td {
+                padding: 8px;
+                line-height: 20px;
+                text-align: left;
+                vertical-align: top;
+                border-top: 1px solid #ddd;
+            }
+
+			.table th {
+                vertical-align: bottom;
+                border-top: 0;
+            }
+            .diferrent_collumns{
+                color: #e02222;
+            }
+		</style>
+	</head>
+	<body>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#1f1f1f; height:52px;">
+			<tr>
+				<td align="center">
+					<center>
+						<table border="0" cellpadding="0" cellspacing="0" width="800px" style="height:100%;">
+							<tr>
+								<td align="left" valign="middle" style="padding-left:20px;">
+									<a href="http://titaniumtech.com.br">
+									<img src="<?php echo $this->serverUrl('/images/erp_logo.png')?>" width="86px" height="14px" alt="Metronic logo"/>
+									</a>
+									<h3 style="display: inline;color:white;position: relative;top: -8px">| Sistemas Integrados de Gestão Empresarial</h3>
+
+								</td>
+								<td align="right" valign="middle" style="padding-right:20px;">
+								</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				<td style="padding-bottom:20px;">
+					<center>
+						<table border="0" cellpadding="0" cellspacing="0" width="900px" style="height:100%;">
+							<tr>
+								<td valign="top" class="bodyContent">
+									<table border="0" cellpadding="20" cellspacing="0" width="100%">
+										<tr>
+											<td valign="top">
+												<h2 class="h2">Processo <?php echo $this->processo->pro_codigo?></h2>
+												<br />
+												<div class="textdark" style="text-align: justify;">
+												    <strong>Entidade</strong>: <?php echo $this->processo->getEmpresa()? $this->processo->getEmpresa()->nome_razao :null?>
+												    <br />
+												    <strong>Status</strong>: <?php echo $this->processo->getStatus()? $this->processo->getStatus()->sta_descricao :null?>
+												    <br />
+												    <strong>Quantidade</strong>: <?php echo $this->processo->pro_quantidade?>
+												    <br />
+												    <strong>Valor unitário produção</strong>: <?php echo $this->processo->pro_vlr_unt?>
+												    <br />
+												    <strong>Valor total produção</strong>: <?php echo $this->processo->pro_vlr_pedido?>
+												    <br />
+													<strong>Descrição</strong>: <?php echo $this->processo->pro_desc_produto?>
+													<br />
+												</div>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				<td style="padding-bottom:10px;">
+					<center>
+						<table border="0" cellpadding="0" cellspacing="0" width="900px" style="height:100%;" class="table">
+						    <tr>
+						        <th colspan="7"><h2 class="h2">Histórico</h2></th>
+						    </tr>
+							<tr>
+								<td valign="top" class="bodyContent">
+									<table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tr>
+										    <th>Descrição</th>
+										    <th>Quantidade</th>
+										    <th>Valor Unitário</th>
+										    <th>Valor pedido</th>
+										    <th>Status</th>
+										    <th>Data de alteração</th>
+										    <th>Usuário</th>
+										</tr>
+										<?php if(count($this->historicoList) > 0):?>
+										    <?php $count = 0?>
+										    <?php foreach ($this->historicoList as $key=>$historico):?>
+										        <?php $count++?>
+                                                <?php $newHistorico = ($key == count($this->historicoArray) - 1) ? null: $this->historicoArray[$count]?>
+        										<tr>
+        										    <td style="background: <?php echo $key%2 ? "#f5f5f5": "#fffff"?>" <?php echo isset($newHistorico->pro_desc_produto) && $newHistorico->pro_desc_produto != $historico->pro_desc_produto ? "class='diferrent_collumns'": ""; ?> ><?php echo $historico->pro_desc_produto?></td>
+        										    <td style="background: <?php echo $key%2 ? "#f5f5f5": "#fffff"?>" <?php echo isset($newHistorico->pro_quantidade) && $newHistorico->pro_quantidade != $historico->pro_quantidade ? "class='diferrent_collumns'": ""; ?> ><?php echo $this->formatInteger($historico->pro_quantidade)?></td>
+        										    <td style="text-align:right;background: <?php echo $key%2 ? "#f5f5f5": "#fffff"?>" <?php echo isset($newHistorico->pro_vlr_unt) && $newHistorico->pro_vlr_unt != $historico->pro_vlr_unt ? "class='diferrent_collumns'": ""; ?> ><?php echo $this->formatDecimal($historico->pro_vlr_unt) ?></td>
+        										    <td style="text-align:right;background: <?php echo $key%2 ? "#f5f5f5": "#fffff"?>" <?php echo isset($newHistorico->pro_vlr_pedido) && $newHistorico->pro_vlr_pedido != $historico->pro_vlr_pedido ? "class='diferrent_collumns'": ""; ?> ><?php echo $this->formatDecimal($historico->pro_vlr_pedido) ?></td>
+        										    <td style="background: <?php echo $key%2 ? "#f5f5f5": "#fffff"?>" <?php echo isset($newHistorico->sta_id) && $newHistorico->sta_id != $historico->sta_id ? "class='diferrent_collumns'": ""; ?> ><?php echo $historico->getStatus()->sta_descricao?></td>
+        										    <td style="background: <?php echo $key%2 ? "#f5f5f5": "#fffff"?>" ><?php echo $this->dateHour($historico->dt_criacao)?></td>
+        										    <td style="background: <?php echo $key%2 ? "#f5f5f5": "#fffff"?>" ><?php echo $historico->getUsuario()? $historico->getUsuario() : null?></td>
+        										</tr>
+    										<?php endforeach;?>
+										<?php else:?>
+										<tr>
+										    <td colspan="7">Não possui Histórico</td>
+										</tr>
+										<?php endif;?>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#1f1f1f;">
+			<tr>
+				<td align="center">
+					<center>
+						<table border="0" cellpadding="0" cellspacing="0" width="800px" style="height:100%;">
+							<tr>
+								<td align="right" valign="middle" class="textwhite" style="font-size:12px;padding:20px;">
+									2013 &copy; <a href="http://titaniumtech.com.br" style="color:white;">titanium</a>
+								</td>
+							</tr>
+						</table>
+					</center>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

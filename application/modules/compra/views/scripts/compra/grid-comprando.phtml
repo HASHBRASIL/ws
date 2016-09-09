@@ -1,0 +1,109 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+			
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+<table class="table-bordered table-striped table-condensed flip-content" style="width: 100%" id="perfisTable">
+				<thead class="flip-content">
+					<tr>
+						<th>Código</th>
+						<th class="hidden-480">Referencia</th>
+            <th>Produto</th>
+            <th>Atributos</th>
+            <th class="hidden-480">Quantidade</th>
+            <th class="hidden-480">Valor Unitário</th>
+            <th>Valor Total</th>
+            <th class="hidden-480">Data</th>
+            <th style="width: 40px;" class="action">Ação</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php $total = ''; ?>
+		<?php if (count($this->compraList) > 0):?>
+        <?php foreach ($this->compraList as $produto):?>
+        	<?php $total = $total + ($produto->quantidade * $produto->vl_unitario);?>
+            <tr class="odd gradeX">
+                <td style="width:30px"><?php echo $produto->id_compra_item; ?></td>
+                <td class="hidden-480"><?php echo $produto->getItem()->referencia; ?></td>
+                <td><?php echo $produto->getItem()->nome; ?></td>
+                <td>
+                <?php if( isset($this->opcao[$produto->id_compra_item]) > 0):?>
+	                <?php foreach ($this->opcao[$produto->id_compra_item] as $opcao) : ?>
+	                		<?php echo $opcao['nome_atributo'].' : '.$opcao['nome']; ?><br>
+	               	<?php endforeach;?>
+               	<?php  else :?>
+               		Sem atributo
+               	<?php endif;?>
+                </td>
+                <td class="hidden-480"><?php echo $produto->quantidade; ?></td>
+                <td align="right" class="hidden-480"><?php echo $this->formatDecimal($produto->vl_unitario); ?></td>
+                <td align="right"><?php echo $this->formatDecimal($produto->quantidade * $produto->vl_unitario); ?></td>
+                <td class="hidden-480"><?php echo $this->dateHour($produto->dt_criacao); ?></td>
+                <td class="acoes">
+                    <a class="editMoldal" item="<?php echo $produto->getItem()->id_item; ?>" value="<?php echo $produto->id_compra_item; ?>" href="#">
+                        <img title="Editar" data-tooltip src="<?php echo $this->baseUrl('images/edit.png')?>"/>
+                    </a>
+                    <a class="deleteMoldal" value="<?php echo $produto->id_compra_item; ?>" href="#">
+                        <img title="Excluir" data-tooltip src="<?php echo $this->baseUrl('images/delete.png')?>"/>
+                    </a>
+                </td>
+            </tr>
+	        <?php endforeach;?>
+<?php endif;?>
+	</tbody>
+</table>
+</div>
+
+<div class='row-fluid' style="overflow:hidden; text-align: right ;"><h4><b>Total da compra <span style="color: red;"><?php echo $total ? $this->formatDecimal($total) : '00,00'; ?></span></b></h4></div>
+
+<div class="row-fluid">
+	<a href="" id="finalizar" style="float: right;" total="<?php echo $total;?>" value="<?php echo $this->idCompra;?>" class="icon-btn span2">
+		<i class="icon-cog"><i></i></i>
+		<div>Finalizar Compra</div>
+	</a>
+</div>
+
+<script type="text/javascript">
+
+ $('#perfisTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+</script>

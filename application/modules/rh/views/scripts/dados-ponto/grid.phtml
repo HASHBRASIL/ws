@@ -1,0 +1,46 @@
+<style>
+td.acoes{
+    text-align:center;
+}
+</style>
+
+
+<?php //view
+    $urlDelete = "/rh/dados-ponto/delete/id_rh_dados_ponto/%id_rh_dados_ponto%?url='{$this->url()}'";
+    $options = array(
+        'paginator'            => $this->paginator,
+        'title'                => 'Registro de ponto',
+        'fields'               => array(
+                                         'nsr'        => 'NSR',
+                                         'nome_razao' => "Funcionário",
+                                         'data'       => 'Data',
+                                         'hora'       => 'hora',
+                                         'pis'        => 'Pis'
+                                       ),
+        'desabilitarBotaoNovo' => true,
+        'colorGrid'            => 'darkorange',
+        'icon'                 => ' icon-reorder',
+        'columns'              => array(
+                                         'nsr'          => 'NSR',
+                                         'pis'          => 'PIS',
+                                         'nome_razao'   => "Funcionário",
+                                         'data'         => 'Data',
+                                         'hora'         => 'hora',
+                                         'duplicado'    => 'Duplicado',
+                                         'local'        => 'Local',
+                                         'descricao'    => 'Motivo'
+                                       ),
+        'formatter'            => array( 'data' => 'date', 'duplicado' => 'stringDuplicado'),
+        'actions'              => array(
+            "<a class='delete' data-tooltip title='Excluir' href={$urlDelete} >"
+                . "<img src='" . $this->baseUrl() . "/images/delete.png' />"
+            . "</a>"
+        )
+    );
+    echo $this->partial('grid-metronic.phtml', 'default', $options);
+    ?>
+<script>
+$(document).ready(function(){
+    $('.portlet.box.darkorange:first').parent().parent().css('margin-top', '20px');
+});
+</script>

@@ -1,0 +1,11 @@
+<script>
+    {% for filho in servico.filhos %}
+        {% if filho.metadata.ws_comportamento == 'filter' %}
+            {% if filho.metadata.ws_campo == '.'~campo.metanome|lower %} 
+
+                transformSelect2("{{ filho.metadata.ws_campo }}", "{{campo.descricao}}", {{filho.metadata.ws_selecttags|raw|default(true)}}, "{{filho.id}}" );
+
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</script>

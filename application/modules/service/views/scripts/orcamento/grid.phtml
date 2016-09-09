@@ -1,0 +1,121 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+<div class="row-fluid">
+     <div class="span12">
+	      <h3 class="page-title">
+	       Registro de Orçamento
+	        <small> no sistema</small>
+	      </h3>
+     </div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box steelblue">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-wrench"></i>Orçamentos</div>
+				<div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+                <div class="actions">
+									<a class="btn cadastro-link" href="<?php echo $this->baseUrl('/service/orcamento/form')?>"><i class="icon-pencil"></i> Novo </a>
+								</div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<table class="table-bordered table-striped table-condensed flip-content" id="perfisTable">
+						<thead class="flip-content">
+							<tr>
+                <tr>
+                    <th class="hidden-480"><?php echo $this->translate('Código')?></th>
+                    <th class="hidden-480"><?php echo $this->translate('Tipo')?></th>
+                    <th class="hidden-480"><?php echo $this->translate('Nome')?></th>
+                    <th class="hidden-480"><?php echo $this->translate('Cliente')?></th>
+                    <th class="hidden-480"><?php echo $this->translate('Modelo')?></th>
+                    <th class="hidden-480"><?php echo $this->translate('Quantidade')?></th>
+                    <th class="hidden-480" style="width: 50px !important;"><?php echo $this->translate('Ação')?></th>
+                </tr>
+						</thead>
+
+						<tbody>
+							<?php if (count($this->orcamentoList) > 0):?>
+				        <?php foreach ($this->orcamentoList as $orcamento):?>
+                    <tr>
+                        <td><?php echo $orcamento['id_orcamento']?></td>
+                        <td><?php echo $orcamento->getTipoOrcamento()->nome?></td>
+                        <td><?php echo $orcamento['nome']?></td>
+                        <td><?php echo $orcamento->getCliente()->nome_razao?></td>
+                        <td><?php echo $orcamento->modelo ? "Sim" : "Não" ?></td>
+                        <td><?php echo $orcamento['quantidade']?></td>
+                        <td>
+                            <a href="<?php echo $this->baseUrl('service/orcamento/form/id_orcamento/'.$orcamento['id_orcamento'])?>">
+                                <img src="<?php echo $this->baseUrl('images/edit.png')?>" data-tooltip title="Editar">
+                            </a>
+                            <a href="<?php echo $this->baseUrl('service/orcamento/delete/id/'.$orcamento['id_orcamento'])?>" class="delete">
+                                <img src="<?php echo $this->baseUrl('images/delete.png')?>" data-tooltip title="Remover">
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+							<?php endif;?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir a unidades: <span id ="valueDelete"></span></p>
+</div>
+<div class="dialog_cadastro" style="display: none;">
+  <form class="form-cadastro" style="margin:0 !important;">
+  	<label>Nome</label>
+    <?php echo $this->formText('nome',null, array('style'=> 'width: 410px;'));?>
+	</form>
+						
+</div>
+<script type="text/javascript">
+
+ $('#perfisTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+</script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/sis/orcamento.grid.js')?>"></script>

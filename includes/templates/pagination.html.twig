@@ -1,0 +1,45 @@
+<strong>
+    Listando de {{data.getPages.firstItemNumber}} à {{data.getPages.lastItemNumber}} de {{data.getPages.totalItemCount}}
+</strong>
+<ul class="pagination pull-left">
+
+    {% if data.getPages(pageCount) is defined %}
+
+            {% if data.getPages(previous) is defined %}
+                    <li class="ng-scope disabled">
+                        <a class="ng-scope" ng-switch-when="prev" href="#">
+                            <i class="icofont icofont-double-left"></i>
+                        </a>
+                    </li>
+            {% endif %}
+
+            {% for page in data.getPages.pagesInRange %}
+                {% if page != data.getPages.current %}
+
+                    <li class="ng-scope">
+                        <a class="ng-scope" ng-switch-when="first" href="#">
+                            <span class="ng-binding">{{page}}</span>
+                        </a>
+                    </li>
+
+                {% else %}
+
+                    <li class="ng-scope active">
+                        <a class="ng-scope" ng-switch-when="page" href="">
+                            <span class="ng-binding">{{page}}</span>
+                        </a>
+                    </li>
+
+                {% endif %}
+            {% endfor %}
+
+            {% if data.getPages(next) is defined %}
+                <li class="ng-scope">
+                    <a class="ng-scope" ng-switch-when="next" href="#">
+                        <i class="icofont icofont-double-right"></i>
+                    </a>
+                </li>
+            {% endif %}
+
+    {% endif %}
+</ul>

@@ -1,0 +1,76 @@
+<div class='grupoDivMetas'>
+    <form id="filtros">
+        <input type="hidden" name="id" id="id_metanome_filtro" value="{{ id_metanome_filtro }}" />
+        <table class="table table-responsive" id="tabela-filtros">
+            <thead>
+            <tr>
+                <th> - </th>
+                <th style="color:black!important">Filtros</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for filtro in filtros %}
+                <tr>
+                    <td>
+                        <button class="btn btn-default remfiltro" type="button">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <input type="hidden" class="ws_filtro" name="wsfiltro[{{ loop.index0 }}][campo]" value="{{ filtro.campo }}" />
+                        <input type="hidden" class="ws_filtro" name="wsfiltro[{{ loop.index0 }}][condicao]" value="{{ filtro.condicao }}" />
+                        <input type="hidden" class="ws_filtro" name="wsfiltro[{{ loop.index0 }}][valor]" value="{{ filtro.valor }}" />
+                        <input type="hidden" class="ws_filtro" name="wsfiltro[{{ loop.index0 }}][id]" value="{{ filtro.id }}" />
+                        {{filtro.campo}} {{filtro.condicao}} {{filtro.valor}}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </form>
+    <br/>
+    <form method="post">
+        <fieldset>
+            <legend> Adicionar WS_FILTRO </legend>
+                <input name='campo' value='' id="filtro-campo" type="text" />
+                <select name="operador" id="filtro-condicao">
+                    <option value="=">=</option>
+                </select>
+                <input name="valor" value='' id="filtro-valor" type="text" />
+                <br />
+            <input value="adicionar" id="adcfiltro" type="button" />
+            <input value="salvar" type="submit" />
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript">
+$(function(){
+    $('#adcfiltro').click(function(){
+        var campo = $('#filtro-campo').val(),
+            condicao = $('#filtro-condicao').val(),
+            valor = $('#filtro-valor').val(),
+            qtd = $('#tabela-filtros>tbody tr').length,
+            botao = '<button class="btn btn-default remfiltro" type="button"><span class="glyphicon glyphicon-remove"></span></button>';
+
+        var filtro = campo + ' ' + condicao + ' ' + valor;
+        filtro += '<input type="hidden" class="ws_filtro" name="wsfiltro[' + qtd + '][campo]" value="' + campo + '" />'
+               + '<input type="hidden" class="ws_filtro" name="wsfiltro[' + qtd + '][condicao]" value="' + condicao + '" />'
+               + '<input type="hidden" class="ws_filtro" name="wsfiltro[' + qtd + '][valor]" value="' + valor + '" />';
+
+        $('#tabela-filtros > tbody:last-child').append('<tr><td>' + botao + '</td><td>' + filtro + '</td></tr>');
+        
+        $('#filtro-campo').val('');
+        $('#filtro-condicao').val('=');
+        $('#filtro-valor').val('');
+    });
+
+    $('#tabela-filtros').on('click', '.remfiltro', function(){
+        var that = this;
+        bootbox.confirm('Tem certeza que quer remover o filtro?', function(confirmacao){
+            if (confirmacao) {
+                $(that).parents('tr').remove();
+            }
+        });
+    });
+});
+</script>

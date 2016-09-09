@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="phpjasperxml" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="BlankPage" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.2000000000000455"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="zebra" isDefault="true" forecolor="#000000">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></conditionExpression>
+			<style mode="Transparent" forecolor="#404040" backcolor="#00FFFF" fill="Solid">
+				<box>
+					<pen lineColor="#33FF33"/>
+					<topPen lineColor="#33FF33"/>
+					<leftPen lineColor="#33FF33"/>
+					<bottomPen lineColor="#33FF33"/>
+					<rightPen lineColor="#33FF33"/>
+				</box>
+			</style>
+		</conditionalStyle>
+	</style>
+	<parameter name="sql" class="java.lang.String"/>
+	<parameter name="filtros" class="java.lang.String"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select cc.cec_id,cc.cec_descricao,if(ope.ope_nome is null,'---',ope.ope_nome) as ope_nome ,if(SUM(fin.fin_valor) is null,0.00,SUM(fin.fin_valor)) as valor,(select date_format(sysdate(),'%d/%m/%y - %h:%m:%s')) as dataAtual from tb_centro_custo cc
+left join tb_financeiro as fin on fin.cec_id = cc.cec_id
+left join tb_operacoes as ope on ope.ope_id = fin.ope_id
+GROUP BY cc.cec_id, fin.ope_id
+order by cc.cec_descricao, ope.ope_nome desc;]]>
+	</queryString>
+	<field name="cec_id" class="java.lang.Integer"/>
+	<field name="cec_descricao" class="java.lang.String"/>
+	<field name="ope_nome" class="java.lang.String"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="dataAtual" class="java.lang.String"/>
+	<variable name="id_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{id}]]></variableExpression>
+	</variable>
+	<variable name="valor_1" class="java.math.BigDecimal" resetType="Group" resetGroup="Centro de Custo" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}]]></variableExpression>
+	</variable>
+	<variable name="numcc" class="java.lang.Integer" incrementType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{cec_descricao}]]></variableExpression>
+	</variable>
+	<group name="nome_razao">
+		<groupExpression><![CDATA[$F{nome_razao}]]></groupExpression>
+	</group>
+	<group name="Centro de Custo">
+		<groupExpression><![CDATA[$F{cec_descricao}]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<textField>
+					<reportElement x="36" y="4" width="322" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{cec_descricao}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField pattern="#,##0.00">
+					<reportElement x="281" y="3" width="48" height="12"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{valor_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="222" y="3" width="52" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total :]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="119" splitType="Stretch">
+			<staticText>
+				<reportElement style="net.sf.jasperreports.engine.design.JRDesignStyle@1d28de7" x="152" y="53" width="374" height="24" forecolor="#000000" backcolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial Black" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTA DE CENTRO DE CUSTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="83" width="85" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMITIDO EM:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="98" width="37" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POR:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="341" y="98" width="185" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="36" y="67" width="90" height="48"/>
+				<imageExpression class="java.lang.String"><![CDATA["../public/images/logo4-01.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="341" y="83" width="185" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dataAtual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="36" y="0" width="490" height="16" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="69" y="3" width="63" height="11" forecolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OPERAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="3" width="48" height="11" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" mode="Transparent" x="69" y="6" width="63" height="7" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement lineSpacing="Single">
+					<font size="7" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ope_nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement style="Detail" positionType="Float" mode="Transparent" x="141" y="6" width="48" height="7" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Right" lineSpacing="Single">
+					<font size="7" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="36" y="4" width="490" height="1" isRemoveLineWhenBlank="true"/>
+				<graphicElement>
+					<pen lineWidth="0.1"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="462" y="10" width="60" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="36" y="8" width="490" height="1" isRemoveLineWhenBlank="true"/>
+			</line>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="30">
+			<line>
+				<reportElement x="36" y="3" width="490" height="1" isRemoveLineWhenBlank="true"/>
+			</line>
+			<textField>
+				<reportElement x="462" y="6" width="60" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="36" y="19" width="194" height="11"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[relatorioBi/data/jxml/relatorioCentroCusto.jrxml]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

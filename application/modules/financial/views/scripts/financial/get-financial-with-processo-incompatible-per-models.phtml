@@ -1,0 +1,81 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+<table style="width: 100%;" class="table-bordered table-striped table-condensed flip-content ProcessoTable">
+	<thead class="flip-content">
+		<tr>
+			<th class="">Código</th>
+            <th class="">Descrição</th>
+            <th class="">Valor</th>
+            <th class="">Valor Financeiro</th>
+            <th style="width: 45px;" class="action">Ação</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php if (count($this->processoList) > 0):?>
+        <?php foreach ($this->processoList as $processo):?>
+            <tr class="odd gradeX">
+                <td class="" style="width:30px"><?php echo $processo['pro_codigo']?></td>
+                <td><?php echo $processo['pro_desc_produto'];?></td>
+                <td style="text-align: right;" ><?php echo $this->formatDecimal($processo['pro_vlr_pedido']);?></td>
+                <td style="text-align: right;" ><?php echo $this->formatDecimal($processo['total_financeiro']);?></td>
+			    <td class="acoes">
+                	<a title='Editar' data-tooltip href=' <?php echo $this->baseUrl("/processo/processo/form/pro_id/{$processo['pro_id']}") ?>'    >
+                    	<img src='<?php echo $this->baseUrl("/images/edit.png") ?>'  />
+               		</a>
+                </td>
+			</tr>
+			        <?php endforeach;?>
+<?php endif;?>
+	</tbody>
+</table>
+</div>
+
+<script type="text/javascript">
+
+ $('.ProcessoTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     "bDestroy": true,
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+
+</script>

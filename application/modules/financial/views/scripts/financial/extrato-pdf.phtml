@@ -1,0 +1,52 @@
+<h1 style="text-align: center;font-size:14;">Extrato Financeiro emitido em <?php echo date("d/m/Y");?> às <?php echo date("H:i:s")?> por <?php echo Zend_Auth::getInstance()->getIdentity()->pessoa->nome?></h1>
+<span>No período pesquisado de <b><?php echo $this->request["de_fin_inclusao"] ? $this->request["de_fin_inclusao"]: "Sem Limites" ?></b> até <b><?php echo $this->request["ate_fin_inclusao"] ? $this->request["ate_fin_inclusao"]: "Sem Limites"?></b>.
+	<?php if (!empty($this->request["empresa_sacado"] )):?>
+			Empresa <?php echo $this->request["empresa_sacado"] ? $this->request["empresa_sacado"] : "-" ?>.
+	<?php endif;?>
+	<?php if (isset($this->request["grupoContasList"])):?>
+		<?php if (count($this->request["grupoContasList"] )>0):?>
+				Status <?php foreach ($this->request["grupoContasList"] as $key => $conta): if ($conta == 1 /*a pagar*/): echo "- A pagar"; elseif ($conta == 2 /*a receber*/): echo "- A receber"; else: " - Transferência"; endif; endforeach; ?>.
+		<?php endif;?>
+	<?php endif;?>
+	<?php if (count($this->nomeContas )>0):?>
+				Contas <?php foreach ($this->nomeContas as $key => $conta): echo " - {$conta} "; endforeach; ?>.
+	<?php endif;?>
+</span>
+<br>
+<hr/>
+<table style="font-size: small;">
+	<tr style="font-weight:bold; background-color:#eeeeee">
+		<th style="width: 10% !important;">Compensação</th>
+		<th style="width: 5% !important;">Cód</th>
+		<th style="width: 20% !important;">Cliente</th>
+		<th style="width: 35% !important;">Descrição</th>
+		<th style="width: 15% !important;">Conta</th>
+		<th style="width: 8% !important;">Tipo Financeiro</th>
+		<th style="width: 7% !important; text-align: right;">Valor</th>
+	</tr>
+		<?php if (count($this->financialList) > 0):?>
+	    			<?php $valor = 0;?>
+			<?php foreach ($this->financialList as $key=> $financial):
+					$zebra = "#eeeeee";
+		    	    if( $key  % 2 == 0){
+		        	    $zebra = "#ffffff";
+		    	    }?>
+				<tr style="background-color:<?php echo $zebra?>">
+					<td><?php echo $this->date($financial->fin_compensacao)?></td>
+					<td><?php echo $financial->fin_id?></td>
+					<td><?php echo $financial->nome_razao ? $financial->nome_razao : "" ?></td>
+					<td><?php echo $financial->fin_descricao?></td>
+					<td><?php echo $financial->con_codnome?></td>
+		                <?php if ( $financial->tmv_id == 1 ):$style = "red"; $type = "Débito"; elseif ($financial->tmv_id == 2): $style = "blue";  $type = "Crédito"; endif; ?>
+		            <td <?php echo "style='color: {$style} '" ?> color="<?php  echo $style?>"> <?php echo $type?></td>
+					<td style="text-align: right;"><?php if ( $financial->tmv_id == 1 ):echo "-".$this->formatDecimal($financial->fin_valor); elseif ($financial->tmv_id == 2): echo "+".$this->formatDecimal($financial->fin_valor); endif; ?></td>
+				</tr>
+						<?php $valor = $financial->tmv_id == 1 ?  $valor - $financial->fin_valor : $valor + $financial->fin_valor;?>
+			<?php endforeach;?>
+		<?php endif;?>
+</table>
+<div style="text-align: right;">
+	<h4>
+		No período pesquisado de <b><?php echo $this->request["de_fin_inclusao"] ? $this->request["de_fin_inclusao"]: "-" ?></b> até <b><?php echo $this->request["ate_fin_inclusao"] ? $this->request["ate_fin_inclusao"]: "-"?></b> o saldo é <b><?php echo isset($valor) ? $this->formatDecimal($valor) : "0,00"; ?></b>
+	</h4>
+</div>

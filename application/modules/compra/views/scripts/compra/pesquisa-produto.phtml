@@ -1,0 +1,115 @@
+<?php if ($this->produto == false) {?>
+<?php } else {?>
+<style>
+<!--
+}
+#carrossel {
+	height: 160px;
+	overflow: hidden;
+}
+#carrossel ul {
+	list-style: none;
+}
+#carrossel ul li {
+	float: left;
+	display: inline;
+	margin: 5px;
+}	
+p {
+	text-align: center;
+}
+-->
+</style>
+<?php echo $this->formHidden('id_item', $this->produto['id_item']);?>
+<?php echo $this->formHidden('vl_unitario', $this->produto['vl_unitario']);?>
+<?php echo $this->formHidden('id_compra_item');?>
+<div class="span12">
+	<div class="span6">
+			<h3>#<?php echo $this->produto['referencia'];?><?php echo $this->produto['nome'];?></h3>
+
+	</div>
+		
+	<div class="span6">
+		<h3>
+			<?php 
+				$link = "";
+				foreach ($this->arquivoList as $arquivo):
+					for ($i = 0; $i < 1; $i++) {
+						$link = $this->baseUrl('/uploads/item/'.$arquivo->id_item.'/'.$arquivo->nome_md5);
+					}
+					echo '<a class="grouped_elements" data-lightbox="roadtrip" href="'.$this->baseUrl("/uploads/item/".$arquivo->id_item."/".$arquivo->nome_md5).'"> </a>';
+				endforeach;
+				echo '<a class="grouped_elements" data-lightbox="roadtrip" href="'.$link.'">Imagens</a>';
+				?>
+			</h3>
+	</div>
+</div>
+	<div class="span8">
+		<?php if (count($this->itemOpcaoList) > 0):?>
+			<?php $idAtributo = 0?>
+				<?php foreach ($this->itemOpcaoList as $atributo):?>
+					<div class="control-group">
+						<label class="control-label"><?php echo $atributo['nome_atributo'] ?>:</label>
+						<div class="controls">
+						<select class="span6 medium atributo" name="atributos[]" tabindex="1">
+							<option value="">Select...</option>
+							<?php foreach ($atributo['opcao'] as $key => $opcao):?>
+              		<option value="<?php echo $opcao['id_opcao']?>"  <?php echo isset($this->opcao) && in_array($opcao['id_opcao'], $this->opcao) ? 'selected="selected"': '';?>><?php echo $opcao['nome_opcao']?></option>
+              <?php endforeach;?>
+						</select>
+					</div>
+				</div>
+			<?php endforeach;?>
+    <?php endif;?>
+		<div class="control-group">
+			<label class="control-label">Quantidade:</label>
+			<div class="controls">
+				<?php echo $this->formText('quantidade', $this->compra ? $this->compra->quantidade : null  , array('class' => 'm-wrap span2', 'alt' => 'msk'));?>
+			</div>
+		</div>
+	</div>
+	<div class="span3">
+		<p><h4>Valor Unitario</h4></p>
+		<p><h4>R$ <?php echo $this->formatDecimal($this->produto['vl_unitario']);?></h4></p>
+		<div class="valorT" style="display:none;" >
+			<p><h4>Valor Total</h4></p>
+			<p><h4><span style="color: red;" class="valorTotal">R$ <?php echo $this->formatDecimal($this->compra->quantidade * $this->compra->vl_unitario); ?></span></h4></p>
+		</div>
+	</div>
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	$('#quantidade').keypress(function (e) {
+		  if (e.which == 13) {
+			  e.preventDefault();
+		    $('.add').trigger('click');
+		  }
+	});
+	/* This is basic - uses default settings */
+	
+	$("#quantidade").keyup(function() {
+		var valorUnitario = <?php echo $this->produto['vl_unitario'];?>;
+		var quant = $( "#quantidade" ).val();
+	  var total = valorUnitario * quant;
+	  $('.valorTotal').html("R$ "+formatReal(total.toFixed(2)));
+	  $('.valorT').show();
+	});
+	//Colocando as mascaras nos campos necessários
+   $('#quantidade').setMask('999999999');
+
+   function formatReal( int )
+   {
+           var tmp = int+'';
+           tmp = tmp.replace(".","");
+           tmp = tmp.replace(",",".");
+           tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+           if( tmp.length > 6 )
+                   tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+    
+           return tmp;
+   }
+   
+});
+//-->
+</script>
+<?php } ?>

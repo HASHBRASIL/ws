@@ -1,0 +1,84 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+<div class="portlet box steelblue" <?php echo count($this->servico->getListValorServico())? '' : 'style="display: none"' ?>>
+	<div class="portlet-title">
+		<div class="caption"><i class="icon-reorder"></i>Tarefas</div>
+		<div class="tools">
+			<a href="javascript:;" class="collapse"></a>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+			<table class="table-bordered table-striped table-condensed flip-content" style="width: 100%" id="perfisTable">
+				<thead class="flip-content">
+					<tr>
+           	<th  ><?php echo $this->translate('Nome')?></th>
+            <th ><?php echo $this->translate('Tempo extimado')?></th>
+            <th style="width: 70px !important;"><?php echo $this->translate('Ação')?></th>
+					</tr>
+        </thead>
+        <tbody>
+        	<?php foreach ($this->tarefaList as $tarefa):?>
+          	<tr>
+            	<td><?php echo $tarefa['nome']?></td>
+              <td><?php echo $tarefa['tempo_extimado']?> minutos</td>
+              <td>
+              	<a href="<?php echo $tarefa['id_tarefa']?>" class="editar-tarefa" tempo="<?php echo $tarefa['tempo_extimado']?>" name="<?php echo $tarefa['nome']?>">
+                	<img src="<?php echo $this->baseUrl('images/edit.png')?>" data-tooltip title="Editar">
+                </a>
+                <a href="<?php echo $this->baseUrl('service/tarefa/delete/id/'.$tarefa['id_tarefa']) ?>" class="deletar-tarefa">
+                	<img src="<?php echo $this->baseUrl('images/delete.png')?>" data-tooltip title="Remover">
+                </a>
+              </td>
+            </tr>
+          <?php endforeach;?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>			
+
+<script type="text/javascript">
+
+ $('#perfisTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+</script>

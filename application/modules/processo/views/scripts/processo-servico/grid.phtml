@@ -1,0 +1,58 @@
+<?php
+$sumServico = 0;
+?>
+<style>
+i.acao{
+    color: #000;
+}
+</style>
+<div class="row-fluid">
+    <div class="span12">
+        <table class="table-bordered table-striped table-condensed flip-content" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Serviço</th>
+                    <th>quantidade</th>
+                    <th>valor Unitário</th>
+                    <th >Total</th>
+                    <th  colspan="2">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if(count($this->processoServicoList)):?>
+                <?php foreach ($this->processoServicoList as $processoServico):?>
+                        <tr>
+                            <td><?php echo $processoServico->getServico()->nome ?></td>
+                            <td style="text-align: center;"><?php echo $processoServico->quantidade ?></td>
+                            <td style="text-align: right;"><?php echo $this->formatDecimal($processoServico->vl_unitario) ?></td>
+                            <td style="text-align: right;"><?php echo $this->real($processoServico->total) ?></td>
+                            <td  style="width: 30px;text-align: center;">
+                                <a data-tooltip="" href="<?php echo $this->baseUrl('/processo/processo/form/id/'.$processoServico->id_processo_servico)?>" id_processo_servico=<?php echo $processoServico->id_processo_servico ?> class="editar_servico" title="Editar Serviço">
+                                    <i class="icon-pencil acao"></i>
+                                </a>
+                            </td>
+                            <td style="width: 30px;text-align: center;">
+                                <a data-tooltip="" href="<?php echo $this->baseUrl('/processo/processo/delete/id/'.$processoServico->id_processo_servico)?>" id_processo_servico=<?php echo $processoServico->id_processo_servico ?> class="excluir_servico" title="Excluir Serviço">
+                                    <i class="icon-remove acao"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php $sumServico = $processoServico->total+$sumServico?>
+                <?php endforeach;?>
+                <?php else: ?>
+                        <tr>
+                            <td colspan="6">Não há dados</td>
+                        </tr>
+                <?php endif;?>
+            </tbody>
+        </table>
+        <div class="row-fluid">
+            <div class="span6">
+                <div> Mostrando <?php echo count($this->processoServicoList)?> registros</div>
+            </div>
+            <div class="span6" style="text-align: right;">
+                Total do serviço: <strong><?php echo $this->real($sumServico)?></strong>
+            </div>
+        </div>
+    </div>
+</div>

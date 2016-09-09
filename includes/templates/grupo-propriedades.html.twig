@@ -1,0 +1,75 @@
+<h2> {{grupo.nome}} {{msg}} </h2>
+
+<input type="hidden" id="idGrupo" value="{{idGrupo}}">
+
+<div class='grupoDivPropriedades'>
+    
+    
+    <table class="table table-responsive">
+        <tr>
+            <th>Propriedade</th>
+            <th>valor</th>
+        </tr>
+        {% for prop, valor in grupoReadOnly %}
+            <tr>
+                <td>{{prop}}</td>
+                <td>
+                    {{valor}}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <table class="table table-responsive">
+        <tr>
+            <th>Propriedade</th>
+            <th>valor</th>
+        </tr>
+        {% for prop, valor in grupo %}
+            <tr>
+                <td>{{prop}}</td>
+                <td>
+                    <input coluna='{{prop}}' value='{{valor}}' type="text" />
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class='grupoDivMetas'>
+    <table class="table table-responsive">
+        <tr>
+            <th>Propriedade</th>
+            <th>valor</th>
+        </tr>
+        {% for meta in metas %}
+            <tr>
+                <td>{{meta.metanome}}</td>
+                <td>
+                    <input metanome='{{meta.metanome}}' value='{{meta.valor}}' type="text" style="width: 100%;"/>
+                </td>
+                <td style="text-align: center">
+                    <button metanome="{{meta.metanome}}">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <br/>
+    
+    <form method="post">
+        <fieldset>
+            <legend> Adicionar metanome </legend>
+            <label> Metanome : 
+                <input name='metanome' value='{{meta.valor}}' type="text"/>
+            </label>
+            <br/>
+            <label> valor : 
+                <input name="valor" value='' type="text"/>
+            </label>
+            <input value="salvar" type="submit"/>
+        </fieldset>
+    </form>
+</div>

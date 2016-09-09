@@ -1,0 +1,75 @@
+{% macro input(name, value, type, class, extras, overwriteClass) %}
+    {% spaceless %}
+    <input type="{{ type|default('text') }}" name="{{ name }}" value="{{ value|e }}"
+           class="{{ overwriteClass  ? '' : 'form-control input-sm' }} {{ class }}"
+
+    {% for chave,campo in extras %}
+        {% if chave == 'data' %}
+            {% for chave2,campo2 in campo %}
+                {% if chave2[:3] == 'ws_' %}
+                    data-{{ chave2[3:] }}="{{ campo2 }}"
+                {% else %}
+                    data-{{ chave2 }}="{{ campo2 }}"
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {{ chave }}{{ campo ? '="%s"' | format(campo) | raw }}"
+        {% endif %}
+    {% endfor %}
+
+    />
+    {% endspaceless %}
+{% endmacro %}
+
+{% macro select(name, value, options, class, extras) %}
+    {% spaceless %}
+        <select name="{{ name }}" class="form-control input-sm {{ class }}"
+
+    {% for chave,campo in extras %}
+
+        {% if chave == 'data' %}
+            {% for chave2,campo2 in campo %}
+                {% if chave2[:3] == 'ws_' %}
+                    data-{{ chave2[3:] }}="{{ campo2 }}"
+                {% else %}
+                    data-{{ chave2 }}="{{ campo2 }}"
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {{ chave }}{{ campo ? '="%s"' | format(campo) | raw }}"
+        {% endif %}
+    {% endfor %}
+        >
+            <option value=""></option>
+            {% for chave,campo in options %}
+                <option value='{{ chave }}' {% if chave == value %} selected {% endif %}>{{ campo }}</option>
+            {% endfor %}
+            </select>
+
+        </select>
+        <input type="hidden" name="{{ name }}" value="{{ value }}">
+    {% endspaceless %}
+{% endmacro %}
+
+{% macro inputRequired(name, value, type, class, extras, overwriteClass) %}
+    {{ _self.input(name, value, type, class, extras | merge(['required' ]), overwriteClass) }}
+{% endmacro %}
+
+
+{% macro textarea(name, value, rows, cols) %}
+    <textarea name="{{ name }}" rows="{{ rows|default(5) }}" cols="{{ cols|default(30) }}">{{ value|e }}</textarea>
+{% endmacro %}
+
+{% macro checkbox(name, value, options, class, extras) %}
+    <div class="checkbox clip-check check-primary">
+
+        <input type="hidden" name="{{ name }}" value="0">
+        {% for chave,campo in options %}
+            <input type="checkbox" name="{{ name }}" id="{{ name ~ '_' ~ chave }}"  {{ value == chave ?'checked="checked"'|raw }} value="{{ chave }}">
+            <label for="{{ name ~ '_' ~ chave }}">
+                {{ campo }}
+            </label>
+        {% endfor %}
+    </div>
+{% endmacro %}
+

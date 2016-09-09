@@ -1,0 +1,46 @@
+<?php
+    /**
+     * visualização da arvore de grupo podendo adicionar um grupo, subgrupo e uma classe
+     * é adicionar um produto
+    */
+?>
+<style>
+<!--
+.treeview ul {
+    background-color: #eeeeee;
+}
+-->
+</style>
+<div class="row-fluid" style="max-width: 100%">
+<div class="panel">
+    <div id="sidetree">
+    <div class="treeheader">&nbsp;</div>
+    <div id="sidetreecontrol"><a href="?#">Minimizar</a> | <a href="?#">Expandir</a></div>
+
+            <ul id="tree">
+                <?php if($this->consultor):?>
+                    <li class="">
+                        <span><input type='checkbox' class='checkbox-consultor' name="consultor[]" value="<?php echo $this->consultor->id ?>"><?php echo $this->consultor->nome_razao ?></span>
+                        <?php tree($this->consultor, $this->tipoPessoa)?>
+                    </li>
+                <?php endif;?>
+            </ul>
+    </div>
+    </div>
+</div>
+<?php
+function tree($objectConsultor, $tipoPessoa){
+    echo "<ul>";
+    if( count($objectConsultor->getListEmpresa(array('tps_id = ?' => $tipoPessoa)))){
+         foreach ($objectConsultor->getListEmpresa(array('tps_id = ?' => $tipoPessoa)) as $consultor){
+             echo "<li>";
+             echo "<span> <input type='checkbox' class='checkbox-consultor' value='". $consultor->id."' name='consultor[]' >".$consultor->nome_razao."</span>";
+             if(count($consultor->getListEmpresa(array('tps_id = ?' => $tipoPessoa))) > 0){
+                tree($consultor, $tipoPessoa);
+             }
+             echo "</li>";
+         }
+    }
+    echo "</ul>";
+}
+?>

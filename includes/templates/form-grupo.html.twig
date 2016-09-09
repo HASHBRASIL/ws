@@ -1,0 +1,110 @@
+{#todo procurar novo component de upload de imagens para o projeto#}
+{#todo descobrir forma de passar dados do ckeditor#}
+<div id="mensagens" class="alert alert-success hidden" role="alert" style="margin-top: 60px"></div>
+{#todo remover style inline @toinsane#}
+<style>
+    textarea.form-control {
+        overflow: auto;
+        outline:0px none transparent;
+        resize: none;
+
+        -moz-appearance:none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+    textarea.form-control:focus{
+        outline: 0;
+        border: none transparent;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+</style>
+
+{% if time is defined %}
+    <div class="row wrapper">
+        {% include 'header-content.html.twig' %}
+        <form action="home.php" method="post" id="criarTime" enctype="multipart/form-data" accept-charset="utf-8">
+            <div class="col-md-12 content">
+                <div class="form-group-one-unit">
+                    {% if editar %}
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="">Nome: </label>
+                                    <input type="text" class="form-control" name="nome" value="{{ data.nome }}">
+                                    <input type="hidden" name="idtime" value="{{ timeid }}">
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="">Nome: </label>
+                                    <input type="text" class="form-control" name="nome" value="{{ data.nome }}">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="">Time Pai:</label>
+                                    <select class="form-control chosen-select" name="id_time_pai" id="">
+                                        <option value="null" selected="selected" disabled="disabled">Escolha um time pai</option>
+                                        {% for times in time %}
+                                            <option value="{{ times.id }}">{{ times.nome }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label for="">Descricao:</label>
+                                <textarea class="form-control" name="descricao" id="" cols="30" rows="10" wrap="off">{{ data.descricao }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% include 'form-action.html.twig' %}
+            </div>
+        </form>
+    </div>
+{% else %}
+    <div class="row wrapper">
+        {% include 'header-content.html.twig' %}
+        <form action="home.php" method="post" class="criarGrupo" enctype="multipart/form-data" accept-charset="utf-8">
+            <div class="col-md-12 content">
+                <div class="form-group-one-unit">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="">Nome: </label>
+                                <input type="text" class="form-control" name="nome">
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="">Nomehash: </label>
+                                <input type="text" class="form-control" name="nomehash">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Descricao:</label>
+                                <textarea class="form-control" name="descricao" id="" cols="30" rows="10" wrap="off"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% include 'form-action.html.twig' %}
+            </div>
+        </form>
+    </div>
+{% endif %}

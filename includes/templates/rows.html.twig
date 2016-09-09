@@ -1,0 +1,55 @@
+<tr style="display:none">
+
+    <td class="center no-side-padding shrink" data-checkbox="1" data-field="">
+        <div class="checkbox clip-check check-primary check-sm checkbox-inline">
+            <input type="checkbox" value="1" id="checkbox-0">
+            <label for="checkbox-0"></label>
+        </div>
+    </td>
+
+    {% for field in header %}
+        <td data-field="{{ field.campo }}"></td>
+    {% endfor %}
+{#
+    <td class="tool-cell"> {% include 'list-action.html.twig' %} </td> #}
+    <td class="tool-cell visible-xs visible-sm hidden-md hidden-lg">
+        {% include 'list-action-tiny.html.twig' %}
+    </td>
+</tr>
+
+{% for row in data %}
+
+    {% set rowid = row.id ?: row[(header|first).campo] %}
+    <tr class="no-side-padding" data-id="{{ rowid }}">
+
+        <td class="center no-side-padding shrink" data-checkbox="1" data-field="">
+            <div class="checkbox clip-check check-primary check-sm checkbox-inline">
+                <input type="checkbox" value="1" id="checkbox_{{ rowid }}">
+                <label for="checkbox_{{ rowid }}"></label>
+            </div>
+        </td>
+
+        {% for field in header %}
+            {#{{ @todo codigo de alinhamento temporário }}#}
+            <td data-field="{{ field.campo }}" data-field-type="{{field.tipo|default('text')}}" class="expand" {{ (field.filtro == 'number_format') ? ' align="right"' : ' align="left"' }}>
+                {% if field.tipo == 'image' %}
+                    {% if row[field.campo] is not empty %}
+                        <img src="{{ view.filedir.url }}{{ row[field.campo] }}" width="{{ view.filedir.url|tamanhoimagem(row[field.campo], '100') }}" class="img-rounded"/>
+                    {% endif %}
+                {% elseif field.tipo == 'file' and row[field.campo] is not empty and row[field.campo]|phpstrpos %}
+                    <img src="{{ view.filedir.url }}{{ row[field.campo] }}" width="{{ view.filedir.url|tamanhoimagem(row[field.campo], '100') }}" class="img-rounded"/>
+                {% else %}
+                    {{ row[field.campo] | apply_filter(field.filtro) }}
+                {% endif %}
+            </td>
+        {% endfor %}
+{#
+        <td class="tool-cell shrink visible-md visible-lg hidden-sm hidden-xs">
+             {% include 'list-action.html.twig' %}
+        </td> #}
+
+        <td class="tool-cell">
+            {% include 'list-action-tiny.html.twig' %}
+        </td>
+    </tr>
+{% endfor %}

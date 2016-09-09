@@ -1,0 +1,75 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+a i.acao{
+	padding: 5px;
+	color: #000;
+	cursor: pointer;
+}
+a i.acao:HOVER{
+	text-decoration: none;
+}
+div.pesquisa-grid{
+	background: #f9f9f9;
+	padding: 10px;
+	display: none;
+}
+-->
+</style>
+<div class="row-fluid" style="margin-top: 20px">
+	<div class="span12">
+		<div class="portlet box darkorange">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-group"></i>Horario</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"></a>
+		        </div>
+				<div class="actions">
+					<a href="<?php echo $this->baseUrl('rh/horario/form')?>" class="btn">Novo</a>
+				</div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<table class="table-bordered table-striped table-condensed flip-content" id="perfisTable">
+						<thead class="flip-content">
+							<tr>
+								<th class="hidden-480">Código</th>
+					            <th class="hidden-480">Nome</th>
+					            <th style="width: 85px;" class="hidden-480 action">Ação</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<?php if (count($this->horarioList) > 0):?>
+				        <?php foreach ($this->horarioList as $horario):?>
+			            <tr class="odd gradeX">
+			                <td class="hidden-480" style="width:30px"><?php echo $horario->id_horario; ?></td>
+			                <td><?php echo $horario->nome ?></td>
+			                <td class="acoes">
+			                	<a href="<?php echo $this->baseUrl('rh/horario/form/id_horario/'. $horario->id_horario)?>" value="<?php echo $horario->id_horario?>" title="Editar">
+			                		<i class="icon-pencil acao" title="Editar"></i>					
+			                	</a>
+			                    <a class="deleteMoldal" value="<?php echo $horario->id_horario; ?>" href="#">
+	                    			<i class="acao  icon-remove" title="Excluir"></i>
+			                    </a>
+			                </td>
+			            </tr>
+				        <?php endforeach;?>
+					<?php endif;?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir este registro: <span id="valueDelete"></span></p>
+</div>

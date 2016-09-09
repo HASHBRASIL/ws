@@ -1,0 +1,176 @@
+
+
+
+<link rel="stylesheet" href="js/jquery-file-upload/css/style.css">
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="js/jquery-file-upload/css/jquery.fileupload.css">
+
+<span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Select files...</span>
+        <input id="fileupload" type="file" name="file" multiple>
+    </span>
+<div id="progress" class="progress">
+    <div class="progress-bar progress-bar-success"></div>
+</div>
+
+<div id="files" class="files"></div>
+
+<br>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+{#<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>#}
+{#<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>#}
+
+<script src="js/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="js/jquery-file-upload/js/jquery.fileupload.js"></script>
+<script src="js/jquery-file-upload/js/jquery.fileupload-process.js"></script>
+
+
+{#<script src="js/jquery-file-upload/js/jquery.fileupload-image.js"></script>#}
+
+<script src="js/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+
+{#<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>#}
+
+<script>
+    /*jslint unparam: true */
+    /*global window, $ */
+
+
+    $(function () {
+        'use strict';
+        // Change this to the location of your server-side upload handler:
+        var url = 'home.php?servico={{ data.servico }}';
+
+        var processButton = $('<button/>')
+                .addClass('btn btn-primary')
+                .text('{{ 'Adicionar Transação' | zftranslate }}')
+                .data('comportamento', 'action')
+                .data('show', 'modal')
+                {#.data('tipomov', {{ view.params.tmv_id | default('0') }});#}
+;
+//        <button type="submit" data-toggle="tooltip" data-placement="left"
+//        title="" class="btn btn-transparent btn-xs tooltips action btn btn-sm"
+//        data-_tipomov="2" data-show="dropdown" data-comportamento="action"
+//        data-servico="a434e1e5-eb3e-4a4d-a5b5-8da8b340d306"
+//        data-original-title="Adicionar Receita">
+//
+//                Adicionar Receita
+//        </button>
+
+
+        $('#fileupload').fileupload({
+            url: url,
+            messages : {
+                maxNumberOfFiles: '{{ 'Quantidade máxima excedida' | zftranslate }}',
+                acceptFileTypes: '{{ 'Arquivo com tipo não permitido' | zftranslate }}',
+                maxFileSize: '{{ 'Arquivo muito grande' | zftranslate }}',
+                minFileSize: '{{ 'Arquivo muito pequeno' | zftranslate }}',
+                uploadedBytes : '{{ 'Limite excedido' | zftranslate }}'
+            },
+            autoUpload: true,
+
+        {%  if servico['metadata']['ws_field'] and params[servico['metadata']['ws_field']] %}
+            formData: { {{servico['metadata']['ws_field']}} : '{{ params[servico['metadata']['ws_field']] }}'},
+        {% endif %}
+
+        {%  if data['acceptedfiles'] %}
+            acceptFileTypes: {{ data['acceptedfiles'] }},
+        {% endif %}
+
+            dataType: 'json',
+//            done: function (e, data) {
+//                $.each(data.result.files, function (index, file) {
+//                    $('<p/>').text(file.name).appendTo('#files');
+//                });
+//            },
+//            progressall: function (e, data) {
+//                var progress = parseInt(data.loaded / data.total * 100, 10);
+//                $('#progress .progress-bar').css(
+//                        'width',
+//                        progress + '%'
+//                );
+//            }
+        }).on('fileuploadadd', function (e, data) {
+//            $('#progress .progress-bar').css(
+//                    'width',
+//                    0 + '%'
+//            );
+            data.context = $('<div/>').appendTo('#files');
+            $.each(data.files, function (index, file) {
+                var node = $('<p/>')
+                        .append($('<span/>').text(file.name));
+                node.appendTo(data.context);
+            });
+        }).on('fileuploadprocessalways', function (e, data) {
+            var index = data.index,
+                    file = data.files[index],
+                    node = $(data.context.children()[index]);
+            if (file.preview) {
+                node
+                        .prepend('<br>')
+                        .prepend(file.preview);
+            }
+            if (file.error) {
+                node
+                        .append('<br>')
+                        .append($('<span class="text-danger"/>').text(file.error));
+            }
+            if (index + 1 === data.files.length) {
+                data.context.find('button')
+                        .text('Upload')
+                        .prop('disabled', !!data.files.error);
+            }
+        }).on('fileuploadprogressall', function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
+            );
+        }).on('fileuploaddone', function (e, data) {
+
+            if (data.result.success == true) {
+                var msg = $('<span class="text-success"/>').text(data.result.msg);
+
+                $(data.context.children()[0])
+                        .append('<br>')
+                        .append(msg);
+            } else {
+                var msg = $('<span class="text-danger"/>').text(data.result.msg);
+                $(data.context.children()[0])
+                        .append('<br>')
+                        .append(msg);
+            }
+
+            if ((typeof data.result.new !== "undefined") && (data.result.new !== null)) {
+
+                $.each(data.result.new, function (index, file) {
+
+                    var node = $('<p/>').append($('<span/>').text(file.caminho));
+
+                    var botao = processButton.clone(true);
+
+                    $.each(file, function (indice, valor) {
+                        $.data(botao, indice, valor);
+                    });
+
+                    node.append('<br>').append(botao);
+                    node.appendTo(data.context);
+                });
+            }
+
+        }).on('fileuploadfail', function (e, data) {
+            $.each(data.files, function (index) {
+                var error = $('<span class="text-danger"/>').text('{{ 'Erro no upload' | zftranslate }}');
+                $(data.context.children()[index])
+                        .append('<br>')
+                        .append(error);
+            });
+        }).prop('disabled', !$.support.fileInput)
+                .parent().addClass($.support.fileInput ? undefined : 'disabled');
+    });
+
+</script>
+

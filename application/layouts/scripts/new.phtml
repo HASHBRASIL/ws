@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="pt-br" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="pt-br" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="pt-br" class="no-js"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<?php echo $this->partial('new_header.phtml', 'default')?>
+<head>
+    <?php print $this->headMeta(); ?>
+    <?php print $this->headTitle(); ?>
+    <?php print $this->headLink(); ?>
+    <?php print $this->headStyle(); ?>
+    <?php print $this->headScript()?>
+</head>
+
+    <body class="page-header-fixed">
+
+    <div id="all">
+            <div class="load-frame" route-loader>
+                <div class="load-center">
+                    <img src="<?php echo PATH_IMGDEFAULT ?>loading.svg" alt=". . ." width="60" />
+                    <br/>
+                    <span class="mensagem-carregamento">
+                        Carregando . . .
+                    </span>
+                </div>
+            </div>
+            <?php  //echo $this->partial('new_column.phtml', 'default')?>
+            <?php  echo $this->action('sidebar', 'index', 'default');?>
+            <main class="col-xs-9" role="main">
+
+                <section class="section-top">
+
+                    <div class="dropdown dropdown-top-section">
+
+                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                            TitaniumTech
+                            <span class="fa fa-chevron-down"></span>
+                        </button>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                        </ul>
+
+                    </div>
+
+                    <i class="fa fa-arrow-right"></i>
+                    <i class="fa fa-star gold"></i>
+
+                    <div class="dropdown dropdown-top-section">
+
+                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                            Desenvolvimento
+                            <span class="fa fa-chevron-down"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">1</a></li>
+                          <li><a href="#">2</a></li>
+                          <li><a href="#">3</a></li>
+                        </ul>
+                    </div>
+
+                    <br>
+
+                    <div class="nav-trilha">
+                        <i class="fa fa-home"></i>
+                        <span class="fa fa-right-down"></span>
+                        <span>Serviço de teste de abas</span>
+                        <span>Listar Times/Grupos por Usuário</span>
+                    </div>
+                </section>
+
+                <?php echo $this->layout()->content?>
+
+                <section class="section-nav">
+                    <nav>
+                        <ul>
+                            <li><a href="#">Notícias</a></li>
+                            <li><a href="#">RSS</a></li>
+                            <li><a href="#">Proposições</a></li>
+                        </ul>
+                    </nav>
+                </section>
+
+                <section class="section-content">
+
+                    <h1>Gestão de conteúdo</h1>
+
+                </section>
+
+            </main>
+        </div>
+        <script>$('.load-frame').fadeOut(500);</script>
+    </body>
+</html>

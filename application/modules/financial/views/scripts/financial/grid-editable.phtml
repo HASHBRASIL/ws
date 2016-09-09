@@ -1,0 +1,66 @@
+<style>
+.datepicker table tr td.active.active {
+    background-color: #4b8df8 !important;
+}
+</style>
+<table style="width: 100%" class="table table-hover">
+    <tr>
+        <th style="text-align: center;">Código</th>
+        <th>Entidade</th>
+        <th>Descrição</th>
+        <th>Conta</th>
+        <th>Valor</th>
+        <th>Emissão</th>
+        <th>Vencimento</th>
+        <th>Compensação</th>
+    </tr>
+    <?php if(count($this->financialList) > 0):?>
+        <?php foreach ($this->financialList as $financial):?>
+            <tr>
+                <td style="text-align: center;"><?php echo $financial->fin_id ?></td>
+                <td>
+                    <a href="javascript:;" class="editable fin_empresa" data-name='fin_empresa' data-type="text" data-pk="<?php echo $financial->fin_id?>" data-url="financial/financial/form">
+                        <?php echo $financial->getSacadoFinanceiro() && $financial->getSacadoFinanceiro()->getEmpresa()? $financial->getSacadoFinanceiro()->getEmpresa()->nome_razao: null ?>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:;" class="editable fin_descricao_ticket" data-name='fin_descricao' data-type="text" data-pk="<?php echo $financial->fin_id?>" data-url="financial/financial/form">
+                        <?php echo $financial->fin_descricao?>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:;" class="editable con_id" data-name='con_id' data-type="text" data-pk="<?php echo $financial->fin_id?>" data-url="financial/financial/form">
+                        <?php echo $financial->getConta()?$financial->getConta()->con_codnome: null;?>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:;" class="editable fin_valor" data-name='fin_valor' data-type="text" data-pk="<?php echo $financial->fin_id?>" data-url="financial/financial/form">
+                        <?php echo $this->formatDecimal($financial->fin_valor) ?>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:;" class="editable fin_emissao" data-name='fin_emissao' data-type="text" data-pk="<?php echo $financial->fin_id?>" data-url="financial/financial/form">
+                        <?php echo $this->date($financial->fin_emissao)?>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:;" class="editable fin_vencimento" data-name='fin_vencimento' data-type="text" data-pk="<?php echo $financial->fin_id?>" data-url="financial/financial/form">
+                        <?php echo $this->date($financial->fin_vencimento)?>
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:;" class="editable fin_compensacao" data-name='fin_compensacao' data-type="text" data-pk="<?php echo $financial->fin_id?>" data-url="financial/financial/form">
+                        <?php echo $this->date($financial->fin_compensacao)?>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach;?>
+    <?php else :?>
+        <tr>
+            <td colspan="10">Não foram encontrados resultados</td>
+        </tr>
+    <?php endif;?>
+</table>
+
+<script type="text/javascript" src="assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js"></script>
+<script src="<?php echo $this->baseUrl("/scripts/financial/financial.grid.editable.js")?>" type="text/javascript"></script>

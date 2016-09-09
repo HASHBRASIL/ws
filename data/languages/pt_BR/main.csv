@@ -1,0 +1,313 @@
+form;nao é tão legal!
+user_sucess; Usuário salvo com sucesso
+default;
+forward; AvançarF
+back; Voltar
+add_new_item; Adicionar novo item
+max_value; Valor Máximo;
+submit; Submeter
+title; Título
+operation; Operações
+status; Status
+delete; Excluir
+label; Legenda;
+event;
+title; Título
+totalValue; Valor total
+report;
+action; Propostas recebidas
+partner; Parceiros
+usertype; Tipo de Usuário;
+institution; Instituição;
+budget;
+quantityJL; Dias Úteis - JL
+quantitySL; Dias Úteis - SL
+quantitySE; Dias Úteis - SE
+amountEvent; Total
+amountMission; Total
+amountMissionParticipation; Total
+amountPublication; Total
+action;
+error_extra; Não há nenhuma convocatória aberta nesse momento, a Diretoria Nacional do Projeto irá informar com antecedência a respeito da abertura da nova convocatória
+name; Título;
+convocation; Convocatória;
+dialog; Diálogo;
+internal_institution; Instituições Locais;
+internal_fos_user; Responsável da Ação;
+external_institution; Instituições Externas;
+external_fos_user; Responsável Externo;
+context; Contextualização;
+description; Descrição da Ação;
+objective; Objetivos / Resultados;
+start; Data prevista para início;
+end; Data prevista para final;
+save; Avançar
+code; Sequencial;
+operations; Operações;
+add_user; Cadastrar
+operational_user; "Responsável; "
+mission_member;
+dailies; Diárias;
+name; Nome;
+cpf; CPF;
+email;E-mail
+phone1; Telefone 1;
+phone2; Telefone 2;
+tickets; Passagens;
+origin; Cidade/País de Origem
+destination; Cidade/País de Destino
+start; Data de Ida
+end; Data de Retorno
+country; País
+days; Dias
+origin_country; Cidade/Pais de Origem
+destination_country; Cidade/Pais de Destino
+reference;
+objective; Objetivos;
+specific_objective; Objetivos Específicos;
+result; Resultados;
+schedule; Cronograma Geral da Ação
+start; Data inicial;
+end; Data final;
+add_expert; Adicionar perito
+local; Local;
+referenceschedule;
+start; Data de Início
+end; Data Final
+schedule; Tipo de Atividade
+status; Status
+name; Nome da Atividade
+reference_mission;
+start; Data de Início;
+end; Data Final;
+schedule; Agenda;
+local; Local;
+actionexpert;
+days; Total de dias;
+quantity; Quantidade;
+aproved; Dias Aprovados por categoria de perito;
+referenceexpert;
+function; Função;
+expert; Categoria;
+quantity; Quantidade de dias;
+formation; Formação Acadêmica / Especialidade;
+language; Idiomas;
+experience; Experiência específica;
+activity; Produtos / Atividades;
+schedule; Tabela de Produtos/Atividades do perito
+trip_resume; Resumo das viagens;
+name; Produto/Atividade
+date; Data de Entrega
+local; Base de Trabalho
+status; Status
+cronogram_activity_expert; Cronograma de Produtos / Atividades de perito
+not_found; Peritos não cadastrados
+nonobjection;
+where; Você está em Upload de não Objeção
+nonobjection; Upload de Não Objeção
+upload; Fazer upload de Não Objeção
+actionevent;
+name; Nome do Evento;
+local; Local de realização;
+start; Início;
+end; Término;
+comment; Observações Gerais;
+event_category; Categoria;
+event_item; Item;
+empty_category; Escolha a categoria
+empty_item; Escolha o item da categoria
+add_event; Adicionar evento
+add_item; Adicionar item
+items; Serviços
+actionmission;
+name; Título;
+quantity; N&#186; de Participantes;
+ticket; Tipo da Passagem;
+add_mission; Adicionar missão
+add_ticket; Adicionar passagem
+dailyquantity; Dias
+daily; Diária
+add_daily; Adicionar diária
+dailies; Diárias
+local; Localização;
+actionpublication;
+add_publication; Adicionar publicação
+name; Título;
+quantity; Qtde de exemplares;
+page_quantity; Qtde de páginas;
+description; Descrição;
+items; Serviços relacionados;
+publication_type; Tipo;
+publicationItem; Serviços;
+add_item; Adicionar serviço
+counterpart;
+where; Você está em Contrapartida Nacional.
+add; Adicionar Contrapartida
+description; Descrição;
+amount;  Valor Previsto;
+category; Categoria;
+min_value; Valor mínimo;
+commitment;
+where; Você está em Termo de Compromisso.
+accept; Eu aceito.
+upload;
+where; Você está em Upload de Concordância.
+where_greenlight; Você está em Upload de Greenlight.
+pathAgreement; 'Upload do De Acordo.'
+greenlight; Upload de Greenlight
+success; seu upload foi realizado com sucesso
+submit;
+error; Não foi possível efetuar a ação.
+reopen_success; Execução aberta para edição com sucesso.
+
+where; Você está em Visualizar / Submeter.
+error_counterpart; Valor de contrapartida não suficiente.
+success; Proposta submetida para analise / avaliação.
+submit; Submeter
+unsubmit; Dessubmeter
+unsubmit_success; Proposta Dessubmetida
+evaluation; Avaliação foi submetida com sucesso.
+evaluate_modification; Avaliar modificações
+evaluation;
+concordance; Houve concordância da contraparte para a Ação?
+coherence; Há clareza na ação e coerência com o escopo do projeto?
+specified; O produto foi especificado claramente?
+convocation; Atende aos critérios estabelecidos para a Convocatória?
+defered; Deferido
+feedback; Parecer
+
+definedResult; Objetivos e resultados definidos?
+described; Atividades corretamente descritas?
+cronogram; Programação das atividades corretas?
+decentralizedActor; Envolvimento dos atores descentralizados?
+complementarity; Complementariedade com outras ações
+description; Descrição sucinta da Ação
+evaluation; Avaliação
+decision; Decisão
+aprove_modification; Modificações Aprovadas?
+actionparticipation;
+add_participation; Adicionar participação
+actionexpertcv;
+add; Adicionar Candidato
+title; Nome
+contact; Contato
+description; Comentário
+cv; Currículo
+edit; Editar Candidato
+save; Finalizar Currículos
+expert_criteria; Critérios de Peritos
+cv_grade; Avaliação de Candidatos
+cv_accepted; CV Aceito
+grade; Notas
+candidate; Candidato
+language; Idioma
+education; Escolaridade
+experience; Experiência
+short_education; Esc
+short_language; Id
+short_experience; Exp
+total; Total
+cv_refused; CV Recusado
+cv_show; Visualizar currículo
+undefined; Indefinido
+active; Ativo
+inactive; Inativo
+quit; Desistente
+off; Desligado
+reason; Informe o motivo;
+short_cv; CV
+recuse_cv; Recusar CV
+where; Você está em Avaliação de peritos
+send_grade; Enviar Notas
+ask_more_cv; Solicitar Novos Currículos
+notes; Avalie cada critério inserindo somente notas de 00 a 10, no formato XX (ex; 01, 05, 07)
+titles;
+execution_criteria; Visualizar Peritos
+execution_no_modification; Sem Modificações
+execution_view_modification; Visualizar Modificações
+excedent_approval; Aprovação de excedente de valor
+subtitles;
+view; Visualizar
+edit; Editar
+submited; Submetido(a)
+not_submited; Não Submetido(a)
+commitment; Baixar Termo de Concordância
+pdf; Baixar PDF
+budget_aprove; Aprovar Orçamento
+budget_view; Visualizar Orçamento
+evaluate; Avaliar
+evaluation_view; Visualizar Avaliação
+pdf_download; Baixar PDF
+greenlight_download; Upload/Baixar Greenlight
+nonobjection_download; Upload/Baixar Não Objeção
+not_modified; Não modificado
+awaiting_approval; Aguardando Aprovação
+approved; Aprovado
+#Editar
+view_tdr; Visualizar TDR
+view_info; Visualizar Informações Complementares e Ajustes
+info_pdf_download; Visualizar PDF de Informações Complementares e Ajustes
+verify_modifications; Verificar Modificações
+no_modifications; Ainda sem Modificações
+download_over_ten; Baixar Aprovação do Valor > 10%
+no_over_ten; Aprovação de Valor > 10% não necessária
+reopen_execution; Reabrir Execução
+update_responsible; Alterar Responsável
+operational_user;
+save; "Salvar"
+next;Próximo
+campo_obrig;Campo obrigatório
+campo_obrig_w_d;Campo obrigatorio, campo aceita apenas letras(a-z/A-Z) e números(0-9)
+#publico - inscricao
+email_novo_usuario;E-mail do novo usuário
+nome_novo_time;Nome do novo time
+nome_time;Nome do time
+alias_novo_time;Alias do novo time
+alias;Alias
+nome_novo_usuario;Nome do novo usuário
+nome_usuario;Nome
+time_nao_vazio;O nome do time não pode ser vazio.
+alias_carac_invalido;O alias contém caracteres inválidos. Utilize apenas letras e números.
+alias_ja_usado;O alias informado já é utilizado. Escolha outro.
+usuario_carac_invalido;O usuário contém caracteres inválidos. Utilize apenas letras minúsculas e números.
+usuario_ja_usado;O usuário informado é utilizado. Escolha outro.
+confirmacao_inscricao;Confirmação dos dados de inscrição
+grupo_hash_nao_encontrado;O grupo HASH não foi encontrado.
+impossivel_enviar_email;Não foi possível enviar o e-mail.
+email_de_confirmacao;E-mail de confirmação de inscrição
+verifique_seu_email;Verifique seu e-mail
+enviamos_um_email_para_voce;Enviamos um e-mail de confirmação de inscrição para você. Acesse o endereço indicado no e-mail para ativar o seu cadastro.
+codigo_validacao_nao_encontrado_ou_invalido;O código de validação é inválido ou não foi encontrado.
+aceite_termo_servico_e_privacidade;Termo de Serviço e Termo de privacidade
+li_e_aceitei;Concordo que li e aceitei o
+termo_servico;Termo de Serviço
+termo_privacidade;Termo de Privacidade
+aceitar_antes_de_continuar;Você precisa concordar com os termos antes de continuar.
+inscricao_validada_sucesso;Sua inscrição foi validada com sucesso.
+aguarde_enquanto_configuramos;Aguarde enquanto configuramos o seu workspace. Não se preocupe, iremos avisá-lo por email.
+produto_inicial_nao_encontrado;Não foi possível identificar o grupo inicial informado.
+produto;Produto
+produto_novo_usuario;Selecione um de nossos produtos
+hpc;Hash Pré-campanha
+elegie;Elegie
+hash;Hash
+email_de_finalizacao_sem_pessoa;Configuração de workspace sem pessoa
+email_de_finalizacao_instalacao;Configuração do workspace terminada com sucesso
+email_de_finalizacao_exception;Aconteceu um problema durante a configuração do workspace
+vinculacao;Vinculação do novo time
+descricao_vinculacao;Escolha uma das opções de vinculação do novo time
+time_atual;Criar vinculado ao time atual
+time_isolado;Criar isolado
+
+ELGI_PRECAMPANHA_MENU;Neste módulo, você tem todos os seus seguidores, acompanha os convites pendentes e processados, e os convidados que seus colaboradores engajados encaminharam.
+HASH_GERENCIADOR_MARKETING_DIGITAL;É o mais inovador sistema de distribuição de conteúdo pelas redes sociais. Padroniza a mensagem, e cada um dos seus seguidores e apoiadores distribui a mesma campanha para seus contatos, SMS, e-mail e redes sociais. O serviço de multicampanhas pode ser ativado mediante contratação de pacote.
+ELGI_PRECAMPANHA_MENU_GERENCIAR_PERFIL;Aqui, você altera as fotos e os dados do Comitê, que estão sendo distribuídos pelo APP HASH CAMPANHA.
+ELGI_PRECAMPANHA_TODOS_POREMAIL_GRID;Lista todos os convidados pelo APP HASH CAMPANHA, com nome , e-mail e quem indicou.
+ELGI_PRECAMPANHA_TODOS_PORTELEFONE_GRID;Lista todos os convidados pelo APP HASH CAMPANHA, com nome , telefone e quem indicou.
+ELGI_PESSOAS_ARQUIVOS_IMPORTACAO;Arraste para dentro do sistema e organize todas as planilhas com pessoas de seu gabinete e relacionamento. Verifique os nomes das colunas, que devem ser padrão, e salve. Arraste e veja a mágica acontecer.
+HASH_PESSOAS_CONVITES_PENDENTES;Aqui, você autoriza as pessoas a seguirem seu Comitê, e verifica, dos convites feitos pelos seus seguidores, quem ainda não confirmou.
+HASH_PRECAMPANHA_GERENC_MSG_INDEX;Você acompanha on-line todos os processamentos dos convites (cada módulo de convite pode ter até 100 pessoas).
+HASH_PRECAMPANHA_GERENC_MSG;Edite o convite que seus seguidores vão enviar para futuros eleitores, editando imagem, texto e link dos convites.
+HASH_GERENCIADOR_MARKETING_DIGITAL_CONFIG_CAMPANHA_MSG;Aqui, você padroniza o conteúdo para cada tipo de mensagem, SMS e-mail ou redes sociais.
+HASH_MKTSOC_GERENC_CAMPANHA_INDEX;Gerenciar campanhas de social marketing – Prepare cada campanha a ser distribuída.
+HASH_MKTSOC_GERENC_MSG_INDEX;Acompanhe a distribuição.

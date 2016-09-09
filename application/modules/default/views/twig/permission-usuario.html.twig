@@ -1,0 +1,57 @@
+
+<div class="row wrapper">
+    {% include 'header-content.html.twig' %}
+    <form action="config/permission/form" method="post" id="selectUser" enctype="multipart/form-data" accept-charset="utf-8">
+
+        <input type="hidden" name="id" value="{{ timeId }}" />
+
+        <div class="col-md-12 content">
+            <div class="form-group-one-unit">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <label for="">Usuário: </label>
+                            <select type="text" name="usuario" id="usuario" >
+                                <option value="" selected="selected">Escreva o nome do usuário</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row container-form-action">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-success btn-sm pull-right "> Continuar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script >
+
+    $('#usuario').select2({
+        ajax: {
+            url: "config/permission/autocomplete",
+            dataType: 'json',
+            delay: 350,
+            data: function (params) {
+                var query = {
+                    search: params.term,
+                    page: params.page
+                }
+                // Query paramters will be ?search=[term]&page=[page]
+                return query;
+            }
+        },
+        width: '100%'
+    });
+
+
+</script>
+     {#{{ (texto ?: '<i class="%s"></i>'|format(data.metadata.ws_icon|default("glyphicon glyphicon-edit")))|raw }}#}
+

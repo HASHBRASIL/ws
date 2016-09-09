@@ -1,0 +1,416 @@
+<style type="text/css" media="screen">
+    .iphone_model                               { background: url('/images/iphone_model.png') no-repeat; background-size: contain; width: 377px; height: 720px; margin: 0 auto; padding: 87px 0 0 44px; }
+    .iphone_model .container_app                { width: 304px; height: 540px; background: #057080; position: relative; }
+    .container_app .header_app                  { height: 50px; background: #00aac1; }
+    .header_app i.fa                            { font-size: 25px; color: #06717f; float: left; margin: 14px 0 0 10px; }
+    .header_app h1                              { font-size: 19px; margin: 14px 0 0 20px; color: #fff; font-family: 'Open Sans', sans-serif; font-weight: 200; float: left; }
+    .header_app img.hash_icon                   { float: right; margin-top: 13px; }
+    .header_app div.btn-app                     { float: right; border-radius: 5px; background: #06717f; color: #fff; padding: 3px 6px; font-size: 12px; font-weight: bold; margin-top: 14px; margin-left: 15px; margin-right: 10px; }
+    .footer_app                                 { position: absolute; bottom: 0px; left: 0; background: #06717f; width: 100%; color: #fff; text-align: center; }
+    .footer_app ul                              { margin: 0; padding: 15px 0; }
+    .footer_app ul li                           { display: inline-block; margin-left: 34px; }
+    .footer_app ul li:nth-child(1)              { margin-left: 0px; }
+    .footer_app ul li i                         { font-size: 25px;  }
+
+    .footer_app .tool-share-app                 { border-top: 1px #045865 solid; }
+    .msg-user                                   { display: none; color: #000; transition: all 0.2s ease; background: rgba(255,255,255,0.4); border-radius: 5px; padding: 20px; position: absolute; top: -385px; right: -400px; text-align: left; width: 320px;}
+    .footer_app .tool-share-app li:hover .msg-user,
+    .follow:hover .msg-user ,
+    .invite:hover .msg-user,
+    .edit-profile:hover .msg-user               { display: block; transition: all 0.2s ease; }
+    .follow .msg-user                           { top: -385px; right: -552px;}
+    .follow i span, .invite i span              { font-family: 'Open Sans', sans-serif; margin-left: 5px;}
+    .invite .msg-user                           { top: -385px; right: -385px;}
+    .edit-profile .msg-user                     { top: -286px;}
+
+    .container_app .profile_data_app            { position: absolute; cursor: pointer; bottom: 100px; color: #fff; background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1)); text-align: left; width: 100%; box-sizing: border-box; padding: 15px 15px 25px 15px ; }
+    .container_app .profile_data_app h1         { font-size: 20px; font-weight: 400; }
+    .container_app .profile_data_app h2         { font-size: 14px; }
+    .profile_data_app .fa-pencil                { position: absolute; font-size: 19px; color: #fff; top: 15px; right: 15px; transition: all 0.4s ease; }
+    .profile_data_app:hover .fa-pencil          { font-size: 30px; transition: all 0.2s ease; }
+
+    .footer_app .action-buttons-app > div[class*='col-md']              { border-left: 1px #045865 solid; padding: 15px 0 ; }
+    .footer_app .action-buttons-app > div[class*='col-md']:nth-child(1) { border-left: none; }
+    .edit-picture-app                           { cursor: pointer; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0)); width: 100%; height: 50px; position: absolute; top: 50px; left: 0; padding: 15px; box-sizing: border-box; transition: all 0.3s ease; }
+    .edit-picture-app:hover                     { background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0)); transition: all 0.3s ease; }
+    .edit-picture-app i.fa-camera               { float: right; color: #fff; font-size: 15px; transition: all 0.2s ease; }
+    .edit-picture-app:hover i.fa-camera         { font-size: 20px; transition: all 0.2s ease; }
+    .edit-picture-app p                         { color: rgba(255, 255, 255, 0); float: left; transition: all 0.2s ease; }
+    .edit-picture-app:hover p                   { color: rgba(255, 255, 255, 1); transition: all 0.2s ease; }
+
+    /*#form-edit-data-user input                  { padding: ; }*/
+    .modal-header h4                            { font-weight: bold; font-size: 1em;}
+    .modal-body                                 { min-height: 650px !important }
+    .modal-body #img_file input                 { outline: none; width: 150px;}
+    .modal-body #img_file input::-webkit-file-upload-button  { visibility: hidden;}
+    .modal-body #img_file input::before         { content: 'Selecione a imagem'; display: inline-block; background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);border: 1px solid #999; border-radius: 3px; padding: 5px 8px;
+                                                  outline: none; white-space: nowrap; -webkit-user-select: none; cursor: pointer; text-shadow: 1px 1px #fff; font-weight: 700; font-size: 10pt;}
+    #form-edit-data-user label                  { color: #383838; font-size: 0.9em;}
+    #form-edit-data-user input                  { height: 30px; text-indent: 5px; font-size: 0.9em; box-sizing: border-box; width: 100%; margin-bottom: 15px; border: 1px solid #e0e0e0;}
+    .btn-confirmacao                            { margin: 15px 0; width: 90%;}
+    .btn-confirmacao  button                    { border: 0; border-radius: 5px; background: #d43f3a; font-weight: bold; color: #fff; font-size: 1.2em; height: 30px; width: 60%; transition: all 0.3s ease; outline: none; }
+    @media (min-width: 980px) and (max-width: 1024px)           {
+        .header_app h1                                          { display: none;}
+        .iphone_model                                           { width: 265px; height: 510px; margin: 0 auto; padding: 61px 0 0 31px;}
+        .iphone_model .container_app                            { width: 215px; height: 381px;}
+        .btn-confirmacao  button                                { width: 80%;}
+        .modal-body                                             { min-height: 570px !important;}
+        .container_app .profile_data_app h1                     { font-size: 15px;}
+        .container_app .profile_data_app                        { padding: 15px 5px 25px 5px;}
+    }
+    @media (min-width: 768px) and (max-width: 979px)            {
+        .msg-user                                               { right: -220px !important; max-width: 190px;}
+        .follow .msg-user                                       { right: -375px;}
+    }
+    @media (max-width: 767px)                                   {
+        .suport-text h1                                         { font-size: 1.6em; line-height: 1.2em;}
+        .suport-text h2                                         { font-size: 1.4em; font-weight: 300; line-height: 1em; padding: 0px 0 5px;}
+        .modal-body                                             { min-height: 250px !important }
+        .iphone_model                                           { padding: 55px 0 0 28px; height: 460px; width: 250px;}
+        .iphone_model .container_app                            { width: 194px; height: 346px;}
+        .container_app .profile_data_app                        { padding: 15px 10px 25px 5px;}
+        .container_app .profile_data_app h1                     { font-size: 14px;}
+        .container_app .profile_data_app h2                     { font-size: 13px;}
+        .container_app .profile_data_app h5                     { font-size: 12px;}
+        .container_app .header_app h1                           { display: none;}
+        .header_app i.fa                                        { font-size: 20px;}
+        .profile_data_app .fa-pencil                            { right: 5px;}
+        .picture_app .edit-picture-app                          { padding: 15px 5px;}
+        .action-buttons-app                                     { width: 100%; margin: 0;}
+        .footer_app .action-buttons-app > div[class*='col-md']  { padding: 10px 0;}
+        .footer_app ul li                                       { margin-left: 25px;}
+        .btn-confirmacao                                        { margin: 10px 0;}
+        .btn-confirmacao  button                                { font-size: 1em; width: 70%;}
+    }
+    @media (max-width: 480px)                                   {
+        .suport-text h1                                         { font-size: 1.6em; line-height: 1.2em;}
+        .suport-text h2                                         { font-size: 1.4em; font-weight: 300; line-height: 1em; padding: 0px 0 5px;}
+        .modal-body                                             { min-height: 250px !important }
+        .iphone_model                                           { padding: 55px 0 0 28px; height: 460px; width: 250px;}
+        .iphone_model .container_app                            { width: 194px; height: 346px;}
+        .container_app .profile_data_app                        { padding: 15px 10px 25px 5px;}
+        .container_app .profile_data_app h1                     { font-size: 14px;}
+        .container_app .profile_data_app h2                     { font-size: 13px;}
+        .container_app .profile_data_app h5                     { font-size: 12px;}
+        .container_app .header_app h1                           { display: none;}
+        .header_app i.fa                                        { font-size: 20px;}
+        .profile_data_app .fa-pencil                            { right: 5px;}
+        .picture_app .edit-picture-app                          { padding: 15px 5px;}
+        .action-buttons-app                                     { width: 100%; margin: 0;}
+        .footer_app .action-buttons-app > div[class*='col-md']  { padding: 10px 0;}
+        .footer_app ul li                                       { margin-left: 25px;}
+        .btn-confirmacao                                        { margin: 10px 0;}
+        .btn-confirmacao  button                                { font-size: 1em; width: 70%;}
+    }
+</style>
+<div class="container-inscricao col-md-12">
+    <div class="container-form">
+        <div class="suport-text">
+            <h1>Configure seu perfil para o Hash Pré-Campanha.</h1>
+            <h2>Aenean arcu ligula, ultricies eget ornare sed, tristique non magna.</h2>
+        </div>
+        <div class="row">
+            <div class="iphone_model">
+                <div class="mensagem-balao">
+
+                </div>
+                <div class="container_app">
+                    <div class="header_app">
+                        <i class="fa fa-chevron-left"></i>
+                        <h1>Pré-Candidato</h1>
+                        <div class="btn-app">
+                            Visitante
+                        </div>
+                        <img src="/images/hash_icon_app.png" class="hash_icon" alt="hash_icon" />
+                    </div>
+                    <div class="picture_app">
+                        <div class="edit-picture-app">
+                            <p>Editar Imagem de Perfil</p>
+                            <i class="fa fa-camera"></i>
+                        </div>
+                        <div id="img-user-cropped">
+                            <img style="width: 100%" src="{{ url ~ dadosCracha.FOTO }}" alt="{{ dadosCracha.NOME }}" />
+                        </div>
+                    </div>
+                    <div class="profile_data_app">
+                        <h1 id="profile_nome">{{ dadosCracha.NOME }} - {{ dadosCracha.NUMERO }}</h1>
+                        <h2>Candidato a <span id="profile_cargo">{{ dadosCracha.CARGO }}</span></h2>
+                        <h2><span id="profile_partido">{{ (dadosCracha.NOMECOLIG is defined) ? dadosCracha.NOMECOLIG : dadosCracha.PARTIDO }}</span></h2>
+                        <h5><span id="profile_partido">{{ dadosCracha.SIGLA }}</span></h5>
+                        <span class="edit-profile">
+                            <i class="fa fa-pencil"></i>
+                            <div class="msg-user">
+                                Editar perfil.
+                            </div>
+                        </span>
+                    </div>
+                    <div class="footer_app">
+                        <div class="row action-buttons-app">
+                            <div class="col-md-6 col-sm-6 col-xs-6 follow">
+                                <i class="fa fa-eye"><span>Seguir</span></i>
+                                <div class="msg-user">
+                                    Seguir.Proin eget tortor risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6 invite">
+                                <i class="fa fa-paper-plane"><span>Convidar</span></i>
+                                <div class="msg-user">
+                                    Convidar.Proin eget tortor risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tool-share-app">
+                            <ul>
+                                <li>
+                                    <i class="fa fa-facebook-official" ></i>
+                                    <div class="msg-user">
+                                        Proin eget tortor risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-twitter-square"></i>
+                                    <div class="msg-user">
+                                        Texto informativo usuário
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-share-alt-square"></i>
+                                    <div class="msg-user">
+                                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-whatsapp"></i>
+                                    <div class="msg-user">
+                                        Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-confirmacao btn-action">
+                    <button class="gostei" type="submit">{{ 'Gostei, concluir!'|zftranslate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="form-edit-data-user" class="hide">
+    <form action="perfil_submit" method="get" accept-charset="utf-8">
+        <div class="col-md-4">
+            <label>Sigla</label>
+            <input type="text" value="{{ dadosCracha.SIGLA }}" name="sigla" />
+        </div>
+        <div class="col-md-8">
+            <label>Nome da coligação</label>
+            <input type="text" value="{{ dadosCracha.NOMECOLIG }}" name="nome_coligacao"  />
+        </div>
+        <div class="col-md-12">
+            <label>Nome completo</label>
+            <input type="text" value="{{ dadosCracha.NOMECOMPLETO }}" name="nome_completo" />
+        </div>
+        <div class="col-md-6">
+            <label>Partidos da coligação</label>
+            <input type="text" value="{{ dadosCracha.PARTCOLIG }}" name="partidos_coligacao"  />
+        </div>
+        <div class="col-md-6">
+            <label>Número da coligação</label>
+            <input type="text" value="{{ dadosCracha.PARTIDONUM }}" name="numero_partido"  />
+        </div>
+        <div class="col-md-6">
+            <label>Nome de guerra</label>
+            <input type="text" value="{{ dadosCracha.NOME }}" name="nome"  />
+        </div>
+        <div class="col-md-6">
+            <label>CPF</label>
+            <input type="text" value="{{ dadosCracha.CPF }}" name="cpf" />
+        </div>
+        <div class="col-md-8">
+            <label>E-mail</label>
+            <input type="text" value="{{ dadosCracha.EMAIL }}" name="email"  />
+        </div>
+        <div class="col-md-4">
+            <label>Cargo</label>
+            <input type="text" value="{{ dadosCracha.CARGO }}" name="cargo" />
+        </div>
+        <div class="col-md-12">
+            <label>Partido</label>
+            <input type="text" value="{{ dadosCracha.PARTIDO }}" name="partido" />
+        </div>
+        <div class="col-md-4">
+            <label>Número</label>
+            <input type="text" value="{{ dadosCracha.NUMERO }}" name="numero"  />
+        </div>
+        <div class="col-md-8">
+            <label>Cidade</label>
+            <input type="text" value="{{ dadosCracha.CIDADE }}" name="cidade" />
+        </div>
+        <div class="col-md-4">
+            <label>Estado</label>
+            <input type="text" value="{{ dadosCracha.ESTADO }}" name="estado" />
+        </div>
+        <div class="col-md-8">
+            <label>Par do Candidato caso houver</label>
+            <input type="text" value="{{ dadosCracha.PARCANDIDATO }}" name="par_candidato" />
+        </div>
+    </form>
+</div>
+<div id="img_file" class="hide" style="width: 300px; height: 400px;">
+    <input type="file" accept="image/*" />
+    <img src="" class='preview-cropimg' alt="" style="max-width: 100%">
+</div>
+
+<script>
+        $(function(){
+            var acao = '{{ (target == null) ? '/config/ingestao/finalizado' : 'home.php?servico=' ~ target}}';
+            $('.gostei').click(function(){
+                location.assign(acao);
+            });
+        });
+    $('.profile_data_app').on('click', function(e){
+        e.preventDefault();
+
+        var dataUser = $('#form-edit-data-user').clone().removeClass('hide');
+
+         {#$.ajax({
+             type: "GET",
+             url:  "home.php?servico=" + servico,
+             data: data_modal,
+             success: function(response, status, XMLHttpRequest) {
+
+                 if (processAjaxSuccess(response, status, XMLHttpRequest) == false) {
+                     return;
+                 }
+
+             }
+         });#}
+
+        bootbox.dialog({
+            message: dataUser,
+            title: 'Informações do candidato',
+            buttons: {
+                cancelar: {
+                    label: 'Cancelar',
+                    className: 'btn btn-danger',
+                    callback: function(){
+                        //console.log('cancel action');
+                    }
+                },
+                success: {
+                    label: 'Salvar',
+                    className: 'btn btn-success',
+                    callback: function(){
+
+                        var nome    = dataUser.find('input[name="nome"]').val();
+                        var cargo   = dataUser.find('input[name="cargo"]').val();
+                        var partido = dataUser.find('input[name="partido"]').val();
+
+                        $('#profile_nome').text(nome);
+                        $('#profile_cargo').text(cargo);
+                        $('#profile_partido').text(partido);
+
+                        var dataCracha = {codigo: '{{codigo}}',
+                                          sigla: dataUser.find('input[name="sigla"]').val(),
+                                          nome_coligacao: dataUser.find('input[name="nome_coligacao"]').val(),
+                                          nome_completo: dataUser.find('input[name="nome_completo"]').val(),
+                                          partidos_coligacao: dataUser.find('input[name="partidos_coligacao"]').val(),
+                                          numero_partido: dataUser.find('input[name="numero_partido"]').val(),
+                                          nome: dataUser.find('input[name="nome"]').val(),
+                                          cpf: dataUser.find('input[name="cpf"]').val(),
+                                          email: dataUser.find('input[name="email"]').val(),
+                                          cargo: dataUser.find('input[name="cargo"]').val(),
+                                          partido: dataUser.find('input[name="partido"]').val(),
+                                          numero: dataUser.find('input[name="numero"]').val(),
+                                          cidade: dataUser.find('input[name="cidade"]').val(),
+                                          estado: dataUser.find('input[name="estado"]').val(),
+                                          candidato: dataUser.find('input[name="candidato"]').val()
+                                         };
+
+                        $.ajax({
+                            type: "POST",
+                            url:  "/config/validacao/updateimage",
+                            data: dataCracha,
+                            success: function(response, status, XMLHttpRequest) {
+                                console.log(response);
+                            }
+                        });
+
+                    }
+                }
+            }
+        });
+    });
+
+    $('.edit-picture-app').on('click', function(e){
+        e.preventDefault();
+
+        var imgfile = $('#img_file').clone().removeClass('hide');
+        var imgCrop = imgfile.find('input[type="file"]');
+        var crop;
+        var result;
+        imgCrop.on('change', function(e){
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    result = e.target.result;
+                    imgfile.find('img').attr('src', e.target.result);
+                    $('.imagem').val(e.target.result)
+                    imgfile.find('input').addClass('hide');
+
+                    crop = imgfile.find('img').cropper({
+                        viewMode: 1,
+                        dragMode: 'move',
+                        cropBoxMovable: false,
+                        cropBoxResizable: false,
+                        minContainerWidth: 570,
+                        minContainerHeight: 570,
+                        minCropBoxWidth: 10,
+                        minCropBoxHeight: 10,
+                        aspectRatio: 330/440
+                    });
+                }
+
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        bootbox.dialog({
+            message: imgfile,
+            title: 'Edição de imagem',
+            buttons: {
+                cancelar: {
+                    label: 'Cancelar',
+                    className: 'btn btn-danger',
+                    callback: function(){
+                        //console.log('cancel action');
+                    }
+                },
+                success: {
+                    label: 'Salvar',
+                    className: 'btn btn-success',
+                    callback: function(){
+                        $('#img-user-cropped').html( crop.cropper('getCroppedCanvas') );
+                        $('#img-user-cropped').find('canvas').css('width', '100%');
+
+                        var dataCracha = {codigo: '{{codigo}}',
+                                          imagem: result
+                                         };
+
+                        $.ajax({
+                            type: "POST",
+                            url:  "/config/validacao/updateimage",
+                            data: dataCracha,
+                            success: function(response, status, XMLHttpRequest) {
+                                console.log(response);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    });
+
+</script>

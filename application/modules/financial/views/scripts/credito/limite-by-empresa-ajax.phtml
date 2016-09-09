@@ -1,0 +1,121 @@
+<?php 
+//echo "<pre>";print_r($this->financialList);exit;
+
+$financialCredit = "0";
+$financialTotal = "0";
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('styles/grid.style.css')?>" />
+	<div class="row">
+        <div class="small-12 columns">
+            <div class="title-datatable">
+                <h5>Dados de Crédito desta Empresa</h5>
+            </div>
+            <table class="grid">
+                <thead>
+                    <tr>
+                    <th>Código</th>
+		            <th>Empresa</th>
+		            <th>Crédito Limite</th>
+		            <th>Posição Serasa</th>
+		            <th>Número Protocolo Serasa</th>
+		            <th>Data da consulta</th>
+		            <th>Situação Serasa</th>
+		            <th>Análise de risco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <?php if (count($this->creditoList) > 0):?>
+		        <?php foreach ($this->creditoList as $key=> $credito):?>
+		            <?php if ($key == 0){
+							$valorLimite = $credito->limite_credito;	
+						}?>
+		            <tr>
+		                <td><?php echo $credito->id_credito?></td>
+		                <td><?php echo $credito->getEmpresa()->nome_razao?></td>
+		                <td><?php echo $this->formatDecimal($credito->limite_credito) ?></td>
+		                <td><?php echo $credito->posicao_serasa?></td>
+		                <td><?php echo $credito->numero_serasa?></td>
+		                <td><?php echo $this->date($credito->data_consulta_serasa)?></td>
+		                <td><?php echo ($credito->situacao_serasa == 1)? "Com restrição":"Sem Restrição" ?></td>
+		                <td style="width: 500px;"><?php echo $credito->analise_risco?></td>
+		            </tr>
+		        <?php endforeach;?>
+		    <?php endif;?>
+                </tbody>
+            </table>
+            <div class="footer">
+            	<div style="padding-top:10px; float: right;">
+            		<?php
+            			$valorLimite = isset($valorLimite) ? $valorLimite : null;
+						if ($this->formatDecimal($valorLimite) <= $this->formatDecimal($this->valorTotal) ){
+							echo "O Consolidado sugere:<b> Não vender a prazo</b>";
+						}else if($this->formatDecimal($valorLimite) >= $this->formatDecimal($this->valorTotal)){
+							echo "O Consolidado sugere:<b>Possibilidade de vender a prazo até o limite</b>";
+						}
+            		?>
+						Limite em Vigência: <b><?php echo $this->formatDecimal($valorLimite);?></b>
+            	</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns">
+            <div style="cursor: pointer;" class="title-datatable">
+                <h5>Dados financeiros desta empresa não liquidados</h5>
+            </div>
+            <table style="display: none;" class="grid slidetoggle">
+                <thead>
+                    <tr>
+                        <th style="width: 100px">Código</th>
+                        <th >Tipo Financeiro</th>
+                        <th style="width: 200px">Descrição</th>
+                        <th >Status</th>
+                        <th >Conta</th>
+                        <th >Emissão</th>
+                        <th >Vencimento</th>
+                        <th >Competência</th>
+                        <th >Nota Fiscal</th>
+                        <th >Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if(count($this->financialList)>0):?>
+                        <?php foreach ($this->financialList as $item):?>
+                        <?php 
+                        	  if ($item->tmv_id == 2/*credito*/){
+								$financialCredit = $financialCredit + $item->fin_valor;
+							  }
+							  $financialTotal = $financialTotal + $item->fin_valor;
+                        ?>
+                            <tr>
+                                <td><?php echo $item->fin_id?></td>
+                                <td><?php echo $item->tmv_id == 1 ? "Débito" : "Crédito" ?></td>
+                                <td><?php echo $item->fin_descricao?></td>
+                                <td><?php echo $item->stf_descricao?></td>
+                                <td><?php echo $item->con_codnome ?></td>
+                                <td><?php echo $this->Date($item->fin_emissao)?></td>
+                                <td><?php echo $this->Date($item->fin_vencimento)?></td>
+                                <td><?php echo $this->Date($item->fin_competencia)?></td>
+                                <td><?php echo $item->fin_nota_fiscal?></td>
+                                <td><?php echo $this->formatDecimal($item->fin_valor);?></td>
+                            </tr>
+                        <?php endforeach;?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="11">Não possui Financeiro vinculados a este processo</td>
+                        </tr>
+                    <?php endif;?>
+                </tbody>
+            </table>
+            <div class="footer">
+            	<div style="padding-top:10px; float: right;">
+            		<?php echo "Valor não pago: <b>".$this->formatDecimal($this->valorTotal);?>
+            	</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/financial/limite-by-empresa-ajax.js")?>">
+    <!--
+
+  	//-->
+  	</script>

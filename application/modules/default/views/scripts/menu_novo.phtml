@@ -1,0 +1,19 @@
+<!-- BEGIN MENU -->
+<ul>
+    <?php
+        $identity = Zend_Auth::getInstance()->getIdentity();
+
+//        $modulo = $identity->modulo['id'];
+
+        $pass = $identity->arvoreServicos[$this->idModulo];
+
+        if(!empty($pass)){
+                    $arvore = new RecursiveArrayIterator($pass);
+
+            echo $this->menuTree($arvore);
+        }
+
+    ?>
+</ul>
+<!-- END MENU -->
+

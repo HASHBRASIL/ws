@@ -1,0 +1,95 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css')?>" />
+<link href="<?php echo $this->baseUrl('scripts/lib/lightbox/css/lightbox.css')?>" rel="stylesheet" type="text/css">
+<div class="row-fluid">
+	<div class="span12">
+		<h3 class="page-title">
+			Lista
+			 <small> de campanha</small>
+		</h3>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="portlet box green">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i> Campanhas</div>
+			<div class="actions">
+				<div class="btn-group">
+					<a class="btn dropdown-toggle links" data-toggle="dropdown" href="#">
+					Campanhas <i class="icon-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu select-campanha" style="margin-left: -52px;">
+						<?php foreach ($this->campanhas as $campanhas): ?>
+							<li><a id="linkCampanha" data-idCampanha="<?php echo $campanhas['id_campanha'];?>" href="javascript:;"><?php echo $campanhas['nome'];?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<form action="" class="form-horizontal">
+				<?php echo $this->formHidden('id_compra', $this->idCompra);?>
+				<?php echo $this->formHidden('id_campanhas', $this->idCampanha);?>
+				<?php echo $this->formHidden('id_consultor',Zend_Auth::getInstance()->getIdentity()->id);?>
+				<div class="row-fluid vem" style="margin-bottom: 10px;"></div>
+				<div class="row-fluid campoPesquisa"></div>
+				<div class="row-fluid campoAttr"></div>
+				<div class="form-actions" style="display: none;">
+					<div style="float: right;">
+						<button type="submit" class="btn blue add"><i class="icon-ok"></i> Add Produto</button>
+						<a href="<?php echo $this->baseUrl('compra/compra/grid');?>" class="btn">Voltar</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<h3 class="page-title">
+			Lista
+			 <small> de produtos comprados</small>
+		</h3>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="portlet box green">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>Itens Comprados</div>
+		</div>
+		<div class="portlet-body">
+			<div class="grid-itens-comprados">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="dialog_edit" style="display: none;">
+	<form class="form-feedback" style="margin:0 !important;">
+  	<div class="">
+  	<?php if (count($this->itemOpcaoList) > 0):?>
+			<?php $idAtributo = 0?>
+				<?php foreach ($this->itemOpcaoList as $atributo):?>
+					<div class="control-group">
+						<label class="control-label"><?php echo $atributo['nome_atributo'] ?>:</label>
+						<div class="controls">
+						<select class="span6 medium atributo" name="atributos[]" tabindex="1">
+							<option value="">Select...</option>
+							<?php foreach ($atributo['opcao'] as $key => $opcao):?>
+              	<option value="<?php echo $opcao['id_opcao']?>"><?php echo $opcao['nome_opcao']?></option>
+              <?php endforeach;?>
+						</select>
+					</div>
+				</div>
+			<?php endforeach;?>
+    <?php endif;?>
+    <label>Mensagem</label>
+    <?php echo $this->formTextarea('feedback',null, array('style'=> 'width: 410px; height: 113px ;display: inline;'));?>
+    </div>
+  </form>			
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir o pedido: <span id ="valueDelete"></span></p>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/compra/compra.forms.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/lib/lightbox/js/lightbox-2.6.min.js')?>"></script>

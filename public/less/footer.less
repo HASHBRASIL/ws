@@ -1,0 +1,15 @@
+footer                                          { z-index: 98; background: url('../img/pattern_footer.png'); position: fixed; bottom: 0; padding: 5px; width: 100%;
+    .content                                    { border-bottom: 1px solid lighten(@cor-preto, 55%); display: inline-block; width: 100%;
+        ul                                      { list-style: none; padding: 0; margin-bottom: 5px;
+            li                                  { display: inline; border-left: 1px solid lighten(@cor-preto, 75%); padding: 0 10px;
+                a                               { color: lighten(@cor-preto, 75%); font-weight: 400;}
+                &:first-child                   { border-left: 0px; padding: 0 10px 0 0;}
+            }
+        }
+        p                                       { color: lighten(@cor-preto, 75%); font-family: @openSans; font-size: 0.85em; margin: 0;
+            a                                   { color: lighten(@cor-preto, 75%);
+                &:hover                         { text-decoration: none;}
+            }
+        }
+    }
+}

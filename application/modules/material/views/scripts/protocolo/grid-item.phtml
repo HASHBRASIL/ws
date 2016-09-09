@@ -1,0 +1,40 @@
+<?php $totalProduto = 0?>
+<table class="table-bordered table-striped table-condensed flip-content" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 100px">Quantidade</th>
+            <th >Descrição produto/Serviço</th>
+            <th>Atributo</th>
+            <th style="width: 200px">Unidade</th>
+            <th style="width: 30px" class="action" colspan="3">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if(count($this->listItemMov)):?>
+            <?php foreach ($this->listItemMov as $item):?>
+                <?php if($item->getListMovimento()->current()):?>
+                    <?php $estoque = $item->getListMovimento()->current()->getEstoque() ?>
+                    <tr>
+                        <td><?php echo $this->real($item->quantidade, false)?></td>
+                        <td><?php echo $estoque->getItem()->nome ?></td>
+                        <td><?php
+                         if(count($estoque->getOpcaoList())>0){
+                            foreach ($estoque->getOpcaoList() as $key=>$opcao){
+                                echo $key != 0 ? ' | ': null;
+                                echo $opcao->getAtributo()->nome.": ".$opcao->nome;
+                            }
+                        }
+ ?></td>
+                        <td><?php echo $item->id_tp_movimento == Material_Model_Bo_TipoMovimento::ENTRADA ? $estoque->getItem()->getUnidadeCompra()->nome: $estoque->getItem()->getUnidadeConsumo()->nome ?></td>
+                        <td class="acoes" style="text-align: center;"><a data-tooltip href="<?php echo $item->id_movimento ?>" id_tp_movimento="<?php echo $item->id_tp_movimento?>" title="Visualizar lote" class="ver_lote"><img src="<?php echo $this->baseUrl('/images/view_detail.png')?>"></a></td>
+                    </tr>
+                    <?php  $totalProduto  = $totalProduto + $estoque->vl_total?>
+                <?php endif;?>
+            <?php endforeach;?>
+        <?php else: ?>
+            <tr>
+                <td colspan="16">Não possui dados</td>
+            </tr>
+        <?php endif;?>
+    </tbody>
+</table>

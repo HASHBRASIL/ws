@@ -1,0 +1,10 @@
+
+<script>
+    $(document).ready(function() {
+        {% for label, flashes in session.flash_msg %}
+            {% for flash in flashes %}
+                msg('{{ flash }}', '{{ label }}');
+            {% endfor %}
+        {% endfor %}
+    });
+</script>

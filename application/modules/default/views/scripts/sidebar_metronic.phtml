@@ -1,0 +1,26 @@
+<div class="page-sidebar nav-collapse collapse hidden-print">
+		<!-- BEGIN SIDEBAR MENU -->
+	<ul class="page-sidebar-menu">
+
+        <?php
+
+            $identity = Zend_Auth::getInstance()->getIdentity();
+
+            $modulo = $identity->modulo['id'];
+
+            $arvore = new RecursiveArrayIterator($identity->arvoreServicos[$modulo]);
+
+            echo $this->menuTree($arvore);
+
+        ?>
+		<li>
+			<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+			<div class="sidebar-toggler hidden-phone" style="margin-bottom: 10px"></div>
+			<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+		</li>
+	</ul>
+	<!-- END SIDEBAR MENU -->
+</div>
+<!-- END SIDEBAR -->
+<script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/default/default.sidebar.js")?>">
+</script>

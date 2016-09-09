@@ -1,0 +1,126 @@
+<?php
+    /**
+     * formulario do controller status para cadastrar e editar os status
+    */
+?>
+<div class="row-fluid" style="margin-top: 10px">
+	<div class="portlet box caribbean-green">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i> Planejamento de produção</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+    	<div class="portlet-body form">
+            <form method="post"  class="horizontal-form">
+                <?php echo $this->formHidden('id_planejamento');?>
+    			<div class="row-fluid">
+    			    <div class="span3">
+        				<div class="control-group">
+        					<label class="control-label">Data</label>
+        					<div class="controls">
+        						<?php echo $this->formText('date_select', null, array('class'=> 'span10', 'disabled' => 'disabled'));?>
+        					</div>
+        				</div>
+    				</div>
+    			    <div class="span2">
+        				<div class="control-group">
+        					<label class="control-label">Código do processo</label>
+        					<div class="controls">
+        						<?php echo $this->formText('cod_processo', null, array('class'=> 'span12'));?>
+        						<?php echo $this->formHidden('id_processo')?>
+        					</div>
+        				</div>
+    				</div>
+    				<div class="span2">
+        				<div class="control-group">
+        					<label class="control-label">Prioridade</label>
+        					<div class="controls">
+        						<?php echo $this->formSelect('id_prioridade', null, array('class'=> 'span12'), array(1=>'Alta', 2=> 'Média',3=>'Baixa' ));?>
+        					</div>
+        				</div>
+    				</div>
+                    <div class="span1">
+        				<div class="control-group">
+        					<label class="control-label">Ordem</label>
+        					<div class="controls">
+        						<?php echo $this->formText('ordem', null, array('class'=> 'span12'));?>
+        					</div>
+        				</div>
+    				</div>
+    			</div>
+    			<div class="row-fluid">
+    			    <div class="span3">
+        				<div class="control-group">
+        					<div class="controls">
+        						<div id="data_inline" >
+        						</div>
+        					</div>
+        				</div>
+    				</div>
+    			    <div class="span9">
+    			        <div class="form-horizontal form-view view-processo" style="display: none">
+        			        <div class="row-fluid">
+    			                <div class="span12">
+                                    <div class="control-group">
+                                        <label class="control-label" for="firstName">Código do processo:</label>
+                                        <div class="controls">
+                                            <span class="text cod_processo"></span>
+                                        </div>
+                                    </div>
+    			                </div>
+        			        </div>
+        			        <div class="row-fluid">
+    			                <div class="span12">
+                                    <div class="control-group">
+                                        <label class="control-label" for="firstName">Entidade:</label>
+                                        <div class="controls">
+                                            <span class="text entidade"></span>
+                                        </div>
+                                    </div>
+    			                </div>
+        			        </div>
+        			        <div class="row-fluid">
+    			                <div class="span12">
+    			                    <div class="control-group">
+                                        <label class="control-label" for="firstName">Quantidade:</label>
+                                        <div class="controls">
+                                            <span class="text quantidade"></span>
+                                        </div>
+                                    </div>
+    			                </div>
+        			        </div>
+        			        <div class="row-fluid">
+    			                <div class="span12">
+    			                    <div class="control-group">
+                                        <label class="control-label" for="firstName">Descrição:</label>
+                                        <div class="controls">
+                                            <span class="text descricao"></span>
+                                        </div>
+                                    </div>
+    			                </div>
+        			        </div>
+    			        </div>
+    				</div>
+
+    			</div>
+    			<div class="form-actions">
+    			    <a href="<?php echo $this->baseUrl('processo/status/grid')?>" class="btn" >Voltar</a>
+                    <button class="btn blue salvar_planejamento"><i class="icon-ok"></i> Salvar</button>
+            	</div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12" id="grid-planejamento">
+
+    </div>
+</div>
+
+
+<div id="dialog_delete_arquivo" style="display: none;">
+	<p style="font-size: 16px;padding-top: 6px;margin-bottom: 0;">Deseja realmente excluir este planejamento?</p>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl("/scripts/processo/planejamento.form.js")?>">
+</script>

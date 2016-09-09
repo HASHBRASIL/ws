@@ -1,0 +1,47 @@
+#horas a{
+	text-decoration: none;
+    display: block;
+    border: 0px;
+	margin-bottom: -8px;
+}
+#select2-drop {
+	z-index: 99999;
+}
+table.grid-duplicado th{
+    text-align: center;
+}
+table.grid-duplicado td{
+    text-align: center;
+}
+.table > tbody > tr.linha-folga > td{
+	background-color: #f2dede;
+	color: #a94442;
+}
+.table > tbody > tr.linha-feriado > td{
+	background-color: #A6C8E6;
+	color: #2C5285;
+}
+.icon-position {
+	padding: 5px;
+	color: #000;
+	visibility: hidden;
+}
+td:hover .icon-position{
+	visibility: visible;
+	color: #858383;
+	background: #FCFDFF !important;
+	cursor:pointer;
+	border-radius: 5px;
+}
+i.icon-position:before{
+	cursor:pointer;
+}
+i.icon-chevron-right.icon-position{
+	float:right;
+}
+i.icon-chevron-left.icon-position{
+	float:left;
+}
+td, th{
+	text-align: center !important;
+}

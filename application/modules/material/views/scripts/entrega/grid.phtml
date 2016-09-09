@@ -1,0 +1,50 @@
+<form method="post" class="geral" action="<?php echo $this->baseUrl('material/entrega/form')?>">
+    <div class="row-fluid" style="margin-top: 20px">
+        <div class="span8 offset2">
+            <div class="portlet box purple">
+            <div class="portlet-title">
+                <div class="caption"><i class="icon-reorder"></i>Produtos</div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="javascript:;" class="remove"></a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <table class="table table-hover" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th style="width: 60px;">Extrato</th>
+                            <th>Pedidos</th>
+                            <th style="text-align: center;">Qtd. em Estoque</th>
+                            <th style="width: 170px">Qtd. Solicitada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if(count($this->listEstoque)):?>
+                            <?php foreach ($this->listEstoque as $estoque):?>
+                                <tr>
+                                    <td style="text-align: center;"><a  class="view_extrato" href="<?php echo $estoque['id_item'] ?>"><img title="Extrato" src="<?php echo $this->baseUrl('images/detail.png')?>" data-tooltip ></a></td>
+                                    <td><?php echo $estoque['nome']?></td>
+                                    <td style="text-align: center;"><?php echo $this->formatInteger($estoque['quantidade'])?></td>
+                                    <td>
+                                        <?php echo $this->formHidden('id_item[]', $estoque['id_item'])?>
+                                        <?php echo $this->formHidden('qtd_estoque_'.$estoque['id_item'], $estoque['quantidade'])?>
+                                        <?php echo $this->formText('quantidade_'.$estoque['id_item'], null, array( 'class'=> 'decimal span12','alt' => 'integer','id-item' => $estoque['id_item'] ))?>
+                                    </td>
+                                </tr>
+                            <?php endforeach;?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="16">Não possui dados</td>
+                            </tr>
+                        <?php endif;?>
+                    </tbody>
+                </table>
+                <div class="form-actions">
+                    <button type="submit" class="btn green incluir"><i class="icon-ok"></i> Incluir endereço</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>

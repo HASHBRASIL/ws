@@ -1,0 +1,93 @@
+<?php if($this->ok == true): ?>
+<?php foreach ($this->campanha as $campanha):?>
+	<h3><?php echo $campanha->getCampanha()->nome;?></h3>
+	<div class="span12">
+		<div class="span3" style="margin-left: -100px;">
+			<div class="control-group" >
+				<label class="control-label">Buscar por</label>
+				<div class="controls">
+					<div class="basic-toggle-button">
+						<input type="checkbox" id='checked' class="toggle" checked="checked" />
+					</div>
+				</div>
+			</div>	
+		</div>
+		<div class="span9">
+			<div class="control-group">
+				<div class="controls">
+					<div class="input-append">
+						<?php echo $this->formHidden('id_campanha',$campanha->getCampanha()->id_campanha);?>
+						<?php echo $this->formText('nome',null, array('class' => 'm-wrap span12'));?>
+						<div class="btn-group">
+							<button class="btn" id="btn-Pesquisa"><i class="icon-search"></i> Pesquisar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endforeach;?>
+
+<script type="text/javascript">
+<!--
+$("#checked").val("1");
+var id = $('#id_campanha').val();
+$( "#nome" ).autocomplete({
+	source: "/compra/compra/autocomplete/id/"+id,
+	minLength: 1,
+	select: function( event, ui ) {
+		
+	},
+	search: function( event, ui ) {
+		
+	}
+});
+$('.basic-toggle-button').toggleButtons({
+    width: 180,
+    font: {
+        'font-size' : '100px',
+        'font-weight' : '600'
+    },
+    label: {
+        enabled: "Referencia",
+        disabled: "Nome"
+    },
+    style: {
+        // Accepted values ["primary", "danger", "info", "success", "warning"] or nothing
+        enabled: "info",
+        disabled: "danger"
+    },
+    onChange: function ($el, status, e) {
+        if(status){
+        	$("#checked").val("referencia");
+							var id = $('#id_campanha').val();
+        			$( "#nome" ).autocomplete({
+                source: "/compra/compra/autocomplete/id/"+id,
+                minLength: 1,
+                select: function( event, ui ) {
+                },
+                search: function( event, ui ) {
+                    ui.referencia;
+                }
+              });
+
+        }else{
+        	$("#checked").val("nome");
+					var id = $('#id_campanha').val();
+        	$( "#nome" ).autocomplete({
+                source: "/compra/compra/autocomplete-nome/id/"+id,
+                minLength: 2,
+                select: function( event, ui ) {
+                },
+                search: function( event, ui ) {
+                }
+              });
+        }
+    }
+});
+//-->
+</script>
+<?php else:?>
+Você efetuou o número maximo de compra.</br>
+Escolha outra campanha.
+<?php endif;?>

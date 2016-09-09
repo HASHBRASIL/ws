@@ -1,0 +1,86 @@
+body{
+    /* IE10 Consumer Preview */ 
+    background-image: -ms-linear-gradient(top left, #FFFFFF 0%, #C7BACF 100%);
+    /* Mozilla Firefox */ 
+    background-image: -moz-linear-gradient(top left, #FFFFFF 0%, #C7BACF 100%);
+    /* Opera */ 
+    background-image: -o-linear-gradient(top left, #FFFFFF 0%, #C7BACF 100%);
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #C7BACF));
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #C7BACF 100%);
+    /* W3C Markup, IE10 Release Preview */ 
+    background-image: linear-gradient(to bottom right, #FFFFFF 0%, #C7BACF 100%);
+    
+    background-image: url("../images/bg.png");
+}
+.row{
+    max-width: 90%;
+}
+.new{
+    background: #014464;
+    background: -moz-linear-gradient(top, #112F4A, #013953);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#112F4A), to(#112F4A));
+    border: 1px solid #002232;
+}
+
+.new:HOVER {
+    background: #014464;
+    background: -moz-linear-gradient(top, #112F4A, #08090A);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#112F4A), to(#08090A));
+    border: 1px solid #002232;
+}
+.ui-autocomplete-loading {
+    background: url(../images/ui-anim_basic_16x16.gif) right center no-repeat;
+}
+fieldset legend {
+    background: none;
+}
+span.ui-spinner > input[type="text"]{
+    width: 37px;
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 0;
+    margin: .2em 0;
+    vertical-align: middle;
+    margin-left: .4em;
+    margin-right: 22px;
+    height: 20px;
+}
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; }
+.ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
+
+
+.success input, input.success, .success textarea, textarea.success {
+border-color: #0B7234;
+background-color: rgba(15, 198, 59, 0.1);
+}
+#carregando{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 46%;
+    width: 140px;
+    height: 30px;
+    background: #1C486D;
+    z-index: 1000;
+    text-align: center;
+    color: white;
+    border: 1px solid white;
+    border-top-width: 0;
+}
+div#carregando span{
+    margin: 6px 0;
+    display: block;
+}
+.header + .navbar-inner { display: none;  }

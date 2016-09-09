@@ -1,0 +1,98 @@
+
+{% include 'header-content.html.twig' %}
+
+<form method="POST" action="home.php">
+
+    <div class="row wrapper">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>
+                    Nome
+                </label>
+		{% if pessoa.nome  %}
+                <input name="nome"
+                        class="form-control nome"
+                        value="{{ pessoa.nome }}"
+                        readonly="readonly"
+                        />
+		{% else  %}
+		<select name="nome"
+                        class="form-control nome"><option value="" /></select>
+		{% endif %}
+            </div>
+        </div>
+    </div>
+
+    {#<input type="hidden" name="servico" id="servico" value="{{  }}"/>#}
+    <input type="hidden" class="formId" name="id" value="{{ id }}"/>
+
+    {% for perfil in perfis %}
+
+         <div class="row wrapper {% if loop.index is odd %}wrapper-white{% endif %}">
+
+            <div class="col-md-12 content">
+                <div class="form-header">
+                    <h1>
+                        {{ campos[perfil][0].perfil }}
+                        <span>{{ campos[perfil][0].perfil_descricao }}</span>
+                    </h1>
+                </div>
+
+                {% set nested = false %}
+
+                <div class="form-group-one-unit">
+                    {% for campo in campos[perfil] %}
+
+                        {% if nested and campo.id_pai and campo.id_pai != nested %}
+                            </div>
+                            </div>
+                            {% set nested = campo.id_pai %}
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>
+                                        {{ campo.nome_pai }}
+                                        <span>{{ campo.descricao_pai }}</span>
+                                    </label>
+
+                        {% elseif campo.id_pai and not nested %}
+                            {% set nested = campo.id_pai %}
+                            <div class="col-md-12">
+                            <div class="form-group">
+                            <label>
+                                {{ campo.nome_pai }}
+                                <span>{{ campo.descricao_pai }}</span>
+                            </label>
+
+                        {% elseif nested and not campo.id_pai %}
+
+                            {% set nested = false %}
+                            </div>
+                            </div>
+
+                        {% endif %}
+
+                        {% include 'fields.html.twig' %}
+
+                    {% endfor %}
+
+                    {% if nested  %}
+                        {% set nested = false %}
+                        </div>
+                        </div>
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    {% include 'form-action.html.twig' %}
+</form>
+
+
+
+{% include 'filter.html.twig' %}
+
+

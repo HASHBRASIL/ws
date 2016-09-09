@@ -1,0 +1,50 @@
+{% macro botao(data, tipo, texto = null, id = null, req_id) %}
+
+    {% set camposIgnorados = ['ws_icon', 'ws_arquivo'] %}
+    {% set ids = { 'usr' : session.USUARIO.ID, 'time' : session.TIME.ID, 'servico': data.id, 'servico_pai' : data.id_pai} %}
+    {% spaceless %}
+        <button type="submit"
+                class=" {{ data.metadata.ws_class | default("btn btn-success btn-sm pull-right ") }} {{ tipo }}"
+
+                {% for key in data.metadata|keys %}
+                    {% if key not in camposIgnorados %}
+                        {% if (key == 'ws_id') %}
+                            {% set campoId = id?: ids[data.metadata['ws_id']] %}
+                            {{ (' data-%key%="%value%"' | replace({'%key%': key[3:], '%value%': campoId})) | raw }}
+                        {% else %}
+                            {{ (' data-%key%="%value%"' | replace({'%key%': key[3:], '%value%': data.metadata[key]}))|raw }}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                data-servico="{{ data.id }}">
+            {{ (texto ?: '<i class="%s"></i>'|format(data.metadata.ws_icon|default("glyphicon glyphicon-edit")))|raw }}
+        </button>
+    {% endspaceless %}
+{% endmacro %}
+
+
+{#
+<div class="visible-md visible-lg hidden-sm hidden-xs">
+    <a uib-tooltip="Edit" tooltip-placement="top" class="btn btn-transparent btn-xs" href="#"><i class="fa fa-pencil"></i></a>
+    <a uib-tooltip="Share" tooltip-placement="top" class="btn btn-transparent btn-xs tooltips" href="#"><i class="fa fa-share"></i></a>
+    <a uib-tooltip="Remove" tooltip-placement="top" class="btn btn-transparent btn-xs tooltips" href="#"><i class="fa fa-times fa fa-white"></i></a>
+</div>
+<div class="visible-xs visible-sm hidden-md hidden-lg">
+    <div uib-dropdown="" class="btn-group dropdown">
+        <button uib-dropdown-toggle="" class="btn btn-primary btn-sm dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-cog"></i>&nbsp;<span class="caret"></span>
+        </button>
+        <ul role="menu" class="dropdown-menu pull-right dropdown-light">
+            <li>
+                <a href="#"> Edit </a>
+            </li>
+            <li>
+                <a href="#"> Share </a>
+            </li>
+            <li>
+                <a href="#"> Remove </a>
+            </li>
+        </ul>
+    </div>
+</div>#}

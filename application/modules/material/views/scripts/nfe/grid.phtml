@@ -1,0 +1,189 @@
+<?php
+    /**
+     * grid da nota fiscal
+     * com link pra criar, alterar e inativar.
+    */
+?>
+<style>
+th.dt_emissao{
+    width: 130px;
+}
+tr.erow.distinct_total > td{
+    color: #FF0505;
+}
+tr.distinct_total > td{
+    color: #FF0505;
+}
+tr.erow.not_sicronizado > td{
+    color: #0B0BFA;
+}
+tr.not_sicronizado > td{
+    color: #0B0BFA;
+}
+</style>
+<link rel="stylesheet" href="/assets/plugins/data-tables/DT_bootstrap.css" />
+<?php
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$select = array(
+    50 => 50,
+    100 => 100,
+    200 => 200,
+    250 => 250
+    );
+$defaultItens = $request->getParam('itens', 250);
+?>
+
+<?php
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$select = array(
+    50 => 50,
+    100 => 100,
+    200 => 200,
+    250 => 250
+    );
+$defaultItens = $request->getParam('itens', 250);
+?>
+
+<div class="row-fluid" style="margin-top: 20px">
+    <div class="span12">
+        <div class="portlet box purple">
+            <div class="portlet-title">
+            	<div class="caption"><i class="<?php echo isset($this->icon) ? $this->icon : 'icon-group' ?>"></i>Nota fiscal eletrônica - NFE</div>
+            	<div class="actions">
+	                <a class="btn blue" href="<?php echo $this->baseUrl('/material/nfe/form') ?>"><i class="icon-plus"></i> <?php echo  $this->translate("Novo NFE")?></a>
+				</div>
+			</div>
+			<div class="portlet-body">
+            	<div class="clearfix">
+					<div class="btn-group">
+						<div class="dataTables_length">
+							<?php if ($this->paginator->getTotalItemCount() > $defaultItens): ?>
+				                    <label>Mostrar <?php {echo $this->formSelect('itens', $defaultItens, array(), $select);}?>?></label>
+				            <?php endif;?>
+						</div>
+					</div>
+					<div class="btn-group pull-right">
+						<div class="dataTables_filter">
+                            <?php echo $this->partial('pesquisa.phtml', 'default', array(
+                                'fields'       => array(
+                                                     'Natureza_operacao' => 'Natureza da Operação',
+                                                     'num_danfe'         => 'DANFE',
+                                                     'num_serie'         => 'Série'
+                                                     //App_Model_Dao_Abstract::STRING_SEARCH        => 'Todos'
+                                                   ),
+                                'actionSearch' => $this->actionSearch
+                            ))?>
+						</div>
+					</div>
+				</div>
+				<div class="dataTables_wrapper form-inline" role="grid">
+					<table class="table table-striped table-hover table-bordered dataTable" aria-describedby="sample_editable_1_info"">
+                        <thead>
+                            <tr>
+                                <th column="<?php echo 'Natureza_operacao'?>"
+                                    order="asc"
+                                    class="align-left <?php echo 'natureza_operacao'?>"
+                                >
+                                    <div>Natureza da Operação</div>
+                                </th>
+                                <th column="<?php echo 'Natureza_operacao'?>"
+                                    order="asc"
+                                    class="align-left <?php echo 'natureza_operacao'?>"
+                                >
+                                    <div>Emitente</div>
+                                </th>
+                                <th column="<?php echo 'num_danfe'?>"
+                                    order="asc"
+                                    class="align-left <?php echo 'num_danfe'?>"
+                                >
+                                    <div>N° DANFE</div>
+                                </th>
+                                <th column="<?php echo 'num_serie'?>"
+                                    order="asc"
+                                    class="align-left <?php echo 'num_serie'?>"
+                                >
+                                    <div>N° Série</div>
+                                </th>
+                                <th column="<?php echo 'tl_produto'?>"
+                                    order="asc"
+                                    class="align-left <?php echo 'tl_produto'?>"
+                                >
+                                    <div>Total de produto</div>
+                                </th>
+                                <th column="<?php echo 'tl_nota'?>"
+                                    order="asc"
+                                    class="align-left <?php echo 'tl_nota'?>"
+                                >
+                                    <div>Total de nota</div>
+                                </th>
+                                <th column="<?php echo 'dt_emissao'?>"
+                                    order="asc"
+                                    class="align-left <?php echo 'dt_emissao'?>"
+                                >
+                                    <div>Dt de emissão</div>
+                                </th>
+                                <th colspan="2" class = "align-center action"><?php echo $this->translate("Ações")?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (count($this->paginator)): ?>
+                                <?php foreach ($this->paginator as $key => $nfe): ?>
+                                    <tr class="<?php echo $key % 2 ? 'erow ' : ''; echo $this->equalsTlProduto($nfe['tl_produto'], $nfe['id_nfe'])?> " >
+                                        <td style="white-space: normal !important; text-align: justify; padding-right: 5px;" class="natureza_operacao" >
+                                            <?php echo $nfe['natureza_operacao']?>
+                                        </td>
+                                        <td style="white-space: normal !important; text-align: justify; padding-right: 5px;" class="natureza_operacao" >
+                                            <?php echo $nfe['emitente_empresa'] ? $nfe['emitente_empresa'] : '-'?>
+                                        </td>
+                                        <td style="white-space: normal !important; text-align: justify; padding-right: 5px;" class="num_danfe" >
+                                            <?php echo $nfe['num_danfe']?>
+                                        </td>
+                                        <td style="white-space: normal !important; text-align: justify; padding-right: 5px;" class="num_serie" >
+                                            <?php echo $nfe['num_serie']?>
+                                        </td>
+                                        <td style="white-space: normal !important; text-align: justify; padding-right: 5px;" class="tl_produto" >
+                                            <?php echo $this->real($nfe['tl_produto'])?>
+                                        </td>
+                                        <td style="white-space: normal !important; text-align: justify; padding-right: 5px;" class="tl_nota" >
+                                            <?php echo $this->real($nfe['tl_nota'])?>
+                                        </td>
+                                        <td style="white-space: normal !important; text-align: justify; padding-right: 5px;" class="dt_emissao" >
+                                            <?php echo $this->date($nfe['dt_emissao'])?>
+                                        </td>
+                                        <td class="acoes" style="text-align: center;">
+                                            <a title='Editar' data-tooltip href=' <?php echo $this->baseUrl("/material/nfe/form/id_nfe/{$nfe['id_nfe']}") ?>'    >
+                                                <img src='<?php echo $this->baseUrl("/images/edit.png") ?>'  />
+                                            </a>
+                                        </td>
+                                        <td class="acoes" style="text-align: center;">
+                                            <?php if(!$this->hasMovimento($nfe['id_nfe'])):?>
+                                            <a class='delete' data-tooltip title='Excluir' href='<?php echo $this->baseUrl("/material/nfe/delete/id/{$nfe['id_nfe']}") ?>'>
+                                                <img src='<?php echo $this->baseUrl("/images/delete.png")?>' />
+                                            </a>
+                                            <?php endif;?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach;?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="8"><?php echo $this->translate("Não existem registros")?>!</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+			        </table>
+				</div>
+				<?php if ($this->paginator instanceof Zend_Paginator): ?>
+	            		<?php echo $this->paginationControl($this->paginator, 'Elastic', array('pagination-grid-metronic.phtml', 'default'))?>
+        		<?php endif;?>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+    var searchField = $('#searchField').val();
+    if(searchField == ""){
+        $('#searchField').val('num_danfe');
+    }
+});
+</script>

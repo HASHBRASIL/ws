@@ -1,0 +1,76 @@
+<div class="row-fluid">
+	<table id="horas" class="table table-striped table-hover table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 60px;text-align: center">Dia</th>
+				<th style="width: 60px;text-align: center">Data</th>
+				<th style="width: 70px;text-align: center">Hora total</th>
+				<th style="width: 70px;text-align: center">Hora</th>
+				<th style="text-align: center;width: 155px;">Extra</th>
+				<th style="text-align: center;width: 155px;">Aprovação gerente</th>
+				<th style="text-align: center;width: 155px;">Aprovação diretor</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($this->extraList as $calculoExtra):?>
+				<tr data-hora_extra ="<?php echo $calculoExtra->hora_extra?>" class="<?php echo $calculoExtra->hasHoraExtraEquals()?null:'linha-folga'?>" >
+					<?php $data = new Zend_Date($calculoExtra->data)?>
+					<td class="vertical-align" rowspan="<?php echo count($calculoExtra->getExtraList()) ?>">
+						<?php echo $data->toString(Zend_Date::WEEKDAY)?>
+					</td>
+					<td class="vertical-align" rowspan="<?php echo count($calculoExtra->getExtraList()) ?>">
+						<?php echo $data->toString('dd/MM/YYYY')?>
+					</td>
+					<td class="vertical-align" rowspan="<?php echo count($calculoExtra->getExtraList()) ?>">
+						<?php echo $calculoExtra->hora_extra?>
+					</td>
+					<?php foreach ($calculoExtra->getExtraList() as $keyExtra => $extra):?>
+						<?php if($keyExtra != 0):?>
+							<tr class="<?php echo $calculoExtra->hasHoraExtraEquals()?null:'linha-folga'?>" >
+						<?php endif;?>
+						<td class="vertical-align">
+						<?php if(empty($extra->id_aprovacao_gerente)):?>
+							 <a style="display: inline" href="javascript:;" class="hora_extra editable" data-data="<?php echo $data->toString('dd/MM/YYYY')?>" data-pk="<?php echo $extra->id_extra?>" >
+						 <?php endif;?>
+								<?php echo $extra->hora?>
+						<?php if(empty($extra->id_aprovacao_gerente)):?>
+							</a>
+						<?php endif;?>
+						</td>
+						<td class="vertical-align">
+						<?php if(empty($extra->id_aprovacao_gerente)):?>
+							<a style="display: inline" data-posicao="0" href="javascript:;" class="extra_extra editable" data-data="<?php echo $data->toString('dd/MM/YYYY')?>" data-pk="<?php echo $extra->id_extra?>" >
+						<?php endif;?>
+								<?php echo $extra->banco_horas ? 'Banco de horas':$extra->porcentagem."%"?>
+						<?php if(!empty($extra->id_aprovacao_gerente)):?>
+							</a>
+						<?php endif;?>
+						</td>
+						<td>
+							<?php if(!empty($extra->id_aprovacao_gerente) && $extra->id_aprovacao_gerente == $extra->id_aprovacao_diretor):?>
+								<?php echo $extra->aprovado === '0'? "Reprovado por ":"Aprovado por "?><?php echo $extra->getAprovadoGerente()?>
+							<?php elseif(!empty($extra->id_aprovacao_gerente)):?>
+								<?php echo $extra->aprovado === '0' && empty($extra->id_aprovacao_diretor)? "Reprovado por ":"Aprovado por "?><?php echo $extra->getAprovadoGerente()?>
+							<?php else:?>
+							<button href="#" class="btn green icn-only aprovar-gerente" data-id="<?php echo $extra->id_extra?>" ><i class="halflings-icon ok white"></i></button>
+							<button href="#" class="btn red icn-only reprovar-gerente" data-id="<?php echo $extra->id_extra?>" ><i class="halflings-icon remove white"></i></button>
+							<?php endif;?>
+						</td>
+						<td>
+							<?php if(!empty($extra->id_aprovacao_diretor)):?>
+								<?php echo $extra->aprovado === '0' ? "Reprovado por ":"Aprovado por "?><?php echo $extra->getAprovadoDiretor()?>
+							<?php elseif ($extra->aprovado === '0'):?>
+								---------
+							<?php else:?>
+								<button href="#" class="btn green icn-only aprovar-diretor" data-id="<?php echo $extra->id_extra?>" ><i class="halflings-icon ok white"></i></button>
+								<button href="#" class="btn red icn-only reprovar-diretor" data-id="<?php echo $extra->id_extra?>" ><i class="halflings-icon remove white"></i></button>
+							<?php endif;?>
+							
+						</td>
+						</tr>
+					<?php endforeach;?>
+				</tr>
+			<?php endforeach;?>
+		</tbody>
+	</table>
+</div>

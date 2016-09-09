@@ -1,0 +1,29 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('styles/grid.style.css')?>" />
+<table class="grid" style="margin-left: 0">
+    <thead>
+        <tr>
+            <th>Empresa</th>
+            <th>Vl. unitário</th>
+            <th>Fixo/Variável</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if(count($this->valorList)):?>
+            <?php foreach ($this->valorList as $valor):?>
+                <tr>
+                    <td><?php echo $valor->getEmpresa()? $valor->getEmpresa() : "Interno" ?></td>
+                    <td><?php echo $this->real($valor->vl_unitario) ?></td>
+                    <td><?php echo $valor->fixo? "Fixo": "Variável" ?></td>
+                    <td>
+                        <img title="adicionar valor" style="cursor: pointer;" id_empresa="<?php echo $valor->getEmpresa()? $valor->getEmpresa()->id : "Interno" ?>"  valor_unitario="<?php echo $this->real($valor->vl_unitario, false)?>" fixo="<?php echo $valor->fixo ?>" id_valor_servico="<?php echo $valor->id_valor_servico ?>" data-tooltip class="add_valor_unitario" src="<?php echo $this->baseUrl('images/add_money.png')?>" >
+                    </td>
+                </tr>
+            <?php endforeach;?>
+        <?php else: ?>
+            <tr>
+                <td colspan="16">Não existe valor</td>
+            </tr>
+        <?php endif;?>
+    </tbody>
+</table>

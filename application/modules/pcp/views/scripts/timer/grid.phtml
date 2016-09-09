@@ -1,0 +1,105 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+<div class="row-fluid">
+     <div class="span12">
+	      <h3 class="page-title">
+	       	Registros de hora
+	        <small> do PCP</small>
+	      </h3>
+     </div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-wrench"></i>Registros de hora</div>
+				<div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<table class="table-bordered table-striped table-condensed flip-content" id="configTable">
+						<thead class="flip-content">
+							<tr>
+								<th>Código</th>
+					            <th>Nome</th>
+					            <th>Processo</th>
+					            <th>Inicio do trabalho</th>
+					            <th>Fim do trabalho</th>
+					            <th style="width: 60px;">Ação</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<?php if (count($this->timerList) > 0):?>
+				        <?php foreach ($this->timerList as $timer):?>
+				            <tr class="odd gradeX">
+				            	<td class=""><?php echo $timer->id_timer?></td>
+				                <td class=""><?php echo $timer->nome_razao?></td>
+				                <td class=""><?php echo $timer->pro_codigo ?></td>
+				                <td class=""><?php echo $timer->inicio_work?></td>
+								<td class=""><?php echo $timer->fim_work ?></td>
+				                <td class=" acoes">
+				                    <a name ="<?php echo $config->id_config_empresa?>" value="<?php echo $timer->id_timer?>" href="#" class="deleteMoldal">
+				                        <img title="Excluir" data-tooltip src="<?php echo $this->baseUrl('images/delete.png')?>"/>
+				                    </a>
+				                </td>
+				            </tr>
+				        <?php endforeach;?>
+					<?php endif;?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir o timer: <span id ="valueDelete"></span></p>
+</div>
+<script type="text/javascript">
+
+
+ $('#configTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+</script>

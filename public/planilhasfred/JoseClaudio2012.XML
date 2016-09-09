@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!DOCTYPE QXDocument [
+<!ELEMENT QXDocument (Header, Page*)>
+<!ELEMENT Header (Title*, DocType*, Creator*, Author*, Date*, Copyright*, Orientation*)>
+<!ELEMENT DocType (#PCDATA)>
+<!ELEMENT Title (#PCDATA)>
+<!ELEMENT Creator (#PCDATA)>
+<!ELEMENT Author (#PCDATA)>
+<!ELEMENT Date (#PCDATA)>
+<!ELEMENT Copyright (#PCDATA)>
+<!ELEMENT Orientation (#PCDATA)>
+<!ELEMENT Page (Item*)>
+<!ELEMENT Item (#PCDATA)>
+<!ELEMENT Contents (#PCDATA)>
+<!ATTLIST Header Units CDATA "mm">
+<!ATTLIST Header Pagewidth CDATA "210">
+<!ATTLIST Header Pageheight CDATA "297">
+<!ATTLIST Header PaperName CDATA "A4">
+<!ATTLIST Header Layers CDATA "3">
+<!ATTLIST Item Type CDATA "Text">
+<!ATTLIST Item XPos CDATA "0">
+<!ATTLIST Item YPos CDATA "0">
+<!ATTLIST Item Font CDATA "Arial">
+<!ATTLIST Item Height CDATA "12">
+<!ATTLIST Item Color CDATA "Black">
+<!ATTLIST Item BackColor CDATA "White">
+<!ATTLIST Item Weight CDATA "Normal">
+<!ATTLIST Item Decoration CDATA "None">
+<!ATTLIST Item Width CDATA "1">
+<!ATTLIST Item Height CDATA "1">
+<!ATTLIST Item Shape CDATA "0">
+<!ATTLIST Item ControlID CDATA "">
+<!-- 0=rect, 1=ellipse, 2=hline,3=vline,4=roundrect-->
+<!ATTLIST Item Linewidth CDATA "1">
+<!ATTLIST Item FillType CDATA "0">
+<!ATTLIST Item Layer CDATA "0">
+<!ATTLIST Item Opacity CDATA "1">
+<!ATTLIST Item ImageFile CDATA "">
+<!ATTLIST Item Compression CDATA "None">
+<!ATTLIST Item Xscale CDATA "1.0">
+<!ATTLIST Item Yscale CDATA "1.0">
+<!ATTLIST Item Extra CDATA "">
+<!ATTLIST Page Number CDATA "1">
+]>
+<QXDocument>
+<Header Pagewidth="215,90" Pageheight="279,40" PaperName="A4" Units="mm">
+   <Title></Title>
+   <DocType></DocType>
+   <Creator>QRXDocumentFilter</Creator>
+   <Author></Author>
+   <Date>05/09/2016</Date>
+   <Copyright></Copyright>
+   <Orientation>Portrait</Orientation>
+</Header>
+<Page Number="1">
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="6,88" Linewidth="0,26" Shape="0" Width="202,94" Height="31,75" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="93,66" YPos="10,18" Height="16" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIVRO RAZÃO</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="23,67" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Nome</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="27,11" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">CNPJ</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="23,67" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">AGBR COMERCIO SERVIÇOS GRAFICOS IMPORTAÇÃO E EXPORTAÇÃO LTDA</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="27,11" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">11.416.247/0001-00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="33,99" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Folha</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="37,31" Linewidth="0,53" Shape="2" Width="192,88" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape2">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="23,67" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="27,11" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="33,99" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="33,99" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="30,55" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Data</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="30,55" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">01/01/2012 a 31/12/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="30,55" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="111,13" YPos="17,58" Height="8" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="38,89" Linewidth="0,26" Shape="0" Width="202,94" Height="24,61" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="46,21" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Conta :</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="23,32" YPos="46,21" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">1.1.4.4.04.0002</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="60,36" YPos="46,21" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Sequência :</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="73,59" YPos="46,21" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">8150</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="98,72" YPos="46,21" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Descrição :</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="111,16" YPos="46,21" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">JOSE CLAUDIO DE LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="18,26" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Data</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="58,47" Linewidth="0,53" Shape="2" Width="12,44" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_data">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="28,57" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Lançamento</Item>
+<Item Type="Graphic" Layer="1" XPos="28,31" YPos="58,47" Linewidth="0,53" Shape="2" Width="13,23" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_documento">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="48,42" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Contra-Partida</Item>
+<Item Type="Graphic" Layer="1" XPos="42,86" YPos="58,47" Linewidth="0,53" Shape="2" Width="26,99" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_contra_partida">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="100,01" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Histórico</Item>
+<Item Type="Graphic" Layer="1" XPos="71,17" YPos="58,47" Linewidth="0,53" Shape="2" Width="66,41" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_historico">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="141,29" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Valor de Débito</Item>
+<Item Type="Graphic" Layer="1" XPos="138,91" YPos="58,47" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_debito">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="164,31" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Valor de Crédito</Item>
+<Item Type="Graphic" Layer="1" XPos="162,19" YPos="58,47" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_credito">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="193,68" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Saldo</Item>
+<Item Type="Graphic" Layer="1" XPos="185,47" YPos="58,47" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_saldo">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="59,70" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">136.829,35</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="14,59" YPos="59,70" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">Anterior</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="59,70" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="63,50" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">06/01/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="37,57" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">723</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">6.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="63,93" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">142.829,35</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0002</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="66,84" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES - CARRO CHEQUE 806</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="63,93" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="63,76" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">3599)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="70,38" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">11/01/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="37,57" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">864</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">612,80</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="70,83" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">143.442,15</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF PG COM NOTA FISCAL Nº 063 - NAYARA DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="73,74" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">CASSIA EUSTAQUIO COPIADORA ME-JOSÉ </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="76,65" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">CLAUDIO DE LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="70,83" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="80,17" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="80,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">13/01/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="37,57" YPos="80,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">731</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="80,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.375,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="80,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="80,63" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">144.817,15</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="80,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="80,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="83,54" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="80,63" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="69,85" YPos="80,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="80,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="87,05" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="87,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">19/01/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="37,57" YPos="87,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">902</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="87,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">3.900,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="87,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="87,53" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">148.717,15</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="87,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="87,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="90,44" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="87,53" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="87,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="87,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="93,93" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="94,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">06/02/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="94,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1500</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="94,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">877,64</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="94,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="94,43" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">149.594,79</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="94,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="94,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF PAGAMENTO COM CH Nº 2055 PARTE-JOSÉ </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="97,34" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">CLAUDIO DE LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="94,43" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="69,85" YPos="94,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="94,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="100,81" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="101,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">05/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="101,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1244</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="101,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">300,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="101,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="101,33" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">149.894,79</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="101,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="101,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO BANCO DO BRASIL </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="104,24" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">SA - TRANSFERENCIA</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="101,33" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="101,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="101,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="107,69" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="108,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">05/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="108,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1262</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="108,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">300,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="108,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="108,23" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">150.194,79</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="108,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="108,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="111,14" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="108,23" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="108,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="108,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="114,56" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="115,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">06/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="115,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1248</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="115,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">11.194,50</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="115,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="115,13" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">161.389,29</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="115,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="115,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="118,04" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (VERIFICAR SE FOI DESPESA COM </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="120,95" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VIAGEM )</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="115,13" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="115,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="115,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="124,35" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="124,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">12/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="124,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1309</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="124,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5.116,27</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="124,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="124,93" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">166.505,56</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="124,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="124,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="127,84" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="124,93" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="124,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="124,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="131,23" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="131,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">13/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="131,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5854</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="131,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">993,58</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="131,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="131,83" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">167.499,14</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="131,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="131,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="134,74" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES LUCRO DIST EM 2012 </Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="131,83" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="69,85" YPos="131,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="131,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="138,11" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="138,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">16/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="138,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1323</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="138,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">12.790,69</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="138,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="138,73" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">180.289,83</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="138,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="138,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="141,64" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES - TRANS</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="138,73" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="138,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="138,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="144,99" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="145,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">21/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="145,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1381</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="145,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.375,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="145,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="145,63" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">181.664,83</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="145,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="145,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="148,54" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="145,63" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="145,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="145,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="151,87" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="152,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">23/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="152,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1409</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="152,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">12.790,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="152,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="152,53" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">194.454,83</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="152,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="152,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="155,44" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="152,53" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="152,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="152,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="159,01" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="159,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">05/04/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="159,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4971</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="159,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">27.500,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="159,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="159,43" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">221.954,83</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="159,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="159,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF PG DISTRIBUIÇAO DE LUCRO 2012 AO </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="162,34" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">SOCIO JOSÉ CLAUDIO DE LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="159,43" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="159,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="159,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="165,89" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="166,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">10/04/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="166,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4834</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="166,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="166,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="166,33" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">226.954,83</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="166,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="166,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="169,24" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="166,33" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="166,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="166,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="172,77" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="173,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">25/04/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="173,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4946</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="173,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">13.446,06</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="173,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="173,23" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">240.400,89</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="173,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0002</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="173,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF TED (FALTA A VALIDAÇÃO) DE FREDERICO </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="176,14" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">JOSE N. S. MEDEIROS</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="173,23" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="63,76" YPos="173,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">3599)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="173,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="179,65" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="180,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">03/05/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="180,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1984</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="180,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">2.074,43</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="180,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="180,13" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">242.475,32</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="180,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="180,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="183,04" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (REEMBOLSO DE PAGTO)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="180,13" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="180,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="180,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="186,53" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="187,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">03/05/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="187,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5849</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="187,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">27.500,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="187,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="187,03" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">269.975,32</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="187,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="187,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="189,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (DINHEIRO)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="187,03" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="187,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="187,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="193,41" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="193,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">03/05/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="193,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5851</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="193,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">8.224,41</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="193,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="193,93" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">278.199,73</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="193,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="193,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF TRANSF A JOSÉ CLAUDIO DE LIMA LOPES </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="196,84" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VIAGEM INTERNACIONAL</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="193,93" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="69,85" YPos="193,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="193,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="200,29" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="200,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">23/05/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="200,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">2038</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="200,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.793,45</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="200,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="200,83" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">279.993,18</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="200,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="200,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="203,74" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (B.B)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="200,83" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="200,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="200,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="207,17" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="207,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24/05/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="207,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">2041</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="207,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.334,10</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="207,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="207,73" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">281.327,28</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="207,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="207,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="210,64" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (IPTU)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="207,73" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="207,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="207,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="214,05" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="214,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">25/05/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="214,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1873</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="214,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="214,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="214,63" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">282.327,28</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="214,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="214,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="217,54" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="214,63" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="214,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="214,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="220,93" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="221,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">01/06/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="221,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">2257</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="221,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">20.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="221,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="221,53" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">302.327,28</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="221,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="221,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="224,44" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (B.B)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="221,53" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="221,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="221,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="227,81" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="228,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">14/06/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="228,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">2385</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="228,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">10.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="228,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="228,43" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">312.327,28</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="228,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="228,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="231,34" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (B.B)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="228,43" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="228,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="228,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="234,69" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="235,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">20/07/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="235,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">2830</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="235,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">10.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="235,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="235,33" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">322.327,28</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="235,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="235,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="238,24" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="235,33" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="235,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="235,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="241,83" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="242,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">30/07/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="242,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5170</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="242,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">10.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="242,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="242,23" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">332.327,28</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="242,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="242,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="245,14" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="242,23" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="242,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="242,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="248,71" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="249,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">25/08/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="249,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5785</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="160,87" YPos="249,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="174,63" YPos="249,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">7.991,98</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="249,13" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">324.335,30</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="249,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="249,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF REEMBOLSO DE PASSAGEM -JOSÉ </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="252,04" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">CLAUDIO DE LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="249,13" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="249,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="249,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="258,50" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="182,03" YPos="258,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">IRACILENE / 14:43:07</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="258,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">FREDERICO JOSE N. DA SILVA DE MEDEIROS</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="258,50" Linewidth="0,53" Shape="2" Width="192,88" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape5">Graphic item</Item>
+</Page>
+<Page Number="2">
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="6,88" Linewidth="0,26" Shape="0" Width="202,94" Height="56,36" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="93,66" YPos="10,18" Height="16" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIVRO RAZÃO</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="23,67" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Nome</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="27,11" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">CNPJ</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="23,67" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">AGBR COMERCIO SERVIÇOS GRAFICOS IMPORTAÇÃO E EXPORTAÇÃO LTDA</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="27,11" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">11.416.247/0001-00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="33,99" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Folha</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="37,31" Linewidth="0,53" Shape="2" Width="192,88" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape2">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="23,67" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="27,11" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="33,99" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="33,99" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">2</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="18,26" YPos="55,15" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Data</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="28,57" YPos="55,15" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Lançamento</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="48,42" YPos="55,15" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Contra-Partida</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="100,01" YPos="55,15" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Histórico</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="141,29" YPos="55,15" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Valor de Débito</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="164,31" YPos="55,15" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Valor de Crédito</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="193,68" YPos="55,15" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Saldo</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="58,47" Linewidth="0,53" Shape="2" Width="12,44" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_cab_data">Graphic item</Item>
+<Item Type="Graphic" Layer="1" XPos="28,31" YPos="58,47" Linewidth="0,53" Shape="2" Width="13,23" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_cab_documento">Graphic item</Item>
+<Item Type="Graphic" Layer="1" XPos="42,86" YPos="58,47" Linewidth="0,53" Shape="2" Width="26,99" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_cab_contra_partida">Graphic item</Item>
+<Item Type="Graphic" Layer="1" XPos="71,17" YPos="58,47" Linewidth="0,53" Shape="2" Width="66,41" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_cab_historico">Graphic item</Item>
+<Item Type="Graphic" Layer="1" XPos="138,91" YPos="58,47" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_cab_valor_debito">Graphic item</Item>
+<Item Type="Graphic" Layer="1" XPos="162,19" YPos="58,47" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_cab_valor_credito">Graphic item</Item>
+<Item Type="Graphic" Layer="1" XPos="185,47" YPos="58,47" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_cab_saldo">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="59,92" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">324.335,30</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="14,59" YPos="59,92" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">Continuação</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="23,32" YPos="46,42" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">1.1.4.4.04.0002</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="73,59" YPos="46,42" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">8150</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="111,16" YPos="46,42" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">JOSE CLAUDIO DE LIMA LOPES</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="46,42" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Conta :</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="60,36" YPos="46,42" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Sequência :</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="98,72" YPos="46,42" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Descrição :</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="59,92" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="30,55" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Data</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="30,55" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">01/01/2012 a 31/12/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="30,55" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="111,13" YPos="17,58" Height="8" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="63,50" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">25/08/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5786</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">224,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="63,93" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">324.559,30</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="66,84" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (DINHEIRO)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="63,93" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="70,38" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17/09/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">3378</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">349,24</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="70,83" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">324.908,54</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF DEBITO EM CONTA CONF. JOSÉ CLAUDIO </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="73,74" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">DE LIMA LOPES (CAESB COMP DE SANEAMENTO </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="76,65" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">AMBIENTAL DO DF LT 29) VEJA IND E COM DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="79,56" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">BRINDES LTDA</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="70,83" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="83,08" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="83,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">04/10/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="83,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">3988</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="83,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.900,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="83,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="83,53" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">326.808,54</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="83,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0003</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="83,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF DEBITO EM CONTA CONF. LOJA </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="86,44" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">MANONICA ESTRELA P N 03-JOSÉ CLAUDIO DE LIMA </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="89,35" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LOPES</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="83,53" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="63,76" YPos="83,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4022)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="83,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="92,87" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="93,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">11/10/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="93,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">3787</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="93,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.104,66</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="93,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="93,33" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">327.913,20</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="93,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="93,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="96,24" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (ARTUR CASIMIRO DE SOUSA NETO) </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="99,15" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">PARCELA 1/51</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="93,33" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="93,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="93,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="102,66" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="103,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">12/11/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="103,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4120</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="103,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.082,10</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="103,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="103,13" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">328.995,30</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="103,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="103,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="106,04" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (ARTUR CASIMIRO DE SOUSA) </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="108,95" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">PARCELAS 2/51 PEUGEOT 408 </Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="103,13" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="103,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="103,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="112,45" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="112,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">06/12/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="112,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4397</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="112,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="112,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="112,93" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">333.995,30</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="112,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="112,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="115,84" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES </Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="112,93" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="112,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="112,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="119,33" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="119,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">06/12/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="119,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5356</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="119,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="119,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="119,83" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">338.995,30</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="119,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="119,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="122,74" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (BB)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="119,83" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="119,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="119,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="126,21" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="126,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">10/12/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="126,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4420</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="126,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">3.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="126,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="126,73" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">341.995,30</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="126,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="126,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="129,64" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (B.B)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="126,73" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="126,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="126,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="133,09" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="133,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">10/12/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="133,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4425</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="133,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="133,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="133,63" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">342.995,30</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="133,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="133,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="136,54" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES B.B</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="133,63" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="133,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="133,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="139,96" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="140,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">20/12/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="140,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5394</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="140,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">191,25</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="140,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="140,53" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">343.186,55</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="140,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="140,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="143,44" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES </Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="140,53" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="140,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="140,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="146,84" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="147,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">21/12/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="147,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4497</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="147,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.113,82</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="147,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="147,43" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">344.300,37</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="147,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="147,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO JOSÉ CLAUDIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="150,34" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIMA LOPES (ARTUR CASIMIRO DE SOUSA NETO)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="147,43" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="147,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="147,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="153,72" Linewidth="0,26" Shape="0" Width="202,94" Height="8,47" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="137,85" YPos="155,12" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="148,70" YPos="155,12" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">215.463,00</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="174,63" YPos="155,12" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">7.991,98</Item>
+<Item Type="Graphic" Layer="1" XPos="138,91" YPos="153,72" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape12">Graphic item</Item>
+<Item Type="Graphic" Layer="1" XPos="162,19" YPos="153,72" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape13">Graphic item</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="160,60" Linewidth="0,53" Shape="2" Width="192,88" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape10">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="131,00" YPos="155,12" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Total</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="258,50" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="182,03" YPos="258,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">IRACILENE / 14:43:07</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="258,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">FREDERICO JOSE N. DA SILVA DE MEDEIROS</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="258,50" Linewidth="0,53" Shape="2" Width="192,88" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape5">Graphic item</Item>
+</Page>
+</QXDocument>

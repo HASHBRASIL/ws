@@ -1,0 +1,139 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+.acoes{
+    text-align: center;
+}
+.editable{
+    color:black;
+}
+a.editable-click {
+  border-bottom: none;
+}
+a.editable-click.editable-disabled,a.editable-click:hover {
+  border-bottom: none;
+}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/plugins/bootstrap-datepicker/css/datepicker.css" />
+<link href="/assets/plugins/select2/select2_metro.css" rel="stylesheet" type="text/css"/>
+<!-- BEGIN X-EDITABLE PLUGIN-->
+  <link href="/assets/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="/assets/plugins/bootstrap-editable/inputs-ext/address/address.css" rel="stylesheet" type="text/css" media="screen"/>
+<!-- END X-EDITABLE PLUGIN-->
+<div class="row-fluid">
+     <div class="span12">
+	      <h3 class="page-title">
+	       Registro de Feedbacks
+	        <small> no sistema</small>
+	      </h3>
+     </div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box grey">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-wrench"></i>Feedbacks</div>
+				<div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<table class="table-bordered table-striped table-condensed flip-content" id="perfisTable">
+						<thead class="flip-content">
+							<tr>
+								<th class="hidden-480">Código</th>
+					            <th class="hidden-480">Assunto</th>
+					            <th class="hidden-480">Usuario</th>
+					            <th class="hidden-480">Feedback</th>
+					            <th class="hidden-480">Status</th>
+					            <th class="hidden-480">Data de criação</th>
+					            <th style="width: 45px;" class="hidden-480 action">Ação</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<?php if (count($this->feedList) > 0):?>
+				        <?php foreach ($this->feedList as $feed):?>
+			            <tr class="odd gradeX">
+			                <td class="hidden-480" style="width:30px"><?php echo $feed->id_feed; ?></td>
+			                <td><?php echo $feed->getAssunto()->nome; ?></td>
+			                <td class="hidden-480"><?php echo $feed->getUser() ? $feed->getUser()->getEmpresa()->nome_razao : "Anônimo"; ?></td>
+			                <td><?php echo $feed->feedback; ?></td>
+			                <td>
+			                    <a href="javascript:;" class="editable status_feed" data-name='status_feed' data-type="text" data-pk="<?php echo $feed->id_feed?>"  data-url="/sis/feedback/form">
+			                        <?php echo $feed->getStatus()->nome; ?>
+			                    </a>
+		                    </td>
+			                <td class="hidden-480"  style="width:150px"><?php echo $this->dateHour($feed->dt_criacao); ?></td>
+			                <td class="acoes">
+			                    <a class="deleteMoldal" value="<?php echo $feed->id_feed; ?>" href="#">
+			                        <img title="Excluir" data-tooltip src="<?php echo $this->baseUrl('images/delete.png')?>"/>
+			                    </a>
+			                </td>
+			            </tr>
+				        <?php endforeach;?>
+					<?php endif;?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir o feedback: <span id ="valueDelete"></span></p>
+</div>
+<script type="text/javascript">
+
+ $('#perfisTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ],
+     "aaSorting": [[ 4, "asc" ]],
+ });
+</script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js"></script>
+    <script src="/assets/plugins/select2/select2.min.js" type="text/javascript"></script>
+
+<!-- BEGIN X-EDITABLE PLUGIN-->
+  <script src="/assets/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js" type="text/javascript"></script>
+  <script src="/assets/plugins/bootstrap-editable/inputs-ext/address/address.js" type="text/javascript"></script>
+  <script src="/assets/plugins/bootstrap-editable/inputs-ext/wysihtml5/wysihtml5.js" type="text/javascript"></script>
+<!-- END X-EDITABLE PLUGIN-->
+
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/sis/feedback.grid.js')?>"></script>

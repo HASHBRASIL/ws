@@ -1,0 +1,50 @@
+
+{% import 'row.html.twig' as row %}
+{% import 'forms.html.twig' as forms %}
+
+
+<div class="col-md-12 area-conteudo-hash">
+    <div class="row panel panel-white">
+        {#<div class="panel-heading">#}
+        {#<h5>Componente <span>Capa</span></h5>#}
+        {#<p>Descrição desse componente para que o usuário saiba do que se trata esse componente.</p>#}
+        {#</div>#}
+        <div class="panel-body">
+            <form method="POST" action="home.php?servico={{ params.servico }}">
+                {{ forms.input('id', view.id, 'hidden') }}
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset>
+                            <legend>
+                                {{ 'Formulário' | zftranslate }}
+                            </legend>
+                            <div class="row">
+                                {% set selectPessoa = forms.select('id_grupo',  null, view.comboGrupo, 'select2-skin') %}
+                                {{ row.formgroup('Time', selectPessoa, 'col-md-4') }}
+                                {{ row.formgroup('Valor', forms.input('fin_valor', '', 'text', 'decimal'), 'col-md-4') }}
+                                {{ row.formgroup('Centro de Custos', forms.select('cec_id','', view.comboCentroCusto, 'select2-skin'), 'col-md-3') }}
+                                {{ row.formgroup('Plano de Contas', forms.select('plc_id', '', view.comboPlanoContas, 'select2-skin'), 'col-md-3') }}
+                                {{ row.formgroup('Descrição', forms.textarea('fin_descricao', ''), 'col-md-4') }}
+
+                                {{ row.formgroup('Manter valor total na transação', forms.select('keepvalue', 0, {1 : 'Sim', 0: 'Não'}, 'select2-skin'), 'col-md-3') }}
+
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary btn-sm formaction" data-servico="{{ servico.id }}" data-show="ajax">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+           </form>
+        </div>
+    </div>
+</div>

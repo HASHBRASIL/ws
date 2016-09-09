@@ -1,0 +1,120 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box blue">
+			<div class="portlet-title">
+			    <div class="actions">
+	                <a class="btn blue" href="<?php echo $this->baseUrl("empresa/grupo-operacao/form")?>"><i class="icon-pencil"></i>Novo</a>
+                </div>
+				<div class="caption"><i class="icon-money"></i>Grupo de Operações</div>
+				<div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="javascript:;" class="remove"></a>
+                </div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline"
+					role="grid">
+					<table class="table-bordered table-striped table-condensed flip-content" id="financeiroTable">
+						<thead class="flip-content">
+							<tr>
+								<th class="hidden-480">Código</th>
+					            <th class="hidden-480">Nome</th>
+					            <th class="hidden-480">CNPJ / CPF</th>
+					            <th class="hidden-480">Telefone1 </th>
+					            <th class="hidden-480">Telefone2 </th>
+					            <th class="hidden-480">Telefone3</th>
+					            <th class="hidden-480">Email1</th>
+					            <th class="hidden-480">Email2</th>
+					             <th class="hidden-480">Grupo de Empresa</th>
+
+					            <th style="width: 45px;" class="hidden-480 action">Ação</th>
+							</tr>
+						</thead>
+
+						<tbody>
+
+							<?php if (count($this->registros) > 0):?>
+				        <?php for($x = 0 ; $x < count($this->registros); $x++): ?>
+				            <tr class="odd gradeX">
+				                <td class="hidden-480" ><?php echo $this->registros[$x]['id']?></td>
+				                <td class="hidden-480" ><?php echo $this->registros[$x]['nome']?></td>
+				                <td class="hidden-480" style="width:200px"><?php echo $this->registros[$x]['cnpjcpf'] ?></td>
+				                <td class="hidden-480"><?php echo $this->registros[$x]['tel1'] ?></td>
+				                <td class="hidden-480"><?php echo $this->registros[$x]['tel2']?></td>
+				                <td class="hidden-480"><?php echo $this->registros[$x]['tel3']?></td>
+				                <td class="hidden-480"><?php echo $this->registros[$x]['email1'] ?></td>
+				                <td class="hidden-480"><?php echo $this->registros[$x]['email2']  ?></td>
+				                <td class="hidden-480"><?php echo $this->registros[$x]['grupo_empresa']  ?></td>
+
+				                <td class="hidden-480 acoes">
+				                     <a href="<?php echo $this->baseUrl("empresa/grupo-operacao/form/ope_id/{$this->registros[$x]['id']}")?>">
+				                        <img title="Editar" data-tooltip src="<?php echo $this->baseUrl('images/edit.png')?>" />
+				                    </a>
+				                    <a href="<?php echo $this->baseUrl("empresa/grupo-operacao/delete/ope_id/{$this->registros[$x]['id']}")?>" class="delete_financeiro">
+				                        <img  title="excluir" data-tooltip src="<?php echo $this->baseUrl('images/delete.png')?>" />
+				                    </a>
+				                </td>
+				            </tr>
+				        <?php endfor;?>
+				    <?php endif;?>
+
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+
+ $('#financeiroTable').dataTable({
+
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+
+
+</script>

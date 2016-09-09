@@ -1,0 +1,26 @@
+<?php
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$formPesquisa = $this->actionSearch
+			  ? $this->actionSearch
+			  : $this->baseUrl( $request->getModuleName().'/'.$request->getControllerName().'/'.$request->getActionName() );
+?>
+
+<div class='top-div' id='search'>
+    <form action='<?php echo $formPesquisa;?>' method='get' id='form_pesquisa_grid'>
+			<?php echo $this->formSelect('searchField', $request->getParam('searchField'), array('class' => 'select-custom'), array('' => $this->translate('--- Selecione ---')) + (array) $this->fields)?>
+            <input type='text' name='searchString' id='searchString' class='text-custom' value='<?php echo $request->getParam('searchString');?>' />
+            <img src="<?php echo $this->baseUrl('images/search.png')?>" title="Pesquisar" data-tooltip id='bt_pesquisar_grid' style="cursor: pointer" />
+    </form>
+</div>
+<script>
+$(document).ready(function(){
+    $('body').on('click', 'img#bt_pesquisar_grid', function(e){
+        var val  = $("#itens").val() ? $("#itens").val() : "250";
+        if($('#searchField').val() !=  "" && $('#searchString').val() !=  ""){
+            location = '<?php echo $this->baseUrl() . "/" . $request->getModuleName(), '/', $request->getControllerName(), '/', $request->getActionName()?>/itens/' + val +'/searchField/'+$('#searchField').val()+'/searchString/'+$('#searchString').val();
+        }else{
+            location = '<?php echo $this->baseUrl() . "/" . $request->getModuleName(), '/', $request->getControllerName(), '/', $request->getActionName()?>/itens/' + val;
+        }
+    });
+});
+</script>

@@ -1,0 +1,63 @@
+<html>
+<head>
+</head>
+<body>
+    <table align='center' border='0' width='1500px' cellspacing='0' cellpadding='5' style='font-family: "Century Gothic",Arial; font-size: 1.2em; '>
+            <!-- tabela com historico da solicitação -->
+            <tr>
+                <td>
+                    <p>Bom dia,</p>
+                    <p>Segue abaixo as alterações feitas nos processos no dia <?php echo date('d/m/Y')?>:</p>
+               </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php if(count($this->idProcessoList)>0):?>
+                    <?php foreach ($this->idProcessoList as $codProcesso => $idProccesso):?>
+                        <p> Código do processo: <?php echo $codProcesso?></p>
+                        <table border='1' cellspacing='0' cellpadding='5' cellpadding="5px" style="border-color: #EBEBEB">
+                            <thead>
+                                <tr style="background-color: #DDD;color: #666;">
+                                    <th>Descrição</th>
+                                    <th>Quantidade</th>
+                                    <th>valor Unitário</th>
+                                    <th style="width: 90px; text-align: center;" >valor do pedido</th>
+                                <th>Data de entrega</th>
+                                <th>Obs. Entrega</th>
+                                <th>Status</th>
+                                <th  style="width: 160px;">Data de Alteração</th>
+                                <th  style="width: 160px;">Usuário</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <?php $count = 0?>
+                                <?php foreach ($this->historicoList[$idProccesso] as $key=> $historico):?>
+                                    <?php $count++?>
+                                    <?php $newHistorico = ($key == count($this->historicoArray[$idProccesso]) - 1) ? null: $this->historicoArray[$idProccesso][$count]?>
+                                    <tr <?php echo $key % 2 ? 'style="background-color: #F9F9F9"': ''?> >
+                                        <td <?php echo isset($newHistorico->pro_desc_produto) && $newHistorico->pro_desc_produto != $historico->pro_desc_produto ? "style='background-color:#7E0606;color:white;border-style: solid;border-width: 1px;border-color: #B9AAAA;'": ""; ?> ><?php echo $historico->pro_desc_produto ?></td>
+                                        <td <?php echo isset($newHistorico->pro_quantidade) && $newHistorico->pro_quantidade != $historico->pro_quantidade ? "style='background-color:#7E0606;color:white;border-style: solid;border-width: 1px;border-color: #B9AAAA;'": ""; ?>><?php echo $historico->pro_quantidade?></td>
+                                        <td <?php echo isset($newHistorico->pro_vlr_unt) && $newHistorico->pro_vlr_unt != $historico->pro_vlr_unt ? "style='background-color:#7E0606;color:white;border-style: solid;border-width: 1px;border-color: #B9AAAA;'": ""; ?>><?php echo $this->real($historico->pro_vlr_unt)?></td>
+                                        <td <?php echo isset($newHistorico->pro_vlr_pedido) && $newHistorico->pro_vlr_pedido != $historico->pro_vlr_pedido ? "style='background-color:#7E0606;color:white;border-style: solid;border-width: 1px;border-color: #B9AAAA;'": ""; ?>><?php echo $this->real($historico->pro_vlr_pedido) ?></td>
+                                        <td <?php echo isset($newHistorico->pro_data_entrega) && $newHistorico->pro_data_entrega != $historico->pro_data_entrega ? "style='background-color:#7E0606;color:white;border-style: solid;border-width: 1px;border-color: #B9AAAA;'": ""; ?>><?php echo  $this->Date($historico->pro_data_entrega)?></td>
+                                        <td <?php echo isset($newHistorico->pro_prazo_entrega) && $newHistorico->pro_prazo_entrega != $historico->pro_prazo_entrega ? "style='background-color:#7E0606;color:white;border-style: solid;border-width: 1px;border-color: #B9AAAA;'": ""; ?>><?php echo $historico->pro_prazo_entrega ?></td>
+                                        <td <?php echo isset($newHistorico->sta_id) && $newHistorico->sta_id != $historico->sta_id ? "style='background-color:#7E0606;color:white;border-style: solid;border-width: 1px;border-color: #B9AAAA;'": ""; ?>><?php echo $historico->getStatus()->sta_descricao ?></td>
+                                        <td><?php echo $this->dateHour($historico->dt_criacao)?></td>
+                                        <td><?php echo $historico->getUsuario()?></td>
+                                    </tr>
+                                <?php endforeach;?>
+                        </tbody>
+                    </table>
+                <?php endforeach;?>
+                <?php else: ?>
+                        <p>Não possui Historico nesta data...</p>
+                <?php endif;?>
+               </td>
+            </tr>
+
+            <tr>
+                <td style='background-color: #f6f6f6;'></td>
+            </tr>
+    </table>
+</body>
+</html>

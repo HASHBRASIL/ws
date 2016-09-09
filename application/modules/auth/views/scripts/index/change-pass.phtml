@@ -1,0 +1,29 @@
+<div class="content">
+    <form method="Post" class="form-vertical forget-form" novalidate="novalidate" style="display:block">
+        <h3 class="">Cadastre sua nova senha</h3>
+        <p>Digite a sua nova senha nos campos abaixo.</p>
+        <div class="control-group">
+            <div class="controls">
+                <input class="m-wrap placeholder-no-fix" original-title=""
+                       name="senha" id="senha" autofocus="" placeholder="Nova senha"
+                       required="" type="password" />
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input class="m-wrap placeholder-no-fix" original-title=""
+                       name="senha2" id="senha2" autofocus=""
+                       placeholder="Repita a nova senha"
+                       required="" type="password" />
+            </div>
+        </div>
+        <div class="form-actions">
+            <a href="<?php echo $this->baseUrl("auth/index/login/")?>" class="btn">
+            <i class="m-icon-swapleft"></i> Voltar
+            </a>
+            <button type="submit" class="btn green pull-right">
+            Enviar <i class="m-icon-swapright m-icon-white"></i>
+            </button>
+        </div>
+    </form>
+</div>

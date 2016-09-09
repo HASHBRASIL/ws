@@ -1,0 +1,90 @@
+<div class="row-fluid">
+	<div class="span6">
+		<div class="grid_info">
+        	Mostrando de <?php echo $this->firstItemNumber?> até <?php echo $this->lastItemNumber?> de <?php echo $this->totalItemCount?> registros
+		</div>
+	</div>
+	<div class="span6" >
+		<?php
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+    ?>
+    <?php if (count($this->pagesInRange) > 1): ?>
+    <div class="dataTables_paginate paging_bootstrap pagination" style="float: right; margin: 0px;">
+          <ul>
+            <li class="arrow <?php echo $this->previous ? "": "unavailable" ?>"><a href="<?php echo $this->url(
+                        array(
+                            'controller' => $request->getControllerName(),
+                            'action'     => $request->getActionName(),
+                            'module'     => $request->getModuleName(),
+                            'page'       => $this->first
+                    ))?>">&laquo;</a></li>
+            <li class="arrow <?php echo $this->previous ? "": "unavailable" ?>"><a href="<?php echo $this->url(
+                        array(
+                            'controller' => $request->getControllerName(),
+                            'action'     => $request->getActionName(),
+                            'module'     => $request->getModuleName(),
+                            'page'       => $this->previous
+                    ))?>">&lsaquo;</a></li>
+            <?php
+            if($this->current <=  5){
+                $inicio = array(1,2,3,4,5);
+            }else {
+                $inicio = array($this->current-3, $this->current-2, $this->current-1, $this->current, $this->current+1, $this->current+2, $this->current+3);
+            }
+            foreach($inicio as $value):?>
+            <?php if($value > $this->last ): break;endif;?>
+                <li class="<?php echo $this->current == $value ? "current": ""?>"><a href="<?php echo $this->url(
+                        array(
+                            'controller' => $request->getControllerName(),
+                            'action'     => $request->getActionName(),
+                            'module'     => $request->getModuleName(),
+                            'page'       => $value
+                    ))?>"><?php echo $value?></a></li>
+            <?php endforeach;?>
+            <li class="arrow <?php echo $this->next ? "": "unavailable" ?>"><a href="<?php echo $this->url(
+                        array(
+                            'controller' => $request->getControllerName(),
+                            'action'     => $request->getActionName(),
+                            'module'     => $request->getModuleName(),
+                            'page'       => $this->next
+                    ))?>">&rsaquo;</a></li>
+            <li class="arrow <?php echo $this->next ? "": "unavailable" ?>"><a href="<?php echo $this->url(
+                        array(
+                            'controller' => $request->getControllerName(),
+                            'action'     => $request->getActionName(),
+                            'module'     => $request->getModuleName(),
+                            'page'       => $this->last
+                    ))?>">&raquo;</a></li>
+          </ul>
+    </div>
+    <?php endif; ?>
+		
+	</div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('[name=itens]').change(function() {
+            var val  = $(this).val();
+            location = '<?php echo $this->baseUrl() . "/" . $request->getModuleName(), '/', $request->getControllerName(), '/', $request->getActionName()?>/page/<?php echo $this->current?>/itens/' + val + serializaForm();
+        });
+        $('#page').change(function() {
+            var val = $(this).val();
+            location = '<?php echo $this->baseUrl() . "/" .  $request->getModuleName(), '/', $request->getControllerName(), '/', $request->getActionName()?>/page/' + val + serializaForm();
+       });
+
+       $('.footer .buttons').click(function() {
+                $this = $(this);
+            location = $this.parent().attr('href') + serializaForm();
+            return false;
+        });
+    });
+
+    function serializaForm(){
+        if($('#searchField').val() !=  "" && $('#searchString').val() !=  ""){
+            return '/searchField/'+$('#searchField').val()+'/searchString/'+$('#searchString').val();
+        }else{
+            return "";
+        }
+    }
+</script>

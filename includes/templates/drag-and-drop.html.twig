@@ -1,0 +1,160 @@
+{% include 'header-content.html.twig' %}
+<form method="POST" action="home.php">
+    {#<input type="hidden" name="servico" id="servico" value="{{  }}"/>#}
+    <input type="hidden" name="id" value="{{ id }}"/>
+	<div class="campo-arquivo" id="dropzoneArea">
+		<h2>Arraste o arquivo aqui!</h2>
+		<i class="fa fa-upload fa-6"></i>
+	</div>
+    {% include 'form-action.html.twig' %}
+</form>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="js/dropzone.js"></script>
+
+<script type="text/javascript">
+
+function ProgressElement()
+{
+    var elements = {};
+
+    this.add = function(nome, tipo, file)
+    {
+        elements[file.id] = {
+            'iElement' : file.id,
+            'file' : file,
+            'dom' : createTrProgress(nome, tipo)
+        }
+
+        $(elements[file.id]['dom']['iIconRemoveArquivo']).attr('onclick', 'progressElement.del('+file.id+')');
+
+
+        $('.lista-tabela table tbody').prepend(elements[file.id]['dom']['tr']);
+    }
+
+    this.error = function(id)
+    {
+        $(elements[id]['dom']['spanStatusArquivo']).html('Falha no envio do arquivo');
+        $(elements[id]['dom']['spanTipoArquivo']).html('');
+        $(elements[id]['dom']['divProgressBar']).addClass('progress-bar-danger');
+    }
+
+    this.del = function(id)
+    {
+        myDropzone.removeFile(elements[id]['file']);
+        $(elements[id]['dom']['tr']).remove();
+        delete elements[id];
+    }
+
+    this.success = function(id)
+    {
+        $(elements[id]['dom']['spanStatusArquivo']).html('Completo');
+        $(elements[id]['dom']['iIconRemoveArquivo']).hide();
+    }
+
+    this.progress = function(id, progress, bytesSent)
+    {
+        $(elements[id]['dom']['divProgressBar']).css('width', progress+'%');
+        $(elements[id]['dom']['spanStatusArquivo']).html(bytesSent+'bps');
+    }
+
+    function createTrProgress(nome, tipo)
+    {
+        var array = {
+            'tr'                : document.createElement('tr'),
+            'tdBody'            : document.createElement('td'),
+            'tdButton'          : document.createElement('td'),
+            'spanNomeArquivo'   : document.createElement('span'),
+            'spanStatusArquivo' : document.createElement('span'),
+            'spanTipoArquivo'   : document.createElement('span'),
+            'spanSrOnly'        : document.createElement('span'),
+            'aRemoveArquivo'    : document.createElement('a'),
+            'divProgress'       : document.createElement('div'),
+            'divProgressBar'    : document.createElement('div'),
+            'iIconRemoveArquivo': document.createElement('i')
+        };
+
+        $(array['spanNomeArquivo']).html(nome);
+        $(array['spanNomeArquivo']).addClass('nome-arquivo');
+
+        $(array['spanStatusArquivo']).html('kbps');
+        $(array['spanStatusArquivo']).addClass('status-arquivo');
+
+        $(array['spanTipoArquivo']).html(tipo);
+        $(array['spanTipoArquivo']).addClass('tipo-arquivo');
+
+        $(array['divProgress']).addClass('progress');
+
+        $(array['divProgressBar']).addClass('progress-bar progress-bar-success');
+
+        $(array['divProgressBar']).attr('role', 'progressbar').attr('aria-valuenow', '40').attr('aria-valuemin', '0')
+                                  .attr('aria-valuemax', '100').css('width', '0%');
+
+        $(array['spanSrOnly']).addClass('sr-only');
+
+        $(array['aRemoveArquivo']).addClass('btn-remover-arquivo');
+
+        $(array['iIconRemoveArquivo']).addClass('fa fa-times-circle');
+
+
+        $(array['divProgressBar']).append(array['spanSrOnly']);
+
+        $(array['divProgress']).append(array['divProgressBar']);
+
+        $(array['tdBody']).append(array['spanNomeArquivo']).append(array['spanStatusArquivo']).append(array['spanTipoArquivo']).append(array['divProgress']);
+
+        $(array['aRemoveArquivo']).append(array['iIconRemoveArquivo']);
+
+        $(array['tdButton']).append(array['aRemoveArquivo']);
+
+        $(array['tr']).append(array['tdBody']).append(array['tdButton']);
+
+        return array;
+    }
+}
+
+var progressElement = new ProgressElement();
+
+var myDropzone = new Dropzone("div#dropzoneArea", {
+    url: "home.php?servico={{ data.servico }}",
+    autoProcessQueue: true,
+    maxFiles: 100,
+    maxFilesize: 30, // mb
+    uploadMultiple: false,
+    parallelUploads: 1,
+    init: function() {
+        var id = 0;
+            this.on("addedfile", function(file) {
+                file.id = ++id;
+                progressElement.add(file.name, ' | '+file.name.split('.').pop(), file);
+            });
+
+            this.on("uploadprogress", function(file, progress, bytesSent) {
+                progressElement.progress(file.id, progress, bytesSent);
+                if(progress == 100){
+                    //progressElement.completed(file.id);
+                }
+            });
+
+            this.on("success", function(file) {
+                progressElement.del(file.id);
+            });
+
+            this.on("error", function(file) {
+                console.log('errod');
+                progressElement.error(file.id);
+            });
+
+            this.on("totaluploadprogress", function(progress) {
+                console.log(progress);
+            });
+
+            this.on("sending", function(file, xhr, formData) {
+              // Will send the filesize along with the file as POST data.
+              formData.append("filesize", file.size);
+            });
+        }
+    }
+);
+</script>

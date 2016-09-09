@@ -1,0 +1,47 @@
+<?php
+    $this->doctype ( 'XHTML1_STRICT' );
+    $this->headMeta ()  ->appendHttpEquiv ( 'Content-Type', 'text/html; charset=utf-8' )
+                        ->appendHttpEquiv ( 'Content-Language', 'pt-BR' );
+
+    $this->headScript ()->appendFile ( PATH_LIBRARY . 'jquery/jquery-2.1.4.min.js' );
+    $this->headScript ()->appendFile ( PATH_LIBRARY . 'bootstrap/js/bootstrap.min.js' );
+    $this->headScript ()->appendFile ( PATH_JSDEFAULT . 'main.js' );
+
+    $this->headLink ()->appendStylesheet ( PATH_LIBRARY . 'bootstrap/css/bootstrap.min.css' );
+    $this->headLink ()->appendStylesheet ( PATH_LIBRARY . 'fortawesome/css/font-awesome.min.css' );
+    $this->headLink ()->appendStylesheet ( PATH_LIBRARY . 'normalize.css' );
+    
+    $this->headLink ()->appendStylesheet ( PATH_CSSDEFAULT . 'new/mixins.css' );
+    $this->headLink ()->appendStylesheet ( PATH_CSSDEFAULT . 'new/font.css' );
+    $this->headLink ()->appendStylesheet ( PATH_CSSDEFAULT . 'new/grid.css' );
+    $this->headLink ()->appendStylesheet ( PATH_CSSDEFAULT . 'new/general.css' );
+    $this->headLink ()->appendStylesheet ( PATH_CSSDEFAULT . 'new/main.css' );
+    $this->headLink ()->appendStylesheet ( PATH_CSSDEFAULT . 'new/sidebar.css' );
+       
+    $this->doctype ( 'XHTML1_STRICT' );
+    $this->headMeta ()->appendHttpEquiv ( 'Content-Type', 'text/html; charset=utf-8' )->appendHttpEquiv ( 'Content-Language', 'pt-BR' );
+
+    $this->headTitle ( 'ERP | Sistemas Integrados de Gestão Empresarial' );
+?>
+<!-- 1140px Grid styles for IE -->
+<!--[if lte IE 9]><link rel="stylesheet" href="<?php print $this->baseUrl().'/public/css/admin/'; ?>ie.css" type="text/css" media="screen" /><![endif]-->
+<style>
+    #carregando{
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 46%;
+        width: 140px;
+        height: 30px;
+        background: #E02222;
+        z-index: 10000;
+        text-align: center;
+        color: white;
+        border: 1px solid white;
+        border-top-width: 0;
+    }
+    div#carregando span{
+        margin: 6px 0;
+        display: block;
+    }
+</style>

@@ -1,0 +1,64 @@
+/*
+* @Author: toinsane
+* @Date:   2016-01-26 18:33:17
+* @Last Modified by:   toinsane
+* @Last Modified time: 2016-02-02 11:01:36
+*/
+nav.dropdown-hash-menu      { position: absolute; background: @cor-branco; border: 1px solid lighten(@cor-preto, 87%); .rounded(3px); .drop-shadow(1px, 1px, 15px, 0.15); z-index: 10; padding: 10px; display: inline-table; z-index: 11; display: none; font-family: @openSans;
+    &:before                { border-style: solid; border-color: transparent #dbdde0 transparent transparent; border-width: 10px; content: ""; width: 0; height: 0; position: absolute; left: -20px; top: 10px; }
+    &:after                 { border-style: solid; border-color: transparent @cor-branco transparent transparent; border-width: 11px; content: ""; width: 0; height: 0; position: absolute; left: -20px; top: 9px; }
+
+    &.seta-esquerda-topo    {
+        &:before            { border-color: transparent #dbdde0 transparent transparent; left: -20px; top: 10px; }
+        &:after             { border-color: transparent @cor-branco transparent transparent;  left: -20px; top: 9px; }
+    }
+    &.seta-esquerda-base    {
+        &:before            { border-color: transparent #dbdde0 transparent transparent; left: -20px; bottom: 10px; top: initial; }
+        &:after             { border-color: transparent @cor-branco transparent transparent;  left: -20px; bottom: 9px; top: initial; }
+    }
+
+    &.seta-direita-topo     {
+        &:before            { border-color: transparent transparent transparent #dbdde0; right: -20px; top: 10px; left: initial; }
+        &:after             { border-color: transparent transparent transparent @cor-branco;  right: -20px; top: 9px; left: initial; }
+    }
+
+    &.seta-direita-base     {
+        &:before            { border-color: transparent transparent transparent #dbdde0; right: -20px; bottom: 10px; left: initial; top: initial; }
+        &:after             { border-color: transparent transparent transparent @cor-branco;  right: -20px; bottom: 9px; left: initial; top: initial; }
+    }
+
+    &.seta-topo-direita     {
+        &:before            { border-color: transparent transparent #dbdde0 transparent; right: 10px; top: -20px; left: initial; }
+        &:after             { border-color: transparent transparent @cor-branco transparent; right: 9px; top: -20px; left: initial; }
+    }
+
+    &.seta-topo-esquerda    {
+        &:before            { border-color: transparent transparent #dbdde0 transparent; left: 10px; top: -20px; }
+        &:after             { border-color: transparent transparent @cor-branco transparent; left: 9px; top: -20px; }
+    }
+
+    &.seta-base-esquerda    {
+        &:before            { border-color: #dbdde0 transparent transparent transparent; left: 10px; bottom: -20px; top: initial; }
+        &:after             { border-color: @cor-branco transparent transparent transparent; left: 9px; bottom: -20px; top: initial; }
+    }
+
+    &.seta-base-direita     {
+        &:before            { border-color: #dbdde0 transparent transparent transparent; right: 10px; bottom: -20px; top: initial; left: initial; }
+        &:after             { border-color: @cor-branco transparent transparent transparent; right: 9px; bottom: -20px; top: initial; left: initial; }
+    }
+
+    header                  { position: relative; margin: 15px 0 5px 0; height: 20px;
+        &:first-child       { margin-top: 0; }
+        &:after             { content: ""; border-bottom: 1px fade(#cdcdd0, 30%) solid; width: 100%; display: block; position: absolute; top: 8px; }
+        span                { font-size: 12px; font-family: @arimo; margin: 0; padding: 0; color: lighten(@cor-preto, 45%); background: @cor-branco; position: absolute; z-index: 10; padding-right: 5px; }
+    }
+    ul                      { padding: 0; margin: 0;
+        li                  { list-style-type: none; padding: 0 20px 0 0; margin: 0; color: #61686f; margin-bottom: 7px; display: block;
+            a               { color: fade(@cor-preto, 80%); text-decoration: none; font-weight: normal; display: block; font-size: 1.1em; padding-left: 10px;
+                i.fa        { margin-right: 7px; }
+                &:hover     { color: #61686f; }
+            }
+        }
+    }
+    i.ico-hash              { background: url('../img/logo-hash-icone.png') no-repeat; background-size: contain; display: inline-block; height: 20px; vertical-align: middle; width: 20px;}
+}

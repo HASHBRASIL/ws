@@ -1,0 +1,28 @@
+{% include 'paginator.html.twig' %}
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#sample-table-3 thead tr').append($(document.createElement('th')).attr('data-field', 'tools').text('Ferramentas'));
+		$('#sample-table-3 tbody tr').each(function(indice, v){
+
+			var td = $(document.createElement('td')).attr('data-field', 'tools');
+			var i  = $(document.createElement('i')).addClass('glyphicon glyphicon-edit');
+			var a  = $(document.createElement('a')).addClass('listaction-manual');
+
+			a.append(i);
+			td.append(a);
+			$(v).append(td);
+		});
+
+		$('body').on('click', '.listaction-manual', function(e){
+			e.preventDefault();
+			
+			var id   = $(this).closest('tr').attr('data-id');
+			var path = $(this).closest('tr').find('td[data-field-type="image"]').find('img').attr('src')
+			callbackTableFilter(new Array({'id': id, 'path': path}));
+			bootbox.hideAll();
+		});
+	});
+
+</script>

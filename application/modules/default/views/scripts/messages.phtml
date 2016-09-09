@@ -1,0 +1,13 @@
+<?php if(is_array($this->messages) && count($this->messages)): ?>
+    <?php foreach ($this->messages as $message): ?>
+        <div class="row">
+          <div class="large-12 columns">
+            <div data-alert class="alert-box round <?php echo $message->type ?>" >
+                <?php echo $this->translate($message->text) ?>
+                <a href="#" class="close">&times;</a>
+            </div>
+          </div>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+

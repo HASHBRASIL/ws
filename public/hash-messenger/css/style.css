@@ -1,0 +1,436 @@
+/* CORES */
+/* FONTS */
+@import 'bootstrap.min.css';
+* {
+  -webkit-font-smoothing: antialiased !important;
+  outline: none;
+}
+.modal-default .modal-content {
+  background: url('../imgs/bg-noise.jpg');
+  border: 0px;
+  -webkit-box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.5);
+}
+.modal-default .modal-content .modal-header {
+  background-color: #e0e0e0;
+  padding: 10px;
+  -webkit-border-top-right-radius: 6px;
+  -webkit-border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 6px;
+  -moz-border-radius-topright: 6px;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topleft: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 6px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.modal-default .modal-content .modal-header h4 {
+  color: #616161;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.4em;
+  font-weight: 700;
+}
+.modal-default .modal-content .modal-header button i {
+  font-size: 1.2em;
+}
+.modal-default .modal-content .modal-body {
+  padding: 20px;
+}
+.modal-default .modal-content .nav-tabs {
+  margin: 0 0 20px 0;
+}
+.modal-default .modal-content .nav-tabs li {
+  margin-bottom: 0px;
+}
+.modal-default .modal-content .nav-tabs li a {
+  border: none;
+  color: #666666;
+  font-weight: 400;
+  padding: 5px 10px;
+}
+.modal-default .modal-content .nav-tabs li a:hover {
+  background-color: transparent;
+  border: none;
+}
+.modal-default .modal-content .nav-tabs li.active {
+  border-bottom: 3px solid #d25840;
+}
+.modal-default .modal-content .nav-tabs li.active a {
+  background-color: transparent;
+  border: 0;
+  color: #666666;
+  padding: 5px 10px;
+}
+.modal-default .modal-content .nav-tabs li.active a:focus {
+  border: 0;
+}
+.modal-default .modal-content .nav-tabs li.active a:hover {
+  border: 0;
+}
+.modal-default .modal-content form {
+  margin: 0;
+}
+.modal-default .modal-content form label {
+  color: #666666;
+  display: block;
+  font-size: 0.95em;
+  font-weight: 400;
+}
+.modal-default .modal-content form input {
+  border: 1px solid #e2e5e9;
+  color: #666666;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  height: 40px;
+  padding: 5px 10px;
+  margin: 0 0 15px;
+  width: 100%;
+}
+.modal-default .modal-content form select {
+  background-color: #ffffff;
+  border: 1px solid #e2e5e9;
+  color: #666666;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  height: 40px;
+  padding: 5px;
+  margin: 0 0 15px;
+  outline: none;
+  width: 100%;
+}
+.modal-default .modal-content form .box-enviar {
+  background-color: #ffffff;
+  border: 1px solid #e2e5e9;
+  color: #666666;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 0 0 15px;
+}
+.modal-default .modal-content form .box-enviar span {
+  background-color: #d9dde2;
+  display: inline-block;
+  font-size: 0.95em;
+  font-weight: 500;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 6px;
+}
+.modal-default .modal-content form .box-enviar span a {
+  color: #737373;
+  margin: 0 0 0 10px;
+}
+.modal-default .modal-content form .box-arquivo {
+  text-align: center;
+}
+.modal-default .modal-content form .box-arquivo span {
+  display: inline-block;
+  margin: 0 10px;
+}
+.modal-default .modal-content form .box-arquivo span.start i {
+  color: #95c660;
+  font-size: 4em;
+}
+.modal-default .modal-content form .box-arquivo span.stop i {
+  color: #d25840;
+  font-size: 4em;
+}
+.modal-default .modal-content form .box-arquivo span.content-arquivo {
+  position: relative;
+  vertical-align: middle;
+}
+.modal-default .modal-content form .box-arquivo span.content-arquivo i {
+  color: #e0e0e0;
+  font-size: 9em;
+}
+.modal-default .modal-content form .box-arquivo span.content-arquivo small {
+  bottom: 50%;
+  color: #666666;
+  font-size: 1.2em;
+  position: absolute;
+  right: 20px;
+}
+.modal-default .modal-content form textarea {
+  border: 1px solid #e2e5e9;
+  color: #666666;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  height: 40px;
+  padding: 5px;
+  min-height: 120px;
+  width: 100%;
+}
+.modal-default .modal-content form .agendamento {
+  display: inline-block;
+  width: 100%;
+}
+.modal-default .modal-content form .agendamento .data {
+  float: left;
+  margin: 0 15px 0 0;
+  position: relative;
+  width: 28%;
+}
+.modal-default .modal-content form .agendamento .data i {
+  color: #b3b3b3;
+  cursor: pointer;
+  font-size: 1.3em;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+}
+.modal-default .modal-content form .agendamento .horario {
+  float: left;
+  margin: 0 15px 0 0;
+  position: relative;
+  width: 25%;
+}
+.modal-default .modal-content form .agendamento .horario i {
+  color: #b3b3b3;
+  font-size: 1.3em;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+}
+.modal-default .modal-content form .agendamento .notificacao {
+  float: left;
+  width: 40%;
+}
+.modal-default .modal-content form .agendamento input,
+.modal-default .modal-content form .agendamento select {
+  margin: 0 0 7px 0;
+}
+.modal-default .modal-content form .agendamento.evento {
+  display: block;
+  width: 48%;
+}
+.modal-default .modal-content form .agendamento.evento.inicio {
+  float: left;
+}
+.modal-default .modal-content form .agendamento.evento.fim {
+  float: right;
+}
+.modal-default .modal-content form .agendamento.evento .data {
+  margin: 0;
+  width: 65%;
+}
+.modal-default .modal-content form .agendamento.evento .horario {
+  float: right;
+  margin: 0;
+  width: 30%;
+}
+.modal-default .modal-content form .agendamento.evento i {
+  top: 25%;
+}
+.modal-default .modal-content form input[type="checkbox"]:not(:checked),
+.modal-default .modal-content form input[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+.modal-default .modal-content form input[type="checkbox"]:not(:checked) + label,
+.modal-default .modal-content form input[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+.modal-default .modal-content form input[type="checkbox"]:not(:checked) + label:before,
+.modal-default .modal-content form input[type="checkbox"]:checked + label:before {
+  background-color: transparent;
+  border: 1px solid #5c5c5c;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 15px;
+  height: 15px;
+}
+.modal-default .modal-content form input[type="checkbox"]:not(:checked) + label:after,
+.modal-default .modal-content form input[type="checkbox"]:checked + label:after {
+  content: '\f00c';
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  font-family: FontAwesome;
+  font-size: 1.2em;
+  line-height: 0.8;
+  color: #4d4d4d;
+  transition: all .2s;
+}
+.modal-default .modal-content form input[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+.modal-default .modal-content form input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+.modal-default .modal-content form .adicionar-item {
+  margin: 10px 0 0 0;
+}
+.modal-default .modal-content form .adicionar-item input {
+  width: 90%;
+}
+.modal-default .modal-content form .adicionar-item button {
+  border: none;
+  color: #ffffff;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 8px 13px;
+  margin: 0 0 0 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.modal-default .modal-content form .adicionar-item button.excluir {
+  background-color: #d25840;
+}
+.modal-default .modal-content form .adicionar-item button.adicionar {
+  background-color: #95c660;
+}
+.modal-default .modal-content form .dados-evento {
+  display: inline-block;
+  width: 48%;
+}
+.modal-default .modal-content form .dados-evento.lista-checkbox {
+  margin: 25px 0 0;
+}
+.modal-default .modal-content form .dados-evento.lista-checkbox label {
+  margin-bottom: 10px;
+}
+.modal-default .modal-content form .texto-descricao {
+  display: inline-block;
+  width: 100%;
+}
+.modal-default .modal-content table {
+  margin: 20px 0 0;
+  width: 100%;
+}
+.modal-default .modal-content table tbody tr {
+  border-bottom: 1px solid #e6e6e6;
+}
+.modal-default .modal-content table tbody tr td {
+  padding: 10px 0;
+}
+.modal-default .modal-content table tbody tr td i {
+  color: #d25840;
+  display: inline-block;
+  font-size: 1.2em;
+  float: left;
+  margin: 0 10px 0;
+}
+.modal-default .modal-content table tbody tr td h3 {
+  color: #5c5c5c;
+  font-size: 1em;
+  font-weight: 400;
+  margin: 0;
+}
+.modal-default .modal-content table tbody tr td a.link-acao i {
+  color: #7a7a7a;
+}
+.modal-default .modal-content table tbody tr td time {
+  color: #a6a6a6;
+  font-size: 0.75em;
+}
+.modal-default .modal-content table tbody tr td:last-child {
+  border-left: 1px solid #e6e6e6;
+}
+.modal-default .modal-content table tbody tr td:last-child a i {
+  margin: 0 0 0 10px;
+}
+.modal-default .modal-content table tbody tr td .player {
+  margin: 5px 0 0 40px;
+  position: relative;
+  width: 85%;
+}
+.modal-default .modal-content table tbody tr td .player .ui-slider-horizontal {
+  background-color: #ac3e29;
+  border: none;
+  height: .2em;
+}
+.modal-default .modal-content table tbody tr td .player .ui-slider .ui-slider-handle {
+  height: 0.6em;
+  width: 0.6em;
+  top: -0.2em;
+}
+.modal-default .modal-content table tbody tr td .player .ui-state-default,
+.modal-default .modal-content table tbody tr td .player .ui-widget-content .ui-state-default {
+  background-color: #622317;
+  border: none;
+  color: #b4412b;
+  outline: none;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.modal-default .modal-content table tbody tr td .player .ui-state-active,
+.modal-default .modal-content table tbody tr td .player .ui-widget-content .ui-state-active,
+.modal-default .modal-content table tbody tr td .player .ui-widget-header .ui-state-active,
+.modal-default .modal-content table tbody tr td .player a.ui-button:active,
+.modal-default .modal-content table tbody tr td .player .ui-button:active,
+.modal-default .modal-content table tbody tr td .player .ui-button.ui-state-active:hover {
+  background-color: #8b3221;
+  border: none;
+  outline: none;
+}
+.modal-default .modal-content table tbody tr td .player span.processo {
+  color: #616161;
+  font-size: 0.75em;
+  position: absolute;
+  top: -15px;
+  left: 0;
+}
+.modal-default .modal-content table tbody tr td .player span.time-total {
+  color: #616161;
+  font-size: 0.75em;
+  position: absolute;
+  top: -15px;
+  right: 0;
+}
+.modal-default .modal-content table tbody tr td:nth-child(2) {
+  text-align: center;
+}
+.modal-default .modal-content table tbody tr:nth-child(1) td h3,
+.modal-default .modal-content table tbody tr:nth-child(2) td h3,
+.modal-default .modal-content table tbody tr:nth-child(3) td h3 {
+  font-weight: bold;
+}
+.modal-default .modal-content table tbody tr:nth-child(even) {
+  background: #f2f2f2;
+}
+.modal-default .modal-content table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+.modal-default .modal-content .modal-footer {
+  border-top: none;
+  padding: 0 20px 20px;
+  text-align: right;
+}
+.modal-default .modal-content .modal-footer button {
+  font-weight: bold;
+  outline: none;
+  color: #ffffff;
+  padding: 2px 20px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+.modal-default .modal-content .modal-footer button.btn-limpar {
+  background-color: #60a4ea;
+}
+.modal-default .modal-content .modal-footer button.btn-enviar {
+  background-color: #95c660;
+}

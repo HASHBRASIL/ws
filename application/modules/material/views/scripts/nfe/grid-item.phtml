@@ -1,0 +1,55 @@
+<?php $totalProduto = 0?>
+<table class="table-bordered table-striped table-condensed flip-content" style="width: 100%">
+    <thead>
+        <tr>
+            <th style="width: 100px">Código</th>
+            <th>Descrição produto/Serviço</th>
+            <th style="width: 120px">NCM/SH</th>
+            <th style="width: 130px">CST</th>
+            <th style="width: 140px">CFOP</th>
+            <th style="width: 135px;" >Unidade</th>
+            <th style="width: 96px;">Quant</th>
+            <th style="width: 90px">Valor Unitario</th>
+            <th style="width: 90px">Valor Total</th>
+            <th style="width: 90px">B. Calc. ICMS</th>
+            <th style="width: 90px">Valor ICMS</th>
+            <th style="width: 90px">Valor IPI</th>
+            <th style="width: 90px">Aliquo. ICMS</th>
+            <th style="width: 90px">Aliquo. IPI</th>
+            <th style="width: 90px" class="action">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if( count($this->listItemMov) > 0):?>
+            <?php foreach ($this->listItemMov as $item):?>
+            <?php $estoque = $item->getListMovimento()->current()->getEstoque() ?>
+                <tr>
+                    <td><?php echo $estoque->codigo ?></td>
+                    <td><?php echo $estoque->getItem()->nome ?></td>
+                    <td><?php echo $estoque->ncm_sh?></td>
+                    <td><?php echo $estoque->cst?></td>
+                    <td><?php echo $estoque->cfop?></td>
+                    <td><?php echo $estoque->getItem()->getUnidadeCompra()->nome ?></td>
+                    <td><?php echo $this->real($item->quantidade, false)?></td>
+                    <td><?php echo $this->real($estoque->vl_unitario, false)?></td>
+                    <td><?php echo $this->real($estoque->vl_total, false)?></td>
+                    <td><?php echo $this->real($estoque->bc_icms, false)?></td>
+                    <td><?php echo $this->real($estoque->vl_icms, false)?></td>
+                    <td><?php echo $this->real($estoque->vl_ipi, false)?></td>
+                    <td><?php echo $this->real($estoque->aliq_icms,false)?></td>
+                    <td><?php echo $this->real($estoque->aliq_ipi,false)?></td>
+                    <td class="acoes" style="text-align: center;"><a data-tooltip href="<?php echo $item->id_movimento ?>" title="Visualizar lote" class="ver_lote"><img src="<?php echo $this->baseUrl('/images/view_detail.png')?>"></a></td>
+                </tr>
+                <?php  $totalProduto  = $totalProduto + $estoque->vl_total?>
+            <?php endforeach;?>
+        <?php else: ?>
+            <tr>
+                <td colspan="16">Não possui dados</td>
+            </tr>
+        <?php endif;?>
+    </tbody>
+</table>
+<div style="margin-bottom: 20px; text-align: right; margin-top: 5px;">
+    Total dos produtos <?php echo $this->real($totalProduto)?>
+    <?php echo $this->formHidden('total_produto_grid', $this->real($totalProduto, false))?>
+</div>

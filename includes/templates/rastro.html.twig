@@ -1,0 +1,11 @@
+<nav class="rastro">
+    <ul>
+    	{% for item in rastro %}
+            {% if item.id == servico.id %}
+                    <li class="active">{{item.nome}}</li>
+            {% else %}
+                    <li><a href="home.php?servico={{item.id}}">{{item.nome}}</a><i class="fa fa-angle-right"></i></li>
+                    {% endif %}
+    	{% endfor %}
+    </ul>
+</nav>

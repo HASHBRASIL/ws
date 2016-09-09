@@ -1,0 +1,98 @@
+<?php
+    /*<table border="0" cellspacing="3" style="width: 780px" cellpadding="4">
+    <tr>
+        <td style="width: 80px">Cliente: </td><td style="width: 330px"><?php echo $this->cliente->nome?></td>
+        <td style="width: 80px"></td><td><?php  echo date("d/m/Y G:i:s")?></td>
+    </tr>
+    <tr>
+        <td>Endereço: </td><td><?php echo $this->cliente->getListEndereco()->count() ? $this->cliente->getListEndereco()->current()->nome_logradouro." ".$this->cliente->getListEndereco()->current()->tipo_logradouro." ".$this->cliente->getListEndereco()->current()->numero :"-";?></td>
+        <td>Bairro: </td><td><?php  echo $this->cliente->getListEndereco()->count() ? $this->cliente->getListEndereco()->current()->bairro : "-" ?></td>
+    </tr>
+    <tr>
+        <td>CPF/CNPJ: </td><td><?php echo $this->cpf($this->cliente->cnpj_cpf) ?></td>
+        <td>Cidade: </td><td><?php  echo $this->cliente->getListEndereco()->count() ? $this->cliente->getListEndereco()->current()->getCidade()->cid_nome : "-"   ?></td>
+    </tr>
+    <tr>
+        <td>CEP: </td><td><?php echo $this->cliente->getListEndereco()->count() ? $this->cliente->getListEndereco()->current()->cep : "-" ?></td>
+        <td>UF: </td><td><?php  echo $this->cliente->getListEndereco()->count() ? $this->cliente->getListEndereco()->current()->getEstado()->ufs_nome : "-" ?></td>
+    </tr>
+</table>
+    */
+    ?>
+<hr />
+<h1 style="text-align: center;font-size:19;">ORDEM DE PRODUÇÃO <?php echo $this->processo->pro_codigo?></h1>
+<hr />
+<table border="0" style="width: 780px" cellspacing="3" cellpadding="4" >
+    <tr>
+        <td style="width: 105px">Status: </td><td colspan="3"><?php echo $this->processo->getStatus()->sta_descricao?></td>
+    </tr>
+    <tr>
+        <td>Quantidade: </td><td><?php echo $this->processo->pro_quantidade;?></td>
+        <td style="text-align: right;">Data de entrega: </td><td><?php  echo $this->dateHour($this->processo->pro_data_entrega) ?></td>
+    </tr>
+    <tr>
+        <td style="width: 105px">Obs. de entrega: </td><td colspan="3" style="text-align: justify;"><?php echo $this->processo->pro_prazo_entrega ?></td>
+    </tr>
+    <tr>
+        <td>Descrição: </td><td  colspan="3" style="text-align: justify;"><?php  echo $this->processo->pro_desc_produto ?></td>
+    </tr>
+</table>
+<?php if(count($this->servicoList)): ?>
+    <hr />
+    <div style="font-size:15;font-weight: bold;">Serviço</div>
+    <table border="0" style="width: 750px;" cellspacing="1" cellpadding="4" >
+        <tr style="font-weight: bold;">
+            <th style="border-bottom: 1px solid #241E1E; width: 120px;text-align:right;">Quantidade</th>
+            <th style="border-bottom: 1px solid #241E1E; width: 570px">Descrição</th>
+        </tr>
+    <?php foreach ($this->servicoList as $servico):?>
+            <tr>
+                <td  style="text-align:right;"><?php echo $servico->quantidade?></td>
+                <td><?php echo $servico->getServico()->nome?></td>
+            </tr>
+    <?php endforeach;?>
+    </table>
+
+<?php endif;?>
+<?php if(count($this->materialClienteList)): ?>
+    <hr />
+    <div style="font-size:15;font-weight: bold;">Material Cliente</div>
+    <table border="0" style="width: 750px;" cellspacing="1" cellpadding="4" >
+        <tr style="font-weight: bold;">
+            <th style="border-bottom: 1px solid #241E1E; width: 100px;text-align:right;">Quantidade</th>
+            <th style="border-bottom: 1px solid #241E1E; width: 350px">Descrição</th>
+            <th style="border-bottom: 1px solid #241E1E; width: 120px">Unidade</th>
+            <th style="border-bottom: 1px solid #241E1E; width: 120px">Marca</th>
+        </tr>
+    <?php foreach ($this->materialClienteList as $material):?>
+            <tr>
+                <td style="text-align:right;"><?php echo $this->formatDecimal($material->quantidade)?></td>
+                <td><?php echo $material->nome?></td>
+                <td><?php echo $material->getUnidade()->nome?></td>
+                <td><?php echo $material->getMarca()? $material->nome :" - ";?></td>
+            </tr>
+    <?php endforeach;?>
+    </table>
+<?php endif;?>
+
+<?php if(count($this->materialProprioList)): ?>
+    <hr />
+    <div style="font-size:15;font-weight: bold;">Material Próprio</div>
+    <table border="0" style="width: 750px;" cellspacing="1" cellpadding="4" >
+        <tr style="font-weight: bold;">
+            <th style="border-bottom: 1px solid #241E1E; width: 100px;">Quantidade</th>
+            <th style="border-bottom: 1px solid #241E1E; width: 350px">Descrição</th>
+            <th style="border-bottom: 1px solid #241E1E; width: 120px">Unidade</th>
+            <th style="border-bottom: 1px solid #241E1E; width: 120px;">Marca</th>
+        </tr>
+    <?php foreach ($this->materialProprioList as $material):?>
+            <tr>
+                <td  style="text-align:right;"><?php echo $this->formatDecimal($material->quantidade)?></td>
+                <td><?php echo $material->getItem()->nome?></td>
+                <td><?php echo $material->getUnidade()->nome?></td>
+                <td><?php echo $material->getMarca()? $material->nome :" - ";?></td>
+            </tr>
+    <?php endforeach;?>
+    </table>
+
+<?php endif;?>

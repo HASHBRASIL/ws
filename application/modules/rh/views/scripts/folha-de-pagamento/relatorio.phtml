@@ -1,0 +1,246 @@
+<br><br>
+<table border="1" style="width: 700px; font-size: 9; border: 1px solid #000" cellpadding="3">
+	<thead>
+		<tr>
+			<td style="text-align: center;"><h4>Empregados</h4></td>
+			<td style="text-align: center;">Vencimentos</td>
+			<td style="text-align: center;">Descontos</td>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->dados as $dados) :?>
+		<tr>
+			<td colspan="3">
+				<table style="width: 694px; font-size: 8; left: 0px;">
+					<tr>
+						<td>
+						
+							<table style="width: 100%" cellpadding="1">
+								<tr>
+									<td width="30" style="text-align: center;"><?php echo $dados['corporativo']['id']?></td>
+									<td colspan="2"><h4><?php echo $dados['corporativo']['nome_razao']?></h4></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td colspan="2"><?php echo $dados['cbo']['nome']?></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td colspan="2">Admissão em <?php echo $this->date($dados['admissao']['dt_admissao'])?></td>
+								</tr>
+							</table>
+							
+						</td>
+						<td>
+							<table  style="width: 100%" cellpadding="1">
+							<?php foreach ($dados['tss'] as $tss) : ?>
+								<tr>
+									<td  valign="top" style="text-align: center;"><?php echo $tss['codigo'];?></td>
+									<td valign="top"><?php echo str_replace(array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'), '', $tss['fin_descricao']);?></td>
+									<td valign="top" style="text-align: center;"><?php echo $tss['referencia'];?></td>
+									<td valign="top" style="text-align: right;"><?php echo $this->formatDecimal($tss['fin_valor']);?></td>
+								</tr>
+							<?php endforeach;?>
+							</table>
+						</td>
+						<td>
+							<?php if (!empty($dados['tse'])) : ?>
+							<table style="width: 100%" cellpadding="1">
+							<?php foreach ($dados['tse'] as $tse) : ?>
+								<tr>
+									<td style="text-align: center;"><?php echo $tse['codigo'];?></td>
+									<td><?php echo str_replace(array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9'), '', $tse['fin_descricao']);?></td>
+									<td style="text-align: center;"><?php echo $tse['referencia'];?></td>
+									<td style="text-align: right;"><?php echo $this->formatDecimal($tse['fin_valor']);?></td>
+								</tr>
+							<?php endforeach;?>
+							</table>
+							<?php endif;?>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<table style="width: 100%" cellpadding="1">
+								<tr>
+									<td width="30" style="text-align: center;"></td>
+									<td width="110">Salário Base:</td>
+									<td style="text-align: right;">
+										<?php echo $this->formatDecimal($dados['funcional']['salario'])?>
+									</td>
+								</tr>
+								<tr>
+									<td width="30" style="text-align: center;"></td>
+									<td width="110">FGTS a Recolher:</td>
+									<td style="text-align: right;">
+										<?php 
+											if (!empty($dados['valorFgts']['fin_valor'])){
+												echo $this->formatDecimal($dados['valorFgts']['fin_valor']);
+											} else { 
+												echo '0,00'; 
+											}
+										?>
+									</td>
+								</tr>
+								<tr>
+									<td width="30" style="text-align: center;"></td>
+									<td width="110">Base do FGTS Mês:</td>
+									<td style="text-align: right;">
+										<?php 
+											if (!empty($dados['base']['fgts'])){
+												echo $this->formatDecimal($dados['base']['fgts']);
+											} else { 
+												echo '0,00'; 
+											}
+										?>
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							<table style="width: 100%" cellpadding="1">
+								<tr>
+									<td>Total de Vencimentos:</td>
+									<td style="text-align: right;">
+										<?php 
+											if (!empty($dados['base']['totalTss'])){
+												echo $this->formatDecimal($dados['base']['totalTss']);
+											} else { 
+												echo '0,00'; 
+											}
+										?>
+									</td>
+								</tr>
+								<tr>
+									<td>Base do INSS:</td>
+									<td style="text-align: right;">
+										<?php 
+											if (!empty($dados['base']['inss'])){
+												echo $this->formatDecimal($dados['base']['inss']);
+											} else { 
+												echo '0,00'; 
+											}
+										?>
+									</td>
+								</tr>
+								<tr>
+									<td>Base do INSS Mês:</td>
+									<td style="text-align: right;">
+										<?php 
+											if (!empty($dados['base']['inss'])){
+												echo $this->formatDecimal($dados['base']['inss']);
+											} else { 
+												echo '0,00'; 
+											}
+										?>
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							<table style="width: 100%" cellpadding="1">
+								<tr>
+									<td width="30" style="text-align: center;"></td>
+									<td width="120">Total de Descontos:</td>
+									<td style="text-align: right;">
+										<?php 
+											if (!empty($dados['base']['totalTse'])){
+												echo $this->formatDecimal($dados['base']['totalTse']);
+											} else { 
+												echo '0,00'; 
+											}
+										?>
+									</td>
+								</tr>
+								<tr>
+									<td width="30" style="text-align: center;"></td>
+									<td width="120">Salário Líquido:</td>
+									<td style="text-align: right;">
+										<?php 
+											if (!empty($dados['base']['totalTse'])){
+												$total = $dados['base']['totalTss'] - $dados['base']['totalTse'];
+												echo $this->formatDecimal($total);
+											} else { 
+												echo $this->formatDecimal($dados['base']['totalTss']); 
+											}
+										?>
+									</td>
+								</tr>
+								<tr>
+									<td width="30" style="text-align: center;"></td>
+									<td width="120">Base do IRRF Mês:</td>
+									<td style="text-align: right;">
+										<?php 
+											if (!empty($dados['base']['irrf'])){
+												echo $this->formatDecimal($dados['base']['irrf']);
+											} else { 
+												echo '0,00'; 
+											}
+										?>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	<?php endforeach;?>
+	</tbody>
+</table>
+<br><br>
+<table border="1" style="width: 700px; font-size: 8" cellpadding="3">
+	<thead>
+		<tr>
+			<td width="350"><h3 align="center">Totalização A Pagar</h3></td>
+			<td><h3 align="center">Totalização dos Descontos</h3></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td width="350">
+				<table style="width: 340px;" cellpadding="3">
+					<thead>
+						<tr style="border: 1px solid #000;">
+							<td width="50" style="text-align: center;">Código</td>
+							<td width="130">Descrição</td>
+							<td width="80" style="text-align: center;">Horas / Dias</td>
+							<td width="80" style="text-align: right;">Valor</td>
+						</tr>
+					</thead>
+					<tbody>
+					<?php foreach ($this->provento as $provento) :?>
+						<tr>
+							<td width="50" style="text-align: center;"><?php echo $provento['codigo']?></td>
+							<td width="130"><?php echo $provento['descricao']?></td>
+							<td width="80" style="text-align: center;"><?php echo $provento['referencia']?></td>
+							<td width="80" style="text-align: right;"><?php echo $this->formatDecimal($provento['total'])?></td>
+						</tr>
+					<?php endforeach;?>
+					</tbody>
+				</table>
+			</td>
+			<td>
+			<table style="width: 340px;" cellpadding="3">
+				<thead>
+					<tr style="border: 1px solid #000;">
+						<td width="50" style="text-align: center;">Código</td>
+						<td width="130">Descrição</td>
+						<td width="80" style="text-align: center;">Horas / Dias</td>
+						<td width="80" style="text-align: right;">Valor</td>
+					</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($this->desconto as $desconto) :?>
+					<tr>
+						<td width="50" style="text-align: center;"><?php echo $desconto['codigo']?></td>
+						<td width="130"><?php echo $desconto['descricao']?></td>
+						<td width="80" style="text-align: center;"><?php echo $desconto['referencia']?></td>
+						<td width="80" style="text-align: right;"><?php echo $this->formatDecimal($desconto['total'])?></td>
+					</tr>
+				<?php endforeach;?>
+				</tbody>
+			</table>
+			</td>
+		</tr>
+	</tbody>
+</table>

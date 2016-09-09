@@ -1,0 +1,85 @@
+.login                                                                          { padding-top: 0;
+    .content-login                                                              { background: url("../images/hash.jpg") no-repeat; background-size: cover; background-position: center center;
+        .container-fluid                                                        {
+            .box-form-login                                                     { background-color: rgba(255,255,255,0.4); border-radius: 10px; padding: 50px 0 30px; max-width: 400px; margin: 100px auto 230px;
+                                                                                  text-align: center;
+                input[type="password"],input[type="email"]                      { font-size: 1.5em !important; margin: 0 0 20px; height: 50px; width: 70%; outline: none; text-indent: 5px;}
+                span                                                            { display: block; margin: 0 auto 20px; text-align: left; width: 70%;
+                    input[type="checkbox"]                                      { margin: 0px 5px 0 0; height: 25px; vertical-align: middle; width: 25px;}
+                    label                                                       { color: #717171;}
+                }
+                button                                                          { display: block; margin: 0 auto;}
+                .forget-password                                                { margin: 10px 0 0;
+                    a                                                           { font-weight: bold;}
+                    p                                                           { color: #504e4e;}
+                }
+            }
+        }
+    }
+}
+
+.fale-conosco                                                                   {
+    .landing-page                                                               {
+        .content-fale-conosco                                                   {
+            .navbar                                                             { }
+            .form-fale-conosco                                                  { margin: 0 auto; max-width: 680px;
+                h5                                                              { line-height: 1.3em;}
+                form                                                            { display: inline-block; margin: 20px 0 0;
+                    .item-form                                                  {
+                        label                                                   { display: block;}
+                        input, select                                           { border-radius: 2px; height: 30px; margin: 0 0 20px; outline: none; width: 100%;}
+                        textarea                                                { border-radius: 2px; height: 120px; outline: none; width: 100%;}
+                    }
+                    .btn-action                                                 { margin: 20px 0 0 0; text-align: right;}
+                }
+            }
+        }
+    }
+}
+
+.landing-page                                                                   {
+    .navbar                                                                     { background: rgba(0, 0, 0, 0.3);
+        .navbar-header                                                          {
+            .navbar-brand                                                       {
+                img                                                             { max-width: 100px;}
+            }
+        }
+    }
+    .landing-content                                                            { height: auto;
+        .carousel                                                               { height: auto;
+            .slick-slide                                                        { height: auto;
+                .caption                                                        { background-size: cover !important; background-position: center center !important; padding: 130px 80px; position: relative; height: 470px;
+                                                                                  left: 0; top: 0;}
+            }
+        }
+        .slick-prev, .slick-next                                                { top: 15%;}
+    }
+    .section-contact                                                            { background-image: none;}
+}
+
+
+@media (max-width: 992px)                                                       {
+   .landing-page                                                                {
+        .landing-content                                                        {
+            .carousel                                                           {
+                .slick-slide                                                    {
+                    .caption                                                    { padding: 130px 40px;}
+                }
+            }
+        }
+    }
+
+    .fale-conosco                                                               {
+        .landing-page                                                           {
+            .form-fale-conosco                                                  { padding: 60px 0 0;}
+        }
+    }
+}
+
+@media (max-width: 768px)                                                       {
+
+}
+
+@media (max-width: 768px)                                                       {
+
+}

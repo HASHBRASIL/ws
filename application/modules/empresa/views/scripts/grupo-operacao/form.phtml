@@ -1,0 +1,157 @@
+<?php
+    /**
+     * @author Julyeser Santos Silva
+  *  @since  24/07/2013
+     * formulario do controller transportador para cadastrar e editar grupos de operações
+    */
+
+
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css')?>" />
+	<script type="text/javascript" src="/assets/plugins/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js"></script>
+<div class="row-fluid">
+					<div class="span12">
+						<h3 class="page-title">
+							Cadastro
+							 <small>Corporativo</small>
+						</h3>
+					</div>
+				</div>
+<div class="row-fluid">
+	<div class="portlet box green">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i> Grupo de operações</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+	<div class="portlet-body form">
+        <form method="post"  class="form-horizontal" id="ope_id">
+
+
+
+                  <div class="row-fluid">
+                      <div class="span12">
+                      	  <div class="control-group">
+	                          <label class="control-label"><?php echo $this->translate('NOME')?><span class="required">*</span></label>
+	                          <div class="controls">
+
+	                          	<?php echo $this->formText('ope_nome',$this->vo->ope_nome , array('class' => 'span6'));?>
+	                          </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row-fluid">
+
+
+
+                  </div>
+
+
+                  <div class="row-fluid">
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label class="label_cnpj control-label"><?php echo $this->translate('CNPJ / CPF')?><span class="required">*</span></label>
+	                          <div class="controls">
+	                          	<?php echo $this->formText('ope_cpf_cnpj',$this->vo->ope_cpf_cnpj, array('class' => 'span10'));?>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label  class="control-label"><?php echo $this->translate('Email')?></label>
+	                          <div class="controls email">
+		                          <?php echo $this->formText('ope_email1',$this->vo->ope_email1, array( 'style' => 'display:inline-block', 'class' => 'email span10'));?>
+		                          <img title="Adicionar email" src="<?php echo $this->baseUrl('images/add.png')?>" style="cursor: pointer;" class="add-email  tooltips" data-tooltip />
+		                          <?php if ( $this->vo->ope_email2 != ''):?>
+		                                  <input type='text' name='ope_email2' id='email2' value='<?php  echo $this->vo->ope_email2 ?>' class='email span10' style='display:inline-block; margin-top: 5px;'>
+		                                  <img src='/images/delete.png' data-tooltip title='excluir email' class='delete-email tooltips' id-email='2' style='cursor:pointer'>
+		                          <?php endif;?>
+	                         </div>
+                          </div>
+                      </div>
+
+                     <div class="span3">
+                          <div class="control-group">
+	                          <label class="label_cnpj control-label"><?php echo $this->translate('empresas grupo')?><span class="required">*</span></label>
+	                          <div class="controls">
+	                          <?php
+	                             // echo '<pre>'; print_r($this->empresas_grupo); exit;
+	                             $option = array();
+	                             for ($x = 0; $x <  count($this->empresas_grupo); $x++):
+	                                 $option[$this->empresas_grupo[$x]['id']] = $this->empresas_grupo[$x]['fantasia'];
+	                             endfor;
+	                          ?>
+
+	                          	<?php echo $this->formSelect('empresas_grupo_id',$this->vo->empresas_grupo_id, null , $option);?>
+	                          </div>
+                          </div>
+                      </div>
+                      <div class="span3 div_uasg">
+
+                      </div>
+
+
+                  </div>
+                  <div class="row-fluid">
+                      <div class="span3">
+                          <div class="control-group">
+	                          <label  class="control-label"><?php echo $this->translate('Telefone')?></label>
+	                          <div class="controls telefone">
+		                          <?php echo $this->formText('ope_telefone1', $this->vo->ope_telefone1, array( 'style' => 'display:inline-block', 'class' => 'telefone span10'));?>
+		                          <img title="Adicionar telefone" src="<?php echo $this->baseUrl('images/add.png')?>" style="cursor: pointer;" class="add-tel tooltips" data-tooltip />
+
+	                          <?php if ($this->vo->ope_telefone2 != ''): ?>
+	                                  <input type='text' name='ope_telefone2' value='<?php echo $this->vo->ope_telefone2  ?>' id='telefone2'  class='telefone span10' style='display:inline-block; margin-top: 5px;'>
+	                                  <img src='/images/delete.png' data-tooltip title='excluir telefone' class='delete-tel tooltips' id-tel='2' style='cursor:pointer'>
+	                             <?php
+	                             endif;
+	                                 if ($this->vo->ope_telefone3 != ''): ?>
+	                                  <input type='text' name='ope_telefone3' value='<?php echo $this->vo->ope_telefone3  ?>' id='telefone3'  class='telefone span10' style='display:inline-block; margin-top: 5px;'>
+	                                  <img src='/images/delete.png' data-tooltip title='excluir telefone' class='delete-tel tooltips' id-tel='3' style='cursor:pointer'>
+
+	                           <?php  endif; ?>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="span3">
+
+                      </div>
+
+                  </div>
+
+                  <div class="row-fluid">
+
+
+
+
+                  </div>
+                  <div class="row-fluid" style="margin-top: 15px">
+
+                  </div>
+
+
+                  <div class="form-actions">
+                      <button type="submit" class="btn blue"><i class="icon-ok"></i> Salvar</button><a href="/empresa/grupo-operacao/grid" class="btn">Voltar</a>
+
+                  </div>
+                  <?php echo $this->formHidden('ope_ativo',1,null)?>
+
+
+
+        </form>
+        </div>
+    </div>
+</div>
+
+<div class="grid_endereco" style="min-height: 120px;"></div>
+<div class="grid_contato" style="min-height: 120px;"></div>
+<div class="grid_financeiro" style="margin-bottom: 20px">
+</div>
+
+
+
+<script src="<?php echo $this->baseUrl('assets/scripts/form-validation.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/empresa/grupooperacao.form.js')?>"></script>
+

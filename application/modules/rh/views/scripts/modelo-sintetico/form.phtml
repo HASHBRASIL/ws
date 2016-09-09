@@ -1,0 +1,234 @@
+<link rel="stylesheet" href="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css');?>" />
+<div class="row-fluid" style="margin-bottom: 20px;"></div>
+<div class="row-fluid">
+	<div class="portlet box darkorange">
+		<div class="portlet-title">
+			<div class="caption"><i class="fa fa-reorder"></i>Modelo Sintetico</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+			<div class="actions">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<form action="#" class="form-horizontal" id="form_agrupador" method="post">
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label" id="labelCliente">Nome <span style="color: red">*</span></label>
+							<div class="controls">
+              	<?php echo $this->formText("descricao",$this->vo->descricao, array("class" => "span12"));?>
+              	<?php echo $this->formHidden('id_rh_modelo_sintetico', $this->vo->id_rh_modelo_sintetico)?>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="span3 ">
+						<div class="control-group ">
+							<label class="control-label" for="">Codígo <span style="color: red">*</span></label>
+							<div class="controls">
+								<?php echo $this->formText("codigo",$this->vo->codigo, array("class" => "span12"));?>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="span3 ">
+						<div class="control-group ">
+							<label class="control-label" for="">Exibir no Olerite<span style="color: red">*</span></label>
+							<div class="controls">
+								<div class="switch" data-on="warning" data-off="danger">
+									<?php if ($this->vo->exibir == 1) {
+										$chek = 'CHECKED';
+									}?>
+									<?php echo $this->formCheckbox('exibir', $this->vo->exibir, array($chek => $chek, 'class' => 'toggle'));?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<div class="row-fluid">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label" id="labelCliente">Entrada  <span style="color: red">*</span></label>
+							<div class="controls">
+              	<?php echo $this->formSelect('id_rh_entrada_sintetico',$this->vo->id_rh_entrada_sintetico,array("class" => "span6"),array("" => "Selecione")+$this->comboEntrada);?>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="span6 ">
+						<div class="control-group ">
+							<label class="control-label" for="">Natureza  <span style="color: red">*</span></label>
+							<div class="controls">
+								<?php echo $this->formSelect('id_rh_natureza_sintetico',$this->vo->id_rh_natureza_sintetico,array("class" => "span6"),array("" => "Selecione")+$this->comboNatureza);?>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<div class="row-fluid">
+					<div class="span3">
+						<div class="control-group">
+							<label class="control-label" id="labelCliente">INSS</label>
+							<div class="controls">
+              	<div class="switch" data-on="warning" data-off="danger">
+              						<?php if ($this->vo->inss == 1) {
+										$chek1 = 'CHECKED';
+									}?>
+									<?php echo $this->formCheckbox('inss', $this->vo->inss, array($chek1 => $chek1, 'class' => 'toggle'));?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="span3">
+						<div class="control-group ">
+							<label class="control-label" for="">IRRF</label>
+							<div class="controls">
+								<div class="switch" data-on="warning" data-off="danger">
+									<?php if ($this->vo->irrf == 1) {
+										$chek2 = 'CHECKED';
+									}?>
+									<?php echo $this->formCheckbox('irrf', $this->vo->irrf, array($chek2 => $chek2, 'class' => 'toggle'));?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="span3">
+						<div class="control-group ">
+							<label class="control-label" for="">FGTS</label>
+							<div class="controls">
+								<div class="switch" data-on="warning" data-off="danger">
+									<?php if ($this->vo->fgts == 1) {
+										$chek3 = 'CHECKED';
+									}?>
+									<?php echo $this->formCheckbox('fgts', $this->vo->fgts, array($chek3 => $chek3, 'class' => 'toggle'));?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="span3">
+						<div class="control-group ">
+							<label class="control-label" for="">Sindical</label>
+							<div class="controls">
+								<div class="switch" data-on="warning" data-off="danger">
+									<?php if ($this->vo->sindical == 1) {
+										$chek4 = 'CHECKED';
+									}?>
+									<?php echo $this->formCheckbox('sindical', $this->vo->sindical, array($chek4 => $chek4, 'class' => 'toggle'));?>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<div class="form-actions">
+					<a href="<?php echo $this->baseUrl('rh/modelo-sintetico/grid'); ?>" class="btn button-previous" style="display: inline-block;">
+						<i class="m-icon-swapleft"></i> Voltar 
+					</a>
+          <button class="btn green" type="submit">
+          	Salvar
+        	</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js');?>"></script>
+<script type="text/javascript">
+<!--
+	jQuery(document).ready(function() {       
+	   // initiate layout and plugins
+		$('#inss').toggleButtons({
+			  onChange: function ($el, status, e) {
+			    // $el = $('#toggle-button'); 
+			    // status = [true, false], the value of the checkbox
+			    // e = the event
+			    console.log(status);
+			    if(status === true){
+			    	$('#inss').val("1"); 
+			    } else {
+			    	$('#inss').val("0");
+			    }
+			  }
+		});
+		$('#irrf').toggleButtons({
+			  onChange: function ($el, status, e) {
+			    console.log(status);
+			    if(status === true){
+			    	$('#irrf').val("1"); 
+			    } else {
+			    	$('#irrf').val("0");
+			    }
+			  }
+		});
+		$('#fgts').toggleButtons({
+			  onChange: function ($el, status, e) {
+			    console.log(status);
+			    if(status === true){
+			    	$('#fgts').val("1"); 
+			    } else {
+			    	$('#fgts').val("0");
+			    }
+			  }
+		});
+		$('#sindical').toggleButtons({
+			  onChange: function ($el, status, e) {
+			    console.log(status);
+			    if(status === true){
+			    	$('#sindical').val("1"); 
+			    } else {
+			    	$('#sindical').val("0");
+			    }
+			  }
+		});
+		$('#exibir').toggleButtons({
+			  onChange: function ($el, status, e) {
+			    console.log(status);
+			    if(status === true){
+			    	$('#exibir').val("1"); 
+			    } else {
+			    	$('#exibir').val("0");
+			    }
+			  }
+		});
+		$('.switch').toggleButtons({
+			  onChange: function ($el, status, e) {
+			    // $el = $('#toggle-button'); 
+			    // status = [true, false], the value of the checkbox
+			    // e = the event
+			    console.log($el, status, e); 
+			  },
+			  width: 100,
+			  height: 25,
+			  font: {
+	                'font-size': '20px',
+	                'font-weight': '600'
+	            },
+			  animated: true,
+			  transitionspeed: 1, // Accepted values float or "percent" [ 1, 0.5, "150%" ]
+			  label: {
+			    enabled: "SIM",
+			    disabled: "NÃO"
+			  },
+			  style: {
+			    // Accepted values ["primary", "danger", "info", "success", "warning"] or nothing
+			    enabled: "primary",
+			    disabled: "danger",
+			  },
+			  onChange: function (status) {
+			        if(status){
+			        	$('#inss').val("1");
+			        }else{
+			        	$('#inss').val("0");
+			        }
+			    }
+			});
+
+			$('#toggle-button').toggleButtons('toggleActivation'); // to toggle the disabled status
+	});
+//-->
+</script>

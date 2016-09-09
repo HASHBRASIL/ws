@@ -1,0 +1,39 @@
+<table class="table-bordered table-striped table-condensed flip-content row-fluid perfisTable-<?php echo $this->id ?>">
+	<thead class="flip-content">
+		<tr>
+			<th style="width: 45px;">Código</th>
+			<th>Descrição</th>
+			<th>Emissão</th>
+			<th>Vencimento</th>
+			<th>Valor</th>
+			<th style="width: 95px">Ação</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($this->iten as $iten) : ?>
+			<tr id="fin_id_<?php echo $iten['fin_id']?>">
+				<td><?php echo $iten['fin_id']?></td>
+				<td><?php echo $iten->getModelo()->getModelo()->codigo?> <?php echo $iten->getModelo()->getModelo()->descricao?></td>
+				<td><?php echo $this->date($iten['fin_emissao'])?></td>
+				<td><?php echo $this->date($iten['fin_vencimento'])?></td>
+				<td style="text-align: right;"><?php echo $this->formatDecimal($iten['fin_valor'])?></td>
+				<td style="width: 70px; text-align: center;">
+					<a value="<?php echo $iten['fin_id']?>"  ts="<?php echo $this->id?>" class="edit_tk">
+          				<i class="icon-pencil acao" title="Editar"></i>
+          			</a>
+          			<a title="Editar Financeiro" data-tooltip="" href='<?php echo $this->baseUrl("/financial/agrupador-financeiro/form/fin_id/{$iten['fin_id']}/id_agrupador_financeiro/{$iten['id_agrupador_financeiro']}")?>'>
+          				<i class="acao icon-dollar" title="Editar Financeiro"></i>
+          			</a>
+		          	<?php if(!empty($iten->fin_compensacao)):?>
+		          		<a title="emitir recibo" data-tooltip="" href='<?php echo $this->baseUrl("/financial/financial/recibo/fin_id/{$iten['fin_id']}")?>' target="_blank">
+			            	<i class="acao icon-print" title="Emitir recibo"></i>
+			            </a>
+		          	<?php endif;?>
+          			<a class="deleteMoldal" value="<?php echo $iten['fin_id']?>">
+          				<i class="acao  icon-remove" title="Excluir"></i>
+		      		</a>
+				</td>
+			</tr>
+		<?php endforeach;?>
+	</tbody>
+</table>

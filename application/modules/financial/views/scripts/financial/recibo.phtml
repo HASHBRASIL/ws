@@ -1,0 +1,71 @@
+<?php //Zend_Debug::dump($this->agrupadorFinanceiroObj);exit;?>
+<link href="<?php echo $this->baseUrl('assets/plugins/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet" type="text/css">
+<link href="<?php echo $this->baseUrl('assets/plugins/bootstrap/css/bootstrap-responsive.min.css')?>" rel="stylesheet" type="text/css" media="screen">
+<link href="<?php echo $this->baseUrl('assets/plugins/font-awesome/css/font-awesome.min.css')?>" rel="stylesheet" type="text/css">
+<link href="<?php echo $this->baseUrl('assets/css/style-metro.css')?>" rel="stylesheet" type="text/css">
+<link href="<?php echo $this->baseUrl('assets/css/style.css')?>" rel="stylesheet" type="text/css">
+<link href="<?php echo $this->baseUrl('assets/css/style-responsive.css')?>" rel="stylesheet" type="text/css">
+<link href="<?php echo $this->baseUrl('assets/css/themes/default.css')?>" rel="stylesheet" type="text/css" id="style_color">
+<link href="<?php echo $this->baseUrl('assets/plugins/uniform/css/uniform.default.css')?>" rel="stylesheet" type="text/css">
+<link href="<?php echo $this->baseUrl('assets/css/pages/invoice.css')?>" rel="stylesheet" type="text/css">
+<link href="<?php echo $this->baseUrl('assets/css/print.css')?>" rel="stylesheet" type="text/css" media="print">
+<?php $proprietarioSession = new Zend_Session_Namespace('proprietario');?>
+    <div id="primeiraVia">
+    	<div class="row-fluid invoice">
+		    <div class="row-fluid ">
+		         <div class="span4 "><img style="margin-top:; width: 100px;" src="<?php echo $proprietarioSession->proprietario ? "/uploads/logos/".$proprietarioSession->proprietario['logo_report'] : $this->baseUrl("/images/logo4-01.jpg")?>" alt=""></div>
+		         <div style="text-align: right;" class="span8">
+					<h4> <strong>Recibo de Pagamento</strong>
+					<span class="muted" >Emitido em: <?php echo date("d/m/Y H:i:s") ?>
+					    Por: <?php echo $this->userName ?>
+					</span></h4>
+				</div>
+		    </div>
+		</div>
+			<h3 style="text-align: right;" ><b>Valor:  <?php echo $this->agrupadorFinanceiroObj->getMoeda()->moe_sigla?> <?php echo $this->formatDecimal($this->financialObj->fin_valor)?></b></h3>
+	    <div class="row-fluid">
+			<div class="span12" >
+			<h3>Recibo referente ao ticket financeiro: <?php echo $this->financialObj->fin_id ?></h3>
+			<p>
+				Recebi(emos) referente ao ticket financeiro <?php echo $this->financialObj->fin_id ?> de: 
+					
+				<?php if ($this->agrupadorFinanceiroObj->tmv_id == 1/*apagar*/):?>
+					<?php echo $this->faturadoContraPor ?>
+				<?php elseif ($this->agrupadorFinanceiroObj->tmv_id == 2/*areceber*/):?>
+					<?php echo $this->financialObj->getSacadoFinanceiro()->getEmpresa()->nome_razao?> 
+				<?php endif;?>
+
+				a importância de <?php echo $this->agrupadorFinanceiroObj->getMoeda()->moe_sigla?> <?php echo $this->formatDecimal($this->financialObj->fin_valor)?>
+				referente a(o) <?php echo $this->financialObj->fin_descricao?>
+			</p>
+			<p>
+				E, para maior clareza firmo o presente recibo para que produza os seus efeitos, dando plena, rasa e irrevogável quitação, pelo valor recebido.
+			</p>
+			</div>
+		</div>
+		<div class="row-fluid">	
+			<div style="margin-top:70px; text-align: center;" class="span12">
+				<p>________________________________________________________</p>
+				<?php if ($this->agrupadorFinanceiroObj->tmv_id == 1/*apagar*/):?>
+					<p><?php echo $this->Cpf($this->financialObj->getSacadoFinanceiro()->getEmpresa()->cnpj_cpf)?></p>
+					<p><?php echo $this->financialObj->getSacadoFinanceiro()->getEmpresa()->nome_razao?></p>
+				<?php elseif ($this->agrupadorFinanceiroObj->tmv_id == 2/*areceber*/):?>
+					<p><?php echo $this->Cpf($this->faturadoCpfCnpj) ?></p>
+					<p><?php echo $this->faturadoContraPor ?></p>
+				<?php endif;?>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+        <div class="span12">
+        	<hr size="1" style="border:1px dashed ;"> 
+        </div>
+	</div>
+	<div id="segundaVia">
+	</div>
+    <div class="row-fluid">
+        <div class="span12 invoice-block ">
+            <a class="btn blue  hidden-print" onclick="javascript:window.print();">Imprimir<i class="icon-print "></i></a>
+        </div>
+    </div>
+<script src="<?php echo $this->baseUrl('scripts/financial/financial.recibo.js')?>"></script>

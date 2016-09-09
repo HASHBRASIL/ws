@@ -1,0 +1,48 @@
+
+{% import 'row.html.twig' as row %}
+{% import 'forms.html.twig' as forms %}
+
+
+<div class="col-md-12 area-conteudo-hash">
+    <div class="row panel panel-white">
+        {#<div class="panel-heading">#}
+        {#<h5>Componente <span>Capa</span></h5>#}
+        {#<p>Descrição desse componente para que o usuário saiba do que se trata esse componente.</p>#}
+        {#</div>#}
+        <div class="panel-body">
+            <form method="POST" action="home.php?servico={{ params.servico }}">
+                {{ forms.input('id', view.vo.id_grupo, 'hidden') }}
+                {{ forms.input('transacao_conta_id', view.vo.transacao_conta_id, 'hidden') }}
+                {{ forms.input('con_id', view.vo.con_id, 'hidden') }}
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset>
+                            <legend>
+                                {{ 'Formulário' | zftranslate }}
+                            </legend>
+                            <div class="row">
+                                {{ row.formgroup('Valor', forms.input('vl_transacao_conta', view.vo.vl_transacao_conta, 'text', 'decimal'), 'col-md-3') }}
+
+                                {{ row.formgroup('Descrição', forms.input('ds_transacao_conta', view.vo.ds_transacao_conta), 'col-md-4') }}
+
+                                {{ row.formgroup('Data', forms.input('datasaldo', '', 'text', 'datepicker-skin',  {'data-mask' : '99/99/9999'}), 'col-md-3') }}
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary btn-sm formaction" data-servico="{{ servico.id }}" data-show="ajax">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

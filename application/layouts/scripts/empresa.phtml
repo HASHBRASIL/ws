@@ -1,0 +1,103 @@
+<?php //echo $this->doctype() ?>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="pt-BR"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="pt-BR"> <!--<![endif]-->
+    <?php echo $this->partial('header.phtml', 'default')?>
+    <body>
+        <style>
+        <?php
+$config               = Zend_Registry::get('config');
+$color_primary         = isset($config->layout) ? $config->layout->color->primary : "#112F4A";
+$color_secondary       = isset($config->layout) ? $config->layout->color->secondary : "#013953";
+$border                = isset($config->layout) ? $config->layout->color->border : "#002232";
+?>
+            <!--
+            .top-bar {
+                height: 50px;
+                background: #014464;
+                background: -moz-linear-gradient(top, <?php echo $color_primary?>, <?php echo $color_secondary?>);
+                background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(<?php echo $color_primary?>), to(<?php echo $color_secondary?>));
+                border: 1px solid <?php echo $border?>;
+            }
+            .top-bar-section li a:not(.button) {
+                background: -moz-linear-gradient(top, <?php echo $color_primary?>, <?php echo $color_secondary?>);
+                background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(<?php echo $color_primary?>), to(<?php echo $color_secondary?>));
+                border: 1px solid <?php echo $border?>;
+            }
+            .top-bar-section > ul > .divider {
+                border-right: solid 1px #F7F7F7;
+                border-left: solid 1px #E8EEF7;
+            }
+
+            .top-bar-section li a.externo:hover {
+            background: #6D0E0E;
+            }
+            .top-bar-section li a.externo {
+            background: #9B0202;;
+            }
+            -->
+        </style>
+        <div id="carregando" style="display:none">
+            <span>Carregando...</span>
+        </div>
+            <?php if(!$this->disableHeader): ?>
+                <!-- Header and Nav -->
+                  <nav class="top-bar">
+                    <ul class="title-area">
+                      <!-- Title Area -->
+                      <li class="name">
+                        <h1>
+                          <a href="#">
+                            <img src="<?php echo $this->baseUrl('images/logo.png')?>" style=" height: 40px; width: 80px; margin-top: 5px;" />
+                          </a>
+                        </h1>
+                      </li>
+                      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+                    </ul>
+
+                    <section class="top-bar-section">
+                      <!-- Left Nav Section -->
+                      <ul class="left">
+                        <li class="divider"></li>
+                        <li>
+                          <a href="<?php echo $this->baseUrl('material/entrega/empresa')?>"><?php echo $this->translate('Produto Finalizado')?></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <a href="<?php echo $this->baseUrl('material/pedido/index')?>"><?php echo $this->translate('Entrega de Pedidos')?></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="has-dropdown">
+                            <a href="#"><?php echo $this->translate('Pedido')?></a>
+                            <ul class = "dropdown">
+                                <li><a href="<?php echo $this->baseUrl('/processo/processo/form')?>">Novo Pedido</a></li>
+                                <li><a href="<?php echo $this->baseUrl('/processo/processo/grid-pedido')?>">Pedidos</a></li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                      </ul>
+
+                      <!-- Right Nav Section -->
+                      <ul class="right">
+                        <li class="divider"></li>
+                        <li><a href="#" class="externo"><?php echo Zend_Auth::getInstance()->getIdentity()->nome_razao?></a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?php echo $this->baseUrl('auth/index/logout')?>"><?php echo $this->translate('LOGOUT')?></a></li>
+                        <li class="divider"></li>
+                      </ul>
+                    </section>
+                  </nav>
+                  <!-- End Header and Nav -->
+            <?php endif;?>
+
+            <?php echo $this->partial('messages.phtml', 'default', array('messages' => $this->messages))?>
+            <div class="row" id="message-box" style="display: none">
+                <div data-alert class="alert-box round" >
+                    <span class="text-message"></span>
+                    <a href="#" class="close">&times;</a>
+                </div>
+            </div>
+
+            <?php echo $this->layout()->content?>
+
+    </body>
+</html>

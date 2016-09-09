@@ -1,0 +1,23 @@
+<table class="table table-hover" style="width: 100%">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th style="text-align: center;">Quantidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if(count($this->listItem)):?>
+            <?php foreach ($this->listItem as $pedido):?>
+                <tr>
+                    <td><?php echo $pedido->getItem()->nome ?></td>
+                    <td style="text-align: center;"><?php echo $this->formatInteger(intval($pedido->quantidade)) ?></td>
+                </tr>
+            <?php endforeach;?>
+        <?php else:?>
+               <tr>
+                   <td colspan="2">Não existe produto</td>
+               </tr>
+        <?php endif;?>
+    </tbody>
+</table>
+

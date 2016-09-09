@@ -1,0 +1,84 @@
+<div style="text-align:center">
+    <input type="hidden" id="idgrupometadata" value="{{ idgrupometadata }}" />
+    <img id="imagem-atual" src="{{ bgtime }}" />
+    <br />
+    (clique para alterar)
+</div>
+
+<div id="img_file" class="hide" style="width:595px;height:272px;">
+    <input type="file" accept="image/*" />
+    <img src="" class='preview-cropimg' alt="" style="max-width: 100%">
+</div>
+
+<link href='/library/cropimg/css/cropper.min.css' rel='stylesheet' type='text/css' />
+<script src="/library/cropimg/js/cropper.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('#imagem-atual').click(function(){
+        var imgfile = $('#img_file').clone().removeClass('hide');
+        var imgCrop = imgfile.find('input[type="file"]');
+        var crop;
+        var result;
+
+        imgCrop.on('change', function(e){
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    result = e.target.result;
+                    imgfile.find('img').attr('src', e.target.result);
+                    $('.imagem').val(e.target.result);
+                    imgfile.find('input').addClass('hide');
+
+                    crop = imgfile.find('img').cropper({
+                        viewMode: 1,
+                        dragMode: 'move',
+                        cropBoxMovable: false,
+                        cropBoxResizable: false,
+                        minCropBoxWidth: 595,
+                        minCropBoxHeight: 272,
+                        aspectRatio: 595/272
+                    });
+                };
+
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        bootbox.dialog({
+            message: imgfile,
+            title: 'Edição de imagem',
+            buttons: {
+                cancelar: {
+                    label: 'Cancelar',
+                    className: 'btn btn-danger',
+                    callback: function(){}
+                },
+                success: {
+                    label: 'Salvar',
+                    className: 'btn btn-success',
+                    callback: function(){
+                        $('#img-user-cropped').html( crop.cropper('getCroppedCanvas') );
+                        $('#img-user-cropped').find('canvas').css('width', '100%');
+                        var dataFoto = {
+                            imagem: result,
+                            dataCrop: crop.cropper('getData'),
+                            idgrupometadata: $('#idgrupometadata').val()
+                        };
+
+                        $.ajax({
+                            type: "POST",
+                            url:  "/config/perfil2/salvar-foto-time",
+                            data: dataFoto,
+                            success: function(response) {
+                                $('#imagem-atual').attr('src', response.path);
+                                $('#idgrupometadata').val(response.id);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    });
+});
+</script>

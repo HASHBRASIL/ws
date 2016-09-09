@@ -1,0 +1,85 @@
+<?php
+$sumProprio = 0;
+$sumCliente = 0;
+?>
+<div class="row-fluid">
+    <div class="span12">
+        <table  class="table-bordered table-striped table-condensed flip-content" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th style="width:140px">Status</th>
+                    <th>Descrição</th>
+                    <th style="width:100px">Qtd Baixado</th>
+                    <th style="width:90px">Quantidade</th>
+                    <th style="width:120px; text-align: right;">Valor Unitário</th>
+                    <th style="width:110px;  text-align: right;">Total</th>
+                    <th>Unidade</th>
+                    <th>Observação</th>
+                    <th style="width:60px">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if(count($this->materialList)> 0):?>
+                <?php foreach ($this->materialList as $materialCliente):?>
+                        <tr>
+                            <td><?php echo $materialCliente->getTipoMaterial()->nome ?></td>
+                            <td><?php echo $materialCliente->getStatus()?$materialCliente->getStatus()->nome: null; ?></td>
+                            <td><?php echo $materialCliente->getItem()?$materialCliente->getItem()->nome: $materialCliente->nome ?></td>
+                            <td style="text-align: right;"><?php echo $this->formatDecimal($materialCliente->qtd_baixado) ?></td>
+                            <td style="text-align: right;"><?php echo $this->formatDecimal($materialCliente->quantidade) ?></td>
+                            <td style="text-align: right;"><?php echo $this->real($materialCliente->vl_unitario) ?></td>
+                            <td style="text-align: right;"><?php echo $this->real($materialCliente->total) ?></td>
+                            <td><?php echo $materialCliente->getUnidade() ? $materialCliente->getUnidade()->nome : null ?></td>
+                            <td><?php echo $materialCliente->observacao ?></td>
+                            <td>
+                                <?php if($materialCliente->id_status_material == Processo_Model_Bo_StatusMaterial::ESTIMADO):?>
+                                    <a data-tooltip="" href="material-processo/form" id_material_processo="<?php echo $materialCliente->id_material_processo?>" class="validar_material" title="Validar">
+                                        <i class="icon-ok acao"></i>
+                                    </a>
+                                <?php endif;?>
+                                <?php if($materialCliente->id_status_material == Processo_Model_Bo_StatusMaterial::VALIDADO || $materialCliente->id_status_material == Processo_Model_Bo_StatusMaterial::BAIXA_PARCIAL):?>
+                                    <a data-tooltip="" href="material-processo/form" id_material_processo="<?php echo $materialCliente->id_material_processo?>" class="baixar_material" title="Baixar material">
+                                        <i class="icon-download-alt acao"></i>
+                                    </a>
+                                <?php endif;?>
+                                <?php if($materialCliente->id_status_material == Processo_Model_Bo_StatusMaterial::BAIXA_PARCIAL || $materialCliente->id_status_material == Processo_Model_Bo_StatusMaterial::BAIXA_TOTAL):?>
+                                    <a data-tooltip="" href="material-processo/form" id_material_processo="<?php echo $materialCliente->id_material_processo?>" class="ver_lote_material" title="Visualizar lote de material">
+                                        <i class=" icon-barcode acao"></i>
+                                    </a>
+                                <?php endif;?>
+                                <?php if($materialCliente->id_status_material == Processo_Model_Bo_StatusMaterial::ESTIMADO || $materialCliente->id_status_material == Processo_Model_Bo_StatusMaterial::VALIDADO):?>
+                                    <a data-tooltip="" href="#" id_material_processo="<?php echo $materialCliente->id_material_processo?>" class="cancelar_material" title="Cancelar material">
+                                        <i class="icon-remove acao"></i>
+                                    </a>
+                                <?php endif;?>
+                                <a data-tooltip="" href="#" id_material_processo="<?php echo $materialCliente->id_material_processo?>" class="history_material" title="histórico de material">
+                                    <i class="icon-time acao"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php
+                        if($materialCliente->id_tp_material == Processo_Model_Bo_TipoMaterial::CLIENTE){
+                            $sumCliente = $materialCliente->total + $sumCliente;
+                        }elseif ($materialCliente->id_tp_material == Processo_Model_Bo_TipoMaterial::PROPRIO){
+                            $sumProprio = $materialCliente->total + $sumProprio;
+                        }
+                        ?>
+                <?php endforeach;?>
+                <?php else :?>
+                        <tr>
+                            <td colspan="10">Não existem registros!</td>
+                        </tr>
+                <?php endif;?>
+            </tbody>
+        </table>
+        <div class="row-fluid">
+            <div class="span6">
+                <div> Mostrando <?php echo count($this->materialList)?> registros</div>
+            </div>
+            <div class="span6" style="text-align: right;">
+                Total do material do cliente: <b><?php echo $this->real($sumCliente)?></b> Valor do material próprio: <b><?php echo $this->real($sumProprio) ?></b>&nbsp;-&nbsp;<strong>Total de material: <?php echo $this->real($sumCliente+$sumProprio)?></strong>
+            </div>
+        </div>
+    </div>
+</div>

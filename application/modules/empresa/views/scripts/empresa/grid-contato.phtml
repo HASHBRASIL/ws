@@ -1,0 +1,70 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption"><i class="halflings-icon white book"></i>Contato</div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="javascript:;" class="remove"></a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll">
+                <table class="table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th style="width: 280px">Nome</th>
+                            <th style="width: 100px;">Email</th>
+                            <th>Telefone</th>
+                            <th>Radio</th>
+                            <th style="width: 100px;">Aniversário</th>
+                            <th>Cargo</th>
+                            <th>Departamento</th>
+                            <th class="action" colspan="2">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php if (count($this->listContato) > 0):?>
+                        <?php foreach ($this->listContato as $contato):?>
+                            <tr>
+                                <td>
+                                    <?php echo $contato->nome ?>
+                                </td>
+                                <?php $email = $contato->email1;
+                                      $email .= $contato->email2?" - ".$contato->email2:"";?>
+                                <td><?php echo $email ?></td>
+                                <?php $telefone  = $this->formatTelefone($contato->telefone1);
+                                      $telefone .= $contato->telefone2?" - ".$this->formatTelefone($contato->telefone2):"";
+                                      $telefone .= $contato->telefone3?" - ".$this->formatTelefone($contato->telefone3):""?>
+                                <td><?php echo $telefone ?></td>
+                                <td><?php echo $contato->radio ?></td>
+                                <td><?php echo $this->date($contato->aniversario)?></td>
+                                <td><?php echo $contato->getCargo()? $contato->getCargo()->car_descricao : null ?></td>
+                                <td><?php echo $contato->getDepartamento()? $contato->getDepartamento()->cdp_descricao : null ?></td>
+                                <td class="acoes" style="width: 20px">
+                                    <a href="<?php echo $contato->id?>" id_contato="<?php echo $contato->id?>" class="editar_contato tooltips" title="Editar contato">
+                                        <img  src="<?php echo $this->baseUrl('images/edit.png')?>" />
+                                    </a>
+                                </td>
+                                <td class="acoes" style="width: 20px">
+                                    <a href="<?php echo $contato->id?>" id_contato="<?php echo $contato->id?>" class="delete_contato tooltips" title="excluir contato">
+                                        <img   src="<?php echo $this->baseUrl('images/delete.png')?>" />
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
+                    <?php else:?>
+                            <tr>
+                                <td colspan="8" style="text-align: center">Não existem registros!</td>
+                            </tr>
+                    <?php endif;?>
+                    </tbody>
+                </table>
+                <div class="row-fluid">
+                    <div class="span6">
+                        <div style="padding-top: 8px;"> Mostrando <?php echo count($this->listContato)?> registros</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

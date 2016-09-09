@@ -1,0 +1,49 @@
+
+div.dataTables_length > label select{
+    width: 30%;
+}
+.datatable_length{
+    width: 300px;
+    margin-top: 5px;
+}
+.dataTables_filter{
+    width: 250px;
+}
+div.dataTables_filter > label input[type="text"]{
+    display:inline;
+    width: 70%;
+    margin-bottom: 0px;
+}
+div.title-datatable{
+    height: 35px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border: 0px solid #AAA;
+    background: #CCC url(theme/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x;
+    color: #222;
+    font-weight: bold;
+    min-height: 0;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-left-width: 1px;
+}
+div.ui-widget-header{
+    border-top: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+div.title-datatable > h5{
+    padding-left: 5px;
+    display: inline;
+    line-height: 35px;
+    color: #4D4D4D;
+}
+div.title-datatable > a.new-data{
+    float: right;
+    margin: 5px;
+    margin-bottom: 0; 
+    background: url(../images/add.png) no-repeat;
+    padding-left: 27px;
+    line-height: 25px;
+    color: #4D4D4D;
+}

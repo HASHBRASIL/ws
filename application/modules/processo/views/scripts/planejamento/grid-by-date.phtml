@@ -1,0 +1,62 @@
+<style>
+i.acao{
+    color: #000;
+    padding: 0 2px;
+}
+</style>
+<div class="row-fluid">
+    <div class="span12">
+        <table  class="table-bordered table-striped table-condensed flip-content" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Cód. processo</th>
+                    <th style="width: 280px">Cliente</th>
+                    <th>Descrição</th>
+                    <th style="width:100px">Quantidade</th>
+                    <th style="width:90px">Prioridade</th>
+                    <th style="width:120px;">Ordem</th>
+                    <th style="width:60px">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if(count($this->listPlanejamento)> 0):?>
+                <?php foreach ($this->listPlanejamento as $planejamento):?>
+                        <tr>
+                            <td style="text-align: center;"><?php echo $planejamento->getProcesso()->pro_codigo ?></td>
+                            <td><?php echo $planejamento->getProcesso()->getEmpresa()->nome_razao ?></td>
+                            <td><?php echo $planejamento->getProcesso()->pro_desc_produto ?></td>
+                            <td style="text-align: right;"><?php echo $planejamento->getProcesso()->pro_quantidade ?></td>
+                            <td style="text-align: center;"><?php echo $planejamento->getPrioridade()->nome ?></td>
+                            <td style="text-align: center;"><?php echo $planejamento->ordem ?></td>
+                            <td style="text-align: center;">
+                                <a href="#" id_planejamento="<?php echo $planejamento->id_planejamento?>" class="editar_planejamento" title="Editar planejamento">
+                                    <i class="icon-pencil acao"></i>
+                                </a>
+                                <a href="#" id_planejamento="<?php echo $planejamento->id_planejamento?>" class="cancelar_planejamento" title="Cancelar planejamento">
+                                    <i class="icon-remove acao"></i>
+                                </a>
+                            </td>
+                        </tr>
+                <?php endforeach;?>
+                <?php else :?>
+                        <tr>
+                            <td colspan="10">Não existem registros!</td>
+                        </tr>
+                <?php endif;?>
+            </tbody>
+        </table>
+        <div class="row-fluid">
+            <div class="span6">
+                <div> Mostrando <?php echo count($this->listPlanejamento)?> registros</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="span12" style="margin: 0">
+    <div class="row-fluid">
+        <a href="processo/planejamento/pdf-by-date/data/<?php echo $this->date?>" target="_blank" class="icon-btn span2">
+            <i class=" icon-file-text"></i>
+            <div> Gerar PDF </div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+{% set id_servico       = '' %}
+{% set nome_servico     = '' %}
+{% set metanome_servico = '' %}
+{% set servico_crop     = '' %}
+{% set servico_ratio     = '16/10' %}
+
+{% for serv in servico.filhos %}
+    {% if serv.metadata.ws_campo is defined and serv.metadata.ws_campo == '.' ~ campo.metanome|lower  %}
+        {% set id_servico       = serv.id %}
+        {% set nome_servico     = serv.nome %}
+        {% set metanome_servico = serv.metanome %}
+    {% endif %}
+    {% if serv.metadata.ws_campo is defined and serv.metadata.ws_campo == '.cropimage' %}
+        {% set servico_crop = serv.id %}
+    {% endif %}
+    {% if serv.metadata.ws_ratio is defined %}
+        {% set servico_ratio = serv.metadata.ws_ratio %}
+    {% endif %}
+{% endfor %}
+
+<fieldset class="img-cropper-componente">
+    <legend>
+        <h5>Selecionar imagem</h5>
+    </legend>
+    <p>Escolha uma imagem para o conteúdo selecionado para substituir caso já exista alguma.</p>
+    <div class="row">
+        <button type="button" class="btn btn-sm btn-primary call-crop-modal" data-servico='{{ id_servico }}' data-show="modal" data-titulo="{{nome_servico}}" data-metanome='{{ metanome_servico }}'>Escolher imagem</button>
+        <button type="button" class="btn btn-sm btn-primary crop-cropper hide" data-servico="{{servico_crop}}">Cortar</button>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ filedir.url ~ campo.valor }}" name="imagem_galeria" class="cropper-img {{ campo.valor ? '' : 'hide' }}" data-id-ib="" />
+        </div>
+        <div class="col-md-6">
+            <div class="preview-cropper"></div>
+        </div>
+        <input type="hidden"
+               value="{{ campo.valor }}"
+               id="{{ campo.id }}"
+               name="{{ campo.id }}_{{ campo.metanome }}{% if campo.multiplo %}[]{% endif %}"
+               data-perfil="{{ campo.perfil }}" />
+    </div>
+</fieldset>
+
+<style type="text/css">
+    @import url("library/cropimg/css/cropper.min.css");
+	.cropper-img { width: 100%; }
+</style>
+<script src="library/cropimg/js/cropper.min.js"></script>
+<script type="text/javascript">
+
+    $('.call-crop-modal').on('click', function(e){
+        e.preventDefault();
+        $('.preview-cropper').removeClass('hide');
+        $(this).text('Carregando...').prop('disabled', true);
+    });
+
+    $('.crop-cropper').on('click', function(e){
+        e.preventDefault();
+        var $previews = $('.preview-cropper');
+        var $serv     = $(this).attr('data-servico');
+        var $dataCrop = cropper_instance.cropper('getData');
+        var image     = cropper_instance.attr('src');
+        var directory = image.replace('http://resources.hash.ws/', '').split('/');
+        var id_img    = $('.cropper-img').attr('data-id-ib');
+
+        directory.pop();
+        strDirectory = directory.join('/');
+
+        $('.call-crop-modal').removeClass('hide');
+        $(this).addClass('hide');
+
+        $.ajax({
+            type: "POST",
+            url:  "home.php?servico=" + $serv,
+            data: {'image': image, 'data': $dataCrop, 'id_ib_img': id_img },
+            success: function(response, status, XMLHttpRequest) {
+                console.log(response);
+                var url = response.imgGrd;
+            $('input[name="{{ campo.id }}_{{ campo.metanome }}"]').val( url.replace('http://resources.hash.ws/', '') );
+
+                $('.cropper-img').cropper('destroy');
+                $('.preview-cropper').addClass('hide');
+                $('.preview-cropper').find('img').removeClass('cropper-img');
+                $('.cropper-img').attr('src', response.imgGrd);
+
+                delete window.cropper_instance;
+            }
+        });
+    });
+
+    customEscape = function() {
+        $('.call-crop-modal').text('Escolher Imagem').prop('disabled', false);
+    }
+
+	callbackTableFilter = function(data){
+
+        var $previews = $('.preview-cropper');
+        $('.cropper-img').removeClass('hide');
+        $('.crop-cropper').removeClass('hide');
+        $('.call-crop-modal').text('Escolher Imagem').prop('disabled', false).addClass('hide');
+
+        if( typeof alteracoesMidia != 'undefined') {
+            alteracoesMidia[currentSelected].src = data[0].path;
+            alteracoesMidia[currentSelected].src = data[0].path;
+        }
+
+        if( typeof cropper_instance != 'undefined') {
+            cropper_instance.cropper('replace', data[0].path);
+
+            $previews.each(function(i, v){
+                $(this).find('img').removeClass('cropper-hidden');
+            });
+
+        }else{
+            $('.cropper-img').attr('data-id-ib', data[0].id);
+            $('.cropper-img').attr('src', data[0].path);
+
+            cropper_instance = $('.cropper-img');
+            cropper_instance.cropper({
+                zoomable:  false,
+                movable:   false,
+                rotatable: false,
+                scalable:  false,
+                viewMode: 3,
+                aspectRatio: {{servico_ratio}},
+                build: function (e) {
+                	if( typeof alteracoesMidia != 'undefined' && alteracoesMidia[currentSelected].data ) {
+                    	cropper_instance.cropper('setData', alteracoesMidia[currentSelected].data);
+                    }
+                    var $clone = $(this).clone();
+                    $clone.css({display: 'block', width: '100%', minWidth: 0, minHeight: 0, maxWidth: 'none', maxHeight: 'none' });
+                    $previews.css({ width: '100%', overflow: 'hidden'}).html($clone);
+                },
+
+                crop: function (e) {
+                    var imageData = $(this).cropper('getImageData');
+                    var previewAspectRatio = e.width / e.height;
+
+                    $previews.each(function () {
+                        var $preview = $(this);
+                        var previewWidth = $preview.width();
+                        var previewHeight = previewWidth / previewAspectRatio;
+                        var imageScaledRatio = e.width / previewWidth;
+
+                        $preview.height(previewHeight).find('img').css({
+                            width: imageData.naturalWidth / imageScaledRatio,
+                            height: imageData.naturalHeight / imageScaledRatio,
+                            marginLeft: -e.x / imageScaledRatio,
+                            marginTop: -e.y / imageScaledRatio
+                        });
+                    });
+                }
+            });
+        }
+    }
+
+</script>

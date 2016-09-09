@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+        <title></title>
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css/jquery-ui.css">
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css/datepicker.css">
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css/style.css">
+        <script src="/HashWS/public/hash-messenger/js/jquery-2.2.1.min.js"></script>
+        <script src="/HashWS/public/hash-messenger/js/bootstrap.min.js"></script>
+        <script src="/HashWS/public/hash-messenger/js/jquery-ui.js"></script>
+        <script src="/HashWS/public/hash-messenger/js/bootstrap-datepicker.js"></script>
+        <script src="/HashWS/public/hash-messenger/js/bootstrap-datepicker.pt-BR.min.js"></script>
+        <script src="/HashWS/public/hash-messenger/js/bootstrap-clockpicker.min.js"></script>
+        <script src="/HashWS/public/hash-messenger/js/main.js"></script>
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css/jquery-clockpicker.min.css">
+        <link rel="stylesheet" href="/HashWS/public/hash-messenger/css/bootstrap-clockpicker.min.css">
+    </head>
+    <body>
+        <div class="modal-default" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span></button>
+                        <h4 class="modal-title">Lembrete</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <label>Título</label>
+                            <input type="text" placeholder="Informe um título">
+                            <label>Enviar lembrete para:</label>
+                            <div class="box-enviar">
+                                <span>#Desenvolvimento<a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                                <span>@Ana<a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                            </div>
+                            <div class="agendamento">
+                                <div class="data">
+                                    <label>Agendar</label>
+                                    <input type="text" class="datepicker" placeholder="dd/mm/yyyy">
+                                    <i class="fa fa-calendar calendar" aria-hidden="true"></i>
+                                </div>
+                                <div class="horario clockpicker">
+                                    <label>Hora</label>
+                                    <input type="text" placeholder="00:00">
+                                    <i class="fa fa-clock-o clock-full" aria-hidden="true"></i>
+                                </div>
+                                <div class="notificacao">
+                                    <label>Notificar</label>
+                                     <select>
+                                        <option>20 minutos antes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <label>Recorrência</label>
+                            <select>
+                                <option>Todos os dias</option>
+                            </select>
+                            <input type="checkbox" id="confirmacao">
+                            <label for="confirmacao">Solicitar confirmação de recebimento</label>
+                            <input type="checkbox" id="conclusao">
+                            <label for="conclusao">Solicitar conclusão</label>
+                            <div class="adicionar-item">
+                                <label>Tarefa</label>
+                                <input type="text" placeholder="Atualizar o Trello">
+                                <button class="excluir"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                <input type="text">
+                                <button class="adicionar"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-limpar" data-dismiss="modal">Limpar</button>
+                        <button type="button" class="btn btn-enviar">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

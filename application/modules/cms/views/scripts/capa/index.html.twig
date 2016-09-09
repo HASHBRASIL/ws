@@ -1,0 +1,189 @@
+<div class="area-conteudo-hash">
+    <div class="row panel panel-white">
+        <div class="panel-heading">
+            <h5>Componente <span>Capa</span></h5>
+            <p>Descrição desse componente para que o usuário saiba do que se trata esse componente.</p>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>
+                            <h5>Modelos de <span>Capa</span></h5>
+                        </legend>
+                        <p>Escolha um modelo de capa para seu portal.</p>
+                        <div class="form-group">
+                            <label for="" class="control-label">Escolha uma Gride</label>
+                            <input type="text" class="form-control input-sm" name="item_selecionado_2" value="1x3">
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>
+                            <h5>Comportamentos</h5>
+                        </legend>
+                        <p>Como deseja preencher a capa de seu site?</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                    <input type="radio" name="pin" value="3" id="pin_1" checked="checked">
+                                    <label for="pin_3">Mais recentes</label>
+                                </div> 
+                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                    <input type="radio" name="pin" value="0" id="pin_2">
+                                    <label for="pin_0">Mais lidas</label>
+                                </div>
+                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                    <input type="radio" name="pin" value="1" id="pin_3">
+                                    <label for="pin_1">Mais visitadas</label>
+                                </div>
+                                <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                                    <input type="radio" name="pin" value="2" id="pin_4">
+                                    <label for="pin_2">Mais comentadas</label>
+                                </div> 
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row panel panel-white">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li class="active" role="presetation"><a data-toggle="tab" href="#tab_publico">Público</a></li>
+                            <li role="presetation"><a data-toggle="tab" href="#tab_privado">Privado</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab_publico" class="tab-pane fade in active">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="panel-title">Visualização</h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="panel-title">Configurações</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                	{% set prefix_public = 'public' %}
+                                    <div class="col-md-6">
+                                        <p>Abaixo temos um espectro do componente para que você possa configurar a capa do site. Utilize o ícone <i class="fa fa-gear"></i> para configurar o conteúdo e formado da área. Utilize o ícone <i class="fa fa-thumb-tack"></i> para fixar um conteúdo na área, ou selecione uma área e configure com as informações ao lado.</p>
+                                        {% include 'manchete.html.twig' with {'prefix' : prefix_public} %}
+                                    </div>
+                                    <div class="col-md-6">
+                                    	<div class="{{prefix_public}}-settings-on hide">
+                                    		<p>Opções para área selecionada.</p>
+	                                        {% include 'config-comportamento.html.twig' with {'prefix' : prefix_public} %}
+	                                        {% include 'config-imagem.html.twig' %}
+	                                        {% include 'config-url.html.twig' with {'prefix' : prefix_public} %}
+                                    	</div>
+                                    	<div class="{{prefix_public}}-settings-off">
+                                    		<p>Selecione uma área do componente ao lado.</p>
+                                    	</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab_privado" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="panel-title">Visualização</h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="panel-title">Configurações</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                	{% set prefix_private = 'priavete' %}
+                                    <div class="col-md-6">
+                                        <p>Abaixo temos um espectro do componente para que você possa configurar a capa do site. Utilize o ícone <i class="fa fa-gear"></i> para configurar o conteúdo e formado da área. Utilize o ícone <i class="fa fa-thumb-tack"></i> para fixar um conteúdo na área, ou selecione uma área e configure com as informações ao lado.</p>
+                                        {% include 'manchete.html.twig' with {'prefix' : prefix_private } %}
+                                    </div>
+                                    <div class="col-md-6">
+                                    	<div class="{{prefix_private}}-settings-on hide">
+	                                        <p>Opções para área selecionada.</p>
+	                                        {% include 'config-comportamento.html.twig' with {'prefix' : prefix_private} %}
+	                                        {% include 'config-imagem.html.twig' %}
+	                                        {% include 'config-url.html.twig' with {'prefix' : prefix_private} %}
+	                                    </div>
+	                                    <div class="{{prefix_private}}-settings-off">
+	                                    	<p>Selecione uma área do componente ao lado.</p>
+	                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    var currentSelected = null;
+    var alteracoesMidia = new Array({ 'src': null },
+                                    { 'src': null },
+                                    { 'src': null },
+                                    { 'src': null });
+
+
+
+    //COLOCAR ESSE SCRIPT DEPOIS EM UM ARQUIVO SEPARADO
+    function modalBTNS(metanome) {
+        var botoes = {{botoes|json_encode|raw}};
+        return botoes[metanome];
+    }
+    // AQUI TEM QUE TER O SCRIPT QUE VAI INTERAGIR OS COMPONENTES DE FORMA MÁGICA!
+    // Manchete e o MidiaImagemCrop
+
+    function clearConfiguration(id) {
+        // MIDIA
+        if( alteracoesMidia[id].src == null ) {
+            $('.img-cropper-componente').find('img').attr('src', '').addClass('hide');
+        }else{
+            callbackTableFilter(new Array({'path' : alteracoesMidia[id].src, data: alteracoesMidia[id].data }));
+        }
+    }
+
+
+
+    // esse cara foi removido, mas como ele pode aparecer novamente vou deixa-lo aqui como exemplo :/
+    /*
+    $('.select2-style').each(function(i, v){
+        var serv = $(v).attr('data-servico');
+        $(v).select2({
+            minimumInputLength: 2,
+            //tags: [],
+            ajax: {
+                url: 'home.php?servico=' + serv,
+                dataType: 'json',
+                type: "POST",
+                quietMillis: 100,
+                data: function (term) {
+                    return {
+                        term: term
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.text,
+                                id: item.id
+                            }
+                        })
+                    };
+                }
+            },
+            width: '100%'
+        });
+    });
+	*/
+</script>
+
+
+

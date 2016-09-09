@@ -1,0 +1,37 @@
+<tr>
+    <th class="center shrink">
+        <div class="checkbox clip-check check-primary check-sm checkbox-inline">
+            <input type="checkbox" value="1" id="checkbox-todos">
+            <label for="checkbox-todos"></label>
+        </div>
+    </th>
+{% for field in header %}
+        <th data-field="field" class="expand">
+
+            <span>{{ field.label }}</span>
+
+            {% if field.campo == params.orderby %}
+
+                {% if params.order == 'DESC' %}
+                    {% set ico = 'fa-sort-desc' %}
+                {% elseif params.order == 'ASC' %}
+                    {% set ico = 'fa-sort-asc' %}
+                {% else %}
+                    {% set ico = 'fa-sort' %}
+                {% endif %}
+            {% else %}
+                {% set ico = 'fa-sort' %}
+            {% endif %}
+
+            <i class="fa {{ico}}" campo="{{field.campo}}"></i>
+
+            <br/>
+
+            <form method="get" action=''>
+                <input type="text" class="form-control" value='{{ params.searchFields[field.campo]}}'
+                       campo="{{field.campo}}" placeholder='filtrar por "{{field.label}}"'>
+            </form>
+        </th>
+{% endfor %}
+    <th>&nbsp;</th>
+</tr>

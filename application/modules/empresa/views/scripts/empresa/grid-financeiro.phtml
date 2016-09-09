@@ -1,0 +1,154 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-money"></i>Registros Financeiros</div>
+				<div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="javascript:;" class="remove"></a>
+                </div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline"
+					role="grid">
+					<table class="table-bordered table-striped table-condensed flip-content" id="financeiroTable">
+						<thead class="flip-content">
+							<tr>
+								<th class="hidden-480">Código</th>
+					            <th class="hidden-480">Sacado</th>
+					            <th class="hidden-480">Descricão</th>
+					            <th class="hidden-480">Tipo Financeiro</th>
+					            <th class="hidden-480">Status</th>
+					            <th class="hidden-480">Conta</th>
+					            <th class="hidden-480">Emissao</th>
+					            <th class="hidden-480">Vencimento</th>
+					            <th class="hidden-480">Compensação</th>
+					            <th class="hidden-480">Nota Fiscal</th>
+					            <th class="hidden-480">Valor</th>
+					            <th style="width: 45px;" class="hidden-480 action">Ação</th>
+							</tr>
+						</thead>
+
+						<tbody>
+
+							<?php if (count($this->financeiro) > 0):?>
+				        <?php foreach ($this->financeiro as $financeiro):?>
+				            <tr class="odd gradeX">
+				                <td class="hidden-480" ><?php echo $financeiro['fin_id']?></td>
+				                <td class="hidden-480" style="width:200px"><?php echo $financeiro['nome_razao']?></td>
+				                <td class="hidden-480"><?php echo str_replace(array("\n",'\r', '\r\n', '\t'), " ",$financeiro['fin_descricao']) ?></td>
+				                <td class="hidden-480"><?php echo $financeiro['tipo_conta']?></td>
+				                <td>
+									<?php if ($financeiro['fin_compensacao'] != "" && $financeiro['con_codnome'] ):?>
+									
+											<span style="width: 98%; text-align: center;" class="label label-success"> Pago</span>
+											
+									<?php elseif (!$financeiro['fin_vencimento']):?>
+											
+											<span style="width: 98%; text-align: center;" class="label label-inverse"> Sem Vencimento</span>
+								
+									<?php elseif ($financeiro['fin_vencimento'] && date("Y-m-d") > $financeiro['fin_vencimento'] ):?>
+											
+											<span style="width: 98%; text-align: center;" class="label label-important"> Vencida em <?php echo $this->Date($financeiro['fin_vencimento'])?></span>
+											
+									<?php elseif($financeiro['fin_vencimento'] && date("Y-m-d") == $financeiro['fin_vencimento']):?>	
+											
+											<span style="width: 98%; text-align: center;" class="label label-warning">Vencimento Hoje</span>
+											
+									<?php elseif($financeiro['fin_vencimento'] && date("Y-m-d") < $financeiro['fin_vencimento']):?>
+									
+											<span style="width: 98%; text-align: center;" class="label label-info">Vencimento em <?php echo $this->Date($financeiro['fin_vencimento'])?></span>
+									
+									<?php endif; ?>
+								</td>
+				                <td class="hidden-480"><?php echo $financeiro['con_codnome']?></td>
+				                <td class="hidden-480"><?php echo $this->date($financeiro['fin_emissao']) ?></td>
+				                <td class="hidden-480"><?php echo $this->date($financeiro['fin_vencimento']) ?></td>
+				                <td class="hidden-480"><?php echo $this->date($financeiro['fin_compensacao']) ?></td>
+				                <td class="hidden-480"><?php echo $financeiro['fin_nota_fiscal'] ?></td>
+				                <td class="hidden-480" style="text-align: right;"><?php echo $this->formatDecimal($financeiro['fin_valor']) ?></td>
+				                <td class="hidden-480 acoes">
+				                    <a href="<?php echo $this->baseUrl("financial/agrupador-financeiro/form/id_agrupador_financeiro/{$financeiro["id_agrupador_financeiro"]}/fin_id/{$financeiro['fin_id']}")?>">
+				                        <img title="Editar Financeiro" data-tooltip src="<?php echo $this->baseUrl('images/edit.png')?>" />
+				                    </a>
+				                    <a href="<?php echo $financeiro['fin_id']?>" class="delete_financeiro">
+				                        <img  title="excluir Financeiro" data-tooltip src="<?php echo $this->baseUrl('images/delete.png')?>" />
+				                    </a>
+				                </td>
+				            </tr>
+				        <?php endforeach;?>
+				    <?php endif;?>
+
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+
+ $('#financeiroTable').dataTable({
+     "aoColumns": [
+       { "bSortable": true },
+       { "bSortable": true },
+       { "bSortable": true },
+       { "bSortable": true },
+       { "bSortable": true },
+       { "bSortable": true },
+       { "bSortable": true },
+       { "bSortable": true },
+       { "bSortable": true },
+       { "bSortable": true },
+       { "bSortable": true },
+       null
+     ],
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+
+
+</script>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Hash WORKSPACE</title>
+	<link href='https://fonts.googleapis.com/css?family=Arimo:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/hash.css">
+</head>
+<body>
+	<div id="main" class="container">
+		<div id="header" class="row">
+			<div id="hash_workspace">hash workspace</div>
+			
+			<div id="logo_hash">logo hash</div>
+			<div id="submit_search">
+				<input type="text" value="Barra de pesquisa" />
+				<i class="fa fa-search"></i>
+			</div>
+		</div>
+		<div id="content" class="row">
+			<div id="col-01" class="col-md-2">
+				<div id="side-line"></div>
+				<div id="userData">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle-thin fa-stack-2x"></i>
+						<i class="fa fa-user fa-stack-1x "></i>
+					</span>
+					<div>
+						<span id="nameUser">Frederico Medeiros</span>
+						<span id="lastAccess">Último acesso 12/08/2015 19:30<br/>Sessão 07</span>	
+					</div>
+				</div>
+				<div id="entity">
+					<span class="fa-stack fa-lg">
+						<i class="fa fa-circle-thin fa-stack-2x"></i>
+						<i class="fa fa-building fa-stack-1x "></i>
+					</span>
+					<div>
+						<span class="titleSquare">Grande Loja</span>
+						<i class="fa fa-angle-right"></i>
+					</div>
+				</div>
+				<div id="profile">
+					<span class="titleSquare">Gestão de Pessoas</span>
+					<ul>
+						<li><i class="fa fa-user"></i>Adicionar Pessoa<i class="fa fa-angle-right"></i></li>
+						<li><i class="fa fa-user"></i>Adicionar Usuário<i class="fa fa-angle-right"></i></li>
+						<li><i class="fa fa-user"></i>Gerir Perfil<i class="fa fa-angle-right"></i></li>
+					</ul>
+				</div>
+			</div>
+			<div id="col-02" class="col-md-10">
+				<!-- <ul id="listEntity">
+					<li id="entityGP">
+						<span>GP</span>
+					</li>
+					<li id="entityGE">
+						<span>GE</span>
+					</li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul> -->
+				<!-- <ul id="listFunctions">
+					<li class="active"><i class="fa fa-desktop"></i><br/>WorkSpace</li>
+					<li><i class="fa fa-briefcase"></i><br/>Tarefas</li>
+					<li><i class="fa fa-clock-o"></i><br/>Lembretes</li>
+					<li><i class="fa fa-microphone"></i><br/>Memo</li>
+					<li><i class="fa fa-newspaper-o"></i><br/>Eventos</li>
+					<li><i class="fa fa-folder-open"></i><br/>Arquivados</li>
+					<li><i class="fa fa-download"></i><br/>Downloads</li>
+				</ul> -->
+				<div id="boxes-container">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12 box"> 
+								<form action="index_submit" method="get" accept-charset="utf-8" class="form-group">
+									<input type="text" value="teste" class="form-control" />
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div id="col-03">
+				<div id="teams">Time</div>
+				<div id="team_group">
+					<div class="prev-pag">
+						<i class="fa fa-chevron-circle-left"></i>
+					</div>
+					<ul>
+						<li>#Brasília</li>
+						<li>#Grupo 2</li>
+						<li>#Grupo 3</li>
+					</ul>
+					<div class="next-pag">
+						<i class="fa fa-chevron-circle-right"></i>
+					</div>
+				</div>
+				<div id="container-chat">
+					<div id="search_chat">
+						<input type="text" value="Barra de pesquisa" />
+						<i class="fa fa-search"></i>
+					</div>
+					<span class="break-period">
+						<span class="line-break"></span>
+						<span class="info-break">Não Lidas</span>
+					</span>
+					<ul class="list-activity">
+						<li>
+							<div class="img-userChat">
+								<img src="" alt=""/>	
+							</div>
+							<span class="name-userChat">@André Silva</span>
+							<p class="text-userChat">Bom dia Grupo</p>
+							<span class="time-userChat">8:00am</span>
+						</li>
+						<li>
+							<div class="img-userChat">
+								<img src="" alt=""/>	
+							</div>
+							<span class="name-userChat">@André Silva</span>
+							<p class="text-userChat">Bom dia Grupo</p>
+							<span class="time-userChat">8:00am</span>
+						</li>
+						<li>
+							<div class="img-userChat">
+								<img src="" alt=""/>	
+							</div>
+							<span class="name-userChat">@André Silva</span>
+							<p class="text-userChat">Bom dia Grupo</p>
+							<span class="time-userChat">8:00am</span>
+						</li>
+						<li>
+							<div class="img-userChat">
+								<img src="" alt=""/>	
+							</div>
+							<span class="name-userChat">@André Silva</span>
+							<p class="text-userChat">Bom dia Grupo</p>
+							<span class="time-userChat">8:00am</span>
+						</li>
+						
+					</ul>	
+					<span class="break-period">
+						<span class="line-break"></span>
+						<span class="info-break">16 Setembro</span>
+					</span>
+					<ul class="list-activity">
+						<li>
+							<div class="img-userChat">
+								<img src="" alt=""/>	
+							</div>
+							<span class="name-userChat">@André Silva</span>
+							<p class="text-userChat">Bom dia Grupo</p>
+							<span class="time-userChat">8:00am</span>
+						</li>
+						<li>
+							<div class="img-userChat">
+								<img src="" alt=""/>	
+							</div>
+							<span class="name-userChat">@André Silva</span>
+							<p class="text-userChat">Bom dia Grupo</p>
+							<span class="time-userChat">8:00am</span>
+						</li>
+						<li>
+							<div class="img-userChat">
+								<img src="" alt=""/>	
+							</div>
+							<span class="name-userChat">@André Silva</span>
+							<p class="text-userChat">Bom dia Grupo</p>
+							<span class="time-userChat">8:00am</span>
+						</li>
+						<li>
+							<div class="img-userChat">
+								<img src="" alt=""/>	
+							</div>
+							<span class="name-userChat">@André Silva</span>
+							<p class="text-userChat">Bom dia Grupo</p>
+							<span class="time-userChat">8:00am</span>
+						</li>
+						
+					</ul>
+				</div> -->
+
+				<!-- <div class="log">
+					16 Setembro <i class="fa fa-angle-down"></i> Eventos agendados por @AndréSilva
+					<div class="img-userLog">
+					</div>
+				</div>
+				<div class="log">
+					16 Setembro <i class="fa fa-angle-down"></i> Tarefas Postadas por @Paula
+					<div class="img-userLog">
+					</div>
+				</div>
+				<div id="content-news">
+					<div id="new">
+						<i class="fa fa-plus-circle"></i>
+						<i class="fa fa-paperclip"></i>
+						<i class="fa fa-comment"></i>
+						<input type="text" value="digite aqui..." />
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+</body>
+</html>

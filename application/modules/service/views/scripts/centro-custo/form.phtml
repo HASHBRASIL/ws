@@ -1,0 +1,73 @@
+<div class="row-fluid">
+	<div class="span12">
+		<h3 class="page-title">
+			Centro de Custo
+			<small>serviço</small>
+		</h3>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="portlet box steelblue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i> Formulário de Centro de Custo</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+	<div class="portlet-body form">
+        <form method="post"  class="form-horizontal" id="form_change_password">
+			<div class="row-fluid" id="passwordBox">
+				<div class="control-group">
+					<label class="control-label">Código</label>
+					<div class="controls">
+						<?php echo $this->formText('cec_codigo', $this->centroCusto->cec_codigo, array('class' => 'm-wrap small'));?>
+					</div>
+				</div>
+				<div class="span3">
+                          <div class="control-group">
+	                          <label class="control-label"><?php echo $this->translate('Registro Público')?></label>
+	                          <div class="controls">
+		                          	<?php echo $this->formCheckbox('register_public', $this->centroCusto->id_grupo ? null : true ,null, array('checked' => '1', 'unChecked' => '0')); ?>
+	                          </div>
+                          </div>
+                      </div>
+				<div class="control-group">
+					<label class="control-label">Centro de Custo Pai</label>
+					<div class="controls">
+						<?php echo $this->formSelect('cec_id_pai', $this->centroCusto->cec_id_pai, null,$this->comboCentroPai )?>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<label><input TYPE="checkbox" NAME="cec_oculta" VALUE="1" <?php echo $this->centroCusto->cec_oculta ? 'CHECKED' : ''; ?> /> <?php echo $this->translate('Ocultar Registro')?></label>
+            <label style="padding-top: 15px;"><input TYPE="checkbox" NAME="cec_operacional" VALUE="1" <?php echo $this->centroCusto->cec_operacional ? 'CHECKED' : ''; ?> /> <?php echo $this->translate('Operacional')?></label>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Descrição</label>
+					<div class="controls">
+						<?php echo $this->formTextarea('cec_descricao', $this->centroCusto->cec_descricao, array('style'=> 'width: 410px; height: 113px ;display: inline;'))?>
+            <span id="countDescricao"></span> Caracteres restantes
+					</div>
+				</div>
+				<?php echo $this->formHidden('cec_id', $this->centroCusto->cec_id);?>
+
+                <?php $identity = Zend_Auth::getInstance()->getIdentity(); ?>
+                <?php echo $this->centroCusto->cec_id ? $this->formHidden("id_grupo",$this->centroCusto->id_grupo) : $this->formHidden("id_grupo",$identity->grupo['id']); ?>
+
+
+			</div>
+			<div class="form-actions">
+                <button type="submit" class="btn blue"><i class="icon-ok"></i> Salvar</button>
+            	<a href="<?php echo $this->baseUrl('service/centro-custo/index')?>" class="btn" >Voltar</a>
+        	</div>
+        </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/scripts/lib/jquery.limit-1.2.source.js')?>"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#cec_descricao').limit('255','#countDescricao');
+});
+</script>

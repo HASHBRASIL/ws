@@ -1,0 +1,110 @@
+<?php $identity = Zend_Auth::getInstance()->getIdentity(); ?>
+
+<aside class="top-sidebar">
+    <div class="col-md-5ths area-usuario">
+        <figure>
+            <img src="<?php echo $this->baseUrl('img/img-list.jpg');?>" alt="Imagem do usuário">
+            <figcaption><i class="fa fa-circle"></i><?php echo $identity->nomeusuario; ?></figcaption>
+        </figure>
+
+        <a href="#" class="btn-show-user-menu" data-trigger="dropdown-user-top">
+            <i class="fa fa-angle-down"></i>
+        </a>
+    </div>
+    <div class="col-md-5ths area-nav-times">
+        <h1>
+            <a href="#" class="btn-show-times" title="Escolha seu time">
+                <i class="fa fa-users img-item" aria-hidden="true"></i>
+                Times
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                <!-- <span class="badge"><?php //echo count($identity->times); ?></span> -->
+            </a>
+            <!-- <a href="#" class="btn-add"><i class="fa fa-plus-circle"></i></a> -->
+        </h1>
+        <ul class="lista-times closed">
+            <span>Selecione seu time</span>
+            <li><a href="#" class="active"><?php echo $identity->time['nome']; ?></a></li>
+            <?php foreach ($identity->times as $key => $times):?>
+                <?php if($times["id"] != $identity->time['id']): ?>
+                    <li>
+                        <a class="time" name ="<?php echo $times["nome"];?>" id="<?php echo $times['id']?>" href="#">
+                            <?php echo $times["nome"]; ?>
+                        </a>
+                    </li>
+            <?php endif;
+            endforeach;?>
+        </ul>
+    </div>
+    <div class="col-md-5ths area-nav-times">
+        <h1>
+            <a href="#" class="btn-show-grupos">
+                <i class="fa fa-hashtag img-item" aria-hidden="true"></i>
+                Grupos
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                <!-- <span class="badge"><?php //echo count($identity->grupos); ?></span> -->
+            </a>
+            <!-- <a href="#" class="btn-add"><i class="fa fa-plus-circle"></i></a> -->
+        </h1>
+
+        <ul class="lista-grupos closed">
+            <span>Selecione seu grupo</span>
+            <li><a href="#" class="active">#<?php echo $identity->grupo['nome']; ?></a></li>
+            <?php foreach ($identity->grupos as $key => $grupo):?>
+                <?php if($grupo["id"] != $identity->grupo['id']): ?>
+                    <li>
+                        <a class="grupo" name ="<?php echo $grupo["nome"];?>" id="<?php echo $grupo['id']?>" href="#">
+                            #<?php echo $grupo["nome"];  ?>
+                        </a>
+                    </li>
+                <?php endif;
+            endforeach;?>
+        </ul>
+    </div>
+
+    <div class="col-md-5ths area-nav-menu">
+        <h1>
+            <a href="#" class="active">
+                <?php echo $identity->servicos[$identity->modulo['id']]['nome']; ?>
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </a>
+        </h1>
+        <ul class="lista-modulos closed">
+            <?php foreach ($identity->time['modulos'] as $key => $modulo): ?>
+
+                <?php if ($this->isAllowed($modulo['id_servico']) ) : ?>
+                    <li>
+                        <a  class="modulo <?php if($identity->servicos[$modulo['id_servico']]['nome'] == $identity->modulo['nome']){ echo 'active'; } ?>"
+                            name="<?php echo $identity->servicos[$modulo['id_servico']]['nome']; ?>"
+                            id="<?php echo $modulo['id_servico']?>"
+                            href="#">
+
+                            <i class="<?php echo isset($identity->servicos[$modulo['id_servico']]['metadata']['ws_icon']) ? $identity->servicos[$modulo['id_servico']]['metadata']['ws_icon'] : 'icon-cog' ?>"></i>
+                            <?php echo $identity->servicos[$modulo['id_servico']]['nome']; ?>
+                        </a>
+                    </li>
+                <?php endif;
+
+            endforeach;?>
+        </ul>
+    </div>
+
+    <?php $arvore = new RecursiveArrayIterator($identity->arvoreServicos[$identity->modulo['id']]);?>
+
+    <div class="col-md-5ths area-nav-menu">
+            <h1>
+                <a href="#" class="active">
+                    <?php if(!empty($this->servico['id']) && isset($arvore[$this->servico['id']])){ ?>
+                        <?php echo $this->servico['nome'] ?>
+                    <?php }else{ ?>
+                        Selecione um serviço
+                    <?php } ?>
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+            </h1>
+
+        <ul class="lista-modulos closed">
+            <?php echo $this->menuTree($arvore, true); ?>
+        </ul>
+    </div>
+</aside>
+<div class="row top-sidebar-block"></div>

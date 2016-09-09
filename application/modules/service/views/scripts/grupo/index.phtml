@@ -1,0 +1,189 @@
+<?php
+/**
+     * visualização da arvore de grupo podendo adicionar um grupo, subgrupo e uma classe
+     * é adicionar um produto
+    */
+?>
+<style>
+<!--
+div.action {
+	text-align: right;
+	display: inline;
+	float: right;
+}
+
+div.subAction {
+	text-align: right;
+	float: right;
+	display: inline;
+	margin-right: 100px;
+}
+
+div.classe {
+	text-align: right;
+	display: inline;
+	float: right;
+	margin-right: 200px;
+}
+
+.add-subClass,.add {
+	cursor: pointer;
+}
+
+div.row-message {
+	display: none;
+}
+
+div#sidetree {
+	width: 50%;
+}
+
+.treeview li:hover {
+	background-color: rgb(226, 226, 226) !important;
+}
+-->
+</style>
+<div class="row row-message">
+	<div class="large-12 columns">
+		<div data-alert="" class="alert-box round success">
+			Dado cadastrado com sucesso. <a href="#" class="close">×</a>
+		</div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<h3 class="page-title">Grupo do Serviço</h3>
+	</div>
+</div>
+<div class="portlet-body">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="portlet box steelblue">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class="icon-reorder"></i>Grupo
+					</div>
+					<div class="tools">
+						<a href="javascript:;" class="collapse"></a>
+					</div>
+					<div class="actions">
+						<a class="btn"
+							href="<?php echo $this->baseUrl('service/grupo/form')?>"
+							id="novoForm">Novo grupo </a>
+					</div>
+				</div>
+					<div class="portlet-body" style="display: block;">
+						<div id="sidetree">
+							<div class="treeheader">&nbsp;</div>
+							<div id="sidetreecontrol">
+								<a href="?#">Minimizar</a> | <a href="?#">Expandir</a>
+							</div>
+							<ul id="tree">
+                <?php foreach ($this->listGrupo as $grupo):?>
+                	<li class="id_grupo_<?php echo $grupo['id_grupo']?>">
+                		<span class="grupo_<?php echo $grupo['id_grupo']?>"><?php echo $grupo['nome']?></span>
+										<div class="action">
+                    	<?php if(!in_array($grupo['id_grupo'], $this->idGrupoExistItem)):?>
+                        <a id="<?php echo $grupo['id_grupo']?>" href="<?php echo $this->baseUrl('service/sub-grupo/form')?>" class="add-subClass"> 
+													<i class="icon-reorder" title="adicionar sub-Grupo"></i>
+												</a>
+												 <a id_grupo="<?php echo $grupo['id_grupo']?>" href="<?php echo $this->baseUrl('service/grupo/form')?>" class="edit" type="grupo" name="<?php echo $grupo['nome']?>">	
+													<i class="icon-pencil"></i>
+												</a>
+                      <?php endif;?>
+                      <?php if(!count($grupo->getListSubGrupo()) > 0):?>
+                      	<a id="<?php echo $grupo['id_grupo']?>" href="<?php echo $this->baseUrl('service/service/grid/id_grupo/'.$grupo['id_grupo'])?>" class="add add_action_grupo_<?php echo $grupo['id_grupo']?>">
+													<i class="icon-cogs" title="Serviço"></i>
+												</a>
+												<?php if(count($grupo->getListService()) == 0):?>
+                        	<a class="deleteMoldal" value="<?php echo $grupo['id_grupo']?>" href="<?php echo $this->baseurl('service/grupo/delete/id/'.$grupo->id_grupo)?>">
+                          	<i class="icon-remove" title="Excluir grupo"></i>
+                          </a>
+                        <?php endif;?>
+                      <?php endif;?>
+										</div>
+                    <?php if(count($grupo->getListSubGrupo()) > 0):?>
+                    	<ul>
+                      	<?php foreach ($grupo->getListSubGrupo() as $subGrupo):?>
+                        	<li class="subclass id_subgrupo_<?php echo $subGrupo['id_subgrupo']?>">
+                        		<span class="subgrupo_<?php echo $subGrupo['id_subgrupo']?>"><?php echo $subGrupo['nome']?></span><?php echo count($subGrupo->getListService()) > 0 ? " (".count($subGrupo->getListService()).")":""; ?>
+                        		<div class="subAction">
+                            	<?php if(!in_array($subGrupo['id_subgrupo'], $this->idSubGrupoExistItem)):?>
+                              	<a id="<?php echo $subGrupo['id_subgrupo']?>" href="<?php echo $this->baseUrl('service/classe/form')?>" class="add-class"> 
+																	<i class="icon-reorder" title="adicionar sub-Grupo" title="adicionar Classe"></i>
+																</a>
+																<a id_subgrupo="<?php echo $subGrupo['id_subgrupo']?>" id_grupo="<?php echo $subGrupo['id_grupo']?>" href="<?php echo $this->baseUrl('service/sub-grupo/form')?>" type="sub-grupo" class="edit" name="<?php echo $subGrupo['nome']?>">
+																	<i class="icon-pencil"></i>
+																</a>
+															<?php endif;?>
+                            	<?php if(!count($subGrupo->getListClasse()) > 0):?>
+                              	<a id="<?php echo $subGrupo['id_subgrupo']?>" href="<?php echo $this->baseUrl('service/service/grid/id_subgrupo/'.$subGrupo['id_subgrupo'])?>" class="add add_action_subgrupo_<?php echo $subGrupo['id_subgrupo']?>">
+																	<i class="icon-cogs" title="Serviço"></i>
+																</a>
+																<?php if(count($subGrupo->getListService()) == 0):?>
+				                        	<a class="deleteMoldal" value="<?php echo $subGrupo['id_grupo']?>" href="<?php echo $this->baseurl('service/sub-grupo/delete/id/'.$subGrupo->id_subgrupo)?>">
+				                          	<i class="icon-remove" title="Excluir grupo"></i>
+				                          </a>
+				                        <?php endif;?>
+                              <?php endif;?>
+                            </div>
+                            <?php if(count($subGrupo->getListClasse()) > 0):?>
+                            	<ul>
+                            		<?php foreach ($subGrupo->getListClasse() as $classe):?>
+                                	<li class="class id_classe_<?php echo $classe['id_classe']?>"><span  class="classe_<?php echo $classe['id_classe']?>"><?php echo $classe['nome']?></span>
+                                  	<div class="classe">
+																			<a id_classe="<?php echo $classe['id_classe']?>" id_subgrupo="<?php echo $classe['id_subgrupo']?>" href="<?php echo $this->baseUrl('service/classe/form')?>" type="classe" class="edit">
+                                      	<i class="icon-pencil" title="editar Classe"></i>
+                                      </a>
+																			<a id="<?php echo $classe['id_classe']?>" href="<?php echo $this->baseUrl('service/service/grid/id_classe/'.$classe['id_classe'])?>" class="add"> 
+																				<i class="icon-cogs" title="Serviço"></i>
+																			</a>
+																			<?php if(count($classe->getListService()) == 0):?>
+							                        	<a class="deleteMoldal" value="<?php echo $classe['id_classe']?>" href="<?php echo $this->baseurl('service/classe/delete/id/'.$classe->id_classe)?>">
+							                          	<i class="icon-remove" title="Excluir grupo"></i>
+							                          </a>
+							                        <?php endif;?>
+																		</div>
+																	</li>
+                                <?php endforeach;?>
+                              </ul>
+                            <?php endif;?>
+                          </li>
+                        <?php endforeach;//subgrupo?>
+                      </ul>
+                    <?php endif;?>
+                	</li>
+                <?php endforeach;//grupo?>
+            	</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div id="dialog-form" style="display: none;">
+	<form method="post" action="#" class="dialog-form">
+  	<?php echo $this->formHidden('id_grupo', null)?>
+    <?php echo $this->formHidden('id_subgrupo', null)?>
+    <?php echo $this->formHidden('id_classe', null)?>
+    <div class="">
+			<label><?php echo $this->translate('Nome')?>:</label>
+    <?php echo $this->formText('nome', null, array('placeholder' => 'Nome', 'style' => 'width:300px'))?>
+    </div>
+	</form>
+</div>
+
+<div id="dialog_delete" style="display: none;">
+	<p>
+		Deseja realmente excluir o registro: <span id="valueDelete"></span>
+	</p>
+</div>
+<link rel="stylesheet" href="<?php echo $this->baseUrl('styles/jquery.treeview.css')?>">
+<!-- treeview -->
+<script src="<?php echo $this->baseUrl('scripts/lib/treeview/jquery.treeview.async.js')?>"></script>
+<script src="<?php echo $this->baseUrl('scripts/lib/treeview/jquery.treeview.js')?>"></script>
+<script src="<?php echo $this->baseUrl('scripts/lib/treeview/jquery.treeview.edit.js')?>"></script>
+<script src="<?php echo $this->baseUrl('scripts/lib/treeview/jquery.treeview.sortable.js')?>"></script>
+
+<script src="<?php echo $this->baseUrl('scripts/service/group.index.js')?>"> </script>

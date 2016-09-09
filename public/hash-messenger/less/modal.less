@@ -1,0 +1,146 @@
+
+.modal-default                                                                  {
+    .modal-content                                                              { background: url('../imgs/bg-noise.jpg'); border: 0px; .box-shadow(1px 1px 20px rgba(0,0,0,.5));
+        .modal-header                                                           { background-color: lighten(@cor-preto, 88%); padding: 10px; .border-radius(@topright: 6px, @bottomright: 0, @bottomleft: 0, @topleft: 6px);
+            h4                                                                  { color: lighten(@cor-preto, 38%); font-family: @openSans; font-size: 1.4em; font-weight: 700;}
+            button                                                              {
+                i                                                               { font-size: 1.2em;}
+            }
+        }
+        .modal-body                                                             { padding: 20px;}
+        .nav-tabs                                                               { margin: 0 0 20px 0;
+            li                                                                  { margin-bottom: 0px;
+                a                                                               { border: none; color: lighten(@cor-preto, 40%); font-weight: 400; padding: 5px 10px;
+                    &:hover                                                     { background-color: transparent; border: none;}
+                }
+                &.active                                                        { border-bottom: 3px solid @cor-laranja;
+                    a                                                           { background-color: transparent; border: 0; color: lighten(@cor-preto, 40%); padding: 5px 10px;
+                        &:focus                                                 { border: 0;}
+                        &:hover                                                 { border: 0;}
+                    }
+                }
+            }
+        }
+        form                                                                    { margin: 0;
+            label                                                               { color: lighten(@cor-preto, 40%); display: block; font-size: 0.95em; font-weight: 400; }
+            input                                                               { border: 1px solid @cor-cinza-azul; color: lighten(@cor-preto, 40%); .rounded(3px); height: 40px; padding: 5px 10px; margin: 0 0 15px;
+                                                                                  width: 100%;}
+            select                                                              { background-color: @cor-branco; border: 1px solid @cor-cinza-azul; color: lighten(@cor-preto, 40%); .rounded(3px); height: 40px; padding: 5px;
+                                                                                  margin: 0 0 15px; outline: none; width: 100%;}
+            .box-enviar                                                         { background-color: @cor-branco; border: 1px solid @cor-cinza-azul; color: lighten(@cor-preto, 40%); .rounded(3px); padding: 5px;
+                                                                                  margin: 0 0 15px;
+                span                                                            { background-color: darken(@cor-cinza-azul, 3%); display: inline-block; font-size: 0.95em; font-weight: 500; .rounded(3px); padding: 6px;
+                    a                                                           { color: lighten(@cor-preto, 45%); margin: 0 0 0 10px;}
+                }
+            }
+            .box-arquivo                                                        { text-align: center;
+                span                                                            { display: inline-block; margin: 0 10px;
+                    &.start                                                     {
+                        i                                                       { color: @cor-verde; font-size: 4em;}
+                    }
+                    &.stop                                                      {
+                        i                                                       { color: @cor-laranja; font-size: 4em;}
+                    }
+                    &.content-arquivo                                           { position: relative; vertical-align: middle;
+                        i                                                       { color: lighten(@cor-preto, 88%); font-size: 9em; }
+                        small                                                   { bottom: 50%; color: lighten(@cor-preto, 40%);  font-size: 1.2em; position: absolute; right: 20px;}
+                    }
+                }
+            }
+            textarea                                                            { border: 1px solid @cor-cinza-azul; color: lighten(@cor-preto, 40%); .rounded(3px); height: 40px; padding: 5px; min-height: 120px;
+                                                                                  width: 100%;}
+            .agendamento                                                        { display: inline-block; width: 100%;
+                .data                                                           { float: left; margin: 0 15px 0 0; position: relative; width: 28%;
+                    i                                                           { color: lighten(@cor-preto, 70%); cursor: pointer; font-size: 1.3em; position: absolute; top: 50%; right: 10px;}
+                }
+                .horario                                                        { float: left; margin: 0 15px 0 0; position: relative; width: 25%;
+                    i                                                           { color: lighten(@cor-preto, 70%); font-size: 1.3em; position: absolute; top: 50%; right: 10px;}
+                }
+                .notificacao                                                    { float: left; width: 40%; }
+                input, select                                                   { margin: 0 0 7px 0;}
+                &.evento                                                        { display: block; width: 48%;
+                    &.inicio                                                    { float: left;}
+                    &.fim                                                       { float: right;}
+                    .data                                                       { margin: 0; width: 65%;}
+                    .horario                                                    { float: right; margin: 0; width: 30%;}
+                    i                                                           { top: 25%;}
+                }
+            }
+            input[type="checkbox"]                                              {
+                &:not(:checked), &:checked                                      { position: absolute; left: -9999px; }
+                &:not(:checked) + label, &:checked + label                      { position: relative; padding-left: 25px; cursor: pointer; }
+                &:not(:checked) + label:before, &:checked + label:before        { background-color: transparent; border: 1px solid lighten(@cor-preto, 36%); .rounded(2px);
+                                                                                  content: ''; position: absolute; left:0; top: 2px; width: 15px; height: 15px;}
+                &:not(:checked) + label:after, &:checked + label:after          { content: '\f00c'; position: absolute; top: 3px; left: 2px; font-family: FontAwesome; font-size: 1.2em; line-height: 0.8;
+                                                                                  color: lighten(@cor-preto, 30%); transition: all .2s; }
+                &:not(:checked) + label:after                                   { opacity: 0; transform: scale(0); }
+                &:checked + label:after                                         { opacity: 1; transform: scale(1); }
+            }
+            .adicionar-item                                                     { margin: 10px 0 0 0;
+                input                                                           { width: 90%;}
+                button                                                          { border: none; color: @cor-branco; font-size: 1.2em; font-weight: bold; padding: 8px 13px; margin: 0 0 0 5px; .rounded(3px);
+                    &.excluir                                                   { background-color: @cor-laranja;}
+                    &.adicionar                                                 { background-color: @cor-verde;}
+                }
+            }
+            .dados-evento                                                       { display: inline-block; width: 48%;
+                &.lista-checkbox                                                { margin: 25px 0 0;
+                    label                                                       { margin-bottom: 10px;}
+                }
+            }
+            .texto-descricao                                                    { display: inline-block; width: 100%;}
+        }
+        table                                                                   { margin: 20px 0 0; width: 100%;
+            tbody                                                               {
+                tr                                                              { border-bottom: 1px solid lighten(@cor-preto, 90%);
+                    td                                                          { padding: 10px 0;
+                        i                                                       { color: @cor-laranja; display: inline-block; font-size: 1.2em; float: left; margin: 0 10px 0;}
+                        h3                                                      { color: lighten(@cor-preto, 36%); font-size: 1em; font-weight: 400; margin: 0;}
+                        a.link-acao                                             {
+                            i                                                   { color: lighten(@cor-preto, 48%);}
+                        }
+                        time                                                    { color: lighten(@cor-preto, 65%); font-size: 0.75em;}
+                        &:last-child                                            { border-left: 1px solid lighten(@cor-preto, 90%);
+                            a                                                   {
+                                i                                               { margin: 0 0 0 10px;}
+                            }
+                        }
+                        .player                                                 { margin: 5px 0 0 40px; position: relative; width: 85%;
+                            .ui-slider-horizontal                               { background-color: darken(@cor-laranja, 12%); border: none; height: .2em;}
+                            .ui-slider .ui-slider-handle                        { height: 0.6em; width: 0.6em; top: -.2em;}
+                            .ui-state-default,
+                            .ui-widget-content .ui-state-default                { background-color: darken(@cor-laranja, 30%); border: none; color: darken(@cor-laranja, 10%); outline: none;
+                                                                                  .rounded(50%);}
+                            .ui-state-active,
+                            .ui-widget-content .ui-state-active,
+                            .ui-widget-header .ui-state-active,
+                            a.ui-button:active,
+                            .ui-button:active,
+                            .ui-button.ui-state-active:hover                    { background-color: darken(@cor-laranja, 20%); border: none; outline: none;}
+                            span.processo                                       { color: lighten(@cor-preto, 38%); font-size: 0.75em; position: absolute; top: -15px; left: 0;}
+                            span.time-total                                     { color: lighten(@cor-preto, 38%); font-size: 0.75em; position: absolute; top: -15px; right: 0;}
+                        }
+                        &:nth-child(2)                                          { text-align: center;}
+                    }
+                    &:nth-child(1), &:nth-child(2), &:nth-child(3)              {
+                        td                                                      {
+                            h3                                                  { font-weight: bold;}
+                        }
+                    }
+                    &:nth-child(even)                                           { background: lighten(@cor-preto, 95%);}
+                    &:nth-child(odd)                                            { background-color: @cor-branco;}
+                }
+            }
+        }
+        .modal-footer                                                           { border-top: none; padding: 0 20px 20px; text-align: right;
+            button                                                              { font-weight: bold; outline: none; color: @cor-branco; padding: 2px 20px; .rounded(2px);
+                &.btn-limpar                                                    { background-color: @cor-azul;}
+                &.btn-enviar                                                    { background-color: @cor-verde;}
+            }
+        }
+    }
+}
+
+// @media (min-width: 768px)                                                       {
+//     .modal-dialog                                                               { width: 530px;}
+// }

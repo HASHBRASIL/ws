@@ -1,0 +1,50 @@
+<?php
+    /**
+     * grid da empresa aonde visualiza todas as empresas inativas
+     */
+?>
+<style>
+<!--
+th.transacao{
+    width: 80px;
+}
+td.transacao{
+    text-align: center !important;
+}
+-->
+</style>
+<div class="row-fluid">
+     <div class="span12">
+	      <h3 class="page-title">
+	       Registros
+	        <small>Corporativos inativos</small>
+	      </h3>
+     </div>
+</div>
+
+	    <?php //view
+    $options = array(
+        'paginator'            => $this->paginator,
+        'title'                => 'Corporativos inativo',
+        'fields'               => array( 'nome_razao' => 'Nome/Razão Social',
+                                         'fantasia'   => 'Fantasia',
+                                         'cnpj_cpf'   => 'CNPJ/CPF',
+                                         App_Model_Dao_Abstract::STRING_SEARCH        => 'Todos'
+                                       ),
+        'caminhoFormBotaoNovo' => $this->baseUrl() . '/empresa/empresa/form-wizard',
+        'columns'              => array( 'nome_razao'    => 'Nome/Razão social',
+                                         'fantasia'      => 'Fantasia',
+                                         'cnpj_cpf'      => 'CNPJ/CPF'
+                                       ),
+        'formatter'            => array( 'cnpj_cpf' => 'cpf'),
+        'actions'              => array(
+            "<a id='recycle-%id%' class='recycle' title='Reativar %nome_razao%' data-tooltip href='#' value='%id%' class='detail'> "
+                . "<img style='width: 24px;' src='" . $this->baseUrl() . "/images/recycle.png' />"
+            . "</a>"
+        )
+    );
+    echo $this->partial('grid-metronic.phtml', 'default', $options);
+    ?>
+    
+    
+    <script src="<?php echo $this->baseUrl('scripts/empresa/empresa.grid-inativos.js')?>"></script>

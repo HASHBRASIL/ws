@@ -1,0 +1,49 @@
+<style>
+td.diferrent_collumns{
+    color: #e02222;
+}
+</style>
+    <div class="row-fluid">
+        <div class="span12">
+            <table class="table-bordered table-striped table-condensed flip-content" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th style="width: 100px; text-align: center;" >Valor</th>
+                        <th>Observação</th>
+                        <th>Nota Fiscal</th>
+                        <th>Data de Alteração</th>
+                        <th>Usuário</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if(count($this->historicoList)>0):?>
+                              <?php $count = 0?>
+                        <?php foreach ($this->historicoList as $key=> $historico):?>
+                            <?php $count++?>
+                            <?php $newHistorico = ($key == count($this->historicoArray) - 1) ? null: $this->historicoArray[$count]?>
+                            <tr>
+                                <td <?php echo isset($newHistorico->fin_descricao) && $newHistorico->fin_descricao != $historico->fin_descricao ? "class='fin_descricao'": ""; ?>><?php echo $historico->fin_descricao?></td>
+                                <td style="text-align: right;" <?php echo isset($newHistorico->fin_valor) && $newHistorico->fin_valor != $historico->fin_valor ? "class='diferrent_collumns'": ""; ?>><?php echo $this->real($historico->fin_valor)?></td>
+                                <td <?php echo isset($newHistorico->fin_observacao) && $newHistorico->fin_observacao != $historico->fin_observacao ? "class='diferrent_collumns'": ""; ?>><?php echo $historico->fin_observacao ?></td>
+                                <td <?php echo isset($newHistorico->fin_nota_fiscal) && $newHistorico->fin_nota_fiscal != $historico->fin_nota_fiscal ? "class='diferrent_collumns'": ""; ?>><?php echo $historico->fin_nota_fiscal?></td>
+                                <td><?php echo $this->DateHour($historico->dt_criacao)?></td>
+                                <td><?php echo $historico->getUsuario()->nome?></td>
+                            </tr>
+                        <?php endforeach;?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="10">Não possui Historico a este processo</td>
+                        </tr>
+                    <?php endif;?>
+                </tbody>
+            </table>
+            <div class="footer">
+                <?php if($this->limit && count($this->historicoList) >= 5):?>
+                    <div style="float: right;">
+                        <a href="#" class="limit_historico">Ver mais</a>
+                    </div>
+                <?php endif;?>
+            </div>
+        </div>
+    </div>

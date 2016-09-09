@@ -1,0 +1,120 @@
+<style type="text/css" media="screen">
+    .iphone_model                               { background: url('/images/iphone_model.png') no-repeat; width: 405px; height: 775px; margin: 0 auto; padding: 93px 0 0 48px; }
+    .iphone_model .container_app                { width: 327px; height: 582px; background: #057080; overflow: hidden; position: relative; }
+    .container_app .header_app                  { height: 50px; background: #00aac1; }
+    .header_app i.fa                            { font-size: 25px; color: #06717f; float: left; margin: 14px 0 0 10px; }
+    .header_app h1                              { font-size: 19px; margin: 14px 0 0 20px; color: #fff; font-family: 'Open Sans', sans-serif; font-weight: 200; float: left; }
+    .header_app img.hash_icon                   { float: right; margin-top: 13px; }
+    .header_app div.btn-app                     { float: right; border-radius: 5px; background: #06717f; color: #fff; padding: 3px 6px; font-size: 12px; font-weight: bold; margin-top: 14px; margin-left: 15px; margin-right: 10px; }
+    .footer_app                                 { position: absolute; bottom: 0px; left: 0; background: #06717f; width: 100%; color: #fff; text-align: center; }
+    .footer_app ul                              { margin: 0; padding: 15px 0; }
+    .footer_app ul li                           { display: inline; margin-left: 34px; }
+    .footer_app ul li:nth-child(1)              { margin-left: 0px; }
+    .footer_app ul li i                         { font-size: 25px;  } 
+    .footer_app .tool-share-app                 { border-top: 1px #045865 solid; }
+    .container_app .profile_data_app            { position: absolute; cursor: pointer; bottom: 100px; color: #fff; background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1)); text-align: left; width: 100%; box-sizing: border-box; padding: 15px 15px 25px 15px ; }
+    .container_app .profile_data_app h1         { font-size: 20px; font-weight: 400; }
+    .container_app .profile_data_app h2         { font-size: 14px; }
+    .profile_data_app .fa-pencil                { position: absolute; font-size: 19px; color: #fff; top: 15px; right: 15px; transition: all 0.4s ease; }
+    .profile_data_app:hover .fa-pencil          { font-size: 30px; transition: all 0.2s ease; }
+
+    .footer_app .action-buttons-app > div[class*='col-md']              { border-left: 1px #045865 solid; padding: 15px 0 ; }
+    .footer_app .action-buttons-app > div[class*='col-md']:nth-child(1) { border-left: none; }
+    .edit-picture-app                           { cursor: pointer; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0)); width: 100%; height: 50px; position: absolute; top: 50px; left: 0; padding: 15px; box-sizing: border-box; transition: all 0.3s ease; }
+    .edit-picture-app:hover                     { background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0)); transition: all 0.3s ease; }
+    .edit-picture-app i.fa-camera               { float: right; color: #fff; font-size: 15px; transition: all 0.2s ease; }
+    .edit-picture-app:hover i.fa-camera         { font-size: 20px; transition: all 0.2s ease; }
+    .edit-picture-app p                         { color: rgba(255, 255, 255, 0); float: left; transition: all 0.2s ease; }
+    .edit-picture-app:hover p                   { color: rgba(255, 255, 255, 1); transition: all 0.2s ease; }
+
+</style>    
+<div class="container-inscricao col-md-12">
+    <div class="container-form">
+        <div class="suport-text">
+            <h1>Configure seu perfil para o Hash Pré-Campanha.</h1>
+            <h2>Aenean arcu ligula, ultricies eget ornare sed, tristique non magna.</h2>
+        </div>
+        <div class="row">
+            <div class="iphone_model">
+                <div class="container_app">
+                    <div class="header_app">
+                        
+                        <i class="fa fa-chevron-left"></i>
+                        <h1>Pré-Candidato</h1>
+                        <div class="btn-app">
+                            Visitante
+                        </div>
+                        <img src="/images/hash_icon_app.png" class="hash_icon" alt="hash_icon" />
+                    </div>
+                    <div class="picture_app">
+                        <div class="edit-picture-app">
+                            <p>Editar Imagem de Perfil</p>
+                            <i class="fa fa-camera"></i>    
+                        </div>
+                        <img src="/images/obama_picture_profile.jpg" alt="barack obama" />
+                    </div>
+                    <div class="profile_data_app">
+                        <h1>Barack Obama</h1>
+                        <h2>President - Democratics</h2>
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                    <div class="footer_app">
+                        <div class="row action-buttons-app">
+                            <div class="col-md-6">
+                                <i class="fa fa-eye"></i> Seguir
+                            </div>
+                            <div class="col-md-6">
+                                <i class="fa fa-paper-plane"></i> Convidar
+                            </div>
+                        </div>
+                        <div class="row tool-share-app">
+                            <ul>
+                                <li><i class="fa fa-facebook-official"></i></li>
+                                <li><i class="fa fa-twitter-square"></i></li>
+                                <li><i class="fa fa-share-alt-square"></i></li>
+                                <li><i class="fa fa-whatsapp"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.profile_data_app').on('click', function(e){
+        e.preventDefault();
+        bootbox.alert('{{ 'aceitar_antes_de_continuar'|zftranslate }}');
+    });
+
+    $('.edit-picture-app').on('click', function(e){
+        e.preventDefault();
+        bootbox.alert('{{ 'aceitar_antes_de_continuar'|zftranslate }}');
+    });
+
+    $.ajax({
+        type: "GET",
+        url:  "home.php?servico=" + servico,
+        data: data_modal,
+        success: function(response, status, XMLHttpRequest) {
+
+            if (processAjaxSuccess(response, status, XMLHttpRequest) == false) {
+                return;
+            }
+
+            bootbox.dialog({
+                title:   titulo || 'Dropdown',
+                message: response,
+                buttons: objBotoesModal,
+                className: 'bootbox-large',
+                onEscape: function() {
+                    if( typeof customEscape == 'function'){
+                        customEscape();
+                    }else{
+                    }
+                }
+            });
+        }
+    });
+</script>

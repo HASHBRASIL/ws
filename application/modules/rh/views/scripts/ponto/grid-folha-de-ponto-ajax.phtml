@@ -1,0 +1,68 @@
+<div class="row-fluid">
+	<table id="horas" class="table table-striped table-hover table-bordered">
+		<thead>
+			<tr>
+				<th style="width: 100px;text-align: center">Dia</th>
+				<th style="width: 70px;text-align: center">Data</th>
+				<th style="text-align: center;width: 155px;">Entrada1</th>
+				<th style="text-align: center;width: 155px;">Saída1</th>
+				<th style="text-align: center;width: 155px;">Entrada2</th>
+				<th style="text-align: center;width: 155px;">Saída2</th>
+				<th>Falta</th>
+				<th>Extra</th>
+				<th>Carga Trabalhada</th>
+				<th>Carga Horaria</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($this->dados as $data => $dados):?>
+				<?php if($dados->getFeriado()):?>
+					<tr  id='1' class="<?php echo 'linha-feriado' ?>">
+				<?php elseif ($dados->getFolga()):?>
+					<tr  id='1' class="<?php echo 'linha-folga' ?>">
+				<?php endif;?>
+					<?php 
+						$ptBR = new Zend_Locale('pt_BR');
+						$date = new Zend_Date($dados->getData(), null, $ptBR);
+					?>
+					<td>
+						<?php echo $date->toString('EEEE')?> <?php if(!empty($dados->getFeriado())) { echo '<span class="badge badge-important tooltips" data-placement="top" title="'.$dados->getFeriado().'" style="float: right;">!</span>'; }?> 
+					</td>
+					<td>
+						<?php echo $date->toString('dd/MM/YYYY')?> 
+					</td>
+					<?php $tempo = $dados->getTempo()?>
+					<?php for($i = 0; $i < 4; $i++): ?>
+						<td class="position" data-data="<?php echo $dados->getData()?>">
+							<?php if (!empty($tempo[$i]['justificativa'])) : ?>
+								<i class=" icon-chevron-left icon-position"></i>
+							<?php endif;?>
+							<a style="display: inline" data-posicao="<?php echo $i?>" href="javascript:;" class="link"  data-data="<?php echo $dados->getData()?>" data-pk="<?php echo !empty($tempo[$i]) ? $tempo[$i]['idTempo'] : null;?>">
+								<?php if(!empty($tempo[$i]['hora'])):?>
+									<?php echo $this->formatTime($tempo[$i]['hora'], 'H:i');?>
+								<?php elseif (!empty($tempo[$i]['justificativa'])):?>
+									<?php echo $tempo[$i]['justificativa'];?>
+								<?php endif;?>
+							</a>
+							<?php if (!empty($tempo[$i]['justificativa'])) : ?>
+							<i class="icon-chevron-right icon-position"></i>
+							<?php endif;?>
+						 	<?php if (!empty($tempo[$i]['descricao'])) : ?>
+								<span class="badge badge-important tooltips" data-placement="top" title="<?php echo $tempo[$i]['descricao'];?>" style="border-radius:2px !important; margin: 0 3px ">!</span>
+							<?php endif;?>
+						</td>
+					<?php endfor;?>
+					<td><?php echo empty($dados->getCalcularPonto('hora_falta'))? '00:00':$this->formatTime($dados->getCalcularPonto('hora_falta'), "H:i") ?></td>
+					<td><?php echo empty($dados->getCalcularPonto('hora_extra'))? '00:00':$this->formatTime($dados->getCalcularPonto('hora_extra'), "H:i") ?></td>
+					<td>
+						<?php echo empty($dados->sumChTrabalhado('H:i'))?'00:00' : $dados->sumChTrabalhado('H:i')?>
+					</td>
+					<td>
+						<?php echo empty($dados->sumChDefault('H:i'))?'00:00' : $dados->sumChDefault('H:i')?>
+					</td>
+					
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+</div>

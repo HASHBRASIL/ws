@@ -1,0 +1,124 @@
+
+<?php $identity=Zend_Auth::getInstance()->getIdentity(); ?>
+
+<?php
+
+//    var_dump($identity->grupos);exit;
+?>
+
+<?php //$proprietarioSession=new Zend_Session_Namespace('proprietario');?>
+<?php //$workspaceList=Zend_Auth::getInstance()->getStorage()->read()->workspace;?>
+<?php //$workspaceSession=new Zend_Session_Namespace('workspace');?>
+
+<!-- BEGIN HEADER -->
+<div class="header navbar navbar-inverse navbar-fixed-top hidden-print">
+    <!-- BEGIN TOP NAVIGATION BAR -->
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <!-- BEGIN LOGO -->
+            <a class="brand" href="<?php echo $this->baseUrl("empresa/empresa/index")?>">
+                <img style="margin-top:-10px;float: left; height: 40px;" src="<?php echo $this->baseUrl("assets/hash/imgs/hash_full_logo.png"); ?>" alt="HASH WORKSPACE"/>
+                <b style="float: left; margin-left: 10px;" class="visible-desktop"><?php echo $identity->grupo['nome']; ?></b>
+            </a>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+            <img src="<?php echo $this->baseUrl('assets/img/menu-toggler.png')?>" alt="" />
+            </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <ul class="nav pull-right">
+                <li class="dropdown " id="header_modulos">
+                    <a href="#" class="dropdown-toggle modulos-link" data-toggle="dropdown">
+                        <i class="icon-cog"></i>
+                        <span class="">Módulo - <?php echo $identity->modulo['nome'] ?></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <?php
+                            foreach ($identity->grupos[$identity->grupo['id']]['modulos'] as $key => $modulo):
+                                if ($this->isAllowed($modulo['id_servico'])) :
+
+                                    ?>
+                                    <li>
+                                        <a class="modulo"
+                                           name="<?php echo $identity->servicos[$modulo['id_servico']]['nome']; ?>"
+                                           id="<?php echo $modulo['id_servico']?>"
+                                           href="#">
+                                            <i class="<?php echo isset($identity->servicos[$modulo['id_servico']]['metadata']['ws_icon']) ? $identity->servicos[$modulo['id_servico']]['metadata']['ws_icon'] : 'icon-cog' ?>"></i>
+                                            <?php echo $identity->servicos[$modulo['id_servico']]['nome']; ?>
+                                        </a>
+                                    </li>
+                        <?php endif;
+                            endforeach;?>
+                    </ul>
+                </li>
+
+                <?php if(count($identity->grupos) > 0):?>
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-cloud"></i>
+                        <span class="">Time
+                            <span id ="workspaceSelected">
+                                <?php echo $identity->grupo['nome']; ?>
+                            </span>
+                        </span>
+                        <i class="icon-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                            <?php foreach ($identity->grupos as $key => $grupo):?>
+                                    <li>
+                                        <a class="workspace" name ="<?php echo $grupo["nome"];?>" id="<?php echo $grupo['id']?>" href="#">
+                                            <i class="icon-caret-right"></i>
+                                            <?php echo $grupo["nome"];  ?>
+                                        </a>
+                                    </li>
+                            <?php endforeach;?>
+                    </ul>
+                </li>
+                <?php endif;?>
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle usuario" data-toggle="dropdown">
+                        <i class="icon-user"></i>
+                        <span class="username"><?php echo Zend_Auth::getInstance()->getIdentity()->pessoa->nome?></span>
+                        <i class="icon-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo $this->baseUrl("/auth/forbidden/session/block/true")?>"><i class="icon-lock"></i> Bloquear Sistema</a></li>
+                        <li><a href="<?php echo $this->baseUrl("/auth/usuario/change-password")?>"><i class="icon-user"></i> Trocar Senha</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?php echo $this->baseUrl('/auth/index/logout')?>"><i class="icon-key"></i> Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- END TOP NAVIGATION BAR -->
+</div>
+<div class="dialog_feedback" style="display: none;">
+    <form class="form-feedback" style="margin:0 !important;">
+        <label>Assunto</label>
+        <select class="medium m-wrap" name="id_tipo_feed" tabindex="1"></select>
+        <label>Mensagem</label>
+        <?php echo $this->formTextarea('feedback',null, array('style'=> 'width: 410px; height: 113px ;display: inline;'));?>
+        <label class="inline" style="padding-top: 16.75; padding-right: 10px;display: inline-block;"><input type="checkbox"  name="id_criacao_usuario" class="anonimo" value="1" >Anônimo</label>
+    </form>
+</div>
+<div id="workspaceDialog" uniqueWorkspace="<?php echo count($identity->grupos)  == 1 ? $identity->grupo['id'] : false ;  ?>" mode="<?php echo $identity->grupo['id'] ? false : true ;?>" style="display: none;">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label"><?php echo $this->translate('Selecione um Workspace')?></label>
+                <div class="controls">
+                    <?php $count=0?>
+                    <?php foreach ($identity->grupos as $key => $grupos):?>
+                            <?php $count++;?>
+                            <a style="margin-left: 3px;" id_workspace="<?php echo $grupos['id'] ?>" href="#" class="icon-btn span4 workspaceButtons">
+                                <i class="icon-cloud"></i>
+                                <div><?php echo $grupos["nome"] ?></div>
+                            </a>
+                    <?php endforeach;?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

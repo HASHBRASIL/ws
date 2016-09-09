@@ -1,0 +1,78 @@
+// Imports
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700);
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,300,700);
+//@import '../../mixins.less';
+ 
+// VARIAVEIS
+@branco: #fff;
+@preto:  #000;
+@azul-link: blue;
+@font-oswald: 'Oswald', sans-serif;
+@font-padrao-condensed: 'Open Sans Condensed', sans-serif;
+@cor-padrao: red;
+
+//mixins
+.gradient (@origin: left, @start: #ffffff, @stop: #000000) {
+    background-color: @start;
+    background-image: -webkit-linear-gradient(@origin, @start, @stop);
+    background-image: -moz-linear-gradient(@origin, @start, @stop);
+    background-image: -o-linear-gradient(@origin, @start, @stop);
+    background-image: -ms-linear-gradient(@origin, @start, @stop);
+    background-image: linear-gradient(@origin, @start, @stop);
+}
+
+.text-shadow (@string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
+    text-shadow: @string;
+}
+
+.drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @cor: rgba(0, 0, 0, 0.25)) {
+    -webkit-box-shadow: @x @y @blur @spread @cor;
+    -moz-box-shadow:    @x @y @blur @spread @cor;
+    box-shadow:     @x @y @blur @spread @cor;
+}
+
+.transition (@prop: all, @time: 1s, @ease: linear) {
+    -webkit-transition: @prop @time @ease;
+    -moz-transition: @prop @time @ease;
+    -o-transition: @prop @time @ease;
+    -ms-transition: @prop @time @ease;
+    transition: @prop @time @ease;
+}
+
+// Destaques
+.noticia-principal                           {
+    a                                        { display: block; width: 100%; min-height: 160px; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; position: relative;
+        div.overlay-selected                 { border: 4px #f5ca20 solid; /*.drop-shadow(0, 0, 20px, 10px, fade(@branco, 90%));*/ z-index: 10; position: absolute; width: 100%; height: 100%; top: 0; left: 0; .gradient( top, fade(#000,80%) 0%, fade(#000, 0%) 20%);
+            .config-area-selected            { position: absolute; top: 15px; left: 15px; color: @branco; }
+            .pin-area-selected               { position: absolute; top: 15px; right: 15px; color: @branco; }
+        }
+        figure                               { position: relative;
+            img                              { width: 100%; }
+            figcaption                       { .gradient( bottom, fade(#000,90%) 0%, fade(#000, 0%) 100%); position: absolute; bottom: 0; left: 0; width: 100%; padding: 0 0 20px 15px;
+                cite                         { font-size: 3.07em; font-family: @font-oswald; .text-shadow(1px 2px 0px fade(@preto, 80%)); color: @branco; font-style: normal; }
+                p                            { color: @branco; .text-shadow(1px 2px 0px fade(@preto, 80%)); font-size: 1.28em; }
+                small                        { color: @branco; .text-shadow(1px 2px 0px fade(@preto, 80%)); font-size: 0.85em; }
+            }
+        }
+    }
+}
+.noticias-secundarias                        {
+    ul                                       { margin: 0; padding: 0;
+        li                                   { float: left; list-style: none; padding: 0; padding-right: 0; position: relative;
+            div.overlay-selected             { border: 4px #f5ca20 solid; /*.drop-shadow(0, 0, 20px, 10px, fade(@branco, 90%));*/ z-index: 10; position: absolute; width: 100%; height: 100%; top: 0; left: 0; .gradient( top, fade(#000,80%) 0%, fade(#000, 0%) 35%);
+                .config-area-selected        { position: absolute; top: 15px; left: 15px; color: @branco; }
+                .pin-area-selected           { position: absolute; top: 15px; right: 15px; color: @branco; }
+            }
+            a                                { display: block; width: 100%; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+                figure                       { position: relative;
+                    img                      { width: 100%; }
+                    span                     { background: @cor-padrao; font-family: @font-padrao-condensed; font-size: 1.14em; position: absolute; top: 2px; left: 2px; color: @branco; padding: 0 7px;}
+                    figcaption               { .gradient( bottom, fade(#000,90%) 0%, fade(#000, 0%) 100%); position: absolute; bottom: 0; left: 0; width: 100%;
+                                                padding: 0 0 20px 15px; margin: 0; padding: 0.3em;
+                        cite                 { font-size: 1.57em; font-family: @font-oswald; .text-shadow(1px 2px 0px fade(@preto, 80%)); color: @branco; }
+                    }
+                }
+            }
+        }
+    }
+}

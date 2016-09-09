@@ -1,0 +1,20 @@
+<div class="dropzone dz-clickable dz-started" style="cursor:default;">
+    <?php if(count($this->listArquivo)):?>
+        <?php foreach ($this->listArquivo as $arquivo):?>
+            <div class="dz-preview dz-file-preview dz-processing">
+                <div class="dz-details" style="width: 120px;">
+                    <div class="dz-filename">
+                        <span data-dz-name=""><?php echo $arquivo->nome.".".$arquivo->extensao?></span>
+                    </div>
+                    <div class="dz-size" data-dz-size style="left:25%">
+                        <a href="<?php echo $this->baseUrl('/processo/arquivo/get-arquivo/id/'.$arquivo->id_arquivo)?>" target="_blank" style="cursor:pointer;" title="baixar o arquivo - <?php echo $arquivo->nome?>">
+                            <i class="icon-download-alt" style="cursor:pointer;color:#35aa47; font-size: 20px"></i>
+                            Baixar
+                        </a>
+                    </div>
+                    <img data-dz-thumbnail="" >
+                </div>
+            </div>
+        <?php endforeach;?>
+    <?php endif;?>
+</div>

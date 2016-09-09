@@ -1,0 +1,84 @@
+<?php
+$id_cliente_last = 0;
+$count 			 = count($this->processoList) - 1;
+$totalVencido 	 = 0;
+$totalPago	 	 = 0;
+$totalAPagar	 = 0;
+$totalVendido	 = 0;
+?>
+<?php
+foreach ($this->processoList as $key=>$processo):
+?>
+	<?php if($processo['id_cliente'] != $id_cliente_last):?>
+
+		<?php if( $id_cliente_last != 0){
+			echo '</tbody></table>';
+			echo '<p style="font-size: 30px;background-color:#fff;"><b>Vendido:</b> '.$this->real($totalVendido).' - <b>Pago:</b> '.$this->real($totalPago).' - <b>A pagar:</b> '.$this->real($totalAPagar).' - <b>Vencido:</b> '.$this->real($totalVencido).' </p><br style="page-break-before: always;">';
+			$totalVencido 	 = 0;
+			$totalPago	 	 = 0;
+			$totalAPagar	 = 0;
+			$totalVendido	 = 0;
+		}?>
+		<?php $id_cliente_last = $processo['id_cliente']?>
+		<h3><?php echo $processo['id_cliente'].' - '.$processo['cliente'].' - '.$this->cpf($processo['cnpj_cpf'])?></h3>
+		<table style="border: 1px solid #DDD;border-collapse: separate; font-size:28px" cellspacing="0" cellpadding="2">
+			<thead>
+				<tr>
+					<td style="border: 1px solid #DDD;background-color: #DDD; text-align: center; vertical-align:middle;"><b>Cód. pedido</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;width: 100px" valign="middle"><b>Status</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;width: 75px" valign="middle"><b>TS</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;width: 75px" valign="middle"><b>TK</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;" valign="middle"><b>Vencimento</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;" valign="middle"><b>Pagamentoo</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;" valign="middle"><b>Conta</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;" valign="middle"><b>Competencia</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;" valign="middle"><b>Situação</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;" valign="middle"><b>Valor</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;" valign="middle"><b>Dias Atraso</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center; width: 50px" valign="middle"><b>Juros</b></td>
+					<td style="border: 1px solid #DDD;background-color: #DDD;text-align: center;" valign="middle"><b>Total</b></td>
+				</tr>
+			</thead>
+	<?php endif;?>
+		<?php $color = $key %2 == 0 ? '#FFF':'#ECECEC' ?>
+		<tbody>
+			<tr>
+				<td style="background-color: <?php echo $color?>; text-align: center;"><?php echo $processo['pro_codigo']?></td>
+				<td style="background-color: <?php echo $color?>; width: 100px"><?php echo $processo['status']?></td>
+				<td style="background-color: <?php echo $color?>; text-align: center;width: 75px"><?php echo $processo['id_agrupador_financeiro']?></td>
+				<td style="background-color: <?php echo $color?>; text-align: center;width: 75px;"><?php echo $processo['fin_id']?></td>
+				<td style="background-color: <?php echo $color?>; text-align: center; vertical-align:middle;"><?php echo $this->date($processo['fin_vencimento'])?></td>
+				<td style="background-color: <?php echo $color?>; text-align: center;"><?php echo $this->date($processo['fin_compensacao'])?></td>
+				<td style="background-color: <?php echo $color?>; text-align: center;"><?php echo $processo['con_codnome']?></td>
+				<td style="background-color: <?php echo $color?>; text-align: center;"><?php echo $this->date($processo['fin_competencia'], 'MMMM/yyyy')?></td>
+				<?php
+				$situacao		 = "A receber";
+				$dtVencimento 	 = new Zend_Date($processo['fin_vencimento']);
+				$dataAtual		 = new Zend_Date();
+				$diasAtrasos	 = null;
+				if(!empty($processo['fin_compensacao'] && !empty($processo['con_codnome']))){
+					$situacao = "Pago";
+					$totalPago += $processo['valor_tk'];
+				}elseif ($dtVencimento->isEarlier($dataAtual)){
+					$situacao = "Vencido";
+					$totalVencido += $processo['valor_tk'];
+					$diasAtrasos = $dataAtual->sub($dtVencimento)->toValue();
+					$diasAtrasos = ceil($diasAtrasos/60/60/24);
+				}else {
+					$totalAPagar += $processo['valor_tk'];
+				}
+				$totalVendido += $processo['valor_tk'];
+				?>
+				<td style="background-color: <?php echo $color?>; text-align: center;"><?php echo $situacao?></td>
+				<td style="background-color: <?php echo $color?>; text-align: right;"><?php echo $this->real($processo['valor_tk'])?></td>
+				<td style="background-color: <?php echo $color?>; text-align: center;"><?php echo $diasAtrasos?></td>
+				<td style="background-color: <?php echo $color?>; text-align: center; width: 50px"> </td>
+				<td style="background-color: <?php echo $color?>; text-align: center;"><?php echo $this->real($processo['valor_tk'])?> </td>
+			</tr>
+			<?php
+			if($count == $key){
+				echo '</tbody></table>';
+				echo "<p style='font-size: 30px;'><b>Vendido:</b> {$this->real($totalVendido)} - <b>Pago:</b> {$this->real($totalPago)} - <b>A pagar:</b> {$this->real($totalAPagar)} - <b>Vencido:</b> {$this->real($totalVencido)} </p><hr>";
+			}
+			?>
+<?php endforeach;?>

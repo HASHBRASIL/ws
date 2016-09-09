@@ -1,0 +1,28 @@
+{% macro botao(data, tipo, texto = null, id = null, req_id, tag = 'button') %}
+
+    {% set camposIgnorados = ['ws_icon', 'ws_arquivo'] %}
+    {% set ids = { 'usr' : session.USUARIO.ID, 'time' : session.TIME.ID, 'servico': data.id, 'servico_pai' : data.id_pai} %}
+    {% spaceless %}
+
+        <{{tag}} type="submit"
+                data-toggle="tooltip" data-placement="left" title="{{data.nome}}"
+                class="{{ data.metadata.ws_class | default("btn btn-transparent btn-xs tooltips") }} {{ tipo }}"
+
+                {% for key in data.metadata|keys %}
+                    {% if key not in camposIgnorados %}
+                        {% if (key == 'ws_id') %}
+                            {% set campoId = id?: ids[data.metadata['ws_id']] %}
+                            {{ (' data-%key%="%value%"' | replace({'%key%': key[3:], '%value%': campoId})) | raw }}
+                        {% else %}
+                            {{ (' data-%key%="%value%"' | replace({'%key%': key[3:], '%value%': data.metadata[key]}))|raw }}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                data-servico="{{ data.id }}" >
+
+            {{ (texto ?: '<i class="%s"></i>'|format(data.metadata.ws_icon|default("glyphicon glyphicon-edit")))|raw }}
+        </{{tag}}>
+
+    {% endspaceless %}
+{% endmacro %}

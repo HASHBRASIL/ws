@@ -1,0 +1,185 @@
+<?php
+    /**
+     * visualização da arvore de grupo podendo adicionar um grupo, subgrupo e uma classe
+     * é adicionar um produto
+    */
+?>
+<style>
+<!--
+div.action{
+    text-align: right;
+    display: inline;
+    float: right;
+}
+div.subAction{
+    text-align: right;
+    float: right;
+    display: inline;
+    margin-right: 100px;
+}
+div.classe{
+    text-align: right;
+    display: inline;
+    float: right;
+    margin-right: 200px;
+}
+.add-subClass, .add{
+    cursor:pointer;
+}
+div.row-message{
+    display:none;
+}
+div#sidetree{
+    width: 50%;
+}
+.treeview li:hover{
+    background-color: rgb(226, 226, 226) !important;
+}
+-->
+</style>
+<div class="row row-message" >
+    <div class="large-12 columns">
+        <div data-alert="" class="alert-box round success">
+            Dado cadastrado com sucesso.
+            <a href="#" class="close">×</a>
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+     <div class="span12">
+	      <h3 class="page-title">
+	       Registro
+	        <small> de grupo</small>
+	      </h3>
+     </div>
+</div>
+<div class="portlet-body">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="portlet box purple">
+				<div class="portlet-title">
+					<div class="caption"><i class="icon-reorder"></i>Grupo</div>
+					<div class="tools">
+						<a href="javascript:;" class="collapse"></a>
+					</div>
+					<div class="actions">
+			                <a class="btn blue" href="<?php echo $this->baseUrl("material/grupo/form") ?>" id="novoForm"><i class="icon-pencil"></i> Novo grupo </a>
+					</div>
+				</div>
+				<div class="portlet-body" style="display: block;">
+    <div id="sidetree">
+    <div class="treeheader">&nbsp;</div>
+    <div id="sidetreecontrol"><a href="?#">Minimizar</a> | <a href="?#">Expandir</a></div>
+
+            <ul id="tree">
+                <?php foreach ($this->listGrupo as $grupo):?>
+                <li class="id_grupo_<?php echo $grupo['id_grupo']?>">
+                    <span class="grupo_<?php echo $grupo['id_grupo']?>"><?php echo $grupo['nome']?></span><?php echo count($grupo->getListItem()) > 0 ? " (".count($grupo->getListItem()).")":""; ?>
+                                                                <div class="action">
+                                                                    <a id_grupo="<?php echo $grupo['id_grupo']?>" href="<?php echo $this->baseUrl('material/grupo/form')?>" class="edit" type="grupo" name="<?php echo $grupo['nome']?>">
+                                                                        <img src="<?php echo $this->baseUrl('/images/tab-edit-icon.png')?>" data-tooltip title="editar Grupo" />
+                                                                    </a>
+                                                                    <?php if(!in_array($grupo['id_grupo'], $this->idGrupoExist)):?>
+                                                                        <a id="<?php echo $grupo['id_grupo']?>" href="<?php echo $this->baseUrl('material/sub-grupo/form')?>" class="add-subClass">
+                                                                            <img src="<?php echo $this->baseUrl('images/tab-add-icon.png')?>" data-tooltip title="adicionar sub-Grupo"/>
+                                                                        </a>
+                                                                    <?php endif;?>
+                                                                    <?php if(!count($grupo->getListSubGrupo()) > 0):?>
+                                                                        <a id="<?php echo $grupo['id_grupo']?>" href="<?php echo $this->baseUrl('material/item/grid/id_grupo/'.$grupo['id_grupo'])?>" class="add add_action_grupo_<?php echo $grupo['id_grupo']?>" >
+                                                                            <img src="<?php echo $this->baseUrl('images/package_add.png')?>" data-tooltip style="height: 13px;"title="Produto"/>
+                                                                        </a>
+                                                                        <?php if(count($grupo->getListItem()) == 0):?>
+                                                                            <a class="deleteMoldal" value="<?php echo $grupo['id_grupo']?>" href="<?php echo $this->baseurl('material/grupo/delete/id/'.$grupo->id_grupo)?>">
+                                                                                <img title="Excluir grupo" src="<?php echo $this->baseUrl('/images/tab-delete-icon.png')?>">
+                                                                            </a>
+                                                                        <?php endif;?>
+                                                                    <?php endif;?>
+                                                                </div>
+                    <?php if(count($grupo->getListSubGrupo()) > 0):?>
+                        <ul>
+                            <?php foreach ($grupo->getListSubGrupo() as $subGrupo):?>
+                                <li class="subclass id_subgrupo_<?php echo $subGrupo['id_subgrupo']?>"><span class="subgrupo_<?php echo $subGrupo['id_subgrupo']?>"><?php echo $subGrupo['nome']?></span><?php echo count($subGrupo->getListItem()) > 0 ? " (".count($subGrupo->getListItem()).")":""; ?>
+                                                                                    <div class="subAction">
+                                                                                            <a id_subgrupo="<?php echo $subGrupo['id_subgrupo']?>" id_grupo="<?php echo $subGrupo['id_grupo']?>" href="<?php echo $this->baseUrl('material/sub-grupo/form')?>" type="sub-grupo" class="edit">
+                                                                                                <img src="<?php echo $this->baseUrl('/images/tab-edit-icon.png')?>" data-tooltip title="editar Sub-Grupo" name="<?php echo $subGrupo['nome']?>" />
+                                                                                            </a>
+                                                                                        <?php if(!in_array($subGrupo['id_subgrupo'], $this->idSubgrupoExist)):?>
+                                                                                            <a id="<?php echo $subGrupo['id_subgrupo']?>" href="<?php echo $this->baseUrl('material/classe/form')?>" class="add-class">
+                                                                                                <img src="<?php echo $this->baseUrl('/images/tab-add-icon.png')?>" data-tooltip  title="adicionar Classe"/>
+                                                                                            </a>
+                                                                                        <?php endif;?>
+                                                                                        <?php if(!count($subGrupo->getListClasse()) > 0):?>
+                                                                                            <a id="<?php echo $subGrupo['id_subgrupo']?>" href="<?php echo $this->baseUrl('material/item/grid/id_subgrupo/'.$subGrupo['id_subgrupo'])?>" class="add add_action_subgrupo_<?php echo $subGrupo['id_subgrupo']?>">
+                                                                                                <img src="<?php echo $this->baseUrl('images/package_add.png')?>" data-tooltip style="height: 13px;"title="Produto"/>
+                                                                                            </a>
+                                                                                            <?php if(count($subGrupo->getListItem()) == 0):?>
+                                                                                                <a class="deleteMoldal" value="<?php echo $subGrupo['id_grupo']?>" href="<?php echo $this->baseurl('material/sub-grupo/delete/id/'.$subGrupo->id_subgrupo)?>">
+                                                                                                    <img title="Excluir sub-Grupo" src="<?php echo $this->baseUrl('/images/tab-delete-icon.png')?>">
+                                                                                                </a>
+                                                                                            <?php endif;?>
+                                                                                        <?php endif;?>
+                                                                                    </div>
+                                <?php if(count($subGrupo->getListClasse()) > 0):?>
+                                    <ul>
+                                        <?php foreach ($subGrupo->getListClasse() as $classe):?>
+                                            <li class="class id_classe_<?php echo $classe['id_classe']?>"><span  class="classe_<?php echo $classe['id_classe']?>"><?php echo $classe['nome']?></span><?php echo count($classe->getListItem()) > 0 ? " (".count($classe->getListItem()).")":""; ?>
+                                                <div class="classe">
+                                                    <a id_classe="<?php echo $classe['id_classe']?>" id_subgrupo="<?php echo $classe['id_subgrupo']?>" href="<?php echo $this->baseUrl('material/classe/form')?>" type="classe" class="edit">
+                                                        <img src="<?php echo $this->baseUrl('/images/tab-edit-icon.png')?>" data-tooltip title="editar Classe" />
+                                                    </a>
+                                                    <a id="<?php echo $classe['id_classe']?>" href="<?php echo $this->baseUrl('material/item/grid/id_classe/'.$classe['id_classe'])?>" class="add">
+                                                            <img src="<?php echo $this->baseUrl('images/package_add.png')?>" data-tooltip style="height: 13px;"title="Produto"/>
+                                                    </a>
+                                                    <?php if(count($classe->getListItem()) == 0):?>
+                                                        <a class="deleteMoldal" value="<?php echo $classe['id_classe']?>" href="<?php echo $this->baseurl('material/classe/delete/id/'.$classe->id_classe)?>">
+                                                            <img title="Excluir classe" src="<?php echo $this->baseUrl('/images/tab-delete-icon.png')?>">
+                                                        </a>
+                                                    <?php endif;?>
+                                                </div>
+                                            </li>
+                                        <?php endforeach;?>
+                                    </ul>
+                                <?php endif;?>
+                                </li>
+                            <?php endforeach;?>
+                        </ul>
+                    <?php endif;?>
+                </li>
+                <?php endforeach;?>
+            </ul>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="dialog-form" style="display:none">
+    <form method="post" action="#" class="dialog-form" style="margin:0;">
+        <?php echo $this->formHidden('id_grupo', null)?>
+        <?php echo $this->formHidden('id_subgrupo', null)?>
+        <?php echo $this->formHidden('id_classe', null)?>
+        <?php $workspaceSession = new Zend_Session_Namespace('workspace');?>
+        <?php echo $this->formHidden('id_workspace', $workspaceSession->id_workspace)?>
+        <div class="row-fluid">
+            <div class="span12">
+                <label><?php echo $this->translate('Nome')?>:</label>
+                <?php echo $this->formText('nome', null, array('placeholder' => 'Nome', 'style' => 'width:300px'))?>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir o registro: <span id ="valueDelete"></span></p>
+</div>
+
+          <link rel="stylesheet" href="<?php echo $this->baseUrl('styles/jquery.treeview.css')?>">
+        <!-- treeview -->
+        <script src="<?php echo $this->baseUrl('scripts/lib/treeview/jquery.treeview.async.js')?>"></script>
+        <script src="<?php echo $this->baseUrl('scripts/lib/treeview/jquery.treeview.js')?>"></script>
+        <script src="<?php echo $this->baseUrl('scripts/lib/treeview/jquery.treeview.edit.js')?>"></script>
+        <script src="<?php echo $this->baseUrl('scripts/lib/treeview/jquery.treeview.sortable.js')?>"></script>
+
+<script src="<?php echo $this->baseUrl('scripts/material/group.index.js')?>"  > </script>

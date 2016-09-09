@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--     <meta name="viewport" content="width=device-width, initial-scale=1">
+ -->    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Inscrição</title>
+
+    <!-- CROPPER CSS -->
+    <link href='/library/cropimg/css/cropper.min.css' rel='stylesheet' type='text/css' />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- GoogleFonts -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:900,500,700,300,200' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="<?php echo $this->baseUrl('library/fortawesome/css/font-awesome.min.css')?>">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<?php echo $this->baseUrl("assets/plugins/bootstrap/js/bootstrap.min.js");?>"></script>
+    <!-- CROPPER -->
+    <script src="/library/cropimg/js/cropper.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+
+    <style type="text/css" media="screen">
+        *                                           { -webkit-font-smoothing: antialiased; }
+        body                                        { font-family: 'Open Sans', sans-serif; }
+        #logo-hash                                  { background: url('/images/hash-campanha-logo.png') no-repeat; background-size: contain; width: 135px; height: 118px; position: absolute; top: 20px; right: 20px; }
+        .container-fluid                            { padding: 0;
+                                                      background-image: url('/images/img_fundo.jpg');
+                                                      background-repeat:no-repeat;
+                                                      -webkit-background-size:cover;
+                                                      -moz-background-size:cover;
+                                                      -o-background-size:cover;
+                                                      background-size:cover;
+                                                      background-position:left top;
+                                                    }
+        .container-fluid > .row                     { margin-left: 0; margin-right: 0; }
+        .container-inscricao                        { height: 100vh; }
+        .container-form                             { text-align: center;
+                                                      position: relative;
+                                                      top: 70%;
+                                                      transform: translateY(-70%);
+                                                    }
+        .container-form form                        { margin-bottom: 0; }
+        h1, h2, h3, h4, h5                          { font-family: 'Raleway', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; margin: 0; }
+        .box-form-inscricao                         { background: rgba(255,255,255,0.4); border-radius: 10px; padding: 20px; display: inline-block;
+                                                      margin: 0 auto; text-align: left; width: 560px;
+                                                    }
+        .suport-text                                {
+                                                      text-align: center;
+                                                    }
+        .suport-text h1                             { padding: 50px 0 0 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); font-weight: 900 }
+        .suport-text h2                             { font-weight: 200; font-size: 2em; padding-bottom: 50px; padding-top: 15px; }
+        .box-form-inscricao input[type='text'],
+        .box-form-inscricao input[type='email']     { height: 56px; text-indent: 15px; font-size: 1.45em !important; box-sizing: border-box; width: 100%; margin-bottom: 0 !important; }
+        .box-form-inscricao input[type='checkbox']  { margin-top: 0; }
+        .box-form-inscricao button                  { border: 0; border-radius: 5px; background: #1eb8c2; font-weight: bold; color: #fff; font-size: 1.2em; height: 56px; width: 100%; transition: all 0.3s ease; outline: none; }
+        .box-form-inscricao button:hover            { background: #11778d; transition: all 0.3s ease; }
+        .box-form-inscricao ul li                   { list-style: none; font-weight: bold; font-size: 1.3em; margin-bottom: 10px; }
+        .box-form-inscricao ul li:nth-last-child(1) { margin-bottom: 0; }
+        .box-form-inscricao ul                      { margin: 0 0 20px 0; }
+        .list-confirm-product                       { text-align: right; padding-right: 0; }
+        .box-form-inscricao form ul                 { margin: 0 0 20px 0; }
+        .box-form-inscricao form ul li              { list-style: none; font-weight: bold; }
+        .box-form-inscricao form ul li span         { font-weight: normal; }
+        .menu-principal                             { position: fixed; top: 50px; right: 160px; z-index: 10 }
+        .menu-principal nav ul                      { margin: 0;}
+        .menu-principal nav ul li                   { display: inline-block; list-style: none; margin-left: 20px; font-weight: bold; color: #fff; }
+        .menu-principal nav ul li:nth-child(1)      { margin-left: 0; }
+        .menu-principal nav ul li a                 { text-decoration: none; }
+        .dark-bg nav ul li a                        { color: rgba(255,255,255,0.4); transition: all 0.4s ease; }
+        .dark-bg nav ul li a:hover                  { color: rgba(255,255,255,1); transition: all 0.4s ease; }
+        .light-bg nav ul li a                       { color: rgba(0,0,0,0.4); font-size: 1.3em; transition: all 0.4s ease; }
+        .light-bg nav ul li a:hover                 { color: rgba(0,0,0,1); transition: all 0.4s ease; }
+        .bootbox                                    { margin: 0 auto; width: inherit; background: none; border: 0; }
+        .modal-footer button                        { border: 0; border-radius: 5px; background: #1eb8c2; font-weight: bold; color: #fff; font-size: 1.2em; transition: all 0.3s ease; outline: none; }
+        .modal-footer .btn-danger:hover,
+        .modal-footer .btn-danger:active,
+        .modal-footer .btn-danger:focus             { background: #11778d; color: #ffffff; transition: all 0.3s ease; }
+        .modal-footer .btn-success:hover,
+        .modal-footer .btn-success:active,
+        .modal-footer .btn-success:focus            { background: #11778d; color: #ffffff; transition: all 0.3s ease; }
+        .modal-body                                 { overflow-y: scroll; max-height: 400px;}
+
+        .aceite-validacao .suport-text              { margin: 20px auto; width: 60%;}
+        .aceite-validacao label                     { width: 100%;}
+        .aceite-validacao input[type="password"]    { display: block; height: 40px; text-indent: 15px; font-size: 1.45em !important; box-sizing: border-box; margin-bottom: 0 !important; margin-top: 5px;}
+        .aceite-validacao .form-password            { width: auto;}
+        button                                      { outline: none !important; }
+
+        @media (min-width: 768px) and (max-width: 979px)            {
+            .container-inscricao                                    { background: rgba(255,255,255,0.4);}
+            #logo-hash                                              { top: 10px; right: 10px;}
+            .menu-principal                                         { right: 0; left: 0;}
+            .box-form-inscricao                                     { width: 100%;}
+            .box-form-inscricao input[type='email']                 { font-size: 1.2em !important; text-indent: 0; text-align: center; margin-bottom: 10px !important;}
+            .box-form-inscricao input[type='text']                  { font-size: 1.2em !important; text-indent: 0; text-align: center; margin-bottom: 10px !important;}
+            .box-form-inscricao ul li                               { font-size: 1.3em;}
+            .suport-text h1                                         { font-size: 2em; line-height: 1.3em;}
+            .suport-text h2                                         { font-size: 1.5em; padding: 10px 0 20px;}
+            .btn-action button                                      { margin: 0;}
+            .list-confirm-product                                   { text-align: left; padding: 0 5px;}
+            .info-user                                              { padding: 5px;}
+            .alert                                                  { position: fixed; z-index: 999; width: 100%;}
+            #aceite button                                          { margin: 0 45%; width: auto;}
+        }
+        @media (max-width: 767px)                                   {
+            .container-inscricao                                    { background: rgba(255,255,255,0.4);}
+            #logo-hash                                              { top: 10px; right: 10px;}
+            .menu-principal                                         { right: 0; left: 0; top: 10px;}
+            .box-form-inscricao                                     { width: 100%;}
+            .box-form-inscricao input[type='email']                 { font-size: 1.2em !important; text-indent: 0; text-align: center; margin-bottom: 10px !important;}
+            .box-form-inscricao input[type='text']                  { font-size: 1.2em !important; text-indent: 0; text-align: center; margin-bottom: 10px !important;}
+            .box-form-inscricao button                              { margin: 0 60%;}
+            .box-form-inscricao ul li                               { font-size: 1em;}
+            .suport-text h1                                         { font-size: 2em; line-height: 1.3em; width: 85%;}
+            .suport-text h2                                         { font-size: 1.5em; padding: 10px 0 20px;}
+            .btn-action button                                      { margin: 0;}
+            .list-confirm-product                                   { text-align: left; padding: 0 5px;}
+            .info-user                                              { padding: 5px;}
+            .alert                                                  { position: fixed; z-index: 999; width: 100%;}
+            #aceite button                                          { margin: 0;}
+        }
+        @media (max-width: 480px)                                   {
+            .container-inscricao                                    { background: rgba(255,255,255,0.4);}
+            #logo-hash                                              { top: 10px; right: 10px;}
+            .menu-principal                                         { right: 0; left: 0; top: 30px;}
+            .box-form-inscricao                                     { width: 100%;}
+            .box-form-inscricao input[type='email']                 { font-size: 1.2em !important; text-indent: 0; text-align: center; margin-bottom: 10px !important;}
+            .box-form-inscricao input[type='text']                  { font-size: 1.2em !important; text-indent: 0; text-align: center; margin-bottom: 10px !important;}
+            .box-form-inscricao button                              { margin: 0 60%;}
+            .box-form-inscricao ul li                               { font-size: 1em;}
+            .suport-text h1                                         { font-size: 2em; line-height: 1.3em; width: auto;}
+            .suport-text h2                                         { font-size: 1.5em; padding: 10px 0 20px;}
+            .btn-action button                                      { margin: 0;}
+            .list-confirm-product                                   { text-align: left; padding: 0 5px;}
+            .info-user                                              { padding: 5px;}
+            .alert                                                  { position: fixed; z-index: 999; width: 100%;}
+            #aceite button                                          { margin: 0;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div id="logo-hash">
+            <img src="" alt="" />
+        </div>
+        <div class="row">
+            <?php if (is_array($this->messages) && count($this->messages)): ?>
+                <?php foreach ($this->messages as $message): ?>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="alert alert-alert" style="margin-top: 10px;">
+                                <?php echo $message['error'] ?>
+                                <button class="close" data-dismiss="alert"></button>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+        <div class="row">
+            <div class="menu-principal light-bg">
+                <nav>
+                    <ul>
+                        <li><a href="http://blog.titaniumtech.com.br/" title="">Blog TitaniumTech</a></li>
+                        <!-- <li><a href="#" title="">Sobre</a></li>
+                        <li><a href="#" title="">Fale Conosco</a></li> -->
+                    </ul>
+                </nav>
+            </div>
+            <?=$this->layout()->content ?>
+        </div>
+    </div>
+  </body>
+</html>

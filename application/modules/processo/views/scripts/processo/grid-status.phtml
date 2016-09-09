@@ -1,0 +1,108 @@
+<style>
+table tr.different_financial td{
+    color: #e02222 !important;
+}
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+i.acao{
+    color:#000;
+    padding: 0 2px;
+}
+td.acoes{
+    text-align: center;
+}
+
+</style>
+<?php //App_Util_Functions::debug($this->processoByStatusList)?>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="row-fluid">
+            <a href="<?php echo $this->baseUrl("/processo/processo/form")?>" class="icon-btn span2">
+                <i class="icon-cog"></i>
+                <div> Novo Pedido </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box caribbean-green">
+                <div class="portlet-title">
+                	<div class="caption"><i class="icon-cogs"></i>Registro de pedido industrial - Status</div>
+    			</div>
+    			<div class="portlet-body">
+                    <!--BEGIN TABS-->
+                    <div class="tabbable tabbable-custom tabs-left">
+                        <ul class="nav nav-tabs">
+                            <?php $primary = true?>
+                            <?php foreach ($this->processoByStatusList as $key=>$processoStatus):?>
+                                <li class="<?php echo $primary? "active": null?>"><a href="#grid-status-<?php echo $key?>" key="<?php echo $key?>" data-toggle="tab"><?php echo $processoStatus['descricao']?></a></li>
+                                <?php $primary = false?>
+                            <?php endforeach;?>
+                        </ul>
+                        <div class="tab-content">
+                            <?php $primary = true?>
+                            <?php foreach ($this->processoByStatusList as $key=>$processoStatus): ?>
+                                <div class="tab-pane <?php echo $primary? "active": null?>" id="grid-status-<?php echo $key?>">
+                            		<table class="grid_datatable table-bordered table-striped table-condensed flip-content" style="width: 100%">
+                            		    <thead>
+                            		        <tr>
+                            		            <th>Código</th>
+                            		            <th>Cliente</th>
+                            		            <th>Descrição</th>
+                            		            <th>Quantidade</th>
+                            		            <th>Valor Unitário</th>
+                            		            <th style="width: 140px">Valor Pedido</th>
+                            		            <th>Valor da transação</th>
+                            		            <th style="min-width: 100px;">Ação</th>
+                            		        </tr>
+                            		    </thead>
+                            		    <tbody>
+                            		    <?php if (count($processoStatus['list']) > 0):?>
+                            		        <?php foreach ($processoStatus['list'] as $processo):?>
+                            		            <tr class="<?php echo $processo['total_financeiro'] != $processo['pro_vlr_pedido']  ? 'different_financial' : '' ?>">
+                            		                <td><?php echo $processo['pro_codigo']?></td>
+                            		                <td><?php echo $processo['cliente'] ?></td>
+                            		                <td><?php echo $processo['pro_desc_produto']?></td>
+                            		                <td><?php echo $processo['pro_quantidade']?></td>
+                            		                <td style="text-align: right;"><?php echo $this->real($processo['pro_vlr_unt']) ?></td>
+                            		                <td style="text-align: right;"><?php echo $this->real($processo['pro_vlr_pedido']) ?></td>
+                            		                <td style="text-align: right;"><?php echo $this->real($processo['total_financeiro']) ?></td>
+                            		                <td class="acoes">
+                            		                    <a href="<?php echo $this->baseUrl("financial/agrupador-financeiro/grid-financial-processo-ajax/id_processo/{$processo['pro_id']}")?>" class="visualizar_financeiro">
+                            		                        <i class="icon-money acao" title="Dados do financeiros"></i>
+                            		                    </a>
+                            		                    <a href='<?php echo $this->baseUrl("material/movimento/movimento-by-processo/pro_id/{$processo['pro_id']}")?>' class="visualizar_processo">
+                            		                        <i class="acao icon-legal" title="Produtos utilizados"></i>
+                            		                    </a>
+                            		                    <a href="<?php echo $this->baseUrl("processo/processo/form/pro_id/{$processo['pro_id']}")?>">
+                            		                        <i title="Editar" class="icon-pencil acao"></i>
+                            		                    </a>
+                            		                </td>
+                            		            </tr>
+                            		        <?php endforeach;?>
+                            		    <?php endif;?>
+                            		    </tbody>
+                            		</table>
+                                </div>
+                                <?php $primary = false?>
+                            <?php endforeach;?>
+                        </div>
+                    </div>
+                    <!--END TABS-->
+                </div>
+            </div>
+    </div>
+</div>
+
+<div id="dialogProcesso">
+</div>
+<div id="dialogFinancial">
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/processo/processo.grid-status.js')?>"></script>

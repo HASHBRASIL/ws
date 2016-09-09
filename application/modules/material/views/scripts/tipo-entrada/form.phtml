@@ -1,0 +1,41 @@
+
+<div class="row-fluid" style="margin-top: 10px">
+    <div class="portlet box purple">
+        <div class="portlet-title">
+            <div class="caption"><i class="icon-reorder"></i> Formulário tipo de protocolo de materiais <?php if($this->vo->id_tp_protocolo): echo "#{$this->vo->id_tp_protocolo} "; endif; ?></div>
+            <div class="tools">
+                <a href="javascript:;" class="collapse"></a>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form method="post" class="form_protocolo form-horizontal">
+                <?php echo $this->formHidden('id_tp_protocolo', $this->vo->id_tp_protocolo) ?>
+                <?php $workspaceSession = new Zend_Session_Namespace('workspace');?>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">Tipo de movimento<span class="required">*</span></label>
+                            <div class="controls">
+                                <?php echo $this->formSelect('id_tp_movimento',$this->vo->id_tp_movimento, array('class' => 'span12'), $this->tpMovimentoCombo);?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="control-group">
+                            <label class="control-label">Nome<span class="required">*</span></label>
+                            <div class="controls">
+                                <?php echo $this->formText('nome', $this->vo->nome, array('class' => 'span6'));?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="form-actions">
+                <a href="<?php echo $this->baseUrl('/material/tipo-entrada/grid')?>" class="btn">Voltar</a>
+                <button type="submit" class="btn green"><i class="icon-ok"></i> Salvar</button>
+        	</div>
+            </form>
+        </div>
+    </div>
+</div>

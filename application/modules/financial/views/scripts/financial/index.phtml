@@ -1,0 +1,178 @@
+<?php
+    /**
+     * formulario de pesquisa financeira
+    */
+?>
+<div class="row-fluid">
+	<div class="span12">
+		<h3 class="page-title">
+			Pesquisa
+			 <small> de tickets financeiro</small>
+		</h3>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i> Pesquisar ticket</div>
+			<div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+		<div class="portlet-body form">
+
+		<div class="row-fluid">
+		    <div class="span12">
+		        <!--BEGIN TABS-->
+		        <div class="tabbable tabbable-custom">
+		            <ul class="nav nav-tabs">
+		                <li class="active"><a href="#tab_1_1" data-toggle="tab">Pesquisa</a></li>
+		                <li><a class="openTab" name="AVC" href="#tab_1_2" data-toggle="tab"> Contas a receber</a></li>
+		                <li><a class="openTab" name="AVD" href="#tab_1_3" data-toggle="tab"> Contas a pagar</a></li>
+		                <li><a class="openTab" name="LC" href="#tab_1_4" data-toggle="tab"> Recebido</a></li>
+		                <li><a class="openTab" name="LD" href="#tab_1_5" data-toggle="tab"> Pagos</a></li>
+		                <li><a class="openTab" name="VC" href="#tab_1_6" data-toggle="tab"> Créditos vencidos</a></li>
+		                <li><a class="openTab" name="VD" href="#tab_1_7" data-toggle="tab"> Pagamentos vencidos</a></li>
+		                <li><a class="openTab" name="PP" href="#tab_1_8" data-toggle="tab"> Pendência com processo</a></li>
+		            </ul>
+		            <div class="tab-content">
+		                <div class="tab-pane active grid_endereco" id="tab_1_1">
+
+		                	<form method="post"  class="form-horizontal" id="form_pesquisa">
+					        	<div class="row-fluid">
+									<div class="span12">
+										<div class="control-group">
+											<label style="text-align: left" class="control-label"><?php echo $this->translate('Data de Emissão')?></label>
+											<div class="controls">
+					                          	<?php echo $this->formText('data_emissao',null, array('class'=>'datepicker', 'placeholder' => 'De:'));?>
+					                          	<?php echo $this->formText('data_emissao2',null, array('class'=>'datepicker','placeholder' => 'Até:'));?>
+					                          	<?php echo $this->formSelect('data_emissaoType',null , null, array("entre" => "Emissão entre dois valores", "exato" => "Emissão Exatamente Igual"));?>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span12">
+										<div class="control-group">
+											<label style="text-align: left" class="control-label"><?php echo $this->translate('Data de Vencimento')?></label>
+											<div class="controls">
+					                          	<?php echo $this->formText('data_vencimento',null, array('class'=>'datepicker','placeholder' => 'De:'));?>
+					                          	<?php echo $this->formText('data_vencimento2',null, array('class'=>'datepicker','placeholder' => 'Até:'));?>
+					                          	<?php echo $this->formSelect('data_vencimentoType',null , null, array("entre" => "Emissão entre dois valores", "exato" => "Emissão Exatamente Igual"));?>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span12">
+										<div class="control-group">
+											<label style="text-align: left" class="control-label"><?php echo $this->translate('Data de Compensação')?></label>
+											<div class="controls">
+					                          	<?php echo $this->formText('data_compensacao',null, array('class'=>'datepicker','placeholder' => 'De:'));?>
+					                          	<?php echo $this->formText('data_compensacao2',null, array('class'=>'datepicker','placeholder' => 'Até:'));?>
+					                          	<?php echo $this->formSelect('data_compensacaoType',null , null, array("entre" => "Emissão entre dois valores", "exato" => "Emissão Exatamente Igual"));?>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span12">
+										<h5>
+											Selecione o tipo financeiro  <!-- - MARCAR TODOS <input type="checkbox" id="marcarTodos"> -->
+										</h5>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span2" style="margin-left: 0">
+										<?php echo $this->formMultiCheckbox("grupoContasList", null,array("class" =>"checkbox"), array(2 => " Crédito", 1 => " Débito"), "\n")?>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span4">
+										<h5>
+											Selecione o Status Financeiro Desejado
+										</h5>
+									</div>
+									<div class="span4">
+										<h5>
+											Selecione a Conta
+										</h5>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span4" style="margin-left: 0">
+										<?php echo $this->formSelect('statusFinanceiro',null , null, array("" => "Selecione", "liquidado" => "Liquidado", "vencido" => "Vencido", "avencer" => "A vencer"));?>
+				                    </div>
+				                    <div class="span4" style="margin-left: 0">
+										<?php echo $this->formSelect('contas',null , null, array("" => "Selecione")+$this->comboContas);?>
+				                    </div>
+								</div>
+								<div class="row-fluid">
+									<div class="span12">
+										<h5>
+											Selecione as entidades desejadas
+										</h5>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span7">
+										<input type="hidden" name="id_empresa" value="" id="id_empresa" idcompany="">
+										<input type="text" name="empresa" id="empresa"  value="" style="display: inline-block; width: 60%;" >
+										<img id="addEmpresa" src="<?php echo $this->baseUrl('images/add.png')?>" style="top:5px; cursor: pointer;">
+									</div>
+								</div>
+				            	 <div class="row-fluid">
+				            	    <div class="span7">
+				            	    	<H3 id="companySelected">Entidades selecionadas: 0 </H3>
+				                       	<div id="localCompany">
+				                    	</div>
+									</div>
+				            	</div>
+								<div class="form-actions">
+									<button type="submit" class="btn blue"><i class="icon-ok"></i> Pesquisar</button>
+										<a onclick="window.history.back()" class="btn" >Voltar</a>
+										<button id="gerar-pdf" class="btn green"><i class="icon-file"></i> Gerar PDF</button>
+								</div>
+					        </form>
+
+		                </div>
+		                <div class="tab-pane grid_contato" id="tab_1_2">
+							<img class="loadAjax" src='images/loading.gif' style='margin-left: 50%;'></img>
+							<div id="AVC"></div>
+		                </div>
+		                <div class="tab-pane grid_financeiro" id="tab_1_3">
+		                	<img class="loadAjax" src='images/loading.gif' style='margin-left: 50%;'></img>
+		                	<div id="AVD"></div>
+		                </div>
+		                <div class="tab-pane grid_financeiro" id="tab_1_4">
+		                	<img class="loadAjax" src='images/loading.gif' style='margin-left: 50%;'></img>
+		                	<div id="LC"></div>
+		                </div>
+		                <div class="tab-pane grid_financeiro" id="tab_1_5">
+		                	<img class="loadAjax" src='images/loading.gif' style='margin-left: 50%;'></img>
+		                	<div id="LD"></div>
+		                </div>
+		                <div class="tab-pane grid_financeiro" id="tab_1_6">
+		                	<img class="loadAjax" src='images/loading.gif' style='margin-left: 50%;'></img>
+		                	<div id="VC"></div>
+		                </div>
+		                <div class="tab-pane grid_financeiro" id="tab_1_7">
+		                	<img class="loadAjax" src='images/loading.gif' style='margin-left: 50%;'></img>
+		                	<div id="VD"></div>
+		                </div>
+		                <div class="tab-pane grid_financeiro" id="tab_1_8">
+		                	<img class="loadAjax" src='images/loading.gif' style='margin-left: 50%;'></img>
+		                	<div id="PP"></div>
+		                </div>
+		            </div>
+		        </div>
+		        <!--END TABS-->
+		    </div>
+		</div>
+		</div>
+    </div>
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir este registro: <span id ="valueDelete"></span></p>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/financial/financial.index.js')?>"></script>

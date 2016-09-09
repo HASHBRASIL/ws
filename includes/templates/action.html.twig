@@ -1,0 +1,53 @@
+{% from 'botoes.html.twig' import botao as gerar_botao %}
+{% set paginacao = false %}
+{% set print = false %}
+{% set acao = false %}
+{% set multiplaacao = false %}
+{% set buttons %}
+    {% for filho in servico.filhos %}
+        {% if filho.metadata.ws_comportamento == 'action' %}
+            {% set print = true %}
+            {% set acao = true %}
+            {{ gerar_botao(filho, 'action btn btn-sm', filho.nome, null , req_id, 'button') }}
+        {% endif %}
+        {% if filho.metadata.ws_comportamento == 'multiaction' %}
+            {% set print = true %}
+            {% set multiplaacao = true %}
+        {% endif %}
+    {% endfor %}
+{% endset %}
+{% if print %}
+<div class="row container-form-action">
+    <div class="col-md-12">
+        <div>
+            {% if multiplaacao %}
+                <div class="btn-group dropdown" uib-dropdown="">
+                    <button type="button" class="btn btn-action">
+                        Ações Multiplas
+                    </button>
+                    <button type="button" class="btn dropdown-toggle btn-action" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+
+                        {% for filho in servico.filhos %}
+                            {% if filho.metadata.ws_comportamento == 'multiaction' %}
+                                <li>
+                                    {{ gerar_botao(filho, 'multiaction btn btn-sm', filho.nome, null , req_id, 'button') }}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% if acao %}
+                {{ buttons }}
+            {% endif %}
+            <button class="filter-toggle btn btn-search btn-xs">
+                <i class="icofont icofont-ui-search"></i>
+            </button>
+        </div>
+    </div>
+</div>
+{% endif %}

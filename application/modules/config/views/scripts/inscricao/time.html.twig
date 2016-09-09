@@ -1,0 +1,20 @@
+<div class="container-inscricao col-md-12">
+    <div class="container-form">
+        <div class="suport-text">
+            <h1>É preciso criar um time para que você possa convidar<br/>amigos e conhecido para sua pré-campanha.</h1>
+            <h2>Escreva abaixo o nome do seu time.</h2>
+        </div>
+        <div class="box-form-inscricao">
+            <form method="POST">
+                <div class="row">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input type="text" name="time" title="{{ 'campo_obrig'|zftranslate }}" value="{{ time }}" required />
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <button type="submit">{{ 'next'|zftranslate }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

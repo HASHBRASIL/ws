@@ -1,0 +1,58 @@
+<?php $valor_credito = 0;?>
+<?php $valor_debito  = 0;?>
+<h1 style="text-align: center;">Financeiro</h1>
+<table border="0" cellspacing="0" style="width: 100%" cellpadding="4"  style="font-size: small;">
+    <tr style="font-weight:bold; background-color:#eeeeee">
+        <th style="width: 5% !important; text-align: center;">Código</th>
+        <th style="width: 15% !important;">Entidade</th>
+        <th style="width: 18% !important;">Descrição</th>
+        <th style="width: 18% !important;">Processo</th>
+        <th style="width: 7% !important;">Tipo <br>Financeiro</th>
+        <th style="width: 10% !important;">Conta</th>
+        <th style="width: 7% !important;text-align: center;">Emissão</th>
+        <th style="width: 7% !important;text-align: center;">Vencimento</th>
+        <th  style="width: 8% !important;text-align: center;">Compensação</th>
+        <th  style="width: 5% !important; text-align: right;">Valor</th>
+    </tr>
+    <?php if(count($this->listFinancial) > 0):?>
+        <?php foreach ($this->listFinancial as $key => $financial):?>
+            <?php $zebra = "#eeeeee";
+            	    if( $key  % 2 == 0){
+                	    $zebra = "#ffffff";
+            	    }
+            ?>
+            <tr style="background-color:<?php echo $zebra?>">
+                <td style="text-align: center;"><?php echo $financial['fin_id']?></td>
+                <td><?php echo $financial['nome_razao']?></td>
+                <td><?php echo $financial['fin_descricao']?></td>
+                <td><?php echo $financial['pro_codigo'].' - '.$financial['pro_desc_produto']?></td>
+                <td><?php echo $financial['tipo_conta']?></td>
+                <td><?php echo $financial['con_codnome']?></td>
+                <td style="text-align: center;"><?php echo $this->date($financial['fin_emissao'])?></td>
+                <td style="text-align: center;"><?php echo $this->date($financial['fin_vencimento'])?></td>
+                <td style="text-align: center;"><?php echo $this->date($financial['fin_compensacao'])?></td>
+                <td style="text-align: right;"><?php echo $this->formatDecimal($financial['fin_valor'])?></td>
+            </tr>
+            <?php
+            if($financial['tmv_id'] == Financial_Model_Bo_Contas::APAGAR){
+                $valor_debito = $valor_debito + $financial['fin_valor'];
+            }elseif ($financial['tmv_id'] == Financial_Model_Bo_Contas::ARECEBER){
+                $valor_credito = $valor_credito + $financial['fin_valor'];
+            }?>
+        <?php endforeach;?>
+    <?php else:?>
+        <tr>
+            <td colspan="10">Não existe financeiro</td>
+        </tr>
+    <?php endif;?>
+</table>
+
+<div style="text-align: right;">
+	<h4>
+		<?php if($valor_debito != 0): ?>
+		    <b>Valor a pagar: </b><?php echo $this->formatDecimal($valor_debito); ?>
+		<?php endif; if($valor_credito != 0): ?>
+		    <b> Valor a receber: </b><?php echo $this->formatDecimal($valor_credito) ?>
+		<?php endif; ?>
+	</h4>
+</div>

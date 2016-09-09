@@ -1,0 +1,26 @@
+<div class="col-md-12">
+    <div class="">
+        <div class="">
+            <h1>Times Importados</h1>
+            <h2>Quantidade de Times importados: {{ quantidade }}</h2>
+        </div>
+        <div class="row">
+            <br />
+            <br />
+            <table width="900">
+                <tr>
+                    <td><strong>Nome do Time</strong></td>
+                    <td><strong>Data de Inclusão</strong></td>
+                    <td><strong>Estado</strong></td>
+                </tr>
+                {% for time in times %}
+                <tr>
+                    <td> {{time["nome"]}}</td>
+                    <td> {{time["dt_inclusao"]}}</td>
+                    <td> {{time["valor"]}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>

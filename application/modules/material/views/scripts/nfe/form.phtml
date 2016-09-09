@@ -1,0 +1,782 @@
+<?php
+    /**
+     * formulario do controller nfe para cadastrar e editar a Nota fiscal eletrônica e sendo redirecionado para a pagina da grid
+    */
+?>
+<style>
+div.ui-dialog .ui-autocomplete {
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+}
+i.icon-remove {
+    font-size: 26px;
+    color: #e02222;
+    cursor: pointer;
+    margin-left: 2px;
+}
+i.check-form-success{
+    font-size: 26px;
+    color: #35aa47;
+    cursor: pointer;
+    margin-left: 2px;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css')?>" />
+<div class="row-fluid">
+    <div class="span12">
+        <div class="row-fluid">
+            <a href="/material/nfe/form" class="icon-btn span2">
+                <i class="icon-credit-card"></i>
+                <div> Nova nota fiscal </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row-fluid" style="margin-top: 20px">
+    <div class="span12">
+        <div class="portlet box purple" id="form_wizard_1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-reorder"></i> Formulário de Nota fiscal - <span class="step-title">Passo 1 de 4</span>
+                </div>
+                <div class="tools hidden-phone">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                    <a href="javascript:;" class="reload"></a>
+                    <a href="javascript:;" class="remove"></a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form action="#" class="" id="form_nfe" method="post">
+                    <div class="form-wizard">
+                        <div class="navbar steps">
+                            <div class="navbar-inner">
+                                <ul class="row-fluid">
+                                    <li class="span3" id-tab="1">
+                                        <a href="#tab1" data-toggle="tab" class="step active" >
+                                        <span class="number">1</span>
+                                        <span class="desc"><i class="icon-ok"></i> Nota fiscal/Emitente</span>
+                                        </a>
+                                    </li>
+                                    <li class="span3" id-tab="2">
+                                        <a href="#tab2" data-toggle="tab" class="step">
+                                        <span class="number">2</span>
+                                        <span class="desc"><i class="icon-ok"></i> Remetente/Imposto</span>
+                                        </a>
+                                    </li>
+                                    <li class="span3" id-tab="3">
+                                        <a href="#tab3" data-toggle="tab" class="step" >
+                                        <span class="number">3</span>
+                                        <span class="desc"><i class="icon-ok"></i> Transportador/Volumes</span>
+                                        </a>
+                                    </li>
+                                    <li class="span3" id-tab="4">
+                                        <a href="#tab4" data-toggle="tab" class="step" >
+                                        <span class="number">4</span>
+                                        <span class="desc"><i class="icon-ok"></i> Dados adicionais</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="bar" class="progress progress-success progress-striped">
+                            <div class="bar"></div>
+                        </div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <?php echo $this->formHidden('id_nfe', $this->vo->id_nfe, array('class' => 'span12')) ?>
+                                <?php $workspaceSession = new Zend_Session_Namespace('workspace');?>
+                                <?php echo $this->vo->id_nfe ? $this->formHidden("id_workspace",$this->vo->id_workspace) : $this->formHidden("id_workspace",$workspaceSession->id_workspace); ?>
+                                <h3 class="form-section"> Nota fiscal</h3>
+                                <div class="row-fluid">
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Natureza da operação')?><span class="required">*</span></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('natureza_operacao',$this->vo->natureza_operacao, array('class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span1">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('N° DANFE')?><span class="required">*</span></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('num_danfe',$this->vo->num_danfe, array('class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span1">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('N° Série')?><span class="required">*</span></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('num_serie',$this->vo->num_serie, array('class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Data da emissão')?><span class="required">*</span></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('dt_emissao',$this->date($this->vo->dt_emissao), array('class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Data da saída')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('dt_saida',$this->date($this->vo->dt_saida), array('class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Hora da saída')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('hr_saida',$this->vo->hr_saida, array('class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="form-section"> Emitente</h3>
+                                <?php echo $this->formHidden('id_fornecedor', $this->vo->id_fornecedor);?>
+                                <?php echo $this->formHidden('id_endereco_fornecedor', $this->vo->id_endereco_fornecedor);?>
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Empresa')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('empresa_fornecedor', $this->vo->getFornecedor()? $this->vo->getFornecedor()->fantasia:null, array('placeholder' => 'Digite o nome fantasia do fornecedor', 'class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span4">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Razão social')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('razao_fornecedor',$this->vo->getFornecedor()? $this->vo->getFornecedor()->nome_razao:null, array('disabled'=> 'disabled', 'class' => 'campo_fornecedor span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('CNPJ/CPF')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('cnpj_fornecedor',$this->vo->getFornecedor()? $this->cpf($this->vo->getFornecedor()->cnpj_cpf):null, array('disabled'=> 'disabled', 'class' => 'campo_fornecedor span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Inscrição Estadual')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('estadual_fornecedor',$this->vo->getFornecedor()? $this->vo->getFornecedor()->estadual:null, array('disabled'=> 'disabled', 'class' => 'campo_fornecedor span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Endereço')?></label>
+                                            <div class="controls">
+                                                <?php $endereco = $this->vo->getEnderecoFornecedor()? $this->vo->getEnderecoFornecedor()->tipo_logradouro." ".$this->vo->getEnderecoFornecedor()->nome_logradouro:null?>
+                                                <?php echo $this->formText('endereco_fornecedor',$endereco, array('disabled'=> 'disabled', 'class' => 'campo_fornecedor span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Bairro')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('bairro_fornecedor',$this->vo->getEnderecoFornecedor()? $this->vo->getEnderecoFornecedor()->bairro:null, array('disabled'=> 'disabled', 'class' => 'campo_fornecedor span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Cidade')?></label>
+                                            <div class="controls">
+                                                <?php $cidade = $this->vo->getEnderecoFornecedor()? $this->vo->getEnderecoFornecedor()->getCidade()? $this->vo->getEnderecoFornecedor()->getCidade()->cid_nome."/".$this->vo->getEnderecoFornecedor()->getEstado()->ufs_sigla:null:null?>
+                                                <?php echo $this->formText('cidade_fornecedor',$cidade, array('disabled'=> 'disabled', 'class' => 'campo_fornecedor span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Fone')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('fone_fornecedor',$this->vo->getFornecedor()? $this->telefone($this->vo->getFornecedor()->telefone1):null, array('disabled'=> 'disabled', 'class' => 'campo_fornecedor span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Cep')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('cep_fornecedor',$this->vo->getEnderecoFornecedor()? $this->cep($this->vo->getEnderecoFornecedor()->cep):null, array('disabled'=> 'disabled', 'class' => 'campo_fornecedor span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab2">
+                                <h3 class="form-section"> Destinatario/Remetente</h3>
+                                <?php echo $this->formHidden('id_empresa_destinatario', $this->vo->id_empresa_destinatario);?>
+                                <?php echo $this->formHidden('id_endereco_destinatario', $this->vo->id_endereco_destinatario);?>
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Empresa')?></label>
+                                            <div class="controls">
+                                                 <?php echo $this->formText('empresa_destinatario',$this->vo->getEmpresaDestinatario()? $this->vo->getEmpresaDestinatario()->nome_razao:null, array('placeholder' => 'Digite o nome da empresa do grupo', 'class'=> 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span4">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Razão Social')?></label>
+                                            <div class="controls">
+                                                 <?php echo $this->formText('razao_destinatario',$this->vo->getEmpresaDestinatario()? $this->vo->getEmpresaDestinatario()->nome_razao:null, array('disabled'=> 'disabled', 'class' => 'campo_destinatario span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('CNPJ/CPF')?></label>
+                                            <div class="controls">
+                                                 <?php echo $this->formText('cnpj_destinatario',$this->vo->getEmpresaDestinatario()? $this->cpf($this->vo->getEmpresaDestinatario()->cnpj_cpf):null, array('disabled'=> 'disabled', 'class' => 'campo_destinatario span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Inscrição estadual')?></label>
+                                            <div class="controls">
+                                                 <?php echo $this->formText('estadual_destinatario',$this->vo->getEmpresaDestinatario()? $this->vo->getEmpresaDestinatario()->estadual:null, array('disabled'=> 'disabled', 'class' => 'campo_destinatario span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Endereço')?></label>
+                                            <div class="controls">
+                                                 <?php $endereco = $this->vo->getEnderecoDestinatario()? $this->vo->getEnderecoDestinatario()->tipo_logradouro." ".$this->vo->getEnderecoDestinatario()->nome_logradouro:null?>
+                                                 <?php echo $this->formText('endereco_destinatario',$endereco, array('disabled'=> 'disabled', 'class' => 'campo_destinatario span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Bairro')?></label>
+                                            <div class="controls">
+                                                 <?php echo $this->formText('bairro_destinatario',$this->vo->getEnderecoDestinatario()? $this->vo->getEnderecoDestinatario()->bairro:null, array('disabled'=> 'disabled', 'class' => 'campo_destinatario span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Cidade')?></label>
+                                            <div class="controls">
+                                                <?php $cidade = $this->vo->getEnderecoDestinatario()? $this->vo->getEnderecoDestinatario()->getCidade()? $this->vo->getEnderecoDestinatario()->getCidade()->cid_nome."/".$this->vo->getEnderecoDestinatario()->getEstado()->ufs_sigla:null:null?>
+                                                <?php echo $this->formText('cidade_destinatario',$cidade, array('disabled'=> 'disabled', 'class' => 'campo_destinatario span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Cep')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('cep_destinatario',$this->vo->getEnderecoDestinatario()? $this->vo->getEnderecoDestinatario()->cep:null, array('disabled'=> 'disabled', 'class' => 'campo_destinatario span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 class="form-section"> Imposto</h3>
+                                <div class="row-fluid">
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Base de cálculo do ICMS')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('bs_calc_icms', $this->vo->getImposto()? $this->vo->getImposto()->bs_calc_icms : null, array('alt' => 'decimal', 'class' =>'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Valor do ICMS')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('vl_icms',  $this->vo->getImposto()? $this->vo->getImposto()->vl_icms : null, array('alt' => 'decimal', 'class' =>'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Base de Cálculo do ICMS substituição')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('bs_calc_icms_subst',  $this->vo->getImposto()? $this->vo->getImposto()->bs_calc_icms_subst : null, array('alt' => 'decimal', 'class' =>'decimal span9'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Valor do ICMS Substituição')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('vl_icms_subst',  $this->vo->getImposto()? $this->vo->getImposto()->vl_icms_subst : null,array('alt' => 'decimal', 'class' =>'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Valor Total dos Produtos')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('tl_produto', $this->vo->tl_produto, array('alt' => 'decimal', 'class' =>'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Valor do frete')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('vl_frete', $this->vo->getImposto()? $this->vo->getImposto()->vl_frete : null, array('alt' => 'decimal', 'class' =>'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Valor do seguro')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('vl_seguro', $this->vo->getImposto()? $this->vo->getImposto()->vl_seguro : null, array('alt' => 'decimal', 'class' =>'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Desconto')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('desconto', $this->vo->getImposto()? $this->vo->getImposto()->desconto : null, array('alt' => 'decimal', 'class' =>'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Despesas acessórias')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('vl_despesa_extra', $this->vo->getImposto()? $this->vo->getImposto()->vl_despesa_extra : null, array('alt' => 'decimal', 'class' =>'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Valor do IPI')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('vl_despesa_extra', $this->vo->getImposto()? $this->vo->getImposto()->vl_despesa_extra : null, array('alt' => 'decimal', 'class' =>'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Valor total da nota')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('tl_nota', $this->vo->tl_nota, array('alt' => 'decimal', 'class' =>'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab3">
+                                <h3 class="form-section"> Transportador/Volumes transportados</h3>
+                                <?php echo $this->formHidden('id_transportador', $this->vo->id_transportador);?>
+                                <?php echo $this->formHidden('id_transp_empresa', $this->vo->getTransportador()? $this->vo->getTransportador()->id_transp_empresa : null);?>
+                                <?php echo $this->formHidden('id_endereco_transportador', $this->vo->id_endereco_transportador);?>
+                                <div class="row-fluid">
+                                    <div class="span4">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Razão social')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('razao_transportador',$this->vo->getTransportador()? $this->vo->getTransportador()->getRazao() : null, array('placeholder' => 'Digite a razão social do transportador', 'class'=>'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('CNPJ/CPF')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('cnpj_transportador',$this->vo->getTransportador()? $this->cpf($this->vo->getTransportador()->getCnpj()) : null, array('disabled'=> 'disabled', 'class' => 'campo_transportador span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Frete por conta')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formSelect('frete',$this->vo->getTransportador()? $this->vo->getTransportador()->frete : null, array('class'=>'span12'), $this->freteCombo);?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Codigo ANTT')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('antt',$this->vo->getTransportador()? $this->vo->getTransportador()->antt : null, array('class'=>'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Placa do veículo')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('placa', $this->vo->getTransportador()? $this->vo->getTransportador()->placa : null, array('class'=> 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Endereço')?></label>
+                                            <div class="controls">
+                                                <?php $endereco = $this->vo->getEnderecoTransp()? $this->vo->getEnderecoTransp()->tipo_logradouro." ".$this->vo->getEnderecoTransp()->nome_logradouro : null ?>
+                                                <?php echo $this->formText('endereco_transportador',$endereco, array('disabled'=> 'disabled', 'class' => 'campo_transportador span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Bairro')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('bairro_transportador',$this->vo->getEnderecoTransp()? $this->vo->getEnderecoTransp()->bairro : null, array('disabled'=> 'disabled', 'class' => 'campo_transportador span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Cidade')?></label>
+                                            <div class="controls">
+                                                <?php $cidade = $this->vo->getEnderecoTransp()? $this->vo->getEnderecoTransp()->getCidade()? $this->vo->getEnderecoTransp()->getCidade()->cid_nome."/".$this->vo->getEnderecoTransp()->getEstado()->ufs_sigla:null:null?>
+                                                <?php echo $this->formText('cidade_transportador',$cidade, array('disabled'=> 'disabled', 'class' => 'campo_transportador span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Cep')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('cep_transportador',$this->vo->getEnderecoTransp()? $this->cep($this->vo->getEnderecoTransp()->cep) : null, array('disabled'=> 'disabled', 'class' => 'campo_transportador span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Inscrição Estadual')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('estadual_transportador',$this->vo->getTransportador()? $this->vo->getTransportador()->getEstadual() : null, array('disabled'=> 'disabled', 'class' => 'campo_transportador span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Quantidade')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('quantidade', $this->vo->getTransportador()? $this->vo->getTransportador()->quantidade : null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Espécie')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('especie', $this->vo->getTransportador()? $this->vo->getTransportador()->especie : null, array('class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Marca')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('marca', $this->vo->getTransportador()? $this->vo->getTransportador()->marca : null, array('class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Numeração')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('numeracao', $this->vo->getTransportador()? $this->vo->getTransportador()->numeracao : null, array('class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Peso bruto')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('peso_bruto', $this->vo->getTransportador()? $this->vo->getTransportador()->peso_bruto : null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Peso líquido')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('peso_liquido',$this->vo->getTransportador()? $this->vo->getTransportador()->peso_liquido : null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab4">
+                                <h3 class="form-section"> <?php echo $this->translate('Dados adicionais')?></h3>
+                                <div class="row-fluid">
+                                    <div class="span10">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Informações complementares')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formTextarea('descricao',$this->vo->descricao, array('style' => 'height:185px', 'class'=>'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Recebido por')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formSelect('id_funcionario',$this->vo->id_funcionario, array('class' => 'span12'), $this->pessoalCombo);?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Data de entrada')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('dt_entrada',$this->date($this->vo->dt_entrada), array('class' => 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="control-group">
+                                            <label class="control-label"><?php echo $this->translate('Hora de entrada')?></label>
+                                            <div class="controls">
+                                                <?php echo $this->formText('hr_entrada',$this->vo->hr_entrada, array('class'=> 'span12'));?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions clearfix">
+                            <a href="javascript:;" class="btn button-previous">
+                                <i class="m-icon-swapleft"></i> Voltar
+                            </a>
+                            <a href="javascript:;" class="btn blue button-next">
+                                Continuar <i class="m-icon-swapright m-icon-white"></i>
+                            </a>
+                            <button class="btn green" type="submit">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <a href="#" class="icon-btn span2 novo-produto">
+        <i class="icon-barcode"></i>
+        <div> Novo Produto </div>
+    </a>
+</div>
+<div id="table_item">
+</div>
+
+<div class="dialog_item" style="display: none">
+    <form action="<?php echo $this->baseUrl('material/estoque/form')?>" class="form_item" method="post" style="margin:0">
+        <?php echo $this->formHidden('id_estoque');?>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Código')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('codigo', null, array('class'=>'span11'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Descrição do Produto')?><span class="required">*</span></label>
+                    <div class="controls">
+                        <?php echo $this->formHidden('id_item');?>
+                        <?php echo $this->formText('nome_item', null, array('class'=>'span11', 'placeholder' => 'Digite o produto'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label" title="Nomenclatura Comum do Mercosul/Sistema Harmonizado"><?php echo $this->translate('NCM/SH')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('ncm_sh', null, array('class'=>'span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label" title="Código de Situação Tributária"><?php echo $this->translate('CFOP')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('cfop', null, array('class'=>'span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label" title="Código Fiscal de Operações e Prestações"><?php echo $this->translate('CST')?></label>
+                    <div class="controls">
+                        <?php echo $this->formText('cst', null, array('class'=>'span12'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Unidade')?><span class="required">*</span></label>
+                    <div class="controls">
+                        <?php echo $this->formHidden('id_tipo_unidade');?>
+                        <?php echo $this->formSelect('id_unidade',null, array('class'=>'span12', 'disabled'=>'disabled'), $this->unidadeCombo);?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-atributo">
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Quantidade')?><span class="required">*</span></label>
+                    <div class="controls">
+                        <?php echo $this->formText('quantidade', null, array('alt'=> 'decimal', 'class' => 'decimal quantidade span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Valor Unitário')?> </label>
+                    <div class="controls">
+                        <?php echo $this->formText('vl_unitario', null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Valor Total')?> </label>
+                    <div class="controls">
+                        <?php echo $this->formText('vl_total', null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('B. Calc. ICMS')?> </label>
+                    <div class="controls">
+                        <?php echo $this->formText('bc_icms', null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Valor do ICMS')?> </label>
+                    <div class="controls">
+                        <?php echo $this->formText('vl_icms', null, array('alt'=> 'decimal', 'class' => 'decimal vl_icms span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Valor do IPI')?> </label>
+                    <div class="controls">
+                        <?php echo $this->formText('vl_ipi', null, array('alt'=> 'decimal', 'class' => 'decimal vl_ipi span12'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Aliquotas ICMS')?> </label>
+                    <div class="controls">
+                        <?php echo $this->formText('aliq_icms', null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label"><?php echo $this->translate('Aliquotas IPI')?> </label>
+                    <div class="controls">
+                        <?php echo $this->formText('aliq_ipi', null, array('alt'=> 'decimal', 'class' => 'decimal span12'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="dialog-adiciona-lote" style="display:none">
+    <?php echo $this->formHidden('lote_manual', 0)?>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">Rastreabilidade<span class="required">*</span></label>
+                <div class="controls">
+                    <label class="checkbox"> <input type="radio" name="rastreabilidade"  class="unidade_compra rastreabilidade" /> Compra (<span class="unidade_compra"></span>)</label>
+                    <label class="checkbox"> <input type="radio" name="rastreabilidade" class="unidade_consumo rastreabilidade" /> Consumo (<span class="unidade_consumo"></span>)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label qtd_unidade"> </label>
+                <div class="controls">
+                    <?php echo $this->formText('quantidade_unidade', null, array('class'=> 'span12 decimal', 'alt' => 'decimal'))?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dialog-lote">
+    <?php echo $this->formHidden('id_movimento')?>
+</div>
+<div id="dialog_ver_lote" style="display:none;">
+</div>
+
+<div class="dialog_endereco">
+    <table class="table_endereco" style="width: 100%; margin-bottom: 0px;">
+    </table>
+</div>
+
+<div id="dialog-lote-automatico" style="display:none; text-align: center;">
+    <?php echo $this->formText('porcentage-creation-lote', null, array('data-readOnly'=> 'true'))?>
+</div>
+
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('assets/plugins/jquery-multi-select/css/multi-select-metro.css')?>" />
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/jquery-validation/dist/jquery.validate.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/jquery-validation/dist/additional-methods.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('assets/plugins/jquery-multi-select/js/jquery.multi-select.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('/assets/plugins/jquery-knob/js/jquery.knob.js')?>"></script>
+
+<script src="<?php echo $this->baseUrl('scripts/material/nfe.form.js')?>"></script>
+<script src="<?php echo $this->baseUrl('scripts/material/nfe.form.produto.js')?>"></script>

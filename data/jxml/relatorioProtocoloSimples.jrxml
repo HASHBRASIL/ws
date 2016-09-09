@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="phpjasperxml" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="BlankPage" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.7715610000000026"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sql" class="java.lang.String"/>
+	<parameter name="filtros" class="java.lang.String"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="idprotocolo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT UPPER(ttp.nome) tpprot,
+IF(emprec.nome_razao = '' OR emprec.nome_razao IS NULL,'não definido',emprec.nome_razao) emprecebe,
+IF(empfor.nome_razao = '' OR empfor.nome_razao IS NULL,'não definido',empfor.nome_razao) empfornece,
+IF(LENGTH(emprec.cnpj_cpf) = 14,
+            IF (emprec.cnpj_cpf IS NULL OR emprec.cnpj_cpf = '',
+              'não definido',
+              CONCAT(SUBSTRING(emprec.cnpj_cpf, 1, 2),'.',SUBSTRING(emprec.cnpj_cpf, 3, 3),'.',SUBSTRING(emprec.cnpj_cpf, 6, 3),'/',SUBSTRING(emprec.cnpj_cpf, 9, 4),'-',SUBSTRING(emprec.cnpj_cpf, 13, 2))),
+            IF(emprec.cnpj_cpf IS NULL OR emprec.cnpj_cpf = '',
+              'não definido',
+              CONCAT(SUBSTRING(emprec.cnpj_cpf, 1, 3),'.',SUBSTRING(emprec.cnpj_cpf, 4, 3),'.',SUBSTRING(emprec.cnpj_cpf, 7, 3),'-',SUBSTRING(emprec.cnpj_cpf, 10, 2)))) cnpj_cpfrecebe,
+IF(LENGTH(empfor.cnpj_cpf) = 14,
+            IF (empfor.cnpj_cpf IS NULL OR empfor.cnpj_cpf = '',
+              'não definido',
+              CONCAT(SUBSTRING(empfor.cnpj_cpf, 1, 2),'.',SUBSTRING(empfor.cnpj_cpf, 3, 3),'.',SUBSTRING(empfor.cnpj_cpf, 6, 3),'/',SUBSTRING(empfor.cnpj_cpf, 9, 4),'-',SUBSTRING(empfor.cnpj_cpf, 13, 2))),
+            IF(empfor.cnpj_cpf IS NULL OR empfor.cnpj_cpf = '',
+              'não definido',
+              CONCAT(SUBSTRING(empfor.cnpj_cpf, 1, 3),'.',SUBSTRING(empfor.cnpj_cpf, 4, 3),'.',SUBSTRING(empfor.cnpj_cpf, 7, 3),'-',SUBSTRING(empfor.cnpj_cpf, 10, 2)))) cnpj_cpffornece,
+IF(pro.pro_desc_produto = '' OR pro.pro_desc_produto IS NULL,'não definido',CONCAT(pro.pro_codigo,' - ',pro.pro_desc_produto)) processo,
+IF(tcc.cec_descricao = '' OR tcc.cec_descricao IS NULL,'não definido',tcc.cec_descricao) cencusto,
+(SELECT DATE_FORMAT(tp.dt_entrada,'%d/%m/%y')) AS dt_entrada,
+tp.hr_entrada,
+IF(id_tp_transportador = 1,emptrans.nome_razao,IF(id_tp_transportador = 2,tes.nome_razao,'não definido')) transportador,
+IF(id_tp_transportador = 1,
+  IF(LENGTH(emptrans.cnpj_cpf) = 14,
+            IF (emptrans.cnpj_cpf IS NULL OR emptrans.cnpj_cpf = '',
+              'não definido',
+              CONCAT(SUBSTRING(emptrans.cnpj_cpf, 1, 2),'.',SUBSTRING(emptrans.cnpj_cpf, 3, 3),'.',SUBSTRING(emptrans.cnpj_cpf, 6, 3),'/',SUBSTRING(emptrans.cnpj_cpf, 9, 4),'-',SUBSTRING(emptrans.cnpj_cpf, 13, 2))),
+            IF(tes.cnpj_cpf IS NULL OR tes.cnpj_cpf = '',
+              'não definido',
+              CONCAT(SUBSTRING(emptrans.cnpj_cpf, 1, 3),'.',SUBSTRING(emptrans.cnpj_cpf, 4, 3),'.',SUBSTRING(emptrans.cnpj_cpf, 7, 3),'-',SUBSTRING(emptrans.cnpj_cpf, 10, 2)))),
+  IF(id_tp_transportador = 2,
+    IF(LENGTH(tes.cnpj_cpf) = 14,
+            IF (tes.cnpj_cpf IS NULL OR tes.cnpj_cpf = '',
+              'não definido',
+              CONCAT(SUBSTRING(tes.cnpj_cpf, 1, 2),'.',SUBSTRING(tes.cnpj_cpf, 3, 3),'.',SUBSTRING(tes.cnpj_cpf, 6, 3),'/',SUBSTRING(tes.cnpj_cpf, 9, 4),'-',SUBSTRING(tes.cnpj_cpf, 13, 2))),
+            IF(tes.cnpj_cpf IS NULL OR tes.cnpj_cpf = '',
+              'não definido',
+              CONCAT(SUBSTRING(tes.cnpj_cpf, 1, 3),'.',SUBSTRING(tes.cnpj_cpf, 4, 3),'.',SUBSTRING(tes.cnpj_cpf, 7, 3),'-',SUBSTRING(tes.cnpj_cpf, 10, 2)))),
+    'não definido')) cnpj_cpf_trans,
+tm.id_movimento,
+ti.nome item,
+ttm.nome movimento,
+CAST(tm.quantidade AS   SIGNED INT) quantlote,
+SUM(IF(tm.id_tp_movimento = 2,ta.quantidade,te.quantidade)) quantuni,
+ttu.nome unidade,
+ti. id_item iditem,
+(SELECT SUM(quantidade) FROM tb_gm_estoque ite WHERE  ite.id_item = ti.id_item) AS quantestoque ,
+(SELECT DATE_FORMAT(SYSDATE(),'%d/%m/%y - %h:%m:%s')) AS dataAtual
+FROM  tb_gm_protocolo tp
+LEFT JOIN tb_gm_movimento tm ON tp.id_protocolo = tm.id_protocolo
+LEFT JOIN tb_gm_tp_protocolo ttp ON ttp.id_tp_protocolo = tp.id_tp_protocolo
+LEFT JOIN tb_empresas emprec ON emprec.id = tp.id_empresa_receptora
+LEFT JOIN tb_empresas empfor ON empfor.id = tp.id_empresa_fornecedor
+LEFT JOIN tb_empresas emptrans ON emptrans.id = tp.id_transportador
+LEFT JOIN tb_empresas tes ON tes.id = tp.id_funcionario_transportador
+LEFT JOIN tb_processo pro ON pro.pro_id = tp.id_processo
+LEFT JOIN tb_centro_custo tcc ON tcc.cec_id = tp.id_centro_custo
+LEFT JOIN tb_gm_estoque_gm_movimento ta ON tm.id_movimento = ta.id_movimento
+LEFT JOIN tb_gm_estoque te ON ta.id_estoque = te.id_estoque
+LEFT JOIN tb_gm_item ti ON ti.id_item = te.id_item
+LEFT JOIN tb_gm_tp_movimento ttm ON ttm.id_tp_movimento = tm.id_tp_movimento
+LEFT JOIN tb_tipo_unidade ttu ON ttu.id_tipo_unidade = te.id_tipo_unidade
+WHERE tp.id_protocolo = $P{idprotocolo}
+GROUP BY id_movimento;]]>
+	</queryString>
+	<field name="dataAtual" class="java.lang.String"/>
+	<field name="item" class="java.lang.String"/>
+	<field name="movimento" class="java.lang.String"/>
+	<field name="quantlote" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="quantuni" class="java.lang.Double"/>
+	<field name="unidade" class="java.lang.String"/>
+	<field name="id_movimento" class="java.lang.String"/>
+	<field name="tpprot" class="java.lang.String"/>
+	<field name="emprecebe" class="java.lang.String"/>
+	<field name="empfornece" class="java.lang.String"/>
+	<field name="cnpj_cpfrecebe" class="java.lang.String"/>
+	<field name="cnpj_cpffornece" class="java.lang.String"/>
+	<field name="processo" class="java.lang.String"/>
+	<field name="cencusto" class="java.lang.String"/>
+	<field name="dt_entrada" class="java.lang.String"/>
+	<field name="hr_entrada" class="java.lang.String"/>
+	<field name="transportador" class="java.lang.String"/>
+	<field name="cnpj_cpf_trans" class="java.lang.String"/>
+	<field name="quantestoque" class="java.lang.String"/>
+	<variable name="quantuni_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantuni}]]></variableExpression>
+	</variable>
+	<variable name="quantlote_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantlote}]]></variableExpression>
+	</variable>
+	<variable name="id_movimento_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{id_movimento}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="203" splitType="Stretch">
+			<staticText>
+				<reportElement x="255" y="82" width="85" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMITIDO EM:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="97" width="37" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POR:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="341" y="97" width="185" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="36" y="64" width="90" height="48"/>
+				<imageExpression class="java.lang.String"><![CDATA["../public/images/logo4-01.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="341" y="82" width="185" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dataAtual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="53" width="393" height="24"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial Black" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["PROTOCOLO "+$F{tpprot}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="171" width="94" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data e Hora de Entrada: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="160" width="229" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{transportador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="126" y="183" width="229" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cencusto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="159" width="94" height="13"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNPJ/CPF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="148" width="89" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa Receptora:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="449" y="136" width="76" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cnpj_cpffornece}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="126" y="148" width="229" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{emprecebe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="160" width="76" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cnpj_cpf_trans}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="136" width="89" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa Fornecedora: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="148" width="94" height="11"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNPJ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="136" width="94" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNPJ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="171" width="229" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{processo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="183" width="89" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Centro de Custo: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="136" width="229" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{empfornece}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="159" width="89" height="13"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Transportador:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="449" y="148" width="76" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cnpj_cpfrecebe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="171" width="89" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Processo: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="449" y="171" width="76" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dt_entrada}+" - "+$F{hr_entrada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="124" width="89" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código do Protocolo: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="124" width="229" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{idprotocolo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="36" y="0" width="490" height="16" backcolor="#000000"/>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="116" y="3" width="224" height="11" forecolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ITEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="3" width="78" height="11" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUANTIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="3" width="36" height="11" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="3" width="37" height="11" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº LOTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="3" width="44" height="11" forecolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Arial" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" mode="Transparent" x="116" y="6" width="224" height="7" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement lineSpacing="Single">
+					<font size="7" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{item}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" positionType="Float" mode="Transparent" x="346" y="6" width="78" height="7" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Right" lineSpacing="Single">
+					<font size="7" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{quantuni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" positionType="Float" mode="Transparent" x="436" y="6" width="36" height="7" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Right" lineSpacing="Single">
+					<font size="7" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{unidade}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="36" y="4" width="490" height="1" isRemoveLineWhenBlank="true"/>
+			</line>
+			<textField>
+				<reportElement style="Detail" positionType="Float" mode="Transparent" x="481" y="6" width="37" height="7" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Right" lineSpacing="Single">
+					<font size="7" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{quantlote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" positionType="Float" mode="Transparent" x="58" y="6" width="44" height="7" isRemoveLineWhenBlank="true"/>
+				<textElement lineSpacing="Single">
+					<font size="7" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{id_movimento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="487" y="12" width="28" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="36" y="8" width="490" height="1" isRemoveLineWhenBlank="true"/>
+			</line>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="57">
+			<line>
+				<reportElement x="73" y="17" width="173" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="305" y="18" width="173" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Outros Carimbos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="18" width="173" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Autorização Carimbo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="305" y="17" width="173" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="35" y="38" width="490" height="1" isRemoveLineWhenBlank="true"/>
+			</line>
+			<textField>
+				<reportElement x="486" y="42" width="28" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="52">
+			<textField>
+				<reportElement x="291" y="38" width="133" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA["Total de Quantidade: "+$V{quantuni_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="38" width="82" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA["Total de Lotes: "+$V{quantlote_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="38" width="139" height="14"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA["Numero de Movimentos: "+$V{id_movimento_1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="37" y="31" width="490" height="1" isRemoveLineWhenBlank="true"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

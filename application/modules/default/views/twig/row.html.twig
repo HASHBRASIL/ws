@@ -1,0 +1,34 @@
+
+
+{% macro formgroup(label, field, class) %}
+
+    <div class="{{ class | default('col-md-12') }}">
+        <div class="form-group">
+            <label class="control-label">
+                {{ label | zftranslate }}
+            </label>
+            {{ field }}
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro inputgroup(fields) %}
+    <div class="input-group">
+        {{ fields|join('<span class="input-group-btn" style="width:0px;"></span>') | raw }}
+    </div>
+{% endmacro %}
+
+
+
+{% macro formgroupcheckbox(label, field, class) %}
+
+    <div class="{{ class | default('col-md-12') }}">
+        <div class="form-group">
+            <label class="control-label">
+                {{ label | zftranslate }}
+            </label>
+            {{ field }}
+        </div>
+    </div>
+{% endmacro %}

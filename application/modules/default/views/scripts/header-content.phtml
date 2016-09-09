@@ -1,0 +1,124 @@
+<style>
+<!--
+<?php
+$config               = Zend_Registry::get('config');
+$color_primary         = isset($config->layout) ? $config->layout->color->primary : "#112F4A";
+$color_secondary       = isset($config->layout) ? $config->layout->color->secondary : "#013953";
+$border                = isset($config->layout) ? $config->layout->color->border : "#002232";
+?>
+.top-bar {
+    height: 50px;
+    background: #014464;
+    background: -moz-linear-gradient(top, <?php echo $color_primary?>, <?php echo $color_secondary?>);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(<?php echo $color_primary?>), to(<?php echo $color_secondary?>));
+    border: 1px solid <?php echo $border?>;
+}
+.top-bar-section li a:not(.button) {
+    background: -moz-linear-gradient(top, <?php echo $color_primary?>, <?php echo $color_secondary?>);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(<?php echo $color_primary?>), to(<?php echo $color_secondary?>));
+    border: 1px solid <?php echo $border?>;
+}
+.top-bar-section > ul > .divider {
+    border-right: solid 1px #F7F7F7;
+    border-left: solid 1px #E8EEF7;
+}
+
+.top-bar-section li a.externo:hover {
+background: #6D0E0E;
+}
+.top-bar-section li a.externo {
+background: #9B0202;;
+}
+-->
+</style>
+
+<!-- Header and Nav -->
+  <nav class="top-bar">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="#">
+            <img src="<?php echo $this->baseUrl('images/logo.png')?>" style=" height: 40px; width: 80px; margin-top: 5px;" />
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li class="divider"></li>
+        <li class="has-dropdown">
+          <a href="#"><?php echo $this->translate('Gerenciamento de Serviço')?></a>
+          <ul class="dropdown">
+              <li><a href="<?php echo $this->baseUrl('service/grupo/index')?>">Grupo de serviço</a></li>
+              <li><a href="<?php echo $this->baseUrl('service/protocolo/grid')?>">Protocolo de serviço</a></li>
+              <li><a href="<?php echo $this->baseUrl('service/orcamento/grid')?>">Orçamento</a></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <li class="has-dropdown">
+          <a href="#"><?php echo $this->translate('Gerenciamento de Material')?></a>
+          <ul class="dropdown">
+              <li><a href="<?php echo $this->baseUrl('material/grupo/index')?>">Grupo de material</a></li>
+              <li><a href="<?php echo $this->baseUrl('material/nfe/grid')?>">Nota Fiscal</a></li>
+              <li><a href="<?php echo $this->baseUrl('material/protocolo/grid')?>">Protocolo</a></li>
+              <li><a href="<?php echo $this->baseUrl('material/estoque/grid')?>">Estoque</a></li>
+              <li><a href="<?php echo $this->baseUrl('material/pedido/entrega')?>">Entrega</a></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <li class="has-dropdown">
+          <a href="#"><?php echo $this->translate('Gerenciamento de Empresa')?></a>
+          <ul class="dropdown">
+              <li><a href="<?php echo $this->baseUrl('empresa/empresa/grid')?>">Empresa</a></li>
+              <li><a href="<?php echo $this->baseUrl('/financial/credito/grid')?>">Gerência de Crédito para Empresas</a></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <li><a href="<?php echo $this->baseUrl('/service/centro-custo/index')?>">Centro de Custo</a></li>
+        <li class="divider"></li>
+        <li class="has-dropdown">
+        	<a href="#"><?php echo $this->translate('Gerenciamento Financeiro')?></a>
+        	<ul class = "dropdown">
+        		<li><a href="<?php echo $this->baseUrl('/financial/financial/index')?>">Pesquisar</a></li>
+        		<li><a href="<?php echo $this->baseUrl('/financial/agrupador-financeiro/grid')?>">Registros Financeiros</a></li>
+        		<li><a href="<?php echo $this->baseUrl('/financial/contas/extrato-form')?>">Extratos Financeiro</a></li>
+        		<li class="has-dropdown">
+        			<a href="#"><?php echo $this->translate('Configurações')?></a>
+        			<ul class = "dropdown">
+        				<li><a href="<?php echo $this->baseUrl('/financial/plano-contas/grid')?>">Gerenciar Plano de Contas</a></li>
+        				<li><a href="<?php echo $this->baseUrl('/financial/contas/grid')?>">Gerenciar Contas</a></li>
+        			</ul>
+        		</li>
+        	</ul>
+        </li>
+        <li class="divider"></li>
+        <li class="has-dropdown">
+        	<a href="#"><?php echo $this->translate('Gerenciamento de Processo')?></a>
+        	<ul class = "dropdown">
+        		<li><a href="<?php echo $this->baseUrl('/processo/processo/form')?>">Novo Processo</a></li>
+        		<li><a href="<?php echo $this->baseUrl('/processo/processo/grid')?>">Processos registrados</a></li>
+        		<li><a href="<?php echo $this->baseUrl('/processo/processo/grid-status')?>">Processos por status</a></li>
+        		<li><a href="<?php echo $this->baseUrl('/processo/processo/grid-pendencia')?>">Processos com pendência</a></li>
+        		<li class="has-dropdown">
+        			<a href="#"><?php echo $this->translate('Configurações')?></a>
+        			<ul class = "dropdown">
+        				<li><a href="<?php echo $this->baseUrl('/processo/status/grid')?>">Gerenciar Status</a></li>
+        			</ul>
+        		</li>
+        	</ul>
+        </li>
+      </ul>
+
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="divider"></li>
+        <li><a href="<?php echo $this->baseUrl('auth/index/logout')?>"><?php echo $this->translate('LOGOUT')?></a></li>
+        <li class="divider"></li>
+      </ul>
+    </section>
+  </nav>
+  <!-- End Header and Nav -->

@@ -1,0 +1,83 @@
+
+{% import 'row.html.twig' as row %}
+{% import 'forms.html.twig' as forms %}
+
+
+<div class="col-md-12 area-conteudo-hash">
+    <div class="row panel panel-white">
+        {#<div class="panel-heading">#}
+        {#<h5>Componente <span>Capa</span></h5>#}
+        {#<p>Descrição desse componente para que o usuário saiba do que se trata esse componente.</p>#}
+        {#</div>#}
+        <div class="panel-body">
+            <form method="POST" action="home.php?servico={{ params.servico }}">
+                {{ forms.input('id_grupo', view.vo.id_grupo, 'hidden') }}
+                {{ forms.input('id', view.vo.con_id, 'hidden') }}
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset>
+                            <legend>
+                                {{ 'Formulário' | zftranslate }}
+                            </legend>
+                            <div class="row">
+
+                                {% set conta = row.inputgroup(
+                                    [
+                                 forms.input('con_numero', view.vo.con_numero, 'text', '', {'placeholder' : 'Conta' | zftranslate}),
+                                 forms.input('con_digito', view.vo.con_digito, 'text', 'input-sm form-control',  {'required' : '', 'style' : 'margin-left:-1px', 'placeholder' : 'Digito' | zftranslate}, true)]
+                                )
+                                %}
+
+                                {% set agencia = row.inputgroup(
+                                [
+                                forms.input('con_agencia', view.vo.con_agencia, 'text', '',  {'required' : '', 'placeholder' : 'Agencia' | zftranslate}),
+                                forms.input('con_age_digito', view.vo.con_age_digito, 'text', 'input-sm form-control',  {'required' : '', 'style' : 'margin-left:-1px', 'placeholder' : 'Digito' | zftranslate}, true)
+                                ])
+                                %}
+
+                                {{ row.formgroup('Codnome da Conta', forms.input('con_codnome', view.vo.con_codnome, 'text', '', {'required' : ''}), 'col-md-4') }}
+
+                                {{ row.formgroup('Número da conta', conta, 'col-md-4') }}
+                                {{ row.formgroup('Número da agencia', agencia, 'col-md-4') }}
+
+                            </div>
+                            <div class="row">
+                                {{ row.formgroup('Banco', forms.select('bco_id', view.vo.bco_id, view.bancoCombo, 'select2-skin'), 'col-md-6') }}
+                                {{ row.formgroup('Tipo da Conta', forms.select('tcb_id', view.vo.tcb_id, view.tipoContaBancoCombo, 'select2-skin'), 'col-md-3') }}
+                                {#{{ row.formgroup('Registro Público', forms.checkbox('register_public', null), 'col-md-3') }}#}
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                {% if view.vo.con_id is empty %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <fieldset>
+                                <legend>
+                                    {{ 'Saldo Inicial Opcional' | zftranslate }}
+                                </legend>
+                                <div class="row">
+                                    {{ row.formgroup('Saldo Inicial', forms.input('saldo', '', 'text', 'decimal'), 'col-md-3') }}
+                                    {{ row.formgroup('Data do saldo', forms.input('datasaldo', '', 'text', 'datepicker-skin',  {'data-mask' : '99/99/9999'}), 'col-md-3') }}
+                                </div>
+                                <div class="row">
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+           </form>
+        </div>
+    </div>
+</div>

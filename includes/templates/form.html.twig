@@ -1,0 +1,107 @@
+{% include 'header-content.html.twig' %}
+<div class="col-md-12 area-conteudo-hash">
+    <form method="POST" action="home.php" enctype="multipart/form-data" >
+        <input type="hidden" class="formId" name="id" value="{{ id }}"/>
+        <div class="row box-form-container">
+            {% for perfil in perfis %}
+                <fieldset>
+                    <legend>
+                        {{ campos[perfil][0].perfil_descricao }}
+                        {#<span>{{ campos[perfil][0].perfil_descricao }}</span>#}
+                    </legend>
+                    <div class="row">
+                        {% for chave,campo in campos[perfil] %}
+
+                            {% if campo['id'] is defined %}
+                                <div class="{{ campo['metadatas'].ws_style | default('col-md-12') }}"
+                                     {% if campo['multiplo'] %}
+                                        data-duplicatable="{{ campo['id'] }}_0"
+                                     {% endif %}
+                                    >
+                                    <label for="{{ campo.id }}">
+                                        {{ campo.nome }}
+                                        {% if campo['multiplo'] %}
+                                            <a href="#" data-duplicate="{{ campo['id'] }}">
+                                                {# <span>Novo Campo</span> #}
+                                                <i class="fa fa-plus-circle"></i>
+                                            </a>
+                                        {% endif %}
+                                        {# <span>{{ campo.descricao }}</span>  #}
+                                    </label>
+                                    {% include 'fields.html.twig' with { 'campo': campo , 'filedir' : (filedir is defined) ? filedir : null} %}
+                                </div>
+                            {% else %}
+                                {% for contador, subCampo in campo %}
+                                    {% if subCampo['perfil'] is defined %}
+                                        {% if contador == 0 %}
+                                             <div class="{{ campos['master'][chave]['metadatas'].ws_style | default('col-md-12') }}"
+                                                {% if campos['master'][chave]['multiplo'] == true %}
+                                                 data-duplicatable="{{ campos['master'][chave]['id'] }}_0"
+                                                {% endif %}
+                                                >
+                                            {% if campos[perfil]|length > 1 %}
+                                                <h4>{{ chave|lower }}
+                                                    {% if campos['master'][chave]['multiplo'] == true %}
+                                                        <a href="#" data-duplicate="{{ campos['master'][chave]['id'] }}">
+                                                            <i class="fa fa-plus-circle"></i>
+                                                        </a>
+                                                    {% endif %}
+                                                </h4>
+                                            {% endif %}
+                                        {% endif %}
+
+                                        <div class="{{ subCampo['metadatas'].ws_style }}">
+                                            <label for="{{ subCampo.id }}">
+                                                {{ subCampo.nome }}
+                                            </label>
+                                            {% include 'fields.html.twig' with {'campo' : subCampo, 'filedir' : (filedir is defined) ? filedir : null} only %}
+                                        </div>
+                                        {% if contador == (campo|length - 1) %}
+                                            {% if campos['master'][chave]['multiplo'] == true %}
+                                                <input type="hidden" name="{{campos['master'][chave]['id']}}_{{campos['master'][chave]['metanome']}}[]" value="{{subSubCampo.tbinfopaiid}}" />
+                                            {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    {% else %}
+                                        {% for counter, subSubCampo in subCampo %}
+                                            {% if counter == 0 %}
+                                                <div class="{{ campos['master'][chave]['metadatas'].ws_style | default('col-md-12') }}"
+                                                    {% if campos['master'][chave]['multiplo'] == true %}
+                                                     data-duplicatable="{{ campos['master'][chave]['id'] }}_0"
+                                                    {% endif %}
+                                                    >
+                                                {% if campos[perfil]|length > 1 %}
+                                                    <h4>{{ chave|lower }}
+                                                        {% if campos['master'][chave]['multiplo'] == true %}
+                                                            <a href="#" data-duplicate="{{ campos['master'][chave]['id'] }}">
+                                                                <i class="fa fa-plus-circle"></i>
+                                                            </a>
+                                                        {% endif %}
+                                                    </h4>
+                                                {% endif %}
+                                            {% endif %}
+                                            <div class="{{ subSubCampo['metadatas'].ws_style }}">
+                                                <label for="{{ subSubCampo.id }}">
+                                                    {{ subSubCampo.nome }}
+                                                </label>
+                                                    {% include 'fields.html.twig' with {'campo' : subSubCampo, 'filedir' : (filedir is defined) ? filedir : null} only %}
+                                            </div>
+                                            {% if counter == (subCampo|length - 1) %}
+                                                {% if campos['master'][chave]['multiplo'] == true %}
+                                                    <input type="hidden" name="{{campos['master'][chave]['id']}}_{{campos['master'][chave]['metanome']}}[]" value="{{subSubCampo.tbinfopaiid}}" />
+                                                {% endif %}
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </fieldset>
+            {% endfor %}
+        </div>
+
+    {% include 'form-action.html.twig' %}
+    </form>
+</div>

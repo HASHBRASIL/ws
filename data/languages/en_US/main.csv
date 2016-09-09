@@ -1,0 +1,266 @@
+form; muito legal!!!
+user_sucess; Usuário salvo com sucesso
+default;
+forward; AvançarF
+back; Voltar
+add_new_item; Adicionar novo item
+max_value; Valor Máximo;
+submit; Submeter
+title; Título
+operation; Operações
+status; Status
+delete; Excluir
+label; Legenda;
+event;
+title; Título
+totalValue; Valor total
+report;
+action; Propostas recebidas
+partner; Parceiros
+usertype; Tipo de Usuário;
+institution; Instituição;
+budget;
+quantityJL; Dias Úteis - JL
+quantitySL; Dias Úteis - SL
+quantitySE; Dias Úteis - SE
+amountEvent; Total
+amountMission; Total
+amountMissionParticipation; Total
+amountPublication; Total
+action;
+error_extra; Não há nenhuma convocatória aberta nesse momento, a Diretoria Nacional do Projeto irá informar com antecedência a respeito da abertura da nova convocatória
+name; Título;
+convocation; Convocatória;
+dialog; Diálogo;
+internal_institution; Instituições Locais;
+internal_fos_user; Responsável da Ação;
+external_institution; Instituições Externas;
+external_fos_user; Responsável Externo;
+context; Contextualização;
+description; Descrição da Ação;
+objective; Objetivos / Resultados;
+start; Data prevista para início;
+end; Data prevista para final;
+save; Avançar
+code; Sequencial;
+operations; Operações;
+add_user; Cadastrar
+operational_user; "Responsável; "
+mission_member;
+dailies; Diárias;
+name; Nome;
+cpf; CPF;
+email; E-mail;
+phone1; Telefone 1;
+phone2; Telefone 2;
+tickets; Passagens;
+origin; Cidade/País de Origem
+destination; Cidade/País de Destino
+start; Data de Ida
+end; Data de Retorno
+country; País
+days; Dias
+origin_country; Cidade/Pais de Origem
+destination_country; Cidade/Pais de Destino
+reference;
+objective; Objetivos;
+specific_objective; Objetivos Específicos;
+result; Resultados;
+schedule; Cronograma Geral da Ação
+start; Data inicial;
+end; Data final;
+add_expert; Adicionar perito
+local; Local;
+referenceschedule;
+start; Data de Início
+end; Data Final
+schedule; Tipo de Atividade
+status; Status
+name; Nome da Atividade
+reference_mission;
+start; Data de Início;
+end; Data Final;
+schedule; Agenda;
+local; Local;
+actionexpert;
+days; Total de dias;
+quantity; Quantidade;
+aproved; Dias Aprovados por categoria de perito;
+referenceexpert;
+function; Função;
+expert; Categoria;
+quantity; Quantidade de dias;
+formation; Formação Acadêmica / Especialidade;
+language; Idiomas;
+experience; Experiência específica;
+activity; Produtos / Atividades;
+schedule; Tabela de Produtos/Atividades do perito
+trip_resume; Resumo das viagens;
+name; Produto/Atividade
+date; Data de Entrega
+local; Base de Trabalho
+status; Status
+cronogram_activity_expert; Cronograma de Produtos / Atividades de perito
+not_found; Peritos não cadastrados
+nonobjection;
+where; Você está em Upload de não Objeção
+nonobjection; Upload de Não Objeção
+upload; Fazer upload de Não Objeção
+actionevent;
+name; Nome do Evento;
+local; Local de realização;
+start; Início;
+end; Término;
+comment; Observações Gerais;
+event_category; Categoria;
+event_item; Item;
+empty_category; Escolha a categoria
+empty_item; Escolha o item da categoria
+add_event; Adicionar evento
+add_item; Adicionar item
+items; Serviços
+actionmission;
+name; Título;
+quantity; N&#186; de Participantes;
+ticket; Tipo da Passagem;
+add_mission; Adicionar missão
+add_ticket; Adicionar passagem
+dailyquantity; Dias
+daily; Diária
+add_daily; Adicionar diária
+dailies; Diárias
+local; Localização;
+actionpublication;
+add_publication; Adicionar publicação
+name; Título;
+quantity; Qtde de exemplares;
+page_quantity; Qtde de páginas;
+description; Descrição;
+items; Serviços relacionados;
+publication_type; Tipo;
+publicationItem; Serviços;
+add_item; Adicionar serviço
+counterpart;
+where; Você está em Contrapartida Nacional.
+add; Adicionar Contrapartida
+description; Descrição;
+amount;  Valor Previsto;
+category; Categoria;
+min_value; Valor mínimo;
+commitment;
+where; Você está em Termo de Compromisso.
+accept; Eu aceito.
+upload;
+where; Você está em Upload de Concordância.
+where_greenlight; Você está em Upload de Greenlight.
+pathAgreement; 'Upload do De Acordo.'
+greenlight; Upload de Greenlight
+success; seu upload foi realizado com sucesso
+submit;
+error; Não foi possível efetuar a ação.
+reopen_success; Execução aberta para edição com sucesso.
+
+where; Você está em Visualizar / Submeter.
+error_counterpart; Valor de contrapartida não suficiente.
+success; Proposta submetida para analise / avaliação.
+submit; Submeter
+unsubmit; Dessubmeter
+unsubmit_success; Proposta Dessubmetida
+evaluation; Avaliação foi submetida com sucesso.
+evaluate_modification; Avaliar modificações
+evaluation;
+concordance; Houve concordância da contraparte para a Ação?
+coherence; Há clareza na ação e coerência com o escopo do projeto?
+specified; O produto foi especificado claramente?
+convocation; Atende aos critérios estabelecidos para a Convocatória?
+defered; Deferido
+feedback; Parecer
+
+definedResult; Objetivos e resultados definidos?
+described; Atividades corretamente descritas?
+cronogram; Programação das atividades corretas?
+decentralizedActor; Envolvimento dos atores descentralizados?
+complementarity; Complementariedade com outras ações
+description; Descrição sucinta da Ação
+evaluation; Avaliação
+decision; Decisão
+aprove_modification; Modificações Aprovadas?
+actionparticipation;
+add_participation; Adicionar participação
+actionexpertcv;
+add; Adicionar Candidato
+title; Nome
+contact; Contato
+description; Comentário
+cv; Currículo
+edit; Editar Candidato
+save; Finalizar Currículos
+expert_criteria; Critérios de Peritos
+cv_grade; Avaliação de Candidatos
+cv_accepted; CV Aceito
+grade; Notas
+candidate; Candidato
+language; Idioma
+education; Escolaridade
+experience; Experiência
+short_education; Esc
+short_language; Id
+short_experience; Exp
+total; Total
+cv_refused; CV Recusado
+cv_show; Visualizar currículo
+undefined; Indefinido
+active; Ativo
+inactive; Inativo
+quit; Desistente
+off; Desligado
+reason; Informe o motivo;
+short_cv; CV
+recuse_cv; Recusar CV
+where; Você está em Avaliação de peritos
+send_grade; Enviar Notas
+ask_more_cv; Solicitar Novos Currículos
+notes; Avalie cada critério inserindo somente notas de 00 a 10, no formato XX (ex; 01, 05, 07)
+titles;
+execution_criteria; Visualizar Peritos
+execution_no_modification; Sem Modificações
+execution_view_modification; Visualizar Modificações
+excedent_approval; Aprovação de excedente de valor
+subtitles;
+view; Visualizar
+edit; Editar
+submited; Submetido(a)
+not_submited; Não Submetido(a)
+commitment; Baixar Termo de Concordância
+pdf; Baixar PDF
+budget_aprove; Aprovar Orçamento
+budget_view; Visualizar Orçamento
+evaluate; Avaliar
+evaluation_view; Visualizar Avaliação
+pdf_download; Baixar PDF
+greenlight_download; Upload/Baixar Greenlight
+nonobjection_download; Upload/Baixar Não Objeção
+not_modified; Não modificado
+awaiting_approval; Aguardando Aprovação
+approved; Aprovado
+#Editar
+view_tdr; Visualizar TDR
+view_info; Visualizar Informações Complementares e Ajustes
+info_pdf_download; Visualizar PDF de Informações Complementares e Ajustes
+verify_modifications; Verificar Modificações
+no_modifications; Ainda sem Modificações
+download_over_ten; Baixar Aprovação do Valor > 10%
+no_over_ten; Aprovação de Valor > 10% não necessária
+reopen_execution; Reabrir Execução
+update_responsible; Alterar Responsável
+operational_user;
+save; "Salvar"
+
+
+
+
+
+
+
+
+

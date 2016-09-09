@@ -1,0 +1,24 @@
+<?php //echo $this->doctype() ?>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="pt-BR"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="pt-BR"> <!--<![endif]-->
+
+    <?php // echo $this->partial('header.phtml', 'default')?>
+    <body>
+            <div id="carregando" style="display:none">
+                <span>Carregando...</span>
+            </div>
+            <?php if(!$this->disableHeader): ?>
+                <?php  // echo $this->partial('header-content.phtml', 'default')?>
+            <?php endif;?>
+
+            <?php echo $this->partial('messages.phtml', 'default', array('messages' => $this->messages))?>
+            <div class="row" id="message-box" style="display: none">
+                <div data-alert class="alert-box round" >
+                    <span class="text-message"></span>
+                    <a href="#" class="close">&times;</a>
+                </div>
+            </div>
+
+            <?php echo $this->layout()->content?>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+
+{% import 'row.html.twig' as row %}
+{% import 'forms.html.twig' as forms %}
+
+
+<div class="col-md-12 area-conteudo-hash form-extra">
+    <div class="row panel panel-white">
+        {#<div class="panel-heading">#}
+        {#<h5>Componente <span>Capa</span></h5>#}
+        {#<p>Descrição desse componente para que o usuário saiba do que se trata esse componente.</p>#}
+        {#</div>#}
+        <div class="panel-body">
+            <form method="POST" action="home.php?servico={{ params.servico }}">
+                {{ forms.input('id_grupo', view.vo.id_grupo, 'hidden') }}
+                {{ forms.input('id', view.vo.id_agrupador_financeiro, 'hidden') }}
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset>
+                           {#  <legend>
+                                {{ 'Formulário' | zftranslate }}
+                            </legend> #}
+                            <div class="row">
+                                {% set selectPessoa = forms.select('id_grupo',  null, view.comboGrupo, 'select2-skin') %}
+                                {{ row.formgroup('Centro de Custos', forms.select('cec_id', view.vo.cec_id, view.comboCentroCusto, 'select2-skin'), 'col-md-3') }}
+                                {{ row.formgroup('Plano de Contas', forms.select('plc_id', view.vo.plc_id, view.comboPlanoContas, 'select2-skin'), 'col-md-3') }}
+                                {{ row.formgroup('Time', selectPessoa, 'col-md-4') }}
+                                {#{{ row.formgroup('Plano de Contas', forms.checkbox('register_public', null), 'col-md-3') }}#}
+                                <div class="btn-salvar col-md-2 pull-right">
+                                    <button type="submit" class="btn btn-primary btn-sm formaction" data-servico="{{ servico.id }}" data-show="ajax">Salvar</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+
+               {#  <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                        </div>
+                    </div>
+                </div> #}
+           </form>
+        </div>
+    </div>
+</div>

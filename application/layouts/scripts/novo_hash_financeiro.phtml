@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<?php $identity = Zend_Auth::getInstance()->getIdentity(); ?>
+<?php echo $this->partial('header_packet.phtml', 'default')?>
+<body>
+<main>
+
+    <?php echo $this->action('sidebar', 'index', 'default'); ?>
+
+    <?php echo $this->action('topbarfull', 'index', 'default'); ?>
+
+    <!--  visible-sm visible-xs hidden-md hidden-lg -->
+    <div class="block-backsidebar"></div>
+    <section class="area-publicidade-topo">
+        <div class="content-publicidade">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- anuncio_blog_topo -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-5801760315108975"
+                 data-ad-slot="7377355440"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </section>
+    <section class="area-top hidden-margin-left-sm">
+        <?php echo $this->action('topbar', 'index', 'default'); ?>
+    </section>
+    <section class="area-conteudo hidden-margin-left-sm">
+        <section class="content-wrapper">
+            <div class="container-fluid">
+                <?php echo $this->partial('messages-novo.phtml', 'default', array('messages' => $this->messages))?>
+                <div class="row-fluid" style="display: none; margin-top: 10px">
+                    <div class="span12" id="message-box">
+                        <div class="alert " >
+                            <span class="text-message"></span>
+                            <button class="close" data-dismiss="alert"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php echo $this->layout()->content; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section class="area-chat closed">
+        <h1>AREA CHAT</h1>
+    </section>
+    <!-- MENUS QUE FLUTUAM -->
+    <nav class="dropdown-hash-menu seta-esquerda-topo" data-menu="dropdown-user">
+        <div class="col-md-4">
+            <header>
+                <span>@<?php echo $identity->nomeusuario; ?></span>
+            </header>
+            <ul>
+                <li><a href="#">Alterar Senha</a></li>
+                <li><a href="/home.php?servico=f34cea12-3c5b-4e61-c3c0-bd023b46b482">Editar Perfil</a></li>
+                <li><a href="/home.php?servico=e7c31963-c006-4762-e7bd-8da79bdab6b6">Alterar minha foto</a></li>
+                <li><a href="/home.php?servico=7f32a5d5-6cd7-4e2e-9509-cacf6c29c4f5">Adicionar novo Time</a></li>
+                <li><a href="#">Adicionar novo Grupo</a></li>
+                <!-- <li><a href="#">
+                        Menu Horizontal
+                        <div class="checkbox clip-check check-primary check-sm checkbox-inline">
+                            <input type="checkbox" value="1"
+                                <?php
+                                    if(property_exists($identity, 'layoutConfig')){
+                                        echo $identity->layoutConfig['menuOrientacao'] == 'true' ? 'checked' : '';
+                                    } ?>
+                                   url="<?php echo $this->baseUrl() ?>"
+                                   id="checkbox-menuview">
+                            <label for="checkbox-menuview"></label>
+                        </div>
+                    </a></li> -->
+                <li><a href="<?php echo $this->baseUrl('/auth/index/logout')?>">Logout</a></li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <header>
+                <span><i class="ico-hash" aria-hidden="true"></i> <?php echo $identity->time['nome']; ?></span>
+            </header>
+            <ul>
+                <li><a href="#">Configurações do time</a></li>
+                <li><a href="#">Perfil do Time</a></li>
+                <li><a href="/home.php?servico=3e9ad826-78da-463f-cd84-343d26b6b492">Alterar foto do Time</a>
+                <li><a href="#">Convidar Pessoas</a></li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <header>
+                <span>#<?php echo $identity->grupo['nome']; ?></span>
+            </header>
+            <ul>
+                <li><a href="#">Configurações do grupo</a></li>
+                <li><a href="#">Perfil do grupo</a></li>
+                <li><a href="#">Convidar Pessoas</a></li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="dropdown-hash-menu seta-esquerda-topo" data-menu="dropdown-modulos">
+        <?php echo $this->partial('menu_novo.phtml', 'default', array('menusPaisList' => $this->menusPaisList))?>
+    </nav>
+    <!--  <div class="container-sub-menu-draft"></div> <div class="container-sub-menu"></div> -->
+    <footer>
+        <div class="content">
+            <ul class="pull-left">
+                <li><a href="http://privacidade.hash.ws" target="_blank">Política de privacidade</a></li>
+                <li><a href="http://termodeuso.hash.ws" target="_blank">Termo de uso</a></li>
+                <li><a href="#">Fale conosco</a></li>
+                <li><a href="#">Suporte</a></li>
+            </ul>
+            <p class="pull-right">Um produto <a href="http://www.titaniumtech.com.br" target="_blank">TITANIUM TECH</a></p>
+        </div>
+    </footer>
+</main>
+<script>
+    // ESSE SCRIPT AQUI ESTÁ MOMENTANEAMENTE AQUI ATÉ EU DESCOBRIR ONDE POSSO COLOCA-LO;
+
+    //EVENTS
+    $('.search-btn').mouseenter(function(){
+        $('.input-search').css('width', '25em').css('padding', '5px 4px');
+    });
+    $('.input-search').mouseenter(function(){
+        $('.input-search').css('width', '25em').css('padding', '5px 4px');
+    });
+
+    $('.input-search').focusout(function() {
+        $('.input-search').css('width', '0em').css('padding', '0px');
+    });
+
+    $('#checkbox-menuview').prop('checked') == true ? turnMenuTop() : turnMenuLeft();
+
+    $('.dropdown-hash-menu[data-menu="dropdown-user"]').clone()
+                            .removeClass('seta-esquerda-topo')
+                            .addClass('seta-topo-esquerda')
+                            .attr('data-menu', 'dropdown-user-top')
+                            .appendTo($( ".dropdown-hash-menu" ).parent());
+
+    $('#checkbox-menuview').click(function(){
+        $(this).prop('checked') == true ? turnMenuTop() : turnMenuLeft();
+        $.post($('#checkbox-menuview').attr('url')+'/index/set-layout-config', {menuOrientacao : $(this).prop('checked')} ,function(){});
+    });
+
+    function turnMenuLeft()
+    {
+        $('.area-sidebar').show().attr('class','area-sidebar visible-md visible-lg hidden-sm hidden-xs');
+        $('.top-sidebar').hide();
+        $('.top-sidebar-block').hide();
+
+        $('.area-top').removeClass('hidden-margin-left');
+        $('.area-conteudo').removeClass('hidden-margin-left');
+    }
+
+    function turnMenuTop()
+    {
+        $('.area-sidebar').hide().attr('class','area-sidebar');
+        $('.top-sidebar').show();
+        $('.top-sidebar-block').show();
+
+        $('.area-top').addClass('hidden-margin-left');
+        $('.area-conteudo').addClass('hidden-margin-left');
+    }
+
+
+    $(document).click(function(e){
+        $('.dropdown-hash-menu').each(function(){
+            if($('.dropdown-hash-menu').is(':visible')){
+                $('.dropdown-hash-menu').hide();
+            }
+        });
+    });
+
+    $('[data-trigger]').each(function(index, value){
+        $(this).click(function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            adjustMenus();
+            $('.dropdown-hash-menu').hide();
+            $('[data-menu="'+ $(this).attr('data-trigger') +'"]').show();
+        });
+    });
+
+    //$('.has-sub .sub-menu-hash').slideUp();
+    //$(this).children('.sub-menu-hash').slideDown();
+
+
+
+    $('.area-nav-menu h1 >a').click(function(e){
+        e.preventDefault();
+
+        var lista = $(this).parent().parent().children('.lista-modulos');
+
+        $('.lista-grupos').removeClass('opened').addClass('closed');
+        $('.lista-times').removeClass('opened').addClass('closed');
+
+        $('.area-nav-menu .lista-modulos').each(function(){
+            if($(this).html() != lista.html()){
+                $(this).removeClass('opened').addClass('closed');
+            }
+        })
+
+        if (lista.hasClass('opened')) {
+            lista.removeClass('opened').addClass('closed');
+        } else {
+            lista.removeClass('closed').addClass('opened');
+        }
+    });
+
+    $(window).resize(function(){
+        adjustContentWrapper();
+        adjustScrollableAreas();
+    });
+
+    // FUNCTIONS
+    function adjustMenus () {
+        //AJUSTA OS SUBs GERAIS
+        $('[data-menu]').each(function(i, v){
+            var link = $(this).attr('data-menu');
+            var btn  = $('[data-trigger="'+ link +'"]');
+            var menu = $(this);
+
+            if (btn.length == 2 || btn.length == 1) {
+
+                if (menu.hasClass('seta-topo-direita')) {
+                    var position = btn.position();
+                    menu.css('top',  position.top + btn.height() )
+                        .css('left', position.left - menu.width() + btn.width() );
+
+                    menu.css('top');
+
+                } else if (menu.hasClass('seta-esquerda-topo')) {
+                    var position = btn.offset();
+
+                    menu.css('top',  position.top + (btn.height()/2) - 20 )
+                        .css('left', position.left + btn.width() + 20 );
+                } else if (menu.hasClass('seta-topo-esquerda')) {
+                    var position = btn.offset();
+                    menu.css('top',  position.top + (btn.height()) + 20)
+                        .css('left', position.left - btn.width());
+                }
+            }
+        });
+
+        //AJUSTA O SUBMENU DO MENU
+        $('.container-sub-menu > .sub-menu-hash').each(function(i, v){
+            var srv = $(v).attr('data-servico');
+            var pai = $('.menu-servicos-modulo > ul > li[data-servico="' + srv + '"]');
+            var pos = pai.offset();
+
+            $(v).css('top',  pos.top - 10 )
+                .css('left', pos.left + pai.width() + 5);
+        });
+    }
+
+    function adjustContentWrapper(){
+        //$('.content-wrapper').height( $(window).height() - $('.area-top').height() );
+    }
+
+    function adjustScrollableAreas () {
+        //$('.container-scrollable-areas').height( $(window).height() - $('.area-usuario').height() );
+    }
+
+    // CALLS
+    adjustMenus();
+    adjustContentWrapper();
+    adjustScrollableAreas();
+/*
+    $('.content-wrapper').mCustomScrollbar({theme: 'minimal-dark', callbacks: {
+        onTotalScroll: function(){
+            // AQUI PODE SER CHAMADO O INFINITY SCROLL
+            $.each($('.paginacao'), function(i,v) {
+                totalItens = $('table.table > tbody > tr').length;
+                ajaxFunction($(this).attr('data-servico'), {total: totalItens}, 'paginacao');
+            });
+        },
+        onScrollStart: function(){
+            $('.select2-selection').attr('aria-expanded', 'false').removeAttr('aria-owns').parent().parent().removeClass('select2-container--open');
+            $('.select2-dropdown').parent().remove();
+        }
+    }});
+
+    $('.container-scrollable-areas').mCustomScrollbar({theme: 'minimal', callbacks: {
+        whileScrolling: function(){
+            adjustMenus();
+        },
+        onScrollStart: function(){
+            $('.dropdown-hash-menu').hide();
+        }
+    }});
+*/
+</script>
+</body>
+</html>

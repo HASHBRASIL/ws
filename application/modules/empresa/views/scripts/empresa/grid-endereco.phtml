@@ -1,0 +1,73 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption"><i class="icon-globe"></i>Endereço</div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="javascript:;" class="remove"></a>
+                </div>
+            </div>
+            <div class="portlet-body flip-scroll">
+                <table class="table-bordered table-striped table-condensed flip-content">
+                    <thead class="flip-content">
+                        <tr>
+                            <th style="width: 280px">Tipo</th>
+                            <th style="width: 100px;">Cep</th>
+                            <th>Tipo Logradouro</th>
+                            <th>Endereço</th>
+                            <th>Bairro</th>
+                            <th>Complemento</th>
+                            <th>Cidade</th>
+                            <th class="action" colspan="2">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php if (count($this->listEndereco) > 0):?>
+                        <?php foreach ($this->listEndereco as $endereco):?>
+                            <tr>
+                                <td>
+                                    <?php if(count($endereco->getListTipoEndereco()) > 0):?>
+                                        <?php foreach ($endereco->getListTipoEndereco() as $key => $tipoEnderecoRef):?>
+                                            <?php echo $tipoEnderecoRef->getTipoEndereco()->tie_descricao?>
+                                            <?php if($key != count($endereco->getListTipoEndereco()) - 1):?>
+                                                <?php echo " / "?>
+                                            <?php endif;?>
+                                        <?php endforeach;?>
+                                    <?php else: echo "N/D";
+                                    endif;?>
+                                </td>
+                                <td><?php echo $this->cep($endereco->cep)?></td>
+                                <td><?php echo $endereco->tipo_logradouro?></td>
+                                <td><?php echo $endereco->nome_logradouro; echo $endereco->numero ? " - $endereco->numero" : "" ?></td>
+                                <td style="width: 260px;"><?php echo $endereco->bairro?></td>
+                                <td><?php echo $endereco->complemento ? $endereco->complemento : "N/D" ?></td>
+                                <td><?php echo $endereco->getCidade() ? $endereco->getCidade()->cid_nome."/".$endereco->getEstado()->ufs_sigla : "N/D" ?></td>
+                                <td class="acoes" style="width: 20px">
+                                    <a href="<?php echo $endereco->id?>" class="editar_endereco">
+                                        <img title="Editar endereço" data-tooltip src="<?php echo $this->baseUrl('images/edit.png')?>" />
+                                    </a>
+                                </td>
+                                <td class="acoes" style="width: 20px">
+                                    <a href="<?php echo $endereco->id?>" class="delete_endereco">
+                                        <img  title="excluir endereço" data-tooltip src="<?php echo $this->baseUrl('images/delete.png')?>" />
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
+                    <?php else:?>
+                            <tr>
+                                <td colspan="8" style="text-align: center">Não existem registros!</td>
+                            </tr>
+                    <?php endif;?>
+                    </tbody>
+                </table>
+                <div class="row-fluid">
+                    <div class="span6">
+                        <div style="padding-top: 8px;"> Mostrando <?php echo count($this->listEndereco)?> registros</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

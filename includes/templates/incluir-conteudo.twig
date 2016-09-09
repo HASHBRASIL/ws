@@ -1,0 +1,243 @@
+{% include 'header-content.html.twig' %}
+
+<script type="text/javascript" src="//static.jstree.com/3.2.1/assets/dist/jstree.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//static.jstree.com/3.2.1/assets/dist/themes/default/style.min.css"/>
+<form method="POST" action="home.php">
+<div class="col-md-12 box-form-container">
+    <div class="row col-md-4">
+        <header>
+            <h3>ITEM DO MENU</h3>
+        </header>
+    <div>
+        <button type="button" type="button" class="btn btn-sm btn-info add_node">incluir</button>
+        <button type="button" class="btn btn-sm btn-danger delete_node">excluir</button>
+        <button type="button" class="btn btn-sm btn-warning rename_node">renomear</button>
+    </div>
+        <div id="jstree"></div>
+    </div>
+
+    <script>
+        $('.add_node').click(function(e){
+            e.preventDefault();
+            var selected = $('#jstree').jstree().get_selected()[0];
+            if(selected == null) {
+                selected  = '#';
+            }
+
+            var count = $('#jstree').find("li[id*='novo']").length;
+            var nome  = selected + '_novo_' + count;
+            nome      = nome.replace('#_', '');
+
+            $.ajax({
+                type: 'POST',
+                url: "http://localhost/hashWS/public/includes/ajaxCreateItemMenu.php"
+            }).success(function(response){
+                console.log(response);
+                var novo  = $('#jstree').jstree().create_node(selected ,  { "id" : nome, "text" : "Novo item", "type": "root"}, "last", function(){
+                     $('#jstree').jstree().open_node(selected);
+                });
+            });
+        });
+
+        $('.delete_node').click(function(e){
+            e.preventDefault();
+            var selected = $('#jstree').jstree().get_selected(true)[0];
+            $('#jstree').jstree().delete_node(selected.id);
+        })
+
+        $('.rename_node').click(function(e){
+            e.preventDefault();
+            var selected = $('#jstree').jstree().get_selected(true)[0];
+            $('#jstree').jstree().edit(selected.id, selected.text, function(e){});
+        });
+
+        $('#jstree').jstree({
+            "checkbox": {
+                "keep_selected_style": true
+            },
+            "core" : {
+                "data": JSON.parse( '{{ novoItens|json_encode|e("js") }}' ),
+                "check_callback" : true
+            },
+            "types" : {
+                "#" :
+                    {"max_depth" : 3,
+                     "valid_children" : ["root"]},
+
+                "root" :
+                    {"icon" : "glyphicon glyphicon-file",
+                     "valid_children" : ["detalhe", "root"]},
+
+                "default" :
+                    {'icon' : "fa fa-folder-o"},
+
+                "site" :
+                    {'icon' : "fa fa-sitemap"}
+
+            },
+            "plugins": ["RadioButton", "dnd", "types"]
+        }).on('select_node.jstree', function(e, data){
+            if (! $('#jstree').jstree().is_open(data.node.id) ) {
+                $('#jstree').jstree().open_node(data.node.id);
+            } else {
+                $('#jstree').jstree().close_node(data.node.id);
+            }
+        }).on("move_node.jstree", function (e, data) {
+
+            var idPai = $('#'+data.node.id).parent().parent().attr('id');
+
+            var array = {};
+            array[idPai] = [];
+
+            $('#'+data.node.id).parent().children().each(function(){
+                array[idPai].push($(this).attr('id'));
+            });
+
+            $.post('home.php?servico=35fe83d4-0bb2-11e6-9dfa-7765a0a5a438', {'bloco' : array});
+        });
+
+	$('#jstree').on("select_node.jstree", function (e, data) {
+            if(data.node.id.length  == '36'){
+                var nome = $('textarea').attr('id');
+                CKEDITOR.instances[nome].setData('');
+                $('.input-sm').val("");
+                $('.btn-success').attr('disabled','disabled');
+                $('.btn-success').removeAttr('disabled');
+                document.getElementById("div_conteudo_pagina").style.display = "block";
+                $.post('content/cms/buscar-conteudo-ib/id/' +data.node.id, $( "form" ).serialize(), function(response) {
+                    // Log the response to the console
+                    resultado = jQuery.parseJSON(response);
+                    CKEDITOR.instances[nome].setData(resultado['conteudo']['valor']);
+                    $('.input-sm').val(resultado['titulo']['valor']);
+                    $('input[type=hidden][name=id_titulo]').val(resultado['titulo']['id']);
+                    $('input[type=hidden][name=id_conteudo]').val(resultado['conteudo']['id']);
+                });
+            }else{
+                var nome = $('textarea').attr('id');
+                CKEDITOR.instances[nome].setData('');
+                $('.input-sm').val("");
+                $('.btn-success').attr('disabled','disabled');
+                document.getElementById("div_conteudo_pagina").style.display = "none";
+            }
+	});
+
+	$(document).ready(function() {
+		$('.btn-success').attr('disabled','disabled');
+		document.getElementById("div_conteudo_pagina").style.display = "none";
+	});
+
+	function trataForm(form){
+
+		var formNovo = $(form).serializeArray();
+		var nome = $('textarea').attr('id');
+		formNovo[5]['value'] = CKEDITOR.instances[nome].getData();
+		return formNovo;
+	}
+    </script>
+	<div class="col-md-8" id="div_conteudo_pagina">
+       <input type="hidden" class="formId" name="id" value="{{ id }}"/>
+        {% for perfil in perfis %}
+            <div class="row">
+                <header>
+                    <h3>
+                        {{ perfil|lower }}
+                        <span>{{ campos[perfil][0].perfil_descricao }}</span>
+                    </h3>
+                </header>
+                <div class="row">
+                    {% for chave,campo in campos[perfil] %}
+
+                        {% if campo['id'] is defined %}
+                            <div class="{{ campo['metadatas'].ws_style | default('col-md-12') }}"
+                                 {% if campo['multiplo'] %}
+                                    data-duplicatable="{{ campo['id'] }}_0"
+                                 {% endif %}
+                                >
+                                <label for="{{ campo.id }}">
+                                    {{ campo.nome }}
+                                    {% if campo['multiplo'] %}
+                                        <a href="#" data-duplicate="{{ campo['id'] }}">
+                                            {# <span>Novo Campo</span> #}
+                                            <i class="fa fa-plus-circle"></i>
+                                        </a>
+                                    {% endif %}
+                                    {# <span>{{ campo.descricao }}</span>  #}
+                                </label>
+                                {% include 'fields.html.twig' with { 'campo': campo } %}
+                            </div>
+                        {% else %}
+                            {% for contador, subCampo in campo %}
+                                {% if subCampo['perfil'] is defined %}
+                                    {% if contador == 0 %}
+                                         <div class="{{ campos['master'][chave]['metadatas'].ws_style | default('col-md-12') }}"
+                                            {% if campos['master'][chave]['multiplo'] == true %}
+                                             data-duplicatable="{{ campos['master'][chave]['id'] }}_0"
+                                            {% endif %}
+                                            >
+                                        {% if campos[perfil]|length > 1 %}
+                                            <h4>{{ chave|lower }}
+                                                {% if campos['master'][chave]['multiplo'] == true %}
+                                                    <a href="#" data-duplicate="{{ campos['master'][chave]['id'] }}">
+                                                        <i class="fa fa-plus-circle"></i>
+                                                    </a>
+                                                {% endif %}
+                                            </h4>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <div class="{{ subCampo['metadatas'].ws_style }}">
+                                        <label for="{{ subCampo.id }}">
+                                            {{ subCampo.nome }}
+                                        </label>
+                                        {% include 'fields.html.twig' with {'campo' : subCampo} only %}
+                                    </div>
+                                    {% if contador == (campo|length - 1) %}
+                                        {% if campos['master'][chave]['multiplo'] == true %}
+                                            <input type="hidden" name="{{campos['master'][chave]['id']}}_{{campos['master'][chave]['metanome']}}[]" value="{{subSubCampo.tbinfopaiid}}" />
+                                        {% endif %}
+                                        </div>
+                                    {% endif %}
+                                {% else %}
+                                    {% for counter, subSubCampo in subCampo %}
+                                        {% if counter == 0 %}
+                                            <div class="{{ campos['master'][chave]['metadatas'].ws_style | default('col-md-12') }}"
+                                                {% if campos['master'][chave]['multiplo'] == true %}
+                                                 data-duplicatable="{{ campos['master'][chave]['id'] }}_0"
+                                                {% endif %}
+                                                >
+                                            {% if campos[perfil]|length > 1 %}
+                                                <h4>{{ chave|lower }}
+                                                    {% if campos['master'][chave]['multiplo'] == true %}
+                                                        <a href="#" data-duplicate="{{ campos['master'][chave]['id'] }}">
+                                                            <i class="fa fa-plus-circle"></i>
+                                                        </a>
+                                                    {% endif %}
+                                                </h4>
+                                            {% endif %}
+                                        {% endif %}
+                                        <div class="{{ subSubCampo['metadatas'].ws_style }}">
+                                            <label for="{{ subSubCampo.id }}">
+                                                {{ subSubCampo.nome }}
+                                            </label>
+                                            {% include 'fields.html.twig' with {'campo' : subSubCampo} only %}
+                                        </div>
+                                        {% if counter == (subCampo|length - 1) %}
+                                            {% if campos['master'][chave]['multiplo'] == true %}
+                                                <input type="hidden" name="{{campos['master'][chave]['id']}}_{{campos['master'][chave]['metanome']}}[]" value="{{subSubCampo.tbinfopaiid}}" />
+                                            {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+	<br />
+    {% include 'form-action.html.twig' %}
+    </form>
+</div>
+</div>
+</div>

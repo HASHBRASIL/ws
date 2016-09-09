@@ -1,0 +1,82 @@
+body {
+  width: 100%;
+  *zoom: 1;
+}
+body:before,
+body:after {
+  content: "";
+  display: table;
+}
+body:after {
+  clear: both;
+}
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+@font-face {
+  font-family: 'Arimo Regular';
+  src: url('../font/arimo/Arimo-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Arimo Bold';
+  src: url('../font/arimo/Arimo-Bold.ttf') format('truetype');
+}
+@font-face {
+  @font-face {
+    font-family: 'Arimo Regular';
+    src: url('../font/arimo/Arimo-Regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Arimo Bold';
+    src: url('../font/arimo/Arimo-Bold.ttf') format('truetype');
+  }
+}
+body,
+html {
+  font: 200 18px/24px Arimo Regular, sans-serif, arial;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+* {
+  position: relative;
+  outline: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#all {
+  width: 100%;
+  height: 100%;
+}
+.load-frame {
+  width: 100%;
+  height: 100%;
+  background: #1D2B50;
+  position: fixed;
+  z-index: 10000;
+  display: table;
+  text-align: center;
+  opacity: 0.9;
+}
+.load-center {
+  vertical-align: middle;
+  display: table-cell;
+  margin: 0 auto;
+  width: 50%;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+.circle-online {
+  color: #1eb85a;
+  font-size: 0.7em;
+}
+.circle-offline {
+  color: #ECEDEF;
+  font-size: 0.7em;
+}
+/*# sourceMappingURL=general.css.map */

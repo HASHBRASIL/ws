@@ -1,0 +1,47 @@
+<div class="container-inscricao col-md-12">
+    <div class="container-form">
+        <div class="suport-text">
+            <h1>Você está a um passo de ter sua pré-campanha finalizada.</h1>
+            <h2>Confira os dados abaixo, e clique em salvar.</h2>
+        </div>
+        <div class="box-form-inscricao">
+            <form method="POST">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4 list-confirm-product">
+                        <ul>
+                            <li><span>{{ 'email'|zftranslate }}</span></li>
+                            <li><span>{{ 'nome_time'|zftranslate }}</span></li>
+                            <li><span>{{ 'alias'|zftranslate }}</span></li>
+                            <li><span>{{ 'nome_usuario'|zftranslate }}</span></li>
+                            <li><span>{{ 'produto'|zftranslate }}</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 info-user">
+                        <ul>
+                            <li>{{ email }}</li>
+                            <li>{{ time }}</li>
+                            <li>{{ alias }}</li>
+                            <li>{{ usuario }}</li>
+                            <li>{{ produto|zftranslate }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6 btn-action">
+                        <button type="button" class="back">{{ 'back'|zftranslate }}</button>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 btn-action">
+                        <button type="submit">{{ 'save'|zftranslate }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+    $('.back').click(function(){
+        location.assign('/config/inscricao');
+    });
+});
+</script>

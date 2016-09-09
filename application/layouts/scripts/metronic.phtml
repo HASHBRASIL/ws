@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="pt-br" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="pt-br" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!--> <html lang="pt-br" class="no-js"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+    <?php echo $this->partial('header_metronic.phtml', 'default')?>
+    <body class="page-header-fixed">
+    <style>
+        #carregando{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 46%;
+            width: 140px;
+            height: 30px;
+            background: #E02222;
+            z-index: 10000;
+            text-align: center;
+            color: white;
+            border: 1px solid white;
+            border-top-width: 0;
+        }
+        div#carregando span{
+            margin: 6px 0;
+            display: block;
+        }
+    </style>
+            <div id="carregando" style="display:none">
+                <span>Carregando...</span>
+            </div>
+            <?php if(!$this->disableHeader): ?>
+                <?php  echo $this->partial('header-content-metronic.phtml', 'default')?>
+            <?php endif;?>
+
+			<!-- BEGIN CONTAINER -->
+			<div class="page-container">
+   			<!-- BEGIN SIDEBAR -->
+				<?php echo $this->partial('sidebar_metronic.phtml', 'default', array('menusPaisList' => $this->menusPaisList))?>
+				<!-- END SIDEBAR -->
+				<!-- BEGIN PAGE -->
+				<div class="page-content">
+					<!-- BEGIN PAGE CONTAINER-->
+					<div class="container-fluid">
+						<?php  echo $this->partial('messages-metronic.phtml', 'default', array('messages' => $this->messages))?>
+						        <div class="row-fluid" style="display: none; margin-top: 10px">
+						          <div class="span12" id="message-box">
+						            <div class="alert " >
+						            	<span class="text-message"></span>
+						                <button class="close" data-dismiss="alert"></button>
+						            </div>
+						          </div>
+						        </div>
+						<?php echo $this->layout()->content?>
+					</div>
+					<!-- END PAGE CONTAINER-->
+				</div>
+				<!-- END PAGE -->
+			</div>
+			<!-- END CONTAINER -->
+			<!-- BEGIN FOOTER -->
+
+			<!-- END FOOTER -->
+
+			<!-- MODAL ALERT -->
+            <div  id="alert-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h3 id="alertModalLabel">Alerta</h3>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn green" data-dismiss="modal" aria-hidden="true"><?php echo $this->translate('Fechar')?></button>
+                </div>
+            </div>
+			<!-- END MODAL  -->
+			<script>
+			$(document).ready(function(){
+
+			    // tradução do datepicker
+			    $.datepicker.regional['pt-BR'] = {
+			            closeText: 'Fechar',
+			            prevText: '&#x3c;Anterior',
+			            nextText: 'Pr&oacute;ximo&#x3e;',
+			            currentText: 'Hoje',
+			            monthNames: ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho',
+			            'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+			            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
+			            'Jul','Ago','Set','Out','Nov','Dez'],
+			            dayNames: ['Domingo','Segunda-feira','Ter&ccedil;a-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sabado'],
+			            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+			            dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+			            weekHeader: 'Sm',
+			            dateFormat: 'dd/mm/yy',
+			            firstDay: 0,
+			            isRTL: false,
+			            showMonthAfterYear: false,
+			            yearSuffix: ''};
+			    $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
+
+/*
+			    $.timepicker.regional['pt-BR'] = {
+			            timeOnlyTitle: 'Tempo',
+			            timeText: 'Hora',
+			            hourText: 'Hora',
+			            minuteText: 'Minuto',
+			            secondText: 'Segundo',
+			            currentText: 'Agora',
+			            closeText: 'Fechar'};
+			    $.timepicker.setDefaults($.timepicker.regional['pt-BR']);*/
+
+			    $('body').on( 'click', 'a.delete', function(e){
+			        var valid = confirm("Deseja realmente excluir este dado?");
+			        if(!valid){
+			            return false;
+			        }
+			    });
+
+			    setTimeout(function(){$().parent().hide('slow');}, 7000);
+
+			    $(document).ajaxStart(function(){$("#carregando").show();});
+			    $(document).ajaxStop(function(){$("#carregando").hide();});
+			});
+
+			jQuery.messageBox = function(text, type){
+			    $('#message-box > div.alert').addClass('alert-'+type);
+			    $('span.text-message').text(text);
+			    $('#message-box').show('slow').parent().show('slow');
+			    setTimeout(function(){ $('#message-box').hide('slow').parent().hide('slow');$('#message-box > div.alert').removeClass(type);}, 7000);
+			}
+			</script>
+
+    </body>
+</html>

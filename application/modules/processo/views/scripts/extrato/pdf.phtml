@@ -1,0 +1,89 @@
+<?php //App_Util_Functions::debug($this->listProcesso)?>
+<h1 style="text-align: center;font-size:14;">Extrato de processo</h1>
+<span style="font-size:10;margin: 0">emitido em <?php echo date("d/m/Y");?> às <?php echo date("H:i:s")?> por <?php echo Zend_Auth::getInstance()->getIdentity()->nome_razao?></span><br>
+<span  style="font-size:10;">No período pesquisado de <b><?php echo $this->dt_inicio ? $this->dt_inicio: "Sem Limites" ?></b> até <b><?php echo $this->dt_fim ? $this->dt_fim: "Sem Limites"?>.
+</span>
+<hr/>
+        <?php if(count($this->listProcesso)> 0):?>
+        <?php foreach ($this->listProcesso as $list):?>
+        <br />
+        <br />
+        <table  cellspacing="1" cellpadding="3" border="0" style="width: 850px; border: 1px solid #241E1E;" >
+                <tr>
+                    <td style=" width: 75px;font-weight: bold;">Cliente:</td>
+                    <td><?php echo $list['processo']->getEmpresa()->nome_razao ?></td>
+                    <td style="width: 97px;font-weight: bold;">Cód. processo:</td>
+                    <td><?php echo $list['processo']->pro_codigo ?></td>
+                    <td style="width: 100px;font-weight: bold;">Quantidade:</td>
+                    <td><?php echo $list['processo']->pro_quantidade ?></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Descrição:</td>
+                    <td style="text-align: justify;" colspan="5"><?php echo $list['processo']->pro_desc_produto ?></td>
+                </tr>
+                <?php if(count($list['financial'])> 0):?>
+                    <?php foreach ($list['financial'] as $financial):?>
+                        <tr>
+                            <td colspan="6" style="border-bottom: 1px solid #241E1E;">
+                                <table  cellspacing="1" cellpadding="3" border="0">
+                                    <tr style="border-bottom: 1px solid #241E1E;">
+                                        <td style=" width: 100px;font-weight: bold;">Cód transação:</td>
+                                        <td><?php echo $financial['list']->id_agrupador_financeiro ?></td>
+                                        <td style="width: 105px;font-weight: bold;">Valor transação:</td>
+                                        <td><?php echo $this->formatDecimal($financial['list']->fin_valor) ?></td>
+                                        <td style="width: 90px;font-weight: bold;">Transação:</td>
+                                        <td><?php echo $financial['list']->getTipoMovimento()->tmv_descricao ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">
+                                            <?php if(count($financial['ticket'])> 0):?>
+                                                <table  cellspacing="1" cellpadding="3" border="0">
+                                                    <tr>
+                                                        <td colspan="5">Ticket da transação <span style="font-weight: bold;"><?php echo $financial['list']->id_agrupador_financeiro ?></span></td>
+                                                    </tr>
+                                                    <tr  style="font-weight: bold;background-color: #eeeeee">
+                                                        <th style="width: 50px">Código</th>
+                                                        <th style="width: 200px">Cliente</th>
+                                                        <th>Conta</th>
+                                                        <th>Compensação</th>
+                                                        <th style="width: 150px">Valor</th>
+                                                    </tr>
+                                                    <?php $count = 0?>
+                                                <?php foreach($financial['ticket'] as $ticket):?>
+                                                <?php
+                                					$zebra = "#eeeeee";
+                                		    	    if( $count  % 2 == 0){
+                                		        	    $zebra = "#ffffff";
+                                		    	    }
+                                		    	    $count++
+                                		    	    ?>
+                                                    <tr style="background-color: <?php echo $zebra?>" >
+                                                        <td><?php echo $ticket->fin_id?></td>
+                                                        <td><?php echo $ticket->getSacadoFinanceiro()->getEmpresa()->nome_razao?></td>
+                                                        <td><?php echo $ticket->getConta()? $ticket->getConta()->con_codnome : null?></td>
+                                                        <td><?php echo $this->date($ticket->fin_compensacao)?></td>
+                                                        <td><?php echo $this->formatDecimal($ticket->fin_valor)?></td>
+                                                    </tr>
+                                                <?php endforeach;?>
+                                                </table>
+                                            <?php else:?>
+                                                Não existe ticket para a transação financeira <span style="font-weight: bold;"><?php echo $financial['list']->id_agrupador_financeiro ?></span>!
+                                            <?php endif;?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    <?php endforeach;?>
+                <?php else :?>
+                        <tr>
+                            <td colspan="6" style="border-bottom: 1px solid #241E1E;">Não existe transação financeira para o processo <span style="font-weight: bold;"><?php echo $list['processo']->pro_codigo ?></span>!</td>
+                        </tr>
+                <?php endif;?>
+             </table>
+        <?php endforeach;?>
+        <?php else :?>
+                <tr>
+                    <td colspan="6">Não existem registros!</td>
+                </tr>
+        <?php endif;?>

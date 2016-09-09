@@ -1,0 +1,12 @@
+@grid-columns: 12;
+
+.col-offset-right(@i, @type) when (@i >= 0) {
+    .col-@{type}-offset-right-@{i} {
+        margin-right: percentage((@i / @grid-columns));
+    }
+    .col-offset-right(@i - 1, @type);
+};
+.col-offset-right(@grid-columns, xs);
+.col-offset-right(@grid-columns, sm);
+.col-offset-right(@grid-columns, md);
+.col-offset-right(@grid-columns, lg);

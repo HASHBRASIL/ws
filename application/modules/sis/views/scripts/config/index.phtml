@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="small-12 columns">
+        Diretório: <?php echo $this->config->resources->frontController->moduleDirectory;?>
+        <br>
+        Versão: <?php echo $this->config->appVersion;?>
+        <br><br>
+        <strong>; error</strong><br>
+        <span style="padding-right: 200px">phpSettings.error_reporting</span>                        = <?php echo $this->config->phpSettings->error_reporting == E_ALL ? "E_ALL": $this->config->phpSettings->error_reporting == E_ALL; ?><br>
+        <span style="padding-right: 150px">phpSettings.display_startup_errors</span>                 = <?php echo $this->config->phpSettings->display_startup_errors;?><br>
+        <span style="padding-right: 205px">phpSettings.display_errors</span>                         = <?php echo $this->config->phpSettings->display_errors;?><br>
+        <span style="padding-right: 35px">resources.frontController.params.displayExceptions</span> = <?php echo $this->config->resources->frontController->params->displayExceptions;?><br>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 columns">
+    <br>
+        <strong>; phpsettings</strong><br>
+        <span  style="padding-right: 205px">phpSettings.session.name</span>                           = <?php echo $this->config->phpSettings->session->name;?><br>
+        <span  style="padding-right: 204px">phpSettings.date.timezone</span>                          = <?php echo $this->config->phpSettings->date->timezone;?><br>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 columns">
+    <br>
+        <strong>; bootstrap</strong><br>
+        <span style="padding-right: 255px">includePaths.library</span>     = <?php echo APPLICATION_PATH.$this->config->includePaths->library;?><br>
+        <span style="padding-right: 290px">bootstrap.path</span>           = <?php echo APPLICATION_PATH.$this->config->bootstrap->path;?><br>
+        <span style="padding-right: 285px">bootstrap.class</span>          = <?php echo $this->config->bootstrap->class;?><br><br>
+
+        <span style="padding-right: 103px">resources.frontController.moduleDirectory</span>   = <?php echo APPLICATION_PATH.$this->config->resources->frontController->moduleDirectory;?><br>
+        <span style="padding-right: 120px">resources.frontController.defaultModule</span>     = <?php echo $this->config->resources->frontController->defaultModule;?><br>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 columns">
+    <br>
+        <strong>; banco de dados</strong><br>
+        <span style="padding-right: 240px">resources.db.adapter</span>                        = <?php echo $this->config->resources->db->adapter;?><br>
+        <span style="padding-right: 185px">resources.db.params.charset</span>                 = <?php echo $this->config->resources->db->params->charset;?><br>
+
+        <span style="padding-right: 206px">resources.db.params.host</span>                    = <?php echo $this->config->resources->db->params->host;?><br>
+        <span style="padding-right: 176px">resources.db.params.dbname</span>                  = <?php echo $this->config->resources->db->params->dbname;?><br>
+    </div>
+</div>

@@ -1,0 +1,146 @@
+<!-- 
+<?php 
+$totalFalta = '00:00:00';
+$totalExtra = '00:00:00';
+$totalTrabalhado = '00:00:00';
+$totalHorario 	 = '00:00:00';
+?> -->
+	<table border='1' style="width: 780px" cellspacing="2" cellpadding="2">
+		<tr>
+			<td colspan="2" width="400"><b>Nome:</b> <?php echo $this->funcionario->getEmpresa()->nome_razao?></td>
+			<td><b>Periodo de:</b> <?php echo $this->data->toString(Zend_Date::MONTH_NAME.'/'.Zend_Date::YEAR)?></td>
+		</tr>
+		<tr>		
+			<td width="200"><b>CPF:</b> <?php echo $this->cpf($this->funcionario->getEmpresa()->cnpj_cpf)?></td>
+			<td width="200"><b>PIS:</b> <?php echo $this->funcionario->getDocumento()->pis?></td>
+			<td><b>Emitido em:</b> <?php echo new Zend_Date()?></td>
+		</tr>
+	</table>
+	<table id="horas" border='1' style="width: 780px" cellpadding="3" style=" border:1px solid #dfdfdf;">
+		<thead>
+			<tr style="background-color: #E7E6E6">
+				<th width="90px" align="center"><b>dia</b></th>
+				<th width="90px" align="center"><b>Data</b></th>
+				<th align="center"><b>Entrada1</b></th>
+				<th align="center"><b>Saída1</b></th>
+				<th align="center"><b>Entrada2</b></th>
+				<th align="center"><b>Saída2</b></th>
+				<th width="45px" align="center"><b>falta</b></th>
+				<th  width="45px" align="center"><b>Extra</b></th>
+				<th width="80px" align="center"><b>Trabalhado</b></th>
+				<th align="center"><b>Horario</b></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($this->dados as $data => $dados):?>
+			<?php 
+			$style = '#fff';
+				if($dados->getFeriado()){
+					$style = 'rgb(182, 212, 224)';
+				}
+				elseif ($dados->getFolga()){
+					$style = '#f2dede';
+				}
+			?>
+			<tr style="background-color: <?php echo $style ?>">
+				<?php 
+					$ptBR = new Zend_Locale('pt_BR');
+					$date = new Zend_Date($dados->getData(), null, $ptBR);
+				?>
+				<td width="90px" align="center"><?php echo $date->toString('EEEE')?></td>
+				<td align="center" width="90px"><?php echo $date->toString('dd/MM/YYYY')?></td>
+				<?php $tempo = $dados->getTempo()?>
+					<?php for($i = 0; $i < 4; $i++): ?>
+						<td  align="center" <?php echo !empty($tempo[$i]['justificativa'])?'style="background-color: #B6E0B9;"': "" ?> >
+								<?php if(!empty($tempo[$i]['hora'])):?>
+									<?php echo $this->formatTime($tempo[$i]['hora'], 'H:i');?>
+								<?php elseif (!empty($tempo[$i]['justificativa'])):?>
+									<?php echo $tempo[$i]['justificativa'];?>
+								<?php else:?>
+									-------
+								<?php endif;?>
+							<?php if (!empty($tempo[$i]['descricao'])) : ?>
+								*
+							<?php endif;?>
+						</td>
+					<?php endfor;?>
+					<td width="45px" align="center">
+						<?php if(empty($dados->getCalcularPonto('hora_falta'))){
+							echo  '00:00';
+						}else{
+							echo $this->formatTime($dados->getCalcularPonto('hora_falta'), "H:i");
+							$totalFalta = $this->CalculoHora($totalFalta.":00", $this->formatTime($dados->getCalcularPonto('hora_falta')));
+						}?>
+					</td>
+					<td  width="45px" align="center">
+					<?php if(empty($dados->getCalcularPonto('hora_extra'))){
+							echo '00:00';
+						}else{
+							echo $this->formatTime($dados->getCalcularPonto('hora_extra'), "H:i");
+							$totalExtra = $this->CalculoHora($totalExtra.":00", $this->formatTime($dados->getCalcularPonto('hora_extra')));
+						}?>
+					</td>
+					<td width="80px" align="center">
+						<?php if(empty($dados->sumChTrabalhado('H:i'))){
+							echo '00:00';
+						}else{
+							echo $dados->sumChTrabalhado('H:i');
+							$totalTrabalhado = $this->calculoHora($totalTrabalhado.":00",$dados->sumChTrabalhado());
+						}?>
+					</td>
+					<td align="center">
+						<?php if(empty($dados->sumChDefault('H:i'))){
+							echo '00:00';
+						}else{
+							echo $dados->sumChDefault('H:i');
+							$totalHorario = $this->calculoHora($totalHorario.":00", $dados->sumChDefault());
+						}?>
+					</td>
+			</tr>
+			<?php endforeach; ?>
+			<tr style="background-color: #fff;" >
+				<td colspan="6"><b>total</b></td>
+				<td align="center"><?php echo $totalFalta ?></td>
+				<td align="center"><?php echo $totalExtra?></td>
+				<td align="center"><?php echo $totalTrabalhado?></td>
+				<td align="center"><?php echo $totalHorario?></td>
+			</tr>
+		</tbody>
+	</table>
+	<table id="horas" border='0' style="width: 780px" cellspacing="2" cellpadding="4" style="font-size: 30px;">
+		<tr>
+			<td width="25px" style="background-color: rgb(182, 212, 224);"></td>
+			<td>Feriados</td>
+			<td width="25px"  style="background-color: #B6E0B9;"></td>
+			<td>Justificativas</td>
+			<td width="25px"  style="background-color: #f2dede;"></td>
+			<td>Folga</td>
+			<td align="center" width="25px" font-size="20">*</td>
+			<td width="200px">Ponto com modificação humana</td>
+		</tr>
+	</table>
+	<br/>
+	<?php foreach ($this->configHorarioPadrao as $key=>$configHorarioPadrao):?>
+			<table  border='1' style="width: 380px" cellspacing="1" cellpadding="2" style="font-size: 20px; width:280px; border:1px solid #dfdfdf;">
+				<thead>
+					<tr style="background-color: #E7E6E6">
+						<th></th>
+						<th align="center"><b>Entrada 1</b></th>
+						<th align="center"><b>Saída 1</b></th>
+						<th align="center"><b>Entrada 2</b></th>
+						<th align="center"><b>Saída 2</b></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($configHorarioPadrao as $configHorario):?>
+					    <tr  style="border:1px solid #dfdfdf;">
+					        <td align="center"><?php echo $configHorario['nome_semana']?></td>
+					        <td align="center"><?php echo $configHorario['config'] ? $configHorario['config']->entrada1: null?></td>
+					        <td align="center"><?php echo $configHorario['config'] ? $configHorario['config']->saida1 : null?></td>
+					        <td align="center"><?php echo $configHorario['config'] ? $configHorario['config']->entrada2: null?></td>
+					        <td align="center"><?php echo $configHorario['config'] ? $configHorario['config']->saida2: null?></td>
+					    </tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+	<?php endforeach;?>

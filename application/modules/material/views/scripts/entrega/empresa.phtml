@@ -1,0 +1,140 @@
+    <div id="grid_entrega"></div>
+    <div class="dialog_endereco" style="display: none">
+        <form class="form_endereco" style="margin: 0">
+            <div class="row-fluid" style="margin: 0; max-width: 100%;">
+                <div class="span12">
+                    <div class="control-group">
+                        <label class="control-label">Destinatário</label>
+                        <div class="controls">
+                            <?php echo $this->formText('destinatario',null, array('placeholder'=> 'Destinátario','class'=>'span12', 'maxlength'=>'50'));?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label">Aos cuidados</label>
+                        <div class="controls">
+                            <?php echo $this->formText('aos_cuidados',null, array('placeholder'=> 'Aos cuidados', 'maxlength'=>'50','class'=>'span12'));?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label">Email</label>
+                        <div class="controls">
+                            <?php echo $this->formText('email',null, array( 'placeholder'=> 'Email', 'maxlength'=>'50','class'=>'span12'));?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="control-group">
+                        <label class="control-label">Cep<span class="required">*</span></label>
+                        <div class="controls">
+                            <?php echo $this->formText('cep',null, array('placeholder'=> 'Cep','class'=>'span6'));?>
+                            <img src="<?php echo $this->baseUrl('images/search.png')?>" data-tooltip id="bt_pesquisar_cep" style="cursor: pointer" title="Pesquisar Cep">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span8">
+                    <div class="control-group">
+                        <label class="control-label">Logradouro<span class="required">*</span></label>
+                        <div class="controls">
+                            <?php echo $this->formText('logradouro',null, array('placeholder'=> 'Endereço', 'maxlength'=>'50','class'=>'span12'));?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="control-group">
+                        <label class="control-label">Número<span class="required">*</span></label>
+                        <div class="controls">
+                            <?php echo $this->formText('numero',null, array('placeholder'=> 'Número', 'maxlength'=>'6','class'=>'span12'));?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label">Complemento</label>
+                        <div class="controls">
+                            <?php echo $this->formText('complemento',null, array('placeholder'=> 'Complemento', 'maxlength'=>'30','class'=>'span12'));?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label">Bairro</label>
+                        <div class="controls">
+                            <?php echo $this->formText('bairro',null, array( 'placeholder'=> 'Bairro', 'maxlength'=>'50','class'=>'span12'));?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="control-group">
+                        <label class="control-label">Estado/Cidade<span class="required">*</span></label>
+                        <div class="controls">
+                            <?php echo $this->formHidden('pais_id', 1);?>
+                            <?php echo $this->formSelect('ufs_id', null, array('style' => 'width: 90px; margin-bottom: 15px;','class'=>'span6'), $this->comboEstado); ?>
+                            <?php echo $this->formSelect('id_cidade', null, array('style' => 'width: 300px;margin-bottom: 15px;','class'=>'span6'), array('Cidade'=>'Cidade')); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span4">
+                    <div class="control-group">
+                        <label class="control-label">Telefone</label>
+                        <div class="controls">
+                            <?php echo $this->formText('telefone',null, array( 'placeholder'=> 'Telefone','class'=>'span12'));?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="control-group">
+                        <label class="control-label">Celular</label>
+                        <div class="controls">
+                            <?php echo $this->formText('celular',null, array( 'placeholder'=> 'Celular','class'=>'span12'));?>
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="control-group">
+                        <label class="control-label">Fax</label>
+                        <div class="controls">
+                            <?php echo $this->formText('fax',null, array( 'placeholder'=> 'Fax','class'=>'span12'));?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="control-group">
+                        <label class="control-label">Observação</label>
+                        <div class="controls">
+                             <?php echo $this->formTextarea('observacao',null, array( 'placeholder'=> 'Observação','class'=>'span12', 'rows'=>3));?>
+                             <span id="countObservacao"></span> Caracteres restantes
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div style="text-align: center;color: red;">* campo Obrigatório</div>
+                </div>
+            </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="dialog_extrato" style="padding: 0;">
+    </div>
+<script src="<?php echo $this->baseUrl('scripts/lib/jquery.limit-1.2.source.js')?>"></script>
+<script src="<?php echo $this->baseUrl('scripts/material/entrega.empresa.js')?>"></script>

@@ -1,0 +1,64 @@
+<fieldset>
+    <legend>
+        <h5>Comportamento</h5>
+    </legend>
+    <p>Escolha um comportamento para a área selecionada.</p>
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active" role="presetation"><a data-toggle="tab" href="#behavior_comportamento_{{prefix}}">Comportamento</a></li>
+            <li role="presetation"><a data-toggle="tab" href="#behavior_conteudo_{{prefix}}">Conteúdo - Pinar</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="behavior_comportamento_{{prefix}}" class="tab-pane fade in active">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                            <input type="radio" name="comportamento" value="0" id="comportamento_1" checked="checked">
+                            <label for="comportamento_1">Mais recentes</label>
+                        </div> 
+                        <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                            <input type="radio" name="comportamento" value="1" id="comportamento_2">
+                            <label for="comportamento_2">Mais lidas</label>
+                        </div>
+                        <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                            <input type="radio" name="comportamento" value="2" id="comportamento_3">
+                            <label for="comportamento_3">Mais visitadas</label>
+                        </div>
+                        <div class="radio clip-radio radio-primary radio-sm radio-inline">
+                            <input type="radio" name="comportamento" value="3" id="comportamento_4">
+                            <label for="comportamento_4">Mais comentadas</label>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div id="behavior_conteudo_{{prefix}}" class="tab-pane fade">
+                <p>Escolher conteúdo para aparecer na área.</p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <select class="select2-style" id="{{prefix}}-tipo-conteudo"></select>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-sm btn-primary pull-right" data-servico='{{botoes.deletar_ZENDSTYLE.id}}' data-comportamento="modal" data-titulo="{{botoes.deletar_ZENDSTYLE.nome}}" data-metanome='deletar_ZENDSTYLE'>Escolher conteúdo</button>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-primary pull-right" data-servico='123'>Aplicar</button>
+</fieldset>
+
+<script type="text/javascript">
+    var data_modal = null;
+
+    $('.select2-style').select2({width: '100%'});
+
+    $('#{{prefix}}-tipo-conteudo').select2({
+        data: {{tipo_conteudo|raw}},
+        width: '100%'
+    }).change(function(e){
+        data_modal = { id_tib: $(this).val() };
+    });
+
+    
+</script>

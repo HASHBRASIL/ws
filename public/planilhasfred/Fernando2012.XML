@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!DOCTYPE QXDocument [
+<!ELEMENT QXDocument (Header, Page*)>
+<!ELEMENT Header (Title*, DocType*, Creator*, Author*, Date*, Copyright*, Orientation*)>
+<!ELEMENT DocType (#PCDATA)>
+<!ELEMENT Title (#PCDATA)>
+<!ELEMENT Creator (#PCDATA)>
+<!ELEMENT Author (#PCDATA)>
+<!ELEMENT Date (#PCDATA)>
+<!ELEMENT Copyright (#PCDATA)>
+<!ELEMENT Orientation (#PCDATA)>
+<!ELEMENT Page (Item*)>
+<!ELEMENT Item (#PCDATA)>
+<!ELEMENT Contents (#PCDATA)>
+<!ATTLIST Header Units CDATA "mm">
+<!ATTLIST Header Pagewidth CDATA "210">
+<!ATTLIST Header Pageheight CDATA "297">
+<!ATTLIST Header PaperName CDATA "A4">
+<!ATTLIST Header Layers CDATA "3">
+<!ATTLIST Item Type CDATA "Text">
+<!ATTLIST Item XPos CDATA "0">
+<!ATTLIST Item YPos CDATA "0">
+<!ATTLIST Item Font CDATA "Arial">
+<!ATTLIST Item Height CDATA "12">
+<!ATTLIST Item Color CDATA "Black">
+<!ATTLIST Item BackColor CDATA "White">
+<!ATTLIST Item Weight CDATA "Normal">
+<!ATTLIST Item Decoration CDATA "None">
+<!ATTLIST Item Width CDATA "1">
+<!ATTLIST Item Height CDATA "1">
+<!ATTLIST Item Shape CDATA "0">
+<!ATTLIST Item ControlID CDATA "">
+<!-- 0=rect, 1=ellipse, 2=hline,3=vline,4=roundrect-->
+<!ATTLIST Item Linewidth CDATA "1">
+<!ATTLIST Item FillType CDATA "0">
+<!ATTLIST Item Layer CDATA "0">
+<!ATTLIST Item Opacity CDATA "1">
+<!ATTLIST Item ImageFile CDATA "">
+<!ATTLIST Item Compression CDATA "None">
+<!ATTLIST Item Xscale CDATA "1.0">
+<!ATTLIST Item Yscale CDATA "1.0">
+<!ATTLIST Item Extra CDATA "">
+<!ATTLIST Page Number CDATA "1">
+]>
+<QXDocument>
+<Header Pagewidth="215,90" Pageheight="279,40" PaperName="A4" Units="mm">
+   <Title></Title>
+   <DocType></DocType>
+   <Creator>QRXDocumentFilter</Creator>
+   <Author></Author>
+   <Date>05/09/2016</Date>
+   <Copyright></Copyright>
+   <Orientation>Portrait</Orientation>
+</Header>
+<Page Number="1">
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="6,88" Linewidth="0,26" Shape="0" Width="202,94" Height="31,75" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="93,66" YPos="10,18" Height="16" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">LIVRO RAZÃO</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="23,67" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Nome</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="27,11" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">CNPJ</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="23,67" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">AGBR COMERCIO SERVIÇOS GRAFICOS IMPORTAÇÃO E EXPORTAÇÃO LTDA</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="27,11" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">11.416.247/0001-00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="33,99" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Folha</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="37,31" Linewidth="0,53" Shape="2" Width="192,88" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape2">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="23,67" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="27,11" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="33,99" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="33,99" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="15,12" YPos="30,55" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Data</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="24,38" YPos="30,55" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">01/01/2012 a 31/12/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="22,79" YPos="30,55" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="111,13" YPos="17,58" Height="8" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="38,89" Linewidth="0,26" Shape="0" Width="202,94" Height="24,61" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="46,21" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Conta :</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="23,32" YPos="46,21" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">1.1.4.4.04.0004</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="60,36" YPos="46,21" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Sequência :</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="73,59" YPos="46,21" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">8174</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="98,72" YPos="46,21" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Descrição :</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="111,16" YPos="46,21" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">FERNANDO ANTONIO SANTOS OLIVIERI</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="18,26" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Data</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="58,47" Linewidth="0,53" Shape="2" Width="12,44" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_data">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="28,57" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Lançamento</Item>
+<Item Type="Graphic" Layer="1" XPos="28,31" YPos="58,47" Linewidth="0,53" Shape="2" Width="13,23" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_documento">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="48,42" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Contra-Partida</Item>
+<Item Type="Graphic" Layer="1" XPos="42,86" YPos="58,47" Linewidth="0,53" Shape="2" Width="26,99" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_contra_partida">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="100,01" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Histórico</Item>
+<Item Type="Graphic" Layer="1" XPos="71,17" YPos="58,47" Linewidth="0,53" Shape="2" Width="66,41" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_historico">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="141,29" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Valor de Débito</Item>
+<Item Type="Graphic" Layer="1" XPos="138,91" YPos="58,47" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_debito">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="164,31" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Valor de Crédito</Item>
+<Item Type="Graphic" Layer="1" XPos="162,19" YPos="58,47" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_credito">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="193,68" YPos="54,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Saldo</Item>
+<Item Type="Graphic" Layer="1" XPos="185,47" YPos="58,47" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="shape_saldo">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="194,20" YPos="59,70" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">52.854,46</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="14,59" YPos="59,70" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">Anterior</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="59,70" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="63,50" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">13/01/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="37,57" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">731</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.075,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="194,20" YPos="63,93" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">53.929,46</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO MARYANNE DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="66,84" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">ASSUMÇÃO SAMPAIO DA COSTA</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="63,93" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="69,85" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="63,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="70,38" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">06/02/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1500</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">686,15</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="194,20" YPos="70,83" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">54.615,61</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF PAGAMENTO COM CH Nº 2055 PARTE-</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="73,74" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">MARYANNE DE A. SAMPAIO DA COSTA</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="70,83" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="69,85" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="70,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="77,26" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="77,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">13/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="77,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5854</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="77,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">776,80</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="77,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="194,20" YPos="77,73" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">55.392,41</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="77,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="77,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO MARYANNE DE A. </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="80,64" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">SAMPAIO DA COSTA LUCRO DIST EM 2012 </Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="77,73" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="69,85" YPos="77,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="77,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="84,14" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="84,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">16/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="84,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1322</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="84,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">10.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="84,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="194,20" YPos="84,63" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">65.392,41</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="84,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="84,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO MARYANNE DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="87,54" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">ASSUMÇÃO SAMPAIO DA COSTA</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="84,63" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="84,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="84,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="91,02" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="91,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">21/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="91,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1382</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="91,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.075,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="91,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="194,20" YPos="91,53" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">66.467,41</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="91,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="91,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO MARYANNE DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="94,44" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">ASSUMÇÃO SAMPAIO DA COSTA</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="91,53" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="91,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="91,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="97,90" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="98,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">23/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="98,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1401</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="98,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">16.200,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="98,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="194,20" YPos="98,43" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">82.667,41</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="98,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="98,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO MARYANNE DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="101,34" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">ASSUMÇÃO SAMPAIO DA COSTA</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="98,43" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="98,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="98,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="104,78" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="105,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">23/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="105,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1421</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="105,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">710,01</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="105,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="194,20" YPos="105,33" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">83.377,42</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="105,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="105,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF PGTO BOLETO VICPACK COMERCIO DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="108,24" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">EMBALAGENS-GRAFICA E EDITORA OLIVIERI</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="105,33" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="105,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="105,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="111,65" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="112,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">23/03/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="112,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5846</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="112,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">10.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="112,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="194,20" YPos="112,23" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">93.377,42</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="112,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="112,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO MARYANNE DE </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="115,14" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">ASSUMÇÃO SAMPAIO DA COSTA (CAIXA)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="112,23" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="112,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="112,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="118,53" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="119,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">05/04/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="119,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4972</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="119,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">21.500,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="119,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="119,13" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">114.877,42</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="119,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="119,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF PG DISTRIBUIÇAO DE LUCRO 2012 A </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="122,04" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">SOCIA MARYANNE DE A. SAMPAIO DA COSTA</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="119,13" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="119,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="119,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="125,41" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="126,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">03/05/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="126,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5848</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="126,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">21.500,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="126,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="126,03" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">136.377,42</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="126,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="126,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO MARYANNE DE A. </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="128,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">SAMPAIO DA COSTA (DINHEIRO)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="126,03" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="126,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="126,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="132,29" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="132,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">03/05/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="132,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5851</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="132,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">3.448,95</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="132,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="132,93" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">139.826,37</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="132,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="132,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF TRANSF A FERNANDO ANTONIO SANTOS </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="135,84" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">OLIVIERI VIAGEM INTERNACIONAL</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="132,93" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="69,85" YPos="132,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="132,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="139,17" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="139,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">03/05/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="139,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5851</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="139,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.061,21</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="139,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="139,83" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">140.887,58</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="139,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="139,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">FERNANDO ANTONIO SANTOS OLIVIERI PRESTAR </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="142,74" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">CONTAS DESPESA VIAGEM INTERNACIONAL</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="139,83" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="69,85" YPos="139,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="139,83" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="146,31" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="146,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">04/06/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="146,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5631</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="146,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">32.250,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="146,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="146,73" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">173.137,58</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="146,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="146,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO FERNANDO OLIVIERI </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="149,64" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">MES 06/2012</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="146,73" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="146,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="146,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="153,19" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="153,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">15/06/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="153,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">2698</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="153,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">10.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="153,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="153,63" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">183.137,58</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="153,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="153,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO MARYANNE DE A. </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="156,54" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">SAMPAIO DA COSTA (B.B)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="153,63" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="153,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="153,63" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="160,07" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="160,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">19/06/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="160,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5676</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="160,87" YPos="160,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="174,63" YPos="160,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">6.500,00</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="160,53" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">176.637,58</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="160,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4.2.1.0.01.0050</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="160,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF PAGAMENTO COM CUPOM FISCAL Nº 15573 </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="163,44" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">EBS COMERCIO DE ARTIGOS DE PESCA LTDA</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="160,53" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="63,76" YPos="160,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">7344)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="160,53" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="166,95" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="167,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">25/08/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="167,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5784</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="167,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="167,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="167,43" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">181.637,58</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="167,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="167,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO FERNANDO </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="170,34" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">ANTONIO SANTOS OLIVIERI (DINHEIRO)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="167,43" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="167,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="167,43" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="173,83" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="174,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">14/09/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="174,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">3367</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="160,87" YPos="174,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="176,74" YPos="174,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">700,00</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="174,33" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">180.937,58</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="174,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="174,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">RECEBIMENTO NF-e [TEXTO][NUMERO] GRAFICA E </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="177,24" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">EDITORA OLIVIERI</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="174,33" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="174,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="174,33" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="180,71" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="181,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">14/09/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="181,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5906</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="160,87" YPos="181,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="178,06" YPos="181,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">10,01</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="181,23" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">180.927,57</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="181,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="181,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF DEVOLUÇÃO DE EMPRESTIMO DA </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="184,14" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">GRAFICA E EDITORA OLIVIERI</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="181,23" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="181,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="181,23" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="187,59" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="188,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">07/11/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="188,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4280</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="150,02" YPos="188,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">30.000,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="188,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="188,13" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">210.927,57</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="188,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="188,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO FERNANDO </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="191,04" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">ANTONIO SANTOS OLIVIERI (SAQUE BB)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="188,13" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="188,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">24)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="188,13" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="194,47" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="195,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">07/11/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="195,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">5787</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="195,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">6.450,00</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="195,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="195,03" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">217.377,57</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="195,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.1.01.0001</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="195,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF RETIRADA DE SOCIO FERNANDO </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="197,94" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">ANTONIO SANTOS OLIVIERI (DINHEIRO)</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="195,03" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="66,41" YPos="195,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">17)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="195,03" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="201,35" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="201,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">28/11/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="201,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4350</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="151,34" YPos="201,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4.448,67</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="201,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="201,93" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">221.826,24</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="201,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0003</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="201,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF DEBITO EM CONTA CONF. BRADESCO </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="204,84" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">FINANCIAMENTO SA  PARCELA 1/24- FERNANDO </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="207,75" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">ANTONIO SANTOS OLIVIERI</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="201,93" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="63,76" YPos="201,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4022)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="201,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="211,14" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="211,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">03/12/2012</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="36,25" YPos="211,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4510</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="153,46" YPos="211,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">626,52</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="184,15" YPos="211,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" "></Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="192,88" YPos="211,73" Height="7" Color="#000000" Weight="Bold" Decoration="none" ControlID =" ">222.452,76</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="42,90" YPos="211,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">1.1.1.2.01.0003</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="211,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">VLR REF DEBITO EM CONTA CONF. IPVA 2012 </Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="71,21" YPos="214,64" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">PLACA JDU 8500- FERNANDO ANTONIO OLIVEIRE</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="205,58" YPos="211,73" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">D</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="63,76" YPos="211,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">4022)</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="61,42" YPos="211,73" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">(</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="218,02" Linewidth="0,26" Shape="0" Width="202,94" Height="8,47" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="137,85" YPos="219,42" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">:</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="148,70" YPos="219,42" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">176.808,31</Item>
+<Item Type="Text" Layer="0" Font="Arial" XPos="174,63" YPos="219,42" Height="7" Color="#080000" Weight="Bold" Decoration="none" ControlID =" ">7.210,01</Item>
+<Item Type="Graphic" Layer="1" XPos="138,91" YPos="218,02" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape12">Graphic item</Item>
+<Item Type="Graphic" Layer="1" XPos="162,19" YPos="218,02" Linewidth="0,53" Shape="2" Width="21,96" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape13">Graphic item</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="224,90" Linewidth="0,53" Shape="2" Width="192,88" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape10">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="131,00" YPos="219,42" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">Total</Item>
+<Item Type="Graphic" Layer="2" XPos="12,96" YPos="258,50" Linewidth="0,26" Shape="0" Width="202,94" Height="3,97" Color="#000000" BackColor="#FFFFFF" FillType="Fill" ControlID="">Graphic item</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="182,03" YPos="258,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">IRACILENE / 14:40:51</Item>
+<Item Type="Text" Layer="0" Font="Tahoma" XPos="14,59" YPos="258,93" Height="7" Color="#080000" Weight="normal" Decoration="none" ControlID =" ">FREDERICO JOSE N. DA SILVA DE MEDEIROS</Item>
+<Item Type="Graphic" Layer="1" XPos="14,55" YPos="258,50" Linewidth="0,53" Shape="2" Width="192,88" Height="1,06" Color="#000000" BackColor="#FFFFFF" FillType="Outline" ControlID="QRShape5">Graphic item</Item>
+</Page>
+</QXDocument>

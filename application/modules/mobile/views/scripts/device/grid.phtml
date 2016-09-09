@@ -1,0 +1,113 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+<div class="row-fluid">
+     <div class="span12">
+	      <h3 class="page-title">
+	       Devices autorizados
+	        <small> no sistema</small>
+	      </h3>
+     </div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box grey">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-wrench"></i>Devices Autorizados</div>
+				<div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+				<div class="actions">
+					<a class="btn " href="<?php echo $this->baseUrl("/mobile/device/form") ?>"><i class="icon-pencil"></i> Novo </a>
+				</div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<table class="table-bordered table-striped table-condensed flip-content" id="deviceTable">
+						<thead class="flip-content">
+							<tr>
+								<th class="">Código</th>
+					            <th class="">Nome</th>
+					            <th class="">Marca</th>
+					            <th class="">Modelo</th>
+					            <th class="">UUID</th>
+					            <th class="">MAC</th>
+					            <th style="width: 45px;" class="hidden-480 action">Ação</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<?php if (count($this->deviceList) > 0):?>
+				        <?php foreach ($this->deviceList as $device):?>
+				            <tr class="odd gradeX">
+				                <td class="" style="width:30px"><?php echo $device->id_device?></td>
+				                <td><?php echo $device->nome;?></td>
+				                <td class=""><?php echo $device->marca;?></td>
+				                <td><?php echo $device->modelo;?></td>
+				                <td><?php echo $device->uuid;?></td>
+				                <td><?php echo $device->mac;?></td>
+				                <td class="acoes">
+				                    <a href="<?php echo $this->baseUrl("/mobile/device/form/id_device/{$device->id_device}")?>">
+				                        <img title="Editar" data-tooltip src="<?php echo $this->baseUrl('images/edit.png')?>"/>
+				                    </a>
+				                    <a class="deleteMoldal" name = "<?php echo $device->nome;?>" value = "<?php echo $device->id_device?>" href="#">
+				                        <img title="Excluir" data-tooltip src="<?php echo $this->baseUrl('images/delete.png')?>"/>
+				                    </a>
+				                </td>
+				            </tr>
+				        <?php endforeach;?>
+					<?php endif;?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir este device: <span id ="valueDelete"></span></p>
+</div>
+<script type="text/javascript">
+
+ $('#deviceTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+</script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/mobile/device.grid.js')?>"></script>

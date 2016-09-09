@@ -1,0 +1,18 @@
+<div class="control-group">
+  <label class=" control-label"><?php echo $this->translate('Imagem dos produtos')?></label>
+</div>
+<?php foreach ($this->arquivoList as $arquivo):?>
+    <div class="span2 image_<?php echo $arquivo->id_arquivo ?>">
+        <div class="item">
+            <a class="fancybox-button" data-rel="fancybox-button" title="<?php echo $arquivo->nome?>" href="javascript:;">
+                <div class="zoom">
+                    <img src="<?php echo $this->baseUrl('/uploads/item/'.$arquivo->id_item.'/'.$arquivo->nome_md5)?>" class="img-polaroid" style="height: 100px;" alt="<?php echo $arquivo->nome?>" />
+                    <div class="zoom-icon"></div>
+                </div>
+            </a>
+            <div class="details">
+                <a href="<?php echo $this->baseUrl('material/arquivo/delete/id/'.$arquivo->id_arquivo)?>" value="<?php echo $arquivo->id_arquivo?>" class="icon delete_imagem"><i class="icon-remove"></i> Excluir</a>
+            </div>
+        </div>
+    </div>
+<?php endforeach;?>

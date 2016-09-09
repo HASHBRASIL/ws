@@ -1,0 +1,67 @@
+// GED
+.descricao                                      {
+    p                                           { color: @cor-preto; font-family: @arimo; font-size: @font-size; padding: 20px;}
+}
+
+// Campo upload arquivo
+
+.campo-arquivo                                  { background-color: #ffffff; border: 1px solid #ebedf0; padding: 40px; margin-bottom: 30px; position: relative; text-align: center;
+    h2                                          { color: #dcdee0; font-family: @arimo; font-weight: bold; font-size: 45px;}
+    i.fa-upload                                 { color: #dcdee0; font-size: 11em; }
+    .dz-details                                 {
+        &.fa.fa-file-word-o                     {
+            &:before                            { content: "\f1c2"; display: block; padding: 0; position: absolute; font-size: 8em; }
+        }
+        &.fa.fa-file-pdf-o                      {
+            &:before                            { content: "\f1c1"; display: block; padding: 0; position: absolute; font-size: 8em; }
+        }
+        &.fa.fa-file-excel-o                    {
+            &:before                            { content: "\f1c3"; display: block; padding: 0; position: absolute; font-size: 8em; }
+        }
+        &.fa.fa-file-image-o                    {
+            &:before                            { content: "\f1c5"; display: block; padding: 0; position: absolute; font-size: 8em; }
+        }
+        &.fa.fa-video-camera                    {
+            &:before                            { content: "\f03d"; display: block; padding: 0; position: absolute; font-size: 8em; }
+        }
+        &.fa.fa-file-audio-o                    {
+            &:before                            { content: "\f1c7"; display: block; padding: 0; position: absolute; font-size: 8em; }
+        }
+    }
+}
+
+// Título lista
+
+.titulo-lista                                   { clear: both; padding-left: 35px; position: relative;
+    &:before                                    { content: ''; border-top: 1px solid #e9e9eb; display: block; position: absolute; left: 0; right: 0; top: 50%; z-index: 1; }
+    &:after                                     { content: ''; border-bottom: 1px solid #ffffff; display: block; position: absolute; left: 0; right: 0; top: 55%; z-index: 1; }
+    h4                                          { background: url(../img/bg-noise.jpg); display: inline-block; color: #1f2327; font-family: @open-sans-light; font-size: 18px; padding: 0 5px; position: relative; z-index: 2; }
+}
+
+// Tabela
+
+.lista-tabela                                   { margin-top: 30px;
+    table                                       { width: 100%;
+        tr                                      { border-top: 1px solid #eaecef; border-bottom: 1px solid #eaecef;
+            td                                  {
+                span                            { font-family: @arimo; font-size: 13px; }
+                .nome-arquivo                   { color: #41454b; margin-right: 10px; }
+                .status-arquivo                 { color: #9299a1; }
+                .tipo-arquivo                   { color: #9299a1; }
+                .progress                       { border-radius: 0px; box-shadow: inset 0px 2px 0px 0px rgba(0,0,0,.1); -webkit-box-shadow: inset 0px 2px 0px 0px rgba(0,0,0,.1); height: 12px; margin-bottom: 0px; margin-top: 2px;
+                    .progress-bar               { box-shadow: inset 0px 2px 0px 0px rgba(0,0,0,.15); -webkit-box-shadow: inset 0px 2px 0px 0px rgba(0,0,0,.15); }
+                    .progress-bar-success       { background-color: #7eaede; }
+                    .progress-bar-danger        { background-color: #cb5643; }
+                }
+                .btn-remover-arquivo            {
+                    i                           { color: #df5024; font-size: 20px; }
+                }
+                &:first-child                   { border-right: 1px solid #eaecef; padding: 10px 20px 15px; }
+                &:last-child                    { text-align: center; padding: 0 4px; }
+            }
+            &:nth-child(even)                   { background-color: #fbfbfc; }
+            &:nth-child(odd)                    { background-color: #ffffff; }
+        }
+    }
+}
+

@@ -1,0 +1,20 @@
+<div class="row-fluid">
+	<table class="table table-striped table-hover table-bordered grid-duplicado">
+		<thead>
+			<tr>
+				<th>Data</th>
+				<th>Hora</th>
+				<th style="width: 50px">Ação</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($this->pontoList as $ponto):?>
+			    <tr>
+			        <td style="padding-top: 16px"><?php echo $this->date($ponto->data)?></td>
+			        <td style="padding-top: 16px"><?php echo $ponto->hora?></td>
+			        <td><a href="#" class="btn icn-only green btn-duplicado" data-id="<?php echo $ponto->id_rh_dados_ponto?>" title="Aprovar" ><i class="halflings-icon ok white"></i></a></td>
+			    </tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+</div>

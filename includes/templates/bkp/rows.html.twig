@@ -1,0 +1,24 @@
+<tr style="display:none">
+    {% for field in header %}
+        <td data-field="{{ field.campo }}"></td>
+    {% endfor %}
+    <td class="tool-cell">
+        {% include 'list-action.html.twig' %}
+    </td>
+</tr>
+
+{% for row in data %}
+    <tr data-id="{{ row.id }}">
+        {% for field in header %}
+            <td data-field="{{ field.campo }}">
+                {{ row[field.campo] }}
+            </td>
+        {% endfor %}
+        <td class="tool-cell">
+            {% include 'list-action.html.twig' %}
+        </td>
+    </tr>
+{% endfor %}
+
+
+

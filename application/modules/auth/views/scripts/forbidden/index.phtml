@@ -1,0 +1,35 @@
+<?php if (!$this->xmlHttpRequest):?>
+	<link href=<?php echo $this->baseUrl("assets/plugins/bootstrap/css/bootstrap.min.css")?> rel="stylesheet" type="text/css"/>
+	<link href=<?php echo $this->baseUrl("assets/plugins/font-awesome/css/font-awesome.min.css")?> rel="stylesheet" type="text/css"/>
+	<link href=<?php echo $this->baseUrl("assets/css/style.css")?> rel="stylesheet" type="text/css"/>
+	<link href=<?php echo $this->baseUrl("assets/css/style-responsive.css")?> rel="stylesheet" type="text/css"/>
+<?php endif;?>
+<link href="<?php echo $this->baseUrl("assets/css/pages/error.css")?>" rel="stylesheet" type="text/css"/>
+	<!-- END PAGE LEVEL STYLES -->
+	<link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-500-full-page">
+	<div class="row-fluid">
+		<div class="span12 page-500">
+			<div class=" number">
+				então <?php echo $this->user ? $this->user:"amigo";?>,
+			</div>
+			<div class=" details">
+				<h3>eu não posso continuar com isto!</h3>
+				<p>
+					Posso estar errado!<br />
+					Mas não encontrei as autorizações necessárias para o seu acesso.<br />
+					Contate o administrador do sistema e reporte minha mensagem com o código '<?php echo $this->error;?>'.<br /> Desculpe, mas não posso continuar desta maneira...<br /><br />
+					
+				</p>
+				<p>
+					<input type="button" value="Voltar" onclick="window.history.back()">
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+<!-- END BODY -->
+</html>

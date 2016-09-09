@@ -1,0 +1,111 @@
+<style>
+.classUl
+{
+    list-style-type: none;
+	font-size: 16px;
+	padding-bottom: 15px !important;
+}
+.classA
+{
+    padding-left: 0px !important;
+}
+
+
+
+</style>
+
+<link href="<?php echo $this->baseUrl("scripts/lib/sitemapstyler/sitemapstyler.css")?>" rel="stylesheet" type="text/css" media="screen" />
+
+<div class="row-fluid">
+     <div class="span12">
+	      <h3 class="page-title">
+	       Menus
+	        <small> do sistema</small>
+	      </h3>
+     </div>
+</div>
+
+<div class="portlet-body">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="portlet box grey">
+				<div class="portlet-title">
+					<div class="caption"><i class="icon-reorder"></i>Menu</div>
+					<div class="tools">
+						<a href="javascript:;" class="collapse"></a>
+					</div>
+					<div class="actions">
+			                <a class="btn red" href="<?php echo $this->baseUrl("auth/menu/form") ?>"><i class="icon-pencil"></i> Novo Menu Raiz </a>
+					</div>
+				</div>
+				<div class="portlet-body" style="display: block;">
+				<div class="btn-group">
+					<?php if (count($this->menuListPai)>0):?>
+					<ul class = "classUl" id="sitemap">
+					<!--
+						Refatorar código afim de tornar níveis de menu infinitos, embora o menu permita somente 4 níveis
+					 -->
+					<?php foreach ($this->menuListPai as $menuPai):?>
+						<li>
+							<a>
+								<?php echo $menuPai->name_menu?>
+							</a>
+							<a class="classA" href="<?php echo $this->baseUrl("auth/menu/form/id_au_parent_menu/{$menuPai->id_au_menu}");?>"><img title="Adcionar Submenu" src="<?php echo $this->baseUrl("/images/tab-add-icon.png");?>"></a>
+							<a class="classA" href="<?php echo $this->baseUrl("auth/menu/form/id_au_menu/{$menuPai->id_au_menu}");?>"><img title="Editar" src="<?php echo $this->baseUrl("/images/tab-edit-icon.png");?>"></a>
+							<a class="deleteMoldal classA" value = "<?php echo $menuPai->id_au_menu ?>" name="<?php echo $menuPai->name_menu?>"  href="#"><img title="Excluir" src="<?php echo $this->baseUrl("/images/tab-delete-icon.png");?>"></a>
+							<?php if (count($menuPai->getListMenu())>0):?>
+							<ul class = "classUl">
+								<?php foreach ($menuPai->getListMenu()as $menuFilho):?>
+								<li>
+									<a>
+									<?php echo $menuFilho->name_menu;?>
+									</a>
+									<a class="classA" href="<?php echo $this->baseUrl("auth/menu/form/id_au_parent_menu/{$menuFilho->id_au_menu}");?>"><img title="Adcionar Submenu"" src="<?php echo $this->baseUrl("/images/tab-add-icon.png");?>"></a>
+									<a class="classA" href="<?php echo $this->baseUrl("auth/menu/form/id_au_menu/{$menuFilho->id_au_menu}");?>"><img title="Editar" src="<?php echo $this->baseUrl("/images/tab-edit-icon.png");?>"></a>
+									<a class="deleteMoldal classA" value = "<?php echo $menuFilho->id_au_menu ?>" name="<?php echo $menuFilho->name_menu?>"  href="#"><img title="Excluir" src="<?php echo $this->baseUrl("/images/tab-delete-icon.png");?>"></a>
+									<?php if (count($menuFilho->getListMenu())>0):?>
+									<ul class = "classUl">
+											<?php foreach ($menuFilho->getListMenu()as $menuNeto):?>
+												<li>
+													<a>
+														<?php echo $menuNeto->name_menu;?>
+													</a>
+													<a class="classA" href="<?php echo $this->baseUrl("auth/menu/form/id_au_parent_menu/{$menuNeto->id_au_menu}");?>"><img title="Adcionar Submenu"" src="<?php echo $this->baseUrl("/images/tab-add-icon.png");?>"></a>
+													<a class="classA" href="<?php echo $this->baseUrl("auth/menu/form/id_au_menu/{$menuNeto->id_au_menu}");?>"><img title="Editar" src="<?php echo $this->baseUrl("/images/tab-edit-icon.png");?>"></a>
+													<a class="deleteMoldal classA" value = "<?php echo $menuNeto->id_au_menu ?>" name="<?php echo $menuNeto->name_menu?>"  href="#"><img title="Excluir" src="<?php echo $this->baseUrl("/images/tab-delete-icon.png");?>"></a>
+													<?php if (count($menuNeto->getListMenu())>0):?>
+														<ul class = "classUl">
+																<?php foreach ($menuNeto->getListMenu()as $menuBisneto):?>
+																	<li>
+																		<a>
+																			<?php echo $menuBisneto->name_menu;?>
+																		</a>
+																		<a class="classA" href="<?php echo $this->baseUrl("auth/menu/form/id_au_menu/{$menuBisneto->id_au_menu}");?>"><img title="Editar" src="<?php echo $this->baseUrl("/images/tab-edit-icon.png");?>"></a>
+																		<a class="deleteMoldal classA" value = "<?php echo $menuBisneto->id_au_menu ?>" name="<?php echo $menuBisneto->name_menu?>"  href="#"><img title="Excluir" src="<?php echo $this->baseUrl("/images/tab-delete-icon.png");?>"></a>
+																	</li>
+																<?php endforeach;?>
+														</ul>
+														<?php endif;?>
+												</li>
+											<?php endforeach;?>
+									</ul>
+									<?php endif;?>
+								</li>
+								<?php endforeach;?>
+							</ul>
+							<?php endif;?>
+						</li>
+				<?php endforeach;?>
+					</ul>
+				<?php endif;?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir o menu: <span id ="valueDelete"></span></p>
+</div>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/lib/sitemapstyler/sitemapstyler.js')?>"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl('scripts/auth/menu.grid.js')?>"></script>

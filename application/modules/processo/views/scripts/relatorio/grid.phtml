@@ -1,0 +1,107 @@
+<style>
+<!--
+.dataTables_filter{
+	float: right;
+}
+
+.dataTables_paginate{
+	margin: 0px;
+	float: right;
+}
+
+-->
+</style>
+<?php $somaProcesso = 0;?>
+<div class="row-fluid" style="margin-top: 20px;">
+	<div class="span12">
+		<div class="portlet box grey">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-wrench"></i>Relatório de processo</div>
+				<div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+			</div>
+			<div class="portlet-body flip-scroll">
+				<div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+					<table class="table-bordered table-striped table-condensed flip-content" id="perfisTable">
+						<thead class="flip-content">
+							<tr>
+								<th>Código</th>
+					            <th>Entidade</th>
+					            <th>Status</th>
+					            <th>Descrição</th>
+					            <th>Quantidade</th>
+					            <th>Valor unitário</th>
+					            <th>Valor total</th>
+					            <th>data de emissão</th>
+					            <th>workspace</th>
+					            <th style="width: 45px;" class=" action">Ação</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<?php if (count($this->processoList) > 0):?>
+				        <?php foreach ($this->processoList as $processo):?>
+				            <tr class="odd gradeX">
+				                <td style="width:30px"><?php echo $processo['pro_codigo']?></td>
+				                <td><?php echo $processo['cliente']?></td>
+				                <td><?php echo $processo['sta_descricao']?></td>
+				                <td><?php echo $processo['pro_desc_produto']?></td>
+				                <td style="text-align: center"><?php echo $processo['pro_quantidade']?></td>
+				                <td style="text-align: right;"><?php echo $this->formatDecimal($processo['pro_vlr_unt'])?></td>
+				                <td style="text-align: right;"><?php echo $this->formatDecimal($processo['pro_vlr_pedido'])?></td>
+				                <td><?php echo $processo['pro_data_inc']?></td>
+				                <td><?php echo $processo['name_workspace']?></td>
+				                <td class="acoes" style="text-align: center;">
+				                    <a href="<?php echo $this->baseUrl("processo/processo/form/pro_id/{$processo['pro_id']}")?>">
+				                        <img title="Editar" data-tooltip src="<?php echo $this->baseUrl('images/edit.png')?>"/>
+				                    </a>
+				                </td>
+				            </tr>
+				            <?php $somaProcesso += $processo['pro_vlr_pedido']?>
+				        <?php endforeach;?>
+					<?php endif;?>
+						</tbody>
+					</table>
+					<h3 style="text-align: right;">Total dos pedidos <?php echo $this->real($somaProcesso)?></h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="dialog_delete" style="display: none;">
+	<p>Deseja realmente excluir o vínculo do usuário: <span id ="valueDelete"></span></p>
+</div>
+<script type="text/javascript">
+
+ $('#perfisTable').dataTable({
+     "aLengthMenu": [
+         [30, 50, 100, -1],
+         [30, 50, 100, "All"] // change per page values here
+     ],
+     // set the initial value
+     "iDisplayLength": 30,
+     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+     "sPaginationType": "bootstrap",
+     "oLanguage": {
+         "sProcessing": "Aguarde enquanto os dados são carregados ...",
+         "sLengthMenu": "Mostrar _MENU_ registros",
+         "sZeroRecords": "Não foram encontrados resultados",
+         "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+         "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+         "sInfoFiltered": "",
+         "sSearch": "Procurar",
+         "oPaginate": {
+            "sFirst":    "Primeiro",
+            "sPrevious": "Anterior",
+            "sNext":     "Próximo",
+            "sLast":     "Último"
+         }
+      },
+     "aoColumnDefs": [{
+             'bSortable': true,
+             'aTargets': [0]
+         }
+     ]
+ });
+</script>
