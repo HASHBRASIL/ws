@@ -39,8 +39,12 @@
             {{ chave }}{{ campo ? '="%s"' | format(campo) | raw }}"
         {% endif %}
     {% endfor %}
+        {#{% for chave,campo in extras %}#}
+            {#{{ chave }}{{ campo ? '="%s"' | format(campo) }}"#}
+        {#{% endfor %}#}
+
         >
-            <option value=""></option>
+            <option value=''></option>
             {% for chave,campo in options %}
                 <option value='{{ chave }}' {% if chave == value %} selected {% endif %}>{{ campo }}</option>
             {% endfor %}

@@ -353,6 +353,75 @@ TEXT;
         $this->view->file = 'termos.html.twig';
     }
 
+    /**
+     * Action usada pela primeira versão do instalador.
+     *
+     * Ele recebe um id pessoa para consultar os dados, um par de senhas e a
+     * confirmação por parte do usuário sobre os termos de serviço e compromisso.
+     *
+     * @return type
+     */
+    public function index2Action()
+    {
+        $idPessoa = $this->_request->getParam('codigo');
+        $this->view->data = [
+            'codigo' => $idPessoa,
+        ];
+
+        if (empty($idPessoa)
+            || (!(new Legacy_Model_Bo_Pessoa())->pessoaExiste($idPessoa))
+        ) {
+            $this->view->file = 'invalido.html.twig';
+            return;
+        }
+
+        if ($this->_request->isPost()){
+
+            if ($this->getParam('servico') && $this->getParam('privacidade')) {
+
+                $senha = $this->getParam('senha');
+                $senha2 = $this->getParam('senha2');
+
+                if (($senha != $senha2) || empty($senha)) {
+                    $this->_addMessageError('As senhas informadas não conferem.');
+                    $this->view->file = 'termos.html.twig';
+                    return;
+                }
+                // -- Gerando e armazenando a nova senha
+                $usuarioBo = new Auth_Model_Bo_Usuario();
+                $dados = [];
+                list(, $dados['salt'], $dados['password_encrypted'])
+                    = $usuarioBo->criaPassword($senha);
+                $usuarioBo->update($dados, $idPessoa);
+
+                $filedir = Zend_Registry::getInstance()
+                    ->get('config')
+                    ->get('filedir');
+
+                $url = $filedir->remoto . $this->view->url([
+                    'module'     => 'content',
+                    'controller' => 'robo',
+                    'action'     => 'configura-workspace',
+                ]);
+
+                // -- Chamando o robo de instalação de produtos
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+
+                $res = curl_exec($ch);
+                curl_close($ch);
+
+                $this->view->file = 'configurando.html.twig';
+                return;
+            }
+            $this->_addMessageError('aceitar_antes_de_continuar');
+        }
+
+        $this->view->file = 'termos.html.twig';
+    }
+
     public function dashboardAction() {
         $BoGrupo = new Config_Model_Bo_Grupo();
         $times = $BoGrupo->getTimesImportados();

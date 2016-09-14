@@ -15,21 +15,21 @@
                 {{ forms.input('id', view.vo.cec_id, 'hidden') }}
                 <div class="row">
                     <div class="col-md-12">
-                        <fieldset>
-                            <legend>
-                                {{ 'Formulário' | zftranslate }}
-                            </legend>
+                        <fieldset class="form-custo">
+                            {# <legend>
+                                {{ 'Centro de custo' | zftranslate }}
+                            </legend> #}
                             <div class="row">
 
                                 {{ row.formgroup('Centro de Custo Pai', forms.select('cec_id_pai', view.vo.cec_id_pai, view.comboCentroPai, 'select2-skin', {'required' : ''}), 'col-md-4') }}
                                 {{ row.formgroup('Código', forms.input('cec_codigo', view.vo.cec_codigo, 'text', '', {'required' : ''}), 'col-md-4') }}
+                                {{ row.formgroup('Ocultar Registro', forms.checkbox('cec_oculta', view.vo.cec_oculta, {1: 'Sim'}), 'col-md-2') }}
+                                {{ row.formgroup('Operacional', forms.checkbox('cec_operacional', view.vo.cec_operacional, {1: 'Sim'}), 'col-md-2') }}
+                            </div>
+                            <div class="row descricao">
+                                {{ row.formgroup('Descrição*', forms.textarea('cec_descricao', view.vo.cec_descricao), 'col-md-12') }}
                             </div>
                             <div class="row">
-                                {{ row.formgroup('Descrição*', forms.textarea('cec_descricao', view.vo.cec_descricao), 'col-md-4') }}
-                            </div>
-                            <div class="row">
-                                {{ row.formgroup('Ocultar Registro', forms.checkbox('cec_oculta', view.vo.cec_oculta, {1: 'Sim'}), 'col-md-4') }}
-                                {{ row.formgroup('Operacional', forms.checkbox('cec_operacional', view.vo.cec_operacional, {1: 'Sim'}), 'col-md-4') }}
 
                             </div>
 

@@ -5,7 +5,7 @@
 * @Last Modified time: 2016-02-10 11:57:31
 */
 
-.area-sidebar                                   { background-color: @cor-branco; z-index: 2; height: 100vh; }
+.area-sidebar                                   { background-color: @cor-branco; z-index: 2; }
 .area-usuario                                   { width: @sidebar-width; height: 135px; background: url(../img/logo-bg-cinza.png) no-repeat; background-size: cover; position: relative;
     figure                                      { .gradient(linear; fade(@cor-preto, 0%) 55%, fade(@cor-preto, 100%) 100%; 180deg); height: 100%;
         img                                     { .rounded(90px); width: 60px; height: 60px; border: 3px fade(@cor-branco, 50%) solid; margin: 10px 0 0 10px; }
@@ -13,18 +13,25 @@
             i.fa                                { margin-right: 5px; color: @cor-verde; }
         }
     }
-    .btn-show-user-menu                         { font-size: 2em; color: @cor-branco; position: absolute; right: 10px; top: 10px; width: 15px; padding-right: 5px;
-        i.fa                                    { float: right; .text-shadow (0px 0px 5px rgba(0, 0, 0, .9));}
+    .btn-show-user-menu                         { font-size: 2em; color: @cor-branco; position: absolute; right: 10px; bottom: 5px; width: 15px; padding-right: 5px;
+        i.fa                                    { float: right; .text-shadow (0px 0px 3px rgba(0, 0, 0, .9));}
     }
 }
 
 .container-scrollable-areas                     { font-family: @openSans;
     .area-nav-times                             { background-color: @cor-branco; color: lighten(@cor-menu-times, 20%); padding: 0;
-        nav                                     { border-bottom: 1px solid lighten(@cor-preto, 89%); margin: 0 15px; padding: 0 0 5px;
+        nav                                     { border-bottom: 1px solid lighten(@cor-preto, 89%); margin: 0 15px; padding: 0 0 5px; position: relative;
             ul.lista-times,
             ul.lista-grupos                     { overflow: hidden; .transition(); padding: 0 0 10px 0;
-                span                            { color: lighten(@cor-preto, 35%); display: block; font-size: 1em; font-weight: bold; padding: 10px 0; border-top: 1px solid lighten(@cor-preto, 89%); margin: 10px 0 0 0;}
-                &.opened                        { height: initial; .transition(); }
+                span                            { color: lighten(@cor-preto, 35%); display: block; font-size: 1em; font-weight: bold; padding: 10px; border-bottom: 1px solid lighten(@cor-preto, 95%);}
+                &.opened                        { background-color: @cor-branco; position: absolute; height: initial; .transition(); z-index: 999; width: 270px; max-height: 300px; margin: 5px 0; overflow-y: scroll;
+                                                  .box-shadow(1px 0px 5px 2px lighten(@cor-preto, 85%));
+                    li                          {
+                        a                       { border-bottom: 1px solid lighten(@cor-preto, 95%); padding: 10px;}
+                    }
+                }
+                &.opened::-webkit-scrollbar     { background-color: transparent; width: 7px;}
+                &.opened::-webkit-scrollbar-thumb { background-color: lighten(@cor-preto, 75%); .rounded(5px);}
                 &.closed                        { height: 0; .transition(); }
             }
             header                              {
@@ -52,8 +59,8 @@
                 }
             }
             ul                                  { margin: 0 0 0 0; padding: 0;
-                li                              { list-style-type: none; margin-bottom: 3px; cursor: pointer; padding: 0; border-top: 0px;
-                    a                           { text-decoration: none; padding: 5px; display: block; font-weight: 500;
+                li                              { list-style-type: none; cursor: pointer; padding: 0; border-top: 0px;
+                    a                           { text-decoration: none; padding: 5px; display: block; font-weight: 500; border-bottom: 1px solid transparent;
                                                   color: lighten(@cor-preto, 25%); .transition();
                         &:hover                 { background-color: lighten(@cor-preto, 97%); text-decoration: none; color: lighten(@cor-preto, 5%); .transition(); }
                         &.active                { text-decoration: none; color: lighten(@cor-preto, 47%); }
@@ -80,7 +87,7 @@
         }
         nav.menu-servicos-modulo                { padding: 0 0 15px;
             >ul                                 { margin: 0; padding: 0;
-                li                              { list-style-type: none; margin: 0; border-bottom: 0px; padding: 7px 10px; position: relative;
+                li                              { list-style-type: none; margin: 0; border-bottom: 0px; padding: 7px 15px; position: relative;
                     &:nth-last-child(1)         { margin-bottom: 0; }
                     a                           { color: lighten(@cor-preto, 35%); font-weight: bold; text-decoration: none; display: block; font-size: 1.05em; font-weight: 500;
                                                   padding: 3px 0px 3px 0px; .border-radius(4px, 4px, 0, 0); .transition();
@@ -123,7 +130,8 @@
                         ul                      {
                             li                  {
                                 a               { display: inline-block; padding: 5px 5px 0px 0;}
-                                &:hover         { background-color: transparent;}
+                                &:hover         { background-color: transparent; .box-shadow(none);}
+                                &:hover:after   { display: none;}
                             }
                         }
                     }

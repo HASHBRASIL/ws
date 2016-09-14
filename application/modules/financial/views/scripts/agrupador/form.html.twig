@@ -16,24 +16,25 @@
                 <div class="row">
                     <div class="col-md-12">
                         <fieldset>
-                            <legend>
-                                {{ 'Formulário' | zftranslate }}
-                            </legend>
+                            {# <legend>
+                                {{ 'Importar' | zftranslate }}
+                            </legend> #}
                             <div class="row">
                                 {% set dataselect = { 'data':
                                     view.autoCompletePessoa.metadata | default([]) | merge({'servico': view.autoCompletePessoa.id}) }
                                 %}
                                 {% set selectPessoa = forms.select('id_pessoa_cliente',  view.vo.id_pessoa_cliente, view.comboPessoaCliente, 'select2-skin', dataselect  ) %}
-                                {{ row.formgroup('Entidade', selectPessoa, 'col-md-4') }}
 
-                                {{ row.formgroup('Moeda', forms.select('moe_id', view.vo.moe_id | default(1) , view.comboMoedas, 'select2-skin'), 'col-md-4') }}
+                                {{ row.formgroup('Entidade', selectPessoa, 'col-md-8') }}
 
-                                {{ row.formgroup('Valor', forms.input('fin_valor', view.vo.fin_valor, 'text', 'decimal'), 'col-md-3') }}
+                                {{ row.formgroup('Moeda', forms.select('moe_id', view.vo.moe_id | default(1) , view.comboMoedas, 'select2-skin'), 'col-md-2') }}
+
+                                {{ row.formgroup('Valor', forms.input('fin_valor', view.vo.fin_valor, 'text', 'decimal'), 'col-md-2') }}
 
                             </div>
-                            <div class="row">
+                            <div class="row descricao">
                                 {#{{ row.formgroup('Data', forms.input('datasaldo', '', 'text', 'datepicker-skin',  {'data-mask' : '99/99/9999'}), 'col-md-3') }}#}
-                                {{ row.formgroup('Descrição', forms.textarea('fin_descricao', view.vo.fin_descricao), 'col-md-4') }}
+                                {{ row.formgroup('Descrição', forms.textarea('fin_descricao', view.vo.fin_descricao), 'col-md-8') }}
 
                                 {{ row.formgroup('Observação', forms.textarea('fin_observacao',  view.vo.fin_observacao), 'col-md-4') }}
 

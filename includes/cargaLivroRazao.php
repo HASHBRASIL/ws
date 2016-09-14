@@ -2,20 +2,11 @@
 
     $qry = $dbh->prepare("insert into ing_dexion_livrorazao (id,contade,datalivro,lancamento,valordebito,valorcredito,saldo,contapara,texto1,debcred,segundoid) values (:id,:contade,:datalanc,:lancamento,:valordebito,:valorcredito,:saldo,:contapara,:texto1,:debcred,:segundoid)");
 
-//    for($cnt=1;$cnt<=   12;$cnt++){
+    for($cnt=1;$cnt<=   12;$cnt++){
         echo "Carregando Mês " . $cnt;
         $num = str_pad($cnt,2,'0',STR_PAD_LEFT);
-        $handle = fopen("/Users/solbisio/dev/hash-ws-php/public/planilhasfred/Livro Razão - 01012013 a 31122013.fernando2013.XML", "r");
-
-//        $teste = file_get_contents("/Users/solbisio/dev/hash-ws-php/public/planilhasfred/Livro Razão - 01012013 a 31122013.fernando2013.XML");
-
-//    $objXml = new SimpleXMLIterator("/Users/solbisio/dev/hash-ws-php/public/planilhasfred/Livro Razão - 01012013 a 31122013.fernando2013.XML", null, true);
-
-
-    exit('end');
-
-
-        $contade = getLinha($handle, null, true);
+        $handle = fopen("C:\\Users\\Fernando Augusto\\Desktop\\rodar a importacao para ERP\\rodar a importacao para ERP\\XML HSBC 2013\\HSBC " . $num . "-2013.XML", "r");
+        $contade = getLinha($handle);
 
         $rodar = true;
         while($rodar) {
@@ -63,7 +54,7 @@
                 $rodar = false;
             }
         }
-//    }
+    }
 
     function getLinha($handle) {
         if ($handle) {
@@ -71,7 +62,9 @@
                 $ini = strpos($linha,'>')+1;
                 $fim = strpos($linha,'<',$ini-1);
                 //echo $ini . ' - ' . $fim;
-                return mb_convert_encoding(substr($linha,$ini,$fim-$ini), 'UTF-8', 'Windows-1252');
+
+                return substr($linha,$ini,$fim-$ini);
+
             } else {
                 return '**EOF**';
             }

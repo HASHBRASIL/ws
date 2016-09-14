@@ -660,17 +660,20 @@ TEXT;
 
         //$this->addProcesso('ProcessaCampanha');
         $ib = $this->getRequest()->getParam('ib');
+
         $mdlIb = new Content_Model_Bo_ItemBiblioteca();
         $mdlTib = new Config_Model_Bo_Tib();
         $mdlPes = new Legacy_Model_Bo_Pessoa();
         $mdlGrp = new Config_Model_Bo_Grupo();
         $mdlInf = new Config_Model_Bo_Informacao();
         $mdlTinf = new Config_Model_Bo_TipoInformacao();
+
         $idtibmsg = current($mdlTib->getByMetanome('TPMSGCAMPANHA'))['id'];
         $idtibtpmsg = current($mdlTib->getByMetanome('TPTIPOMSG'))['id'];
         $pai = current($mdlIb->getById($ib)->toArray());
         $tpfilhos = $mdlTib->getFilhosById($pai['id_tib'])->toArray();
         $tibtpmsg = current($mdlTib->getByIdPaiByMetanome($idtibtpmsg,'nome'))['id'];
+
         $status = null;
         $ibstatus = null;
         $proc = null;
@@ -682,6 +685,12 @@ TEXT;
         $tpmsg = null;
         $msgsrv = null;
         $retirarTag = true;
+
+        $idtibmsg   = current($mdlTib->getByMetanome('TPMSGCAMPANHA'))['id'];
+        $idtibtpmsg = current($mdlTib->getByMetanome('TPTIPOMSG'))['id'];
+        $pai        = current($mdlIb->getById($ib)->toArray());
+        $tpfilhos   = $mdlTib->getFilhosById($pai['id_tib'])->toArray();
+        $tibtpmsg   = current($mdlTib->getByIdPaiByMetanome($idtibtpmsg,'nome'))['id'];
 
         foreach($tpfilhos as $tp) {
             if($tp['metanome']=='status'){
@@ -718,12 +727,14 @@ TEXT;
         $mdlIb->persiste($ibstatus['id'],null,null,null,'PREPARANDO MENSAGENS');
         $mdlIb->persiste($ibdtini['id'],null,null,null,date ('d-m-Y H:i:s'));
         foreach($jsonProc as $itmcmp) {
+
             $ibmsg = $mdlIb->getItemBibliotecaById($itmcmp->msg)->toArray();
             $tpmsg = null;
             $txtmsg = null;
             $titmsg = null;
             $imgmsg = null;
             $urlmsg = null;
+
             foreach($ibmsg as $cmpmsg) {
                 $tpcmpmsg = current($mdlTib->getById($cmpmsg['id_tib']));
                 if($tpcmpmsg['metanome']=='tipomsg'){
@@ -742,6 +753,7 @@ TEXT;
                     $urlmsg = $cmpmsg['valor'];
                 }
             }
+
             $remetente = (new Legacy_Model_Bo_Pessoa)->getByIdIgnoreTime($campanha[0]['id_criador']);
             $site = current((new Config_Model_Bo_Grupo)->getGruposByIDPaiByMetanome($time, 'SITE'));
             $cracha = current((new Config_Model_Bo_GrupoMetadata)->listMetaByMetanome($site['id'], Config_Model_Bo_GrupoMetadata::META_CRACHA)->toArray());
@@ -816,6 +828,7 @@ TEXT;
         //curl_setopt($ch, CURLOPT_TIMEOUT, 1);
 
         $res = curl_exec($ch);
+
         curl_close($ch);
 
         exit();
@@ -875,7 +888,12 @@ TEXT;
                 // }
                 // $contatos = array_unique($contatos);
                 $arrMsg = array('assunto' => $ibtitulo, 'mensagem'=>$ibtexto);
-                $this->enviaMensagem($arrMsg,array($info), $imagem['valor']);
+
+                if (!filter_var($info, FILTER_VALIDATE_EMAIL) === false) {
+                    $this->enviaMensagem($arrMsg, array($info), $imagem['valor']);
+                } else {
+                    $this->enviaMensagem($arrMsg, array(), $imagem['valor']);
+                }
             }
         }
 
@@ -917,7 +935,6 @@ TEXT;
 
     protected function enviaMensagem(array $mensagem, array $destinatarios = [], $imagem = NULL)
     {
-
         $myfile = fopen(getcwd() . "/transacional/001/ativacao.html", "r");
         $txtorig = fread($myfile, filesize(getcwd() . "/transacional/001/ativacao.html"));
         fclose($myfile);
@@ -940,9 +957,8 @@ TEXT;
         // );
 
         //$this->_helper->email->sendEmailMailer($destinatarios[0], $mensagem['assunto'], $mensagem['mensagem'], $nome);
-        $this->_helper->campanha->enviarEmail($mensagem, array('fernando@titaniumtech.com.br'), $arrImg);
-
-
+        //$this->_helper->campanha->enviarEmail($mensagem, array('fernando@titaniumtech.com.br'), $arrImg);
+        $this->_helper->campanha->enviarEmail($mensagem, $destinatarios, $arrImg);
     }
 
     protected function enviaSms($numero, $card, $msg,$msgid) {
@@ -1309,6 +1325,9 @@ CONTEUDO;
         return $dadosCracha;
     }
 
+    /*
+     * Gera os PARCEIROSS dos cadidatos eleitorais municipais ( prefeito, vice)
+     */
     public function geraparcandidatoAction() {
         $saida = false;
         $cnt=0;
@@ -1348,6 +1367,8 @@ CONTEUDO;
     }
 
     public function preparatmpcampanhaAction () {
+
+        set_time_limit(0);
         $saida = false;
         $myfile = fopen(getcwd() . "/transacional/001/ativacao.html", "r");
         $txtorig = fread($myfile, filesize(getcwd() . "/transacional/001/ativacao.html"));
@@ -1357,21 +1378,33 @@ CONTEUDO;
         foreach($lstimg as $img) {
             $arrImg[explode('.',$img)[0]] = getcwd() . "/transacional/001/imagens/" . $img;
         }
+
         while(!$saida) {
+
             $tmpret = $this->_bo->geratmpemailinfocand();
+
             if(count($tmpret) > 0) {
                 $ret = current($tmpret);
                 $tmpemail = $txtorig;
                 $ret['nometime'] = $this->limparString($ret['nometime']);
                 $tmpemail = str_replace("%%HASH_URL%%",'http://www.hash.ws/config/ingestao/index/codigo/' . $ret['id'],$tmpemail);
                 $tmpemail = str_replace("%%TIME_HASH%%",$ret['nometime'],$tmpemail);
-                $tmpemail = str_replace("%%linkcancelamento%%",'http://www.hash.ws/config/optinout/cancelcand?c=' . $ret['id'],$tmpemail);
+                //$tmpemail = str_replace("%%linkcancelamento%%",'http://www.hash.ws/config/optinout/cancelcand?c=' . $ret['id'],$tmpemail);
+                $tmpemail = str_replace("%%linkcancelamento%%",'http://www.hash.ws/content/robo/cancelcand/?c=' . $ret['id'],$tmpemail);
+                echo $ret['id'].' inserido !<Br>';
                 $idret = $this->_bo->inseretmpemailcand($ret['id'],$ret['nome'],$ret['email'],$ret['nometime'],$tmpemail,'N');
                 //$this->_helper->email->sendEmailMailer('fernando@titaniumtech.com.br', 'Teste do email com imagem', $tmpemail, 'TitaniumTech', $arrImg);
                 $msg = array('assunto' => '[Lançamento gratuito] Ganhe a eleição com ajuda do poderoso Sistema HASH', 'mensagem' => $tmpemail);
-                $this->_helper->campanha->enviarEmail($msg, array($ret['email']), $arrImg);
+
+
+                $email = strtolower($ret['email']);
+
+                 if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                    $this->_helper->campanha->enviarEmail($msg, array($email), $arrImg);
+                }
+
                 //$this->_helper->campanha->enviarEmail($msg, array('frederico@titaniumtech.com.br'), $arrImg);
-                //exit;
+
             } else {
                 $saida = true;
             }
@@ -1379,7 +1412,21 @@ CONTEUDO;
         exit;
     }
 
-    public function carregacandsAction() {
+    //07ddc950-f542-4a1a-d40a-45032bca8f17 id de teste, faze ro descancelamento
+    public function cancelcandAction()
+    {
+        $pes = $_GET['c'];
+        $ibBo = new Content_Model_Bo_ItemBiblioteca();
+        $ibBo->atualizastatuscand($pes,'C');
+
+        echo '<center><h3>Sua inscrição foi cancelada!!!</h3><center>'; exit;
+    }
+
+
+    public function carregacandsAction()
+    {
+        set_time_limit(0);
+
         $uf = $_GET['uf'];
         $pesBo = new Legacy_Model_Bo_Pessoa();
         $tibBo = new Config_Model_Bo_Tib();
@@ -1400,20 +1447,22 @@ CONTEUDO;
                 foreach($tmpret as $rec) {
                     $arrItm[$rec['metanome']] = $rec['valor'];
                 }
-                
+
                 $nomeguerra = strtolower($this->limparString($arrItm['nomeGuerra']));
                 $usrname = $nomeguerra . $arrItm['numero'];
                 echo date('Y-m-d H:i:s') . " - Carregando " . $usrname;
                 $usr = $usrBo->getUserByNomeUsuario($usrname);
                 $usr = $usr->toArray();
-                
+
                 if(!((is_array($usr)) && (count($usr)>0))) {
-                    echo " - CRIANDO";
+                    echo " - CRIANDO ";
+
                     $idPessoa = $pesBo->criar_usuario($arrItm['nome'], null, $usrname, $arrItm['cpf'], '{EMAIL=' . $arrItm['email'] . ',CARGO=' . $arrItm['cargo'] . ',CPF=' . $arrItm['cpf'] . ',AVATAR=' . $arrItm['imagem'] . ',CIDADE=' . utf8_encode($arrItm['cidade']) . ',UF=' . $arrItm['uf'] . '}');
                     $vncBo->persiste(null,$idcls,$idPessoa[0][0]['criar_usuario'],null,$grp,date('Y-m-d H:i:s'),null);
                     $this->_bo->persiste(null,$tppes,$idPessoa[0][0]['criar_usuario'],$idIbPai,$idPessoa[0][0]['criar_usuario']);
                 } else {
-                    echo " - EXISTENTE";
+                    echo " - EXISTENTE ";
+
                     $vnc = $vncBo->getVinculoByClsPesGrp($idcls,$usr[0]['id'],$grp);
                     if((!((is_array($vnc)) && (count($vnc)>0)))){
                         echo " - CRIEI VINCULO!!!";
@@ -1430,7 +1479,6 @@ CONTEUDO;
                 echo 'Finalizado';
                 $saida = true;
             }
-
         }
 
         exit;
@@ -1468,6 +1516,8 @@ CONTEUDO;
         $time = $this->getParam('time');
         $alias = $this->getParam('alias');
         $usuario = $this->getParam('usuario');
+
+        $email = $this->getParam('email');
 
         $pessoaBo = new Legacy_Model_Bo_Pessoa();
         $grupoBo = new Config_Model_Bo_Grupo();
@@ -1530,11 +1580,13 @@ HTML;
         );
 
         $this->_helper->email->sendEmailMailer(
+            $email,
             $this->session->email,
             'Seu HASH foi configurado!',
             $conteudoEmail,
             'HASH Team'
         );
+        exit;
     }
 
     /**

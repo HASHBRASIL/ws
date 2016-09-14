@@ -545,7 +545,11 @@ DML;
         $query = <<<DML
 select ib.id, ibnome.valor as nome, ibemail.valor as email, ibnumero.valor as numero, unaccent_string(lower(replace(ibnome.valor,' ',''))) || ibnumero.valor as nometime
 from (select ib.id, ib.id_tib as tib from tb_itembiblioteca ib join tp_itembiblioteca tib on ib.id_tib = tib.id
-join rl_grupo_item rgi on rgi.id_item = ib.id left join tmp_email_campanha tec on ib.id = tec.idcand where tib.metanome = 'TPINGCANDTSE' and rgi.id_grupo = '363a27b3-95e2-4e46-ea44-f4be5070dcb6' and tec.idcand is null limit 1) ib
+    join rl_grupo_item rgi on rgi.id_item = ib.id
+    left join tmp_email_campanha tec on ib.id = tec.idcand
+    where tib.metanome = 'TPINGCANDTSE'
+    and rgi.id_grupo = '363a27b3-95e2-4e46-ea44-f4be5070dcb6'
+    and tec.idcand is null limit 1) ib
 join tb_itembiblioteca ibnome on ibnome.id_ib_pai = ib.id
 join tp_itembiblioteca tibnome on ibnome.id_tib = tibnome.id and tibnome.id_tib_pai = ib.tib
 join tb_itembiblioteca ibemail on ibemail.id_ib_pai = ib.id
@@ -589,15 +593,15 @@ DML;
         $query = <<<DML
 select ib.id,tibf.metanome,ibf.valor
 from (select ib.id, ib.id_tib
-from tb_itembiblioteca ib 
-join tp_itembiblioteca tib on ib.id_tib = tib.id 
-join rl_grupo_item rgi on rgi.id_item = ib.id 
+from tb_itembiblioteca ib
+join tp_itembiblioteca tib on ib.id_tib = tib.id
+join rl_grupo_item rgi on rgi.id_item = ib.id
 join tb_itembiblioteca ibuf on ibuf.id_ib_pai = ib.id
 join tp_itembiblioteca tibuf on ibuf.id_tib = tibuf.id and tibuf.id_tib_pai = tib.id
-where tib.metanome = 'TPINGCANDTSE' 
+where tib.metanome = 'TPINGCANDTSE'
 and tibuf.metanome = 'uf'
 and ibuf.idx_valor @@ :uf
-and rgi.id_grupo = '363a27b3-95e2-4e46-ea44-f4be5070dcb6' 
+and rgi.id_grupo = '363a27b3-95e2-4e46-ea44-f4be5070dcb6'
 and not exists (select 1 from tb_itembiblioteca pes join tp_itembiblioteca tibpes on pes.id_tib = tibpes.id and tibpes.id_tib_pai = tib.id where tibpes.metanome = 'idpessoa' and pes.id_ib_pai = ib.id) limit 1) ib
 join tb_itembiblioteca ibf on ibf.id_ib_pai = ib.id
 join tp_itembiblioteca tibf on ibf.id_tib = tibf.id and tibf.id_tib_pai = ib.id_tib;

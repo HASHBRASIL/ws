@@ -68,8 +68,9 @@ class Config_IngestaoController extends App_Controller_Action
                     $this->session->cpf = $dado['valor'];
                     break;
                 case Content_Model_Bo_TpItemBiblioteca::META_EMAIL:
-//                    $this->session->email = $dado['valor'];
-                    $this->session->email = 'maykelsbdev@gmail.com';
+                    $this->session->email = $dado['valor'];
+                    //$this->session->email = 'maykelsbdev@gmail.com';
+
                     $tibIdEmail = $dado['id'];
                     break;
                 case Content_Model_Bo_TpItemBiblioteca::META_NOME:
@@ -175,7 +176,8 @@ class Config_IngestaoController extends App_Controller_Action
             . "/nome2/{$this->session->nome2}"
             . "/time/{$this->session->time}"
             . "/alias/{$this->session->alias}"
-            . "/usuario/{$this->session->usuario}";
+            . "/usuario/{$this->session->usuario}"
+            . "/email/{$this->session->email}";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -186,6 +188,7 @@ class Config_IngestaoController extends App_Controller_Action
         curl_close($ch);
 
         $this->view->file = 'configurando.html.twig';
+        $this->view->data = [];
         return;
     }
 
@@ -470,14 +473,14 @@ class Config_IngestaoController extends App_Controller_Action
     protected function limparString($texto)
     {
         $texto = str_replace(
-            ['á', 'à', 'ã', 'â', 'é', 'ẽ', 'ê', 'í', 'ó', 'õ', 'ô', 'ú', 'ç', ' ', '-'],
-            ['a', 'a', 'a', 'a', 'e', 'e', 'e', 'i', 'o', 'o', 'o', 'u', 'c', '', ''],
+            ['á', 'à', 'ã', 'â', 'é', 'ẽ', 'ê', 'í', 'ó', 'õ', 'ô', 'ú', 'ç', ' ', '-', "'"],
+            ['a', 'a', 'a', 'a', 'e', 'e', 'e', 'i', 'o', 'o', 'o', 'u', 'c', '', '', ''],
             $texto
         );
 
         return str_replace(
-            ['Á', 'À', 'Ã', 'Â', 'É', 'Ẽ', 'Ê', 'Í', 'Ó', 'Õ', 'Ô', 'Ú', 'Ç', ' ', '-'],
-            ['A', 'A', 'A', 'A', 'E', 'E', 'E', 'I', 'O', 'O', 'O', 'U', 'C', '', ''],
+            ['Á', 'À', 'Ã', 'Â', 'É', 'Ẽ', 'Ê', 'Í', 'Ó', 'Õ', 'Ô', 'Ú', 'Ç', ' ', '-', "'"],
+            ['A', 'A', 'A', 'A', 'E', 'E', 'E', 'I', 'O', 'O', 'O', 'U', 'C', '', '', ''],
             $texto
         );
     }

@@ -1,4 +1,4 @@
-var callbackTableFilter; 
+var callbackTableFilter;
 
 $(document).ready(function(){
 
@@ -639,7 +639,7 @@ $(document).ready(function(){
                 case 'dropdowntopo':
                     /* depois criar uma função pra isso... agora só estou fazendo acontecer by toinsane GHP*/
                     if( $('.dropdown-content').length == 0 ){
-                        var div     = $(this).closest('div');
+                        var div     = $(this).closest('div').addClass('box-dropdown');
                         var row     = $(this).closest('tr');
                         var countTd = row.find('td').length;
                         var tr      = $(document.createElement('tr'));
@@ -743,7 +743,7 @@ $(document).ready(function(){
 
                                 botao.children('.fa').remove()
                                 botao.children('i').show();
-                                td.addClass('dropdown-inline');
+                                td.addClass('dropdown-inline form-table');
                                 td.html( response );
                                 $(document).trigger('custom');
                             }
