@@ -22,13 +22,12 @@
                                 {% set selectPessoa = forms.select('id_grupo',  null, view.comboGrupo, 'select2-skin') %}
                                 {{ row.formgroup('Time', selectPessoa, 'col-md-4') }}
                                 {{ row.formgroup('Valor', forms.input('fin_valor', '', 'text', 'decimal'), 'col-md-4') }}
-                                {{ row.formgroup('Centro de Custos', forms.select('cec_id','', view.comboCentroCusto, 'select2-skin'), 'col-md-3') }}
-                                {{ row.formgroup('Plano de Contas', forms.select('plc_id', '', view.comboPlanoContas, 'select2-skin'), 'col-md-3') }}
-                                {{ row.formgroup('Descrição', forms.textarea('fin_descricao', ''), 'col-md-4') }}
 
-                                {{ row.formgroup('Manter valor total na transação', forms.select('keepvalue', 0, {1 : 'Sim', 0: 'Não'}, 'select2-skin'), 'col-md-3') }}
+                                {{ row.formgroup('Centro de Custos', forms.select('cec_id','', view.comboCentroCusto, 'select2-skin'), 'col-md-4') }}
+                                {{ row.formgroup('Plano de Contas', forms.select('plc_id', '', view.comboPlanoContas, 'select2-skin'), 'col-md-4') }}
 
-
+                                {{ row.formgroup('Manter valor total na transação', forms.select('keepvalue', 0, {1 : 'Sim', 0: 'Não'}, 'select2-skin'), 'col-md-4') }}
+                                {{ row.formgroup('Descrição', forms.textarea('fin_descricao', ''), 'col-md-12 descricao') }}
                             </div>
                         </fieldset>
                     </div>

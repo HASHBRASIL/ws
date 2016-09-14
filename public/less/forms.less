@@ -19,7 +19,9 @@
 		.btn 							    { background-color: @cor-branco; color: lighten(@cor-preto, 25%); padding: 3px 15px; border: 1px solid lighten(@cor-preto, 90%); font-family: @arimo; font-weight: normal;
 											  font-size: 1em; height: 30px;
 			&.dropdown-toggle               { border-left: 0px;}
-			&.btn-search 					{ border: 0; border-left: 1px solid lighten(@cor-preto, 90%); color: lighten(@cor-preto, 65%); font-size: 1.8em; .rounded(0px); margin: 0 0 0 10px; padding: 0 0 0 10px;}
+			&.btn-search 					{ border: 0; border-left: 1px solid lighten(@cor-preto, 90%); color: lighten(@cor-preto, 45%); font-size: 1.5em; .rounded(0px); margin: 0 0 0 10px; padding: 0 0 0 10px;
+				&:hover 					{ color: lighten(@cor-preto, 25%);}
+			}
 		}
 		*[class^="col-"] 				    { padding: 0;}
 		.tooltips 							{ margin: 0 5px;}
@@ -36,9 +38,8 @@
 	}
 }
 .input-group 								{ margin-bottom: 5px;
-	span.input-group-addon  				{ background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%); padding: 3px 15px; font-family: @arimo; font-weight: normal; font-size: 1em; .rounded(0px);
-											  cursor: pointer;}
-	input.form-control 						{ border: 1px solid lighten(@cor-preto, 90%); font-size: 1em; height: 30px; padding: 5px 10px;
+	span.input-group-addon  				{ background-color:@cor-vermelho; color: @cor-branco; border: 0px; padding: 3px 15px; font-family: @arimo; font-weight: normal; font-size: 1em; cursor: pointer;}
+	input.form-control 						{ border: 1px solid lighten(@cor-preto, 90%); font-size: 1em; height: 30px; padding: 5px 10px; text-align: right;
 		&:hover 							{ border: 1px solid lighten(@cor-preto, 90%);}
 	}
 }
@@ -52,15 +53,18 @@ form.criarGrupo 							{
 		i 									{ color: lighten(@cor-preto, 65%);}
 	}
 	.btn-group 								{
-		button.btn-default 					{ background-color: transparent; color: lighten(@cor-preto, 25%); font-weight: bold; padding: 0 10px;
+		button.btn-default 					{ background-color: transparent; color: lighten(@cor-preto, 25%); font-size: 0.9em; font-weight: bold; padding: 0 10px;
 			&:hover 						{ background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%);}
 		}
 	}
+	.row_list_bottom 						{
+		strong 								{ font-weight: normal;}
+	}
 	.pagination 							{ padding: 0; margin: 0 0 20px 0;
 		li 									{
-			a 								{ border: 0px; color: lighten(@cor-preto, 10%);
-				span 						{ color: lighten(@cor-preto, 25%);}
-				i 							{ font-size: 1.4em;}
+			a 								{ border: 0px; color: lighten(@cor-preto, 20%);
+				span 						{ color: lighten(@cor-preto, 25%); font-weight: normal;}
+				i 							{ color: lighten(@cor-preto, 60%); font-size: 1.4em;}
 				&:hover 					{ background-color: transparent; color: lighten(@cor-preto, 25%);}
 			}
 			&:first-child 					{
@@ -70,8 +74,8 @@ form.criarGrupo 							{
 				a 							{ border-top-right-radius: 0px;border-bottom-right-radius: 0px;}
 			}
 			&.active 						{
-				a 							{ background-color: lighten(@cor-preto, 25%);
-					span 					{ color: lighten(@cor-preto, 70%);}
+				a 							{ background-color: transparent;
+					span 					{ color: lighten(@cor-preto, 25%); font-weight: bold;}
 				}
 			}
 		}
@@ -126,13 +130,119 @@ fieldset 									{ padding: 20px 10px 10px !important; margin: 0 0 30px !import
 		h5 									{ color: #58748B; font-weight: bold; }
 	}
 	&:last-child 							{ margin-bottom: 0px !important;}
+	&.img-cropper-componente 				{ margin: 20px 0 20px 0 !important; }
+	&.form-contas 							{ border: 0px;
+		.form-group 					    { margin-bottom: 0px;
+		}
+	}
+	&.form-plano-contas 					{ border: 0;
+		.form-group 					    { margin-bottom: 0px;
+			input[type="text"] 				{ margin: 10px 0 0;}
+		}
+	}
+	&.form-custo 							{ border: 0;
+		.form-group 					    { margin-bottom: 0px;
+			input[type="text"] 				{ margin: 10px 0 0;}
+		}
+	}
+	&.saldo-inicial 						{ border: 0px; margin: 10px 0 0 0 !important; padding-bottom: 0 !important;
+		legend 								{ color: lighten(@cor-preto, 25%); padding: 0;}
+		.form-group 						{ margin-bottom: 0;}
+	}
 }
 
 .container-fluid 							{
 	.criarGrupo 							{
-		button.btn 							{ background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%); font-size: 1em; font-weight: bold; padding: 5px;}
+		button.btn 							{ background-color: darken(@cor-azul, 25%); border: 0px; color: @cor-branco; font-size: 1em; padding: 5px 10px;
+			&:hover 						{ background-color: darken(@cor-azul, 40%);}
+		}
 	}
 }
+table.table 											{
+	tbody 												{
+		tr 												{
+			td.form-table 								{ padding: 0px;
+				.area-conteudo-hash						{ padding-bottom: 0px;
+					.panel-white 						{ border: 0px; margin: 0;
+						form 							{
+							fieldset 					{ border: 0px;
+								legend 					{ display: none;}
+								input.form-control  	{ height: 32px; margin-top: 8px;}
+							}
+						}
+					}
+				}
+				.btn 									{ background-color: @cor-branco; color: lighten(@cor-preto, 25%); padding: 3px 15px; border: 1px solid lighten(@cor-preto, 90%); font-family: @arimo;
+														  font-weight: normal; height: 30px;}
+				.progress 								{ margin: 10px; height: 10px; .rounded(2px);}
+				.fileinput-button 						{ margin: 10px 10px 0;}
+				.files 									{
+					p 									{ margin: 0 10px;}
+				}
+				&:hover 								{ background-color: transparent;}
+			}
+		}
+	}
+}
+
+.cabecalho-titulo-pagina 										{
+	.container-form-action 										{
+		.box-dropdown 											{
+			tr 													{ display: inline-block; width: 100%;
+				td 												{ display: inline-block; text-align: left; width: 100%;
+					.fileinput-button 							{ margin-bottom: 10px;}
+					.progress 									{ margin-bottom: 5px; height: 10px; .rounded(2px);}
+					.files 										{
+						p										{ font-size: 0.9em;}
+					}
+					*[class^="col-"] 						    { padding: 0 15px;}
+					form 										{
+						fieldset 								{ border: 0;
+							.input-sm 						    { height: 32px; margin-top: 8px;}
+						}
+						.btn-sm 								{ background-color: darken(@cor-azul, 25%); border: 0px; color: @cor-branco; font-size: 1em; font-weight: bold; .rounded(2px); border: 0px;
+							&:hover                         	{ background-color: darken(@cor-azul, 40%);}
+						}
+					}
+				}
+			}
+			.panel-white 										{ border: 1px solid rgba(0, 0, 0, 0.07);}
+		}
+	}
+}
+
+// .area-conteudo-hash 											{
+// 	form 														{ background-color: lighten(@cor-preto, 98%); .rounded(5px);
+// 		fieldset 												{ background-color: lighten(@cor-preto, 98%);}
+// 	}
+// }
+
+form 															{
+	fieldset 													{
+		.descricao                  							{
+			textarea 											{ font-size: 1em; max-height: 50px; outline: none; width: 100%;}
+		}
+	}
+}
+
+.select2-container.select2-container--open 						{ /*.box-shadow(0px 0px 10px rgba(0, 0, 0, .2));*/
+	.select2-search 											{
+		.select2-search__field									{ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); .rounded(3px);}
+		&:after 												{ content: '\ed60'; color: lighten(@cor-preto, 65%); display: inline-block; font-family: 'IcoFont'; position: absolute; right: 10px; top: 7px;}
+	}
+	.select2-selection--single 									{ border: 1px solid darken(@cor-azul, 15%); border-bottom: 0px;}
+	.select2-dropdown 											{ background-color: @cor-branco; border: 1px solid darken(@cor-azul, 15%); border-top: 0px;}
+	.select2-results__option[aria-selected=true],
+	.select2-results__option--highlighted[aria-selected] 	    { background-color: darken(@cor-azul, 15%); color: @cor-branco;}
+}
+
+input[type="checkbox"]:checked + label:before 					{ background-color: transparent !important; border-color: lighten(@cor-preto, 45%) !important; border-width: 1px !important; }
+input[type="checkbox"]:checked + label:after 					{ color: lighten(@cor-preto, 47%) !important;}
+
+.dropdown-action 												{
+	button.btn-action 											{ }
+}
+
 @media (min-width: 767px) and (max-width: 1025px)               {
 	.cabecalho-titulo-pagina 									{
 		.container-form-action  							    {

@@ -136,7 +136,6 @@ QUERY;
             return $rowset;
         }
 
-
         public function getGrupoByMetanome($metanome, $idCriador)
         {
             $db = Zend_Db_Table::getDefaultAdapter();
@@ -147,7 +146,6 @@ QUERY;
 
             return $rowset;
         }
-
 
         public function getTimeByCriador($idCriador)
         {

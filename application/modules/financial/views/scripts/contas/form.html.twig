@@ -15,10 +15,10 @@
                 {{ forms.input('id', view.vo.con_id, 'hidden') }}
                 <div class="row">
                     <div class="col-md-12">
-                        <fieldset>
-                            <legend>
-                                {{ 'Formulário' | zftranslate }}
-                            </legend>
+                        <fieldset class="form-contas">
+                            {# <legend>
+                                {{ 'Contas' | zftranslate }}
+                            </legend> #}
                             <div class="row">
 
                                 {% set conta = row.inputgroup(
@@ -38,7 +38,7 @@
                                 {{ row.formgroup('Codnome da Conta', forms.input('con_codnome', view.vo.con_codnome, 'text', '', {'required' : ''}), 'col-md-4') }}
 
                                 {{ row.formgroup('Número da conta', conta, 'col-md-4') }}
-                                {{ row.formgroup('Número da agencia', agencia, 'col-md-4') }}
+                                {{ row.formgroup('Número da agência', agencia, 'col-md-4') }}
 
                             </div>
                             <div class="row">
@@ -53,7 +53,7 @@
                 {% if view.vo.con_id is empty %}
                     <div class="row">
                         <div class="col-md-12">
-                            <fieldset>
+                            <fieldset class="saldo-inicial">
                                 <legend>
                                     {{ 'Saldo Inicial Opcional' | zftranslate }}
                                 </legend>
