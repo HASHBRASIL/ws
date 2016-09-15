@@ -4,8 +4,8 @@
         <table class="table table-responsive" id="tabela-filtros">
             <thead>
             <tr>
-                <th> - </th>
-                <th style="color:black!important">Filtros</th>
+                {# <th> - </th> #}
+                <th>Filtros</th>
             </tr>
             </thead>
             <tbody>
@@ -38,8 +38,8 @@
                 </select>
                 <input name="valor" value='' id="filtro-valor" type="text" />
                 <br />
-            <input value="adicionar" id="adcfiltro" type="button" />
-            <input value="salvar" type="submit" />
+            <input value="Adicionar" id="adcfiltro" type="button" />
+            <input value="Salvar" type="submit" />
         </fieldset>
     </form>
 </div>
@@ -58,7 +58,7 @@ $(function(){
                + '<input type="hidden" class="ws_filtro" name="wsfiltro[' + qtd + '][valor]" value="' + valor + '" />';
 
         $('#tabela-filtros > tbody:last-child').append('<tr><td>' + botao + '</td><td>' + filtro + '</td></tr>');
-        
+
         $('#filtro-campo').val('');
         $('#filtro-condicao').val('=');
         $('#filtro-valor').val('');
