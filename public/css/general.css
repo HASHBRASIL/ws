@@ -181,8 +181,8 @@
 /* SPECIFIC files */
 .box-form-container {
   background: #fff;
-  padding: 20px;
-  border: 1px rgba(0, 0, 0, 0.07) solid;
+  padding: 0px;
+  border: 0px;
   margin-left: 0px;
   margin-right: 0px;
   margin-bottom: 20px;
@@ -753,7 +753,7 @@ main {
 }
 .area-top {
   overflow: hidden;
-  height: 60px;
+  height: 65px;
   border-bottom: 1px solid #efeded;
 }
 .area-conteudo {
@@ -867,11 +867,10 @@ main {
   max-width: 100%;
 }
 .area-conteudo-hash .container-form-action .btn {
-  background-color: #404040;
-  color: #b3b3b3;
   font-size: 1em;
   font-weight: bold;
   padding: 5px 10px;
+  margin: 0;
 }
 .colorRed {
   color: #c8523f !important;
@@ -1058,7 +1057,7 @@ main {
   padding: 0;
 }
 .container-scrollable-areas .area-nav-times nav {
-  border-bottom: 1px solid #e3e3e3;
+  border-bottom: 1px solid #ededed;
   margin: 0 15px;
   padding: 0 0 5px;
   position: relative;
@@ -2572,6 +2571,9 @@ table#sample-table-3.table thead th {
   border-bottom: 2px solid #c2c2c2;
   padding: 5px;
 }
+table#sample-table-3.table thead th.expand span {
+  color: inherit;
+}
 table#sample-table-3.table thead th .fa {
   color: #b3b3b3;
   margin: 0;
@@ -2989,4 +2991,181 @@ footer .content p a:hover {
   color: ighten(#000, 92%);
   text-shadow: none;
   padding: 5px;
+}
+.ui-datepicker.ui-widget-content {
+  background-color: #fff !important;
+  border: 1px solid #5bbbff;
+  -webkit-box-shadow: 0 0 8px #c1e5ff;
+  -moz-box-shadow: 0 0 8px #c1e5ff;
+  box-shadow: 0 0 8px #c1e5ff;
+}
+.ui-datepicker.ui-widget-content .ui-widget-header {
+  background-color: transparent !important;
+}
+.ui-datepicker.ui-widget-content .ui-widget-header span {
+  color: #1a1a1a;
+}
+.ui-datepicker.ui-widget-content .ui-widget-header .ui-datepicker-title span {
+  font-weight: bold;
+}
+.ui-datepicker.ui-widget-content .ui-widget-header .ui-datepicker-prev span {
+  background-image: none !important;
+  text-indent: 0;
+}
+.ui-datepicker.ui-widget-content .ui-widget-header .ui-datepicker-prev span:before {
+  content: '\f053';
+  display: block;
+  font-family: FontAwesome;
+  left: 0;
+}
+.ui-datepicker.ui-widget-content .ui-widget-header .ui-datepicker-next span {
+  background-image: none !important;
+  text-indent: 0;
+}
+.ui-datepicker.ui-widget-content .ui-widget-header .ui-datepicker-next span:before {
+  content: '\f054';
+  display: block;
+  font-family: FontAwesome;
+  right: 0;
+}
+.ui-datepicker.ui-widget-content .ui-widget-header .ui-state-hover {
+  background: none !important;
+  border: none !important;
+}
+.ui-datepicker.ui-widget-content table.ui-datepicker-calendar thead tr th {
+  background-color: transparent;
+}
+.ui-datepicker.ui-widget-content table.ui-datepicker-calendar thead tr th span {
+  font-weight: bold !important;
+}
+.ui-datepicker.ui-widget-content table.ui-datepicker-calendar tbody td a {
+  text-align: center;
+}
+.ui-datepicker.ui-widget-content table.ui-datepicker-calendar tbody td a.ui-state-default {
+  background: none !important;
+  border: 0;
+}
+.ui-datepicker.ui-widget-content table.ui-datepicker-calendar tbody td a.ui-state-default:hover {
+  background-color: #f9fcff !important;
+}
+.ui-datepicker.ui-widget-content table.ui-datepicker-calendar tbody td.ui-datepicker-today {
+  background-color: #0080da;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.ui-datepicker.ui-widget-content table.ui-datepicker-calendar tbody td.ui-datepicker-today a {
+  color: #fff !important;
+  font-weight: bold !important;
+}
+.ui-datepicker.ui-widget-content table.ui-datepicker-calendar tbody td.ui-datepicker-today:hover {
+  background-color: transparent;
+}
+.container-tree select.select-times {
+  background-color: #f2f2f2;
+  border: 0;
+  height: 30px;
+  width: 80%;
+}
+.container-tree input {
+  background-color: #007ad0;
+  border: 0px;
+  color: #fff;
+  font-weight: 600;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  padding: 5px 15px;
+}
+.container-tree input#adcfiltro,
+.container-tree input#adcmetadado {
+  background-color: #168442;
+}
+.container-tree input#adcfiltro:hover,
+.container-tree input#adcmetadado:hover {
+  background-color: #0f582c;
+}
+.container-tree input:hover {
+  background-color: #0062a7;
+}
+.container-tree .editar-propriedade table.tabela-filtros tbody tr td {
+  border-bottom: 0px;
+}
+.container-tree .editar-propriedade table.tabela-filtros tbody tr td input {
+  font-size: 1em;
+  font-weight: normal;
+}
+.container-tree .editar-propriedade .grupoDivPropriedades table tbody tr:hover {
+  background-color: transparent;
+}
+.container-tree .editar-propriedade .grupoDivPropriedades table tbody tr th {
+  border-bottom: 0px;
+  color: #000 !important;
+  font-size: 1.3em;
+  padding: 20px 10px 10px 0;
+}
+.container-tree .editar-propriedade .grupoDivPropriedades table tbody tr td {
+  font-size: 1.2em;
+  padding: 5px 10px 5px 0px;
+}
+.container-tree .editar-propriedade .grupoDivPropriedades table.tabela-filtros th {
+  padding: 0 10px 10px 0;
+}
+.container-tree .editar-propriedade .grupoDivMetas {
+  margin-bottom: 20px;
+}
+.container-tree .editar-propriedade .grupoDivMetas form table {
+  margin: 0;
+}
+.container-tree .editar-propriedade .grupoDivMetas form table thead th {
+  background-color: transparent !important;
+  color: #000 !important;
+}
+.container-tree .editar-propriedade .grupoDivMetadados form table {
+  margin: 0;
+}
+.container-tree .editar-propriedade .grupoDivMetadados form table thead th {
+  background-color: transparent !important;
+  color: #000 !important;
+}
+.container-tree .editar-propriedade .grupoDivMetadados form table tbody {
+  display: block;
+  padding: 5px 0;
+}
+.container-tree .editar-propriedade .grupoDivMetadados form table tbody tr:hover {
+  background-color: transparent;
+}
+.container-tree .editar-propriedade .grupoDivMetadados form table tbody tr td {
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 1.1em;
+  padding: 10px 20px 10px 0px;
+}
+.container-tree .editar-propriedade .grupoDivMetadados form table tbody tr td .remmetadado {
+  background: #c44c39;
+  color: #fff;
+  border: 0px;
+  padding: 3px 10px;
+}
+.container-tree .editar-propriedade .grupoDivMetadados form table tbody tr td .remmetadado:hover {
+  background-color: #91382a;
+  color: #fff;
+  border: 0px;
+}
+.container-tree .editar-propriedade form fieldset legend {
+  color: #404040;
+  font-size: 1em;
+}
+.container-tree .jstree-default .jstree-striped {
+  background: transparent;
+}
+.container-tree .jstree-default .jstree-striped li a {
+  color: #4d4d4d;
+}
+.container-tree .jstree-default .jstree-striped li a.jstree-clicked {
+  background: #daf0ff;
+  padding: 0px 5px 0 0;
+}
+#loader {
+  background-color: #f3faff !important;
+  opacity: .8;
 }
