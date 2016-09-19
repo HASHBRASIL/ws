@@ -259,15 +259,11 @@
   border-left: 0px;
 }
 .cabecalho-titulo-pagina .container-form-action .btn.btn-search {
-  border: 0;
-  border-left: 1px solid #e6e6e6;
+  background-color: #f7f7f7;
   color: #595959;
-  font-size: 1.5em;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  margin: 0 0 0 10px;
-  padding: 0 0 0 10px;
+  font-size: 1.2em;
+  margin: 0 0 0 40px;
+  padding: 0 10px;
 }
 .cabecalho-titulo-pagina .container-form-action .btn.btn-search:hover {
   color: #404040;
@@ -544,7 +540,7 @@ fieldset.form-plano-contas .form-group {
   margin-bottom: 0px;
 }
 fieldset.form-plano-contas .form-group input[type="text"] {
-  margin: 10px 0 0;
+  margin: 3px 0 0;
 }
 fieldset.form-custo {
   border: 0;
@@ -673,6 +669,7 @@ table.table tbody tr td.form-table:hover {
 form fieldset .descricao textarea {
   font-size: 1em;
   max-height: 50px;
+  margin: 3px 0;
   outline: none;
   width: 100%;
 }
@@ -2581,6 +2578,7 @@ table#sample-table-3.table thead th {
   border-bottom: 2px solid #c2c2c2;
   padding: 5px;
   text-align: left;
+  vertical-align: bottom;
 }
 table#sample-table-3.table thead th.expand span {
   color: inherit;

@@ -19,14 +19,13 @@
 		.btn 							    					{ background-color: @cor-branco; color: lighten(@cor-preto, 25%); padding: 3px 15px; border: 1px solid lighten(@cor-preto, 90%); font-family: @arimo;
 																  font-weight: normal; font-size: 1em; height: 30px;
 			&.dropdown-toggle               					{ border-left: 0px;}
-			&.btn-search 										{ border: 0; border-left: 1px solid lighten(@cor-preto, 90%); color: lighten(@cor-preto, 35%); font-size: 1.5em; .rounded(0px); margin: 0 0 0 10px;
-																  padding: 0 0 0 10px;
+			&.btn-search 										{ background-color: lighten(@cor-preto, 97%); color: lighten(@cor-preto, 35%); font-size: 1.2em; margin: 0 0 0 40px; padding: 0 10px;
 				&:hover 										{ color: lighten(@cor-preto, 25%);}
 			}
 		}
 		*[class^="col-"] 				    					{ padding: 0;}
 		.tooltips 												{ margin: 0 5px;}
-		.btn-add 												{ background-color: lighten(@cor-preto, 97%); font-size: 1.2em;
+		.btn-add			 									{ background-color: lighten(@cor-preto, 97%); font-size: 1.2em;
 			&:hover 											{ background-color: @cor-branco;}
 		}
 		.dropdown-menu 											{ min-width: 170px;
@@ -141,7 +140,7 @@ fieldset 														{ padding: 20px 10px 10px !important; margin: 0 0 30px !i
 	}
 	&.form-plano-contas 										{ border: 0;
 		.form-group 					    					{ margin-bottom: 0px;
-			input[type="text"] 									{ margin: 10px 0 0;}
+			input[type="text"] 									{ margin: 3px 0 0;}
 		}
 	}
 	&.form-custo 												{ border: 0;
@@ -224,7 +223,7 @@ table.table 													{
 form 															{
 	fieldset 													{
 		.descricao                  							{
-			textarea 											{ font-size: 1em; max-height: 50px; outline: none; width: 100%;}
+			textarea 											{ font-size: 1em; max-height: 50px; margin: 3px 0; outline: none; width: 100%;}
 		}
 	}
 }
