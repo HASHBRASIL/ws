@@ -5,7 +5,10 @@
 
     <div>
         <label class="pull-left">Fazer OCR: </label>
-        <input type="checkbox" name="ocr" value="1" />
+        <select name="ocr">
+            <option value="0">{{ 'Não' | zftranslate }}</option>
+            <option value="1">{{ 'Sim' | zftranslate }}</option>
+        </select>
     </div>
 </form>
 

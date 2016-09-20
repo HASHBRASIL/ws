@@ -59,10 +59,7 @@ class Content_GedController extends App_Controller_Action_Twig {
         $this->view->data['idTimeEscolhido'] = $idGrupo;
 
 //        $this->view->data = array('filedir' => $filedir->url);
-
-
-        echo $this->_gridSelect->__toString();
-
+//        echo $this->_gridSelect->__toString();
 
     }
 
@@ -106,15 +103,13 @@ class Content_GedController extends App_Controller_Action_Twig {
 
     public function uploadAction()
     {
-
         // srvico d0bbae9c-58f6-4214-bd7c-c19758f520c2
         $this->servico = array_merge($this->servico, $this->getAllParams());
 
-//        var_dump($this->servico);
-
         $upload = new Zend_File_Transfer_Adapter_Http();
 
-        $orc = false;
+        $ocr = $this->getParam('ocr') != 0 ? $this->getParam('ocr') : false;
+
 
         if (! $upload->isValid()){
             $resposta = array('error' => true, 'msg' => 'Ocorreu uma falha no envio do documento.', 'messages' => current($upload->getMessages()));
@@ -124,7 +119,6 @@ class Content_GedController extends App_Controller_Action_Twig {
             $fileContents = file_get_contents(realpath($info['file']['tmp_name']));
             $dtTipo       = $info['file']['type'];
 
-//            var_dump(realpath($info['file']['tmp_name'])); exit;
 
             $fileName = $info['file']['name'];
 
@@ -159,7 +153,7 @@ class Content_GedController extends App_Controller_Action_Twig {
 
                     foreach (range(1, $fileTransformation->getNumberOfPages()) as $pageNumber) {
                         $fileContents = $fileTransformation->setPage($pageNumber)->getImageData("xpto.jpg");
-                        $retorno = $this->_saveFile($fileContents, $pageNumber . ".jpg", $retornoPai['ib'], $orc);
+                        $retorno = $this->_saveFile($fileContents, $pageNumber . ".jpg", $retornoPai['ib'], $ocr);
 
 //                        $boRlAgrupadorFinanceiroIb->adicionarVinculo($retorno, null);
 
@@ -178,7 +172,7 @@ class Content_GedController extends App_Controller_Action_Twig {
                     //Fall through to next case;
                 case 'jpeg':
 
-                    $retorno = $this->_saveFile($fileContents, $fileName, null, $orc);
+                    $retorno = $this->_saveFile($fileContents, $fileName, null, $ocr);
 
 //                    $boRlAgrupadorFinanceiroIb->adicionarVinculo($retorno, null);
 
