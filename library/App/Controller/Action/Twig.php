@@ -321,7 +321,7 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
                 $id_data = $boIb->persiste(false,$arrData[0]['id'],$this->identity->id,$id_master, date('d/m/Y H:i:s'));
             }
 
-            if ($ocr === true) {
+            if ($ocr == true) {
                 // @todo faz regra OCR
                 $googleVision = new App_Model_Bo_Vision();
 

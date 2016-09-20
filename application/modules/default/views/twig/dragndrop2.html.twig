@@ -7,7 +7,7 @@
 
 <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
-    
+
         <span>{{ 'Arquivo(s)' | zftranslate }} </span>
 
         <input id="fileupload" type="file" name="file" multiple>
@@ -126,17 +126,11 @@
                                 .prop('disabled', !!data.files.error);
                     }
                 })
-                //                .on('fileuploadsubmit', function (e, data) {
-                //
-                //            console.log(data.formData);
-                //
-                //            var other_data = $('form.uploadform').serializeArray();
-                //
-                //            $.each(other_data,function(key,input){
-                //                data.formData.append(input.name,input.value);
-                //            });
-                //
-                //        })
+                .on('fileuploadsubmit', function (e, data) {
+                    if ($('form.uploadform')) {
+                        data.formData = $('form.uploadform').serializeArray();
+                    }
+                })
                 .on('fileuploadprogressall', function (e, data) {
                     var progress = parseInt(data.loaded / data.total * 100, 10);
                     $('#progress .progress-bar').css(
