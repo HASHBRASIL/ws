@@ -1,0 +1,10 @@
+
+{% for row in ib %}
+    {% if (row.metanome in ['ocr', 'uploaddate', 'filename']) %}
+        <div class="form-group">
+            <label class="control-label">
+                {{ row.metanome | zftranslate }} - {{ row.valor }}
+            </label>
+        </div>
+    {% endif %}
+{% endfor %}

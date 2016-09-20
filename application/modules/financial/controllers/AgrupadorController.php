@@ -334,7 +334,7 @@ class Financial_AgrupadorController extends App_Controller_Action_TwigCrud
                     //Fall through to next case;
                 case 'tiff':
 
-                    $retornoPai = $this->_saveFile($fileContents, "jpg");
+                    $retornoPai = $this->_saveFile($fileContents, $info['file']['name']);
 
                     $fileTransformation = new Spatie\PdfToImage\Pdf($info['file']['tmp_name']);
 
@@ -348,7 +348,7 @@ class Financial_AgrupadorController extends App_Controller_Action_TwigCrud
                     }
 
                     break;
-                    // break omitido intensionalmente
+                // break omitido intensionalmente
                 case 'png':
                     //Fall through to next case;
                 case 'gif':
@@ -359,7 +359,7 @@ class Financial_AgrupadorController extends App_Controller_Action_TwigCrud
                     //Fall through to next case;
                 case 'jpeg':
 
-                    $retorno = $this->_saveFile($fileContents, $extensao, null, true);
+                    $retorno = $this->_saveFile($fileContents, $info['file']['name'], null, true);
 
                     $boRlAgrupadorFinanceiroIb->adicionarVinculo($retorno, null);
 

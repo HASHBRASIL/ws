@@ -7,7 +7,7 @@
 
 <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
-        <span>Select files...</span>
+        <span>{{ 'Selecione arquivos' | zftranslate }} </span>
         <input id="fileupload" type="file" name="file" multiple>
     </span>
 <div id="progress" class="progress">
@@ -18,8 +18,9 @@
 
 <br>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="js/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+{#<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>#}
+<script src="js/jquery-file-upload/js/jquery.ui.widget.js"></script>
+
 {#<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>#}
 {#<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>#}
 
@@ -35,9 +36,6 @@
 {#<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>#}
 
 <script>
-    /*jslint unparam: true */
-    /*global window, $ */
-
 
     $(function () {
         'use strict';
@@ -74,6 +72,8 @@
 
         {%  if servico['metadata']['ws_field'] and params[servico['metadata']['ws_field']] %}
             formData: { {{servico['metadata']['ws_field']}} : '{{ params[servico['metadata']['ws_field']] }}'},
+        {% else %}
+            formData: $('form.uploadform').serializeArray(),
         {% endif %}
 
         {%  if data['acceptedfiles'] %}
@@ -123,7 +123,19 @@
                         .text('Upload')
                         .prop('disabled', !!data.files.error);
             }
-        }).on('fileuploadprogressall', function (e, data) {
+        })
+//                .on('fileuploadsubmit', function (e, data) {
+//
+//            console.log(data.formData);
+//
+//            var other_data = $('form.uploadform').serializeArray();
+//
+//            $.each(other_data,function(key,input){
+//                data.formData.append(input.name,input.value);
+//            });
+//
+//        })
+                .on('fileuploadprogressall', function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .progress-bar').css(
                     'width',

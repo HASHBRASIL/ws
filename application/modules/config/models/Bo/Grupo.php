@@ -153,6 +153,10 @@ class Config_Model_Bo_Grupo extends App_Model_Bo_Abstract
     {
         return $this->_dao->listGruposAbaixo( $uuid );
     }
+    public function listGruposFilho($uuid)
+    {
+        return $this->_dao->listGruposFilho( $uuid );
+    }
 
     public function getGruposByIDPaiByMetanome( $idPai, $metanome)
     {

@@ -31,6 +31,27 @@ class Config_Model_Dao_Grupo extends App_Model_Dao_Abstract
         return $select->fetchAll();
     }
 
+    public function listGruposFilho( $uuid )
+    {
+        $query = <<<QUERY
+       WITH RECURSIVE grupos as (
+                        SELECT *, nome::text as nome2 FROM tb_grupo g1 WHERE g1.id = ?
+                        UNION ALL
+                        select  g2.*, (grupos.nome2 || ' - ' || g2.nome)::text as nome2 from tb_grupo as g2 INNER JOIN grupos ON g2.id_pai = grupos.id
+                        where g2.id_representacao is null
+                )
+                select * from grupos g
+QUERY;
+
+        $select = $this->_db->prepare($query);
+
+        $select->bindParam( 1 , $uuid );
+        $select->execute();
+        return $select->fetchAll();
+    }
+
+
+
     public function getGrupo($id)
     {
         $select = $this->_db->prepare('SELECT * FROM tb_grupo WHERE id = ? ');

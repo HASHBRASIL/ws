@@ -1,0 +1,65 @@
+
+{% include 'header-content.html.twig' %}
+{% set paginacao = false %}
+{% for filho in servico.filhos %}
+    {% if filho.metadata.ws_comportamento == 'paginacao' %}
+        {% set paginacao = filho %}
+    {% endif %}
+{% endfor %}
+<div class="panel panel-white">
+    <div class="row box-table-container panel-body table-responsive">
+        <form class="form-tree uploadform" method="POST" action="">
+            <select name="id_grupo" id="grupo" class="select-times">
+                {% for t in grupos %}
+                    <option value="{{ t.id }}" {% if t.id == idTimeEscolhido %} selected {% endif %}>
+                        {{ t.nome2 }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            {#<select name="idTipoEscolhido" class="select-tipo">#}
+            {#<option value="grupos" {% if 'grupos' == idTipoEscolhido %} selected {% endif %}>#}
+            {#grupos#}
+            {#</option>#}
+            {#<option value="servicos" {% if 'servicos' == idTipoEscolhido %} selected {% endif %}>#}
+            {#serviços#}
+            {#</option>#}
+            {#</select>#}
+
+            <input type="submit" value="Atualizar">
+
+        </form>
+
+        <table id="sample-table-3" class="table table-striped table-hover paginacao" data-servico="{{ paginacao.id }}" >
+            <thead>
+            {% include 'list-header.html.twig' %}
+            </thead>
+            <tbody>
+            {% include 'rows.html.twig' %}
+            </tbody>
+        </table>
+
+        <div class="row_list_bottom">
+
+            {% include 'pagination.html.twig' %}
+
+            {% if data.getPages(pageCount) is defined %}
+
+                {% if data.getPages.totalItemCount > 3000 %}
+                    {% set valores = [10,25,50,100, 300, 500] %}
+                {% else %}
+                    {% set valores = [10,25,50,100, 300, 500, 'todos'] %}
+                {% endif %}
+
+                <div class="ng-table-counts btn-group pull-right">
+                    <label class="pull-left">Exibir: </label>
+                    {% for valor in valores %}
+                        <button type="button" class="btn btn-default {% if valor == params.itens %} active {% endif %}">
+                            <span class="ng-binding">{{valor}}</span>
+                        </button>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

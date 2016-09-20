@@ -165,7 +165,9 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
 
         $arqs = array();
 
-        if (isset($this->servico['id_grupo'])){
+        if ($this->hasParam('id_grupo') && ($this->getParam('id_grupo'))){
+            $grupo = $this->getParam('id_grupo');
+        } else if (isset($this->servico['id_grupo'])){
             $grupo = $this->servico['id_grupo'];
         } elseif (isset($this->servico['ws_grupo'])){
             $grupos = $objGrupo->getGruposByIDPaiByMetanome($this->identity->time['id'],$this->servico['ws_grupo']);
@@ -238,7 +240,7 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
     }
 
 
-    protected function _saveFile($fileContents, $extension, $idPai = null, $ocr = null) {
+    protected function _saveFile($fileContents, $fileName, $idPai = null, $ocr = null) {
 
         $boIb = new Content_Model_Bo_ItemBiblioteca();
         $boTib = new Config_Model_Bo_Tib();
@@ -248,8 +250,10 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
 
         $dadosOcr = null;
         $arqs = array();
+        $extension = substr(strrchr($fileName, "."),1);
 
         if (isset($this->servico['id_grupo'])){
+
             $grupo = $this->servico['id_grupo'];
         } elseif (isset($this->servico['ws_grupo'])){
             $grupos = $objGrupo->getGruposByIDPaiByMetanome($this->identity->time['id'],$this->servico['ws_grupo']);
@@ -285,6 +289,8 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
 
         file_put_contents($newFolder . $nome, $fileContents);
 
+        // @todo coloca o arquivo no google cloud!
+
         $filePath = $retorno . $nome;
 
         if (isset($this->servico['ws_arqcampo'])) {
@@ -305,14 +311,14 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
             $id_ib = $boIb->persiste(false,$arrCampo[0]['id'],$this->identity->id,$id_master,null);
 
             if($arrNome){
-                $id_nome = $boIb->persiste(false,$arrNome[0]['id'],$this->identity->id,$id_master, $nome);
+                $id_nome = $boIb->persiste(false,$arrNome[0]['id'],$this->identity->id,$id_master, $fileName);
             }
 
             if($arrStatus) {
                 $id_status = $boIb->persiste(false,$arrStatus[0]['id'],$this->identity->id,$id_master,'NOVO');
             }
             if($arrData) {
-                $id_data = $boIb->persiste(false,$arrData[0]['id'],$this->identity->id,$id_master,date('d/m/Y H:i:s'));
+                $id_data = $boIb->persiste(false,$arrData[0]['id'],$this->identity->id,$id_master, date('d/m/Y H:i:s'));
             }
 
             if ($ocr === true) {
@@ -339,10 +345,11 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
             }
         }
 
-        $retorno = array('ib' => $id_master, 'caminho' => $filePath, 'original' => $nome, 'ocr' => $dadosOcr); // @todo oq é isso?! ", 'id_tib' => $tibArquivo[0]);"
+        $retorno = array('ib' => $id_master, 'caminho' => $filePath, 'original' => $fileName, 'ocr' => $dadosOcr); // @todo oq é isso?! ", 'id_tib' => $tibArquivo[0]);"
 
         return $retorno;
     }
 
 
 }
+

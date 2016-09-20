@@ -589,15 +589,15 @@ DML;
         $query = <<<DML
 select ib.id,tibf.metanome,ibf.valor
 from (select ib.id, ib.id_tib
-from tb_itembiblioteca ib 
-join tp_itembiblioteca tib on ib.id_tib = tib.id 
-join rl_grupo_item rgi on rgi.id_item = ib.id 
+from tb_itembiblioteca ib
+join tp_itembiblioteca tib on ib.id_tib = tib.id
+join rl_grupo_item rgi on rgi.id_item = ib.id
 join tb_itembiblioteca ibuf on ibuf.id_ib_pai = ib.id
 join tp_itembiblioteca tibuf on ibuf.id_tib = tibuf.id and tibuf.id_tib_pai = tib.id
-where tib.metanome = 'TPINGCANDTSE' 
+where tib.metanome = 'TPINGCANDTSE'
 and tibuf.metanome = 'uf'
 and ibuf.idx_valor @@ :uf
-and rgi.id_grupo = '363a27b3-95e2-4e46-ea44-f4be5070dcb6' 
+and rgi.id_grupo = '363a27b3-95e2-4e46-ea44-f4be5070dcb6'
 and not exists (select 1 from tb_itembiblioteca pes join tp_itembiblioteca tibpes on pes.id_tib = tibpes.id and tibpes.id_tib_pai = tib.id where tibpes.metanome = 'idpessoa' and pes.id_ib_pai = ib.id) limit 1) ib
 join tb_itembiblioteca ibf on ibf.id_ib_pai = ib.id
 join tp_itembiblioteca tibf on ibf.id_tib = tibf.id and tibf.id_tib_pai = ib.id_tib;
@@ -608,6 +608,60 @@ DML;
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    }
+
+
+    public function getFolderByGrupoByTib($idGrupo, $servico, $idTib = null) {
+
+//        $this->servico
+
+//        var_dump($servico);exit;
+
+        $select = $this->select()->setIntegrityCheck(false);
+
+        $select->from(array('ib' => 'tb_itembiblioteca'), array('ib2.valor as titulo', 'ib3.valor as arquivo', 'g.nome as nome_grupo', 'ib4.valor as dt_publicacao', 'ib.id_tib', 'ib.id', 'rlvi.id_ib_vinculado'))
+            ->join(array('tib' => 'tp_itembiblioteca'), 'ib.id_tib = tib.id', array())
+            ->join(array('ib2' => 'tb_itembiblioteca'), 'ib.id = ib2.id_ib_pai', array())
+            ->join(array('tib2' => 'tp_itembiblioteca'), 'ib2.id_tib = tib2.id', array())
+            ->join(array('ib3' => 'tb_itembiblioteca'), 'ib.id = ib3.id_ib_pai', array())
+            ->join(array('tib3' => 'tp_itembiblioteca'), 'ib3.id_tib = tib3.id', array())
+            ->join(array('ib4' => 'tb_itembiblioteca'), 'ib.id = ib4.id_ib_pai', array())
+            ->join(array('tib4' => 'tp_itembiblioteca'), 'ib4.id_tib = tib4.id', array())
+            ->join(array('rlgi' => 'rl_grupo_item'), 'rlgi.id_item = ib.id', array())
+            ->join(array('g' => 'tb_grupo'), 'rlgi.id_grupo = g.id', array())
+            ->joinLeft(array('rlvi' => 'rl_vinculo_item'), 'rlvi.id_ib_principal = ib.id', array())
+
+//            ->joinLeft(array('tim' => new Zend_Db_Expr("(select * from tp_itembiblioteca_metadata where metanome = 'ws_tib')")),'tib.id = tim.id_tib', array())
+//            ->joinLeft(array('timcombo' => new Zend_Db_Expr("(select * fro    m tp_itembiblioteca_metadata where metanome = 'ws_comboform')")),'tib.id = timcombo.id_tib', array())
+//            ->joinLeft(array('tibcampo' => 'tp_itembiblioteca'),'tibcampo.id_tib_pai::varchar = tim.valor::varchar and tibcampo.metanome = timcombo.valor',array())
+//            ->joinLeft(array('ibcombo' => 'tb_itembiblioteca'),'ibcombo.id_ib_pai::varchar = ib.valor::varchar and ibcombo.id_tib = tibcampo.id', array())
+
+            ->where('rlgi.id_grupo = ?', $idGrupo)
+            // pegando o nome do arquivo
+            ->where('tib2.id = ?', '99696bec-ca4a-484c-a68e-78dbc19c1ce1')
+            ->where('tib3.id = ?', '3633182d-368d-47fd-a9c7-172c28f4f3b2')
+            ->where('tib4.id = ?', 'e2204ca0-3dfe-11e6-847b-0ff2a4830130');
+
+//            ->where('tib4.id = ?', $servico['metadata']['ws_arqdata']);
+
+//            ->orWhere('tib2.metanome = ?', 'imglocal')
+//            ->orWhere('tib2.metanome = ?)', 'titulo');
+
+//            ->order(array('ib.id_ib_pai', 'tib.metanome'));
+
+        if ($idTib) {
+            $select->where('rlvi.id_ib_principal = ?', $idTib);
+        } else {
+            $select->where('rlvi.id_ib_vinculado is null');
+        }
+
+//        echo $select->__toString();
+//        exit;
+        return $select;
+
+//        exit;
+//        $rows = $this->fetchAll($select);
+//        return $rows;
     }
 
 }
