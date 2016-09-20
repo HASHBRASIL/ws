@@ -19,23 +19,18 @@ table.table     { font-family: @arimo;
         tr                          {
             &:nth-child(even)       { background: fade(@cor-preto, 2%); }
             &:hover                 { background-color: #f9f9f9;}
-            td                      { padding: 8px 15px 0px 15px;
+            td                      { padding: 5px; text-align: left;
                 &:last-child        {  }
-                &.tool-cell         { padding-top: 4px; padding-bottom: 4px;
+                &.tool-cell         { padding-top: 4px; padding-bottom: 4px; text-align: right;
                     // button          { margin-left: 5px; width: 25px; height: 25px;
                     //     // .glyphicon  { left: -4px; }
                     //     .fa         { left: -4px; }
                     // }
                     //
-                    .dropdown-menu.pull-right   { border: 0; .rounded(0px); top: 27px; right: -1px;}
+                    .dropdown-menu.pull-right   { border: 0; .rounded(0px); top: 25px; right: -1px;}
                 }
             }
 
-        }
-    }
-    tfoot       {
-        tr      {
-            td  {  }
         }
     }
 }
@@ -122,7 +117,7 @@ table                               {
 
 table#sample-table-3.table                          {
     thead                                           {
-        th                                          { background-color: transparent; border-bottom: 2px solid lighten(@cor-preto, 76%);  padding: 5px;
+        th                                          { background-color: transparent; border-bottom: 2px solid lighten(@cor-preto, 76%);  padding: 5px; text-align: left; vertical-align: bottom;
             &.expand                                {
                 span                                { color: inherit;}
             }
@@ -130,13 +125,13 @@ table#sample-table-3.table                          {
         }
     }
     tbody                                           {
-        td                                          { color: darken(@cor-preto, 35%); }
+        td                                          { color: lighten(@cor-preto, 25%); }
         .tr-dropdown                                { background-color: fade(@cor-preto, 6%);}
         tr:hover td                                 { background-color: transparent;}
-        td.tool-cell                                {
+        td.tool-cell                                { text-align: right;
             .btn-group                              {
                 .btn                                { background: transparent; border: none; padding: 0px 3px;
-                    i                               { color: lighten(@cor-preto, 65%); font-size: 1.5em;}
+                    i                               { color: lighten(@cor-preto, 60%); font-size: 1.5em;}
                 }
                 ul.dropdown-menu                    {
                     li                              {
@@ -182,7 +177,7 @@ table#sample-table-3.table                          {
 .area-conteudo-hash                         {
     fieldset                                {
         .form-group                         {
-            label                           { color: lighten(@cor-preto, 25%); display: block; font-size: 1em;}
+            label                           { color: lighten(@cor-preto, 25%); display: block; font-size: 1em; margin: 0;}
         }
     }
     form                                    {

@@ -1,185 +1,188 @@
-.box-form-container  						{ background: @cor-branco; padding: 0px; border: 0px; margin-left: 0px; margin-right: 0px; margin-bottom: 20px; margin-top: 0;
-	.row 									{ margin-left: -5px; margin-right: -5px; }
-	*[class^="col-"] 						{ padding-left: 5px; padding-right: 5px; }
-	header 									{ padding-bottom: 20px;
-		h3 									{ font-size: 16px; margin: 0 0 5px 0; padding: 0; font-family: @openSans; font-weight: 300; color: fade(@cor-preto, 80%);
-			span 							{ font-size: 16px; font-weight: bold; color: fade(@cor-preto, 70%); }
+.box-form-container  											{ background: @cor-branco; padding: 0px; border: 0px; margin-left: 0px; margin-right: 0px; margin-bottom: 20px; margin-top: 0;
+	.row 														{ margin-left: -5px; margin-right: -5px; }
+	*[class^="col-"] 											{ padding-left: 5px; padding-right: 5px; }
+	header 														{ padding-bottom: 20px;
+		h3 														{ font-size: 16px; margin: 0 0 5px 0; padding: 0; font-family: @openSans; font-weight: 300; color: fade(@cor-preto, 80%);
+			span 												{ font-size: 16px; font-weight: bold; color: fade(@cor-preto, 70%); }
 		}
-		p 									{ color: fade(@cor-preto, 60%); }
+		p 														{ color: fade(@cor-preto, 60%); }
 	}
 
-	h4 										{ font-size: 1.2em; font-family: @arimo; font-weight: normal; text-transform: capitalize; color: fade(@cor-preto, 80%); padding: 0 3px; margin: 10px 0; }
-	label 									{ margin-bottom: -10px; font-size: 1em; color: fade(@cor-preto, 70%); font-weight: normal; width: 100%; }
-	input 									{ border: 1px fade(@cor-preto, 20%) solid; box-shadow: none; border-radius: 0px; margin: 4px 0 10px 0; padding: 5px 9px;
-		&:focus 							{ }
+	h4 															{ font-size: 1.2em; font-family: @arimo; font-weight: normal; text-transform: capitalize; color: fade(@cor-preto, 80%); padding: 0 3px; margin: 10px 0; }
+	label 														{ margin-bottom: -10px; font-size: 1em; color: fade(@cor-preto, 70%); font-weight: normal; width: 100%; }
+	input 														{ border: 1px fade(@cor-preto, 20%) solid; box-shadow: none; border-radius: 0px; margin: 4px 0 10px 0; padding: 5px 9px;
+		&:focus 												{ }
 	}
 }
-.cabecalho-titulo-pagina 					{
-	.container-form-action  			    { margin-left: 0px; margin-right: 0px; margin-bottom: 10px; margin-top: 0; text-align: right;
-		.btn 							    { background-color: @cor-branco; color: lighten(@cor-preto, 25%); padding: 3px 15px; border: 1px solid lighten(@cor-preto, 90%); font-family: @arimo; font-weight: normal;
-											  font-size: 1em; height: 30px;
-			&.dropdown-toggle               { border-left: 0px;}
-			&.btn-search 					{ border: 0; border-left: 1px solid lighten(@cor-preto, 90%); color: lighten(@cor-preto, 45%); font-size: 1.5em; .rounded(0px); margin: 0 0 0 10px; padding: 0 0 0 10px;
-				&:hover 					{ color: lighten(@cor-preto, 25%);}
+.cabecalho-titulo-pagina 										{
+	.container-form-action  			    					{ margin-left: 0px; margin-right: 0px; margin-bottom: 10px; margin-top: 0; text-align: right;
+		.btn 							    					{ background-color: @cor-branco; color: lighten(@cor-preto, 25%); padding: 3px 15px; border: 1px solid lighten(@cor-preto, 90%); font-family: @arimo;
+																  font-weight: normal; font-size: 1em; height: 30px;
+			&.dropdown-toggle               					{ border-left: 0px;}
+			&.btn-search 										{ background-color: lighten(@cor-preto, 97%); color: lighten(@cor-preto, 35%); font-size: 1.2em; margin: 0 0 0 40px; padding: 0 10px;
+				&:hover 										{ color: lighten(@cor-preto, 25%);}
 			}
 		}
-		*[class^="col-"] 				    { padding: 0;}
-		.tooltips 							{ margin: 0 5px;}
-		.dropdown-menu 						{ min-width: 170px;
-			li 								{
-				.btn 						{ margin: 5px 0; background-color: transparent; border: 0; color: lighten(@cor-preto, 20%); text-align: left; width: 100%; .rounded(0px);
-					&:hover 				{ background-color: lighten(@cor-preto, 95%);}
+		*[class^="col-"] 				    					{ padding: 0;}
+		.tooltips 												{ margin: 0 5px;}
+		.btn-add			 									{ background-color: lighten(@cor-preto, 97%); font-size: 1.2em;
+			&:hover 											{ background-color: @cor-branco;}
+		}
+		.dropdown-menu 											{ min-width: 170px;
+			li 													{
+				.btn 											{ margin: 5px 0; background-color: transparent; border: 0; color: lighten(@cor-preto, 20%); font-size: 1em; text-align: left; width: 100%; .rounded(0px);
+					&:hover 									{ background-color: lighten(@cor-preto, 95%);}
 				}
-				a 							{ margin: 5px 0; background-color: transparent; color: lighten(@cor-preto, 30%); text-align: left;
-					&:hover 				{ background-color: @cor-padrao; color: @cor-branco;}
-				}
-			}
-		}
-	}
-}
-.input-group 								{ margin-bottom: 5px;
-	span.input-group-addon  				{ background-color:@cor-vermelho; color: @cor-branco; border: 0px; padding: 3px 15px; font-family: @arimo; font-weight: normal; font-size: 1em; cursor: pointer;}
-	input.form-control 						{ border: 1px solid lighten(@cor-preto, 90%); font-size: 1em; height: 30px; padding: 5px 10px; text-align: right;
-		&:hover 							{ border: 1px solid lighten(@cor-preto, 90%);}
-	}
-}
-form.criarGrupo 							{
-	.container-form-action 					{
-		*[class^="col-"] 				    { padding: 0 15px;}
-	}
-}
-.box-table-container 						{
-	a.btn 									{
-		i 									{ color: lighten(@cor-preto, 65%);}
-	}
-	.btn-group 								{
-		button.btn-default 					{ background-color: transparent; color: lighten(@cor-preto, 25%); font-size: 0.9em; font-weight: bold; padding: 0 10px;
-			&:hover 						{ background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%);}
-		}
-	}
-	.row_list_bottom 						{
-		strong 								{ font-weight: normal;}
-	}
-	.pagination 							{ padding: 0; margin: 0 0 20px 0;
-		li 									{
-			a 								{ border: 0px; color: lighten(@cor-preto, 20%);
-				span 						{ color: lighten(@cor-preto, 25%); font-weight: normal;}
-				i 							{ color: lighten(@cor-preto, 60%); font-size: 1.4em;}
-				&:hover 					{ background-color: transparent; color: lighten(@cor-preto, 25%);}
-			}
-			&:first-child 					{
-				a 							{ border-top-left-radius: 0px; border-bottom-left-radius: 0px;}
-			}
-			&:last-child 					{
-				a 							{ border-top-right-radius: 0px;border-bottom-right-radius: 0px;}
-			}
-			&.active 						{
-				a 							{ background-color: transparent;
-					span 					{ color: lighten(@cor-preto, 25%); font-weight: bold;}
+				a 												{ margin: 5px 0; background-color: transparent; color: lighten(@cor-preto, 30%); text-align: left;
+					&:hover 									{ background-color: @cor-padrao; color: @cor-branco;}
 				}
 			}
 		}
 	}
-	.btn-group 								{
-		label 								{ color: lighten(@cor-preto, 45%); margin: 0 10px 0 0;}
-		.btn-default 						{ background-color: @cor-padrao ; border-bottom: 0; border-right: 0px; border-top: 0px; border-left: 1px solid rgba(255, 255, 255, 0.5); color: @cor-branco;
-											  .rounded(0px); padding: 5px 10px;
-			&:hover 						{ background-color: lighten(@cor-padrao, 5%); color: @cor-branco; }
-			&:first-child 					{ border-left: 0px;}
+}
+.input-group 													{ margin-bottom: 5px;
+	span.input-group-addon  									{ background-color:@cor-vermelho; color: @cor-branco; border: 0px; padding: 3px 15px; font-family: @arimo; font-weight: normal; font-size: 1em; cursor: pointer;}
+	input.form-control 											{ border: 1px solid lighten(@cor-preto, 90%); font-size: 1em; height: 30px; padding: 5px 10px; text-align: right;
+		&:hover 												{ border: 1px solid lighten(@cor-preto, 90%);}
+	}
+}
+form.criarGrupo 												{
+	.container-form-action 										{
+		*[class^="col-"] 				    					{ padding: 0 15px;}
+	}
+}
+.box-table-container 											{
+	a.btn 														{
+		i 														{ color: lighten(@cor-preto, 65%);}
+	}
+	.btn-group 													{
+		button.btn-default 										{ background-color: transparent; color: lighten(@cor-preto, 25%); font-size: 0.9em; font-weight: bold; padding: 0 10px;
+			&:hover 											{ background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%);}
 		}
 	}
-	table 									{
-		form 								{ margin: 2px 0 4px;
-    		input.form-control 				{ border: 1px solid lighten(@cor-preto, 90%); font-size: 0.9em; font-weight: normal; height: 25px; padding: 5px;}
+	.row_list_bottom 											{
+		strong 													{ font-weight: normal;}
+	}
+	.pagination 												{ padding: 0; margin: 0 0 20px 0;
+		li 														{
+			a 													{ border: 0px; color: lighten(@cor-preto, 20%);
+				span 											{ color: lighten(@cor-preto, 25%); font-weight: normal;}
+				i 												{ color: lighten(@cor-preto, 60%); font-size: 1.4em;}
+				&:hover 										{ background-color: transparent; color: lighten(@cor-preto, 25%);}
+			}
+			&:first-child 										{
+				a 												{ border-top-left-radius: 0px; border-bottom-left-radius: 0px;}
+			}
+			&:last-child 										{
+				a 												{ border-top-right-radius: 0px;border-bottom-right-radius: 0px;}
+			}
+			&.active 											{
+				a 												{ background-color: transparent;
+					span 										{ color: lighten(@cor-preto, 25%); font-weight: bold;}
+				}
+			}
+		}
+	}
+	.btn-group 													{
+		label 													{ color: lighten(@cor-preto, 45%); margin: 0 10px 0 0;}
+		.btn-default 											{ background-color: @cor-padrao ; border-bottom: 0; border-right: 0px; border-top: 0px; border-left: 1px solid rgba(255, 255, 255, 0.5); color: @cor-branco;
+											  					  .rounded(0px); padding: 5px 10px;
+			&:hover 											{ background-color: lighten(@cor-padrao, 5%); color: @cor-branco; }
+			&:first-child 										{ border-left: 0px;}
+		}
+	}
+	table 														{
+		form 													{ margin: 2px 0 4px;
+    		input.form-control 									{ border: 1px solid lighten(@cor-preto, 90%); font-size: 0.9em; font-weight: normal; height: 25px; padding: 5px;}
     	}
-    	.checkbox-inline 					{ margin: 0 !important;}
+    	.checkbox-inline 										{ margin: 0 !important;}
 	}
 }
-.select2 									{ margin: 4px 0 10px 0; outline: none;
-	.select2-selection--single 		 		{ .rounded(3px); }
-	.select2-selection  					{ border: 1px fade(@cor-preto, 15%) solid; outline: none; padding: 12px 9px 16px 9px;
-		.select2-selection__rendered 		{ margin-top: -13px; padding-left: 0;
-			.select2-selection__placeholder { font-size: 0.9em; }
+.select2 														{ margin: 4px 0 10px 0; outline: none;
+	.select2-selection--single 		 							{ .rounded(3px); }
+	.select2-selection  										{ border: 1px fade(@cor-preto, 15%) solid; outline: none; padding: 12px 9px 16px 9px;
+		.select2-selection__rendered 							{ margin-top: -13px; padding-left: 0;
+			.select2-selection__placeholder 					{ font-size: 0.9em; }
 		}
-		&:focus 							{ border: 1px #66afe9 solid; .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6)"); }
-		.select2-selection__arrow 			{ top: 3px; right: 6px; }
-	}
-}
-
-.select2-container 							{ outline: none;
-	.select2-dropdown 						{ border: 1px fade(@cor-preto, 10%) solid; outline: none;
-		.select2-search 					{
-			input 							{ outline: none; }
-		}
-	}
-}
-a[data-duplicate] 			    			{ float: right; margin-right: 5px; text-decoration: none;
-	&:hover 								{ tex-decoration: none;
-		span 								{ display: inline-block; .transition(); color: fade(@cor-preto, 50%); }
-	}
-	&:visited 								{ color: inherit; }
-	span 									{ font-size: 12px; font-weight: normal; text-decoration: none; color: fade(@cor-preto, 0%); .transition();
-		&:hover 							{ text-decoration: none; }
-	}
-	i 										{ font-size: 14px; color: @cor-azul; }
-	i[class*='fa-times-circle'] 			{ color: @cor-vermelho; }
-
-}
-fieldset 									{ padding: 20px 10px 10px !important; margin: 0 0 30px !important; .rounded(5px);
-	legend 									{ font-size: 14px; border: none; display: block; width: inherit; margin-bottom: 0;
-		h5 									{ color: #58748B; font-weight: bold; }
-	}
-	&:last-child 							{ margin-bottom: 0px !important;}
-	&.img-cropper-componente 				{ margin: 20px 0 20px 0 !important; }
-	&.form-contas 							{ border: 0px;
-		.form-group 					    { margin-bottom: 0px;
-		}
-	}
-	&.form-plano-contas 					{ border: 0;
-		.form-group 					    { margin-bottom: 0px;
-			input[type="text"] 				{ margin: 10px 0 0;}
-		}
-	}
-	&.form-custo 							{ border: 0;
-		.form-group 					    { margin-bottom: 0px;
-			input[type="text"] 				{ margin: 10px 0 0;}
-		}
-	}
-	&.saldo-inicial 						{ border: 0px; margin: 10px 0 0 0 !important; padding-bottom: 0 !important;
-		legend 								{ color: lighten(@cor-preto, 25%); padding: 0;}
-		.form-group 						{ margin-bottom: 0;}
+		&:focus 												{ border: 1px #66afe9 solid; .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6)"); }
+		.select2-selection__arrow 								{ top: 3px; right: 6px; }
 	}
 }
 
-.container-fluid 							{
-	.criarGrupo 							{
-		button.btn 							{ background-color: darken(@cor-azul, 25%); border: 0px; color: @cor-branco; font-size: 1em; padding: 5px 10px;
-			&:hover 						{ background-color: darken(@cor-azul, 40%);}
+.select2-container 												{ outline: none;
+	.select2-dropdown 											{ border: 1px fade(@cor-preto, 10%) solid; outline: none;
+		.select2-search 										{
+			input 												{ outline: none; }
 		}
 	}
 }
-table.table 											{
-	tbody 												{
-		tr 												{
-			td.form-table 								{ padding: 0px;
-				.area-conteudo-hash						{ padding-bottom: 0px;
-					.panel-white 						{ border: 0px; margin: 0;
-						form 							{
-							fieldset 					{ border: 0px;
-								legend 					{ display: none;}
-								input.form-control  	{ height: 32px; margin-top: 8px;}
+a[data-duplicate] 			    								{ float: right; margin-right: 5px; text-decoration: none;
+	&:hover 													{ tex-decoration: none;
+		span 													{ display: inline-block; .transition(); color: fade(@cor-preto, 50%); }
+	}
+	&:visited 													{ color: inherit; }
+	span 														{ font-size: 12px; font-weight: normal; text-decoration: none; color: fade(@cor-preto, 0%); .transition();
+		&:hover 												{ text-decoration: none; }
+	}
+	i 															{ font-size: 14px; color: @cor-azul; }
+	i[class*='fa-times-circle'] 								{ color: @cor-vermelho; }
+
+}
+fieldset 														{ padding: 20px 10px 10px !important; margin: 0 0 30px !important; .rounded(5px);
+	legend 														{ font-size: 14px; border: none; display: block; width: inherit; margin-bottom: 0;
+		h5 														{ color: #58748B; font-weight: bold; }
+	}
+	&:last-child 												{ margin-bottom: 0px !important;}
+	&.img-cropper-componente 									{ margin: 20px 0 20px 0 !important; }
+	&.form-contas 												{ border: 0px;
+		.form-group 					    					{ margin-bottom: 0px;
+		}
+	}
+	&.form-plano-contas 										{ border: 0;
+		.form-group 					    					{ margin-bottom: 0px;
+			input[type="text"] 									{ margin: 3px 0 0;}
+		}
+	}
+	&.form-custo 												{ border: 0;
+		.form-group 					    					{ margin-bottom: 0px;
+			input[type="text"] 									{ margin: 10px 0 0;}
+		}
+	}
+	&.saldo-inicial 											{ border: 0px; margin: 10px 0 0 0 !important; padding-bottom: 0 !important;
+		legend 													{ color: lighten(@cor-preto, 25%); padding: 0;}
+		.form-group 											{ margin-bottom: 0;}
+	}
+}
+
+.container-fluid 												{
+	.criarGrupo 												{
+		button.btn 												{ background-color: darken(@cor-azul, 25%); border: 0px; color: @cor-branco; font-size: 1em; padding: 5px 10px;
+			&:hover 											{ background-color: darken(@cor-azul, 40%);}
+		}
+	}
+}
+table.table 													{
+	tbody 														{
+		tr 														{
+			td.form-table 										{ padding: 0px;
+				.area-conteudo-hash								{ padding-bottom: 0px;
+					.panel-white 								{ border: 0px; margin: 0;
+						form 									{
+							fieldset 							{ border: 0px;
+								legend 							{ display: none;}
+								input.form-control  			{ height: 32px; margin-top: 8px;}
 							}
 						}
 					}
 				}
-				.btn 									{ background-color: @cor-branco; color: lighten(@cor-preto, 25%); padding: 3px 15px; border: 1px solid lighten(@cor-preto, 90%); font-family: @arimo;
-														  font-weight: normal; height: 30px;}
-				.progress 								{ margin: 10px; height: 10px; .rounded(2px);}
-				.fileinput-button 						{ margin: 10px 10px 0;}
-				.files 									{
-					p 									{ margin: 0 10px;}
+				.btn 											{ background-color: @cor-branco; color: lighten(@cor-preto, 25%); padding: 3px 15px; border: 1px solid lighten(@cor-preto, 90%); font-family: @arimo;
+														  		  font-weight: normal; height: 30px;}
+				.progress 										{ margin: 10px; height: 10px; .rounded(2px);}
+				.fileinput-button 								{ margin: 10px 10px 0;}
+				.files 											{
+					p 											{ margin: 0 10px;}
 				}
-				&:hover 								{ background-color: transparent;}
+				&:hover 										{ background-color: transparent;}
 			}
 		}
 	}
@@ -220,7 +223,7 @@ table.table 											{
 form 															{
 	fieldset 													{
 		.descricao                  							{
-			textarea 											{ font-size: 1em; max-height: 50px; outline: none; width: 100%;}
+			textarea 											{ font-size: 1em; max-height: 50px; margin: 3px 0; outline: none; width: 100%;}
 		}
 	}
 }

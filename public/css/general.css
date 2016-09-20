@@ -259,15 +259,11 @@
   border-left: 0px;
 }
 .cabecalho-titulo-pagina .container-form-action .btn.btn-search {
-  border: 0;
-  border-left: 1px solid #e6e6e6;
-  color: #737373;
-  font-size: 1.5em;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  margin: 0 0 0 10px;
-  padding: 0 0 0 10px;
+  background-color: #f7f7f7;
+  color: #595959;
+  font-size: 1.2em;
+  margin: 0 0 0 40px;
+  padding: 0 10px;
 }
 .cabecalho-titulo-pagina .container-form-action .btn.btn-search:hover {
   color: #404040;
@@ -278,6 +274,13 @@
 .cabecalho-titulo-pagina .container-form-action .tooltips {
   margin: 0 5px;
 }
+.cabecalho-titulo-pagina .container-form-action .btn-add {
+  background-color: #f7f7f7;
+  font-size: 1.2em;
+}
+.cabecalho-titulo-pagina .container-form-action .btn-add:hover {
+  background-color: #fff;
+}
 .cabecalho-titulo-pagina .container-form-action .dropdown-menu {
   min-width: 170px;
 }
@@ -286,6 +289,7 @@
   background-color: transparent;
   border: 0;
   color: #333333;
+  font-size: 1em;
   text-align: left;
   width: 100%;
   -webkit-border-radius: 0px;
@@ -536,7 +540,7 @@ fieldset.form-plano-contas .form-group {
   margin-bottom: 0px;
 }
 fieldset.form-plano-contas .form-group input[type="text"] {
-  margin: 10px 0 0;
+  margin: 3px 0 0;
 }
 fieldset.form-custo {
   border: 0;
@@ -665,6 +669,7 @@ table.table tbody tr td.form-table:hover {
 form fieldset .descricao textarea {
   font-size: 1em;
   max-height: 50px;
+  margin: 3px 0;
   outline: none;
   width: 100%;
 }
@@ -1435,7 +1440,7 @@ main {
   display: none;
   padding: 0 0 20px;
   position: absolute;
-  z-index: 99;
+  z-index: 9999;
   left: 100%;
   width: 100%;
   top: -47px;
@@ -1516,7 +1521,7 @@ main {
   right: 0;
   width: 10px;
   background: #fff;
-  z-index: 99;
+  z-index: 9999;
 }
 .dropdown-user {
   position: fixed;
@@ -2395,18 +2400,20 @@ table.table tbody tr:hover {
   background-color: #f9f9f9;
 }
 table.table tbody tr td {
-  padding: 8px 15px 0px 15px;
+  padding: 5px;
+  text-align: left;
 }
 table.table tbody tr td.tool-cell {
   padding-top: 4px;
   padding-bottom: 4px;
+  text-align: right;
 }
 table.table tbody tr td.tool-cell .dropdown-menu.pull-right {
   border: 0;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
-  top: 27px;
+  top: 25px;
   right: -1px;
 }
 table thead tr th {
@@ -2570,6 +2577,8 @@ table#sample-table-3.table thead th {
   background-color: transparent;
   border-bottom: 2px solid #c2c2c2;
   padding: 5px;
+  text-align: left;
+  vertical-align: bottom;
 }
 table#sample-table-3.table thead th.expand span {
   color: inherit;
@@ -2579,7 +2588,7 @@ table#sample-table-3.table thead th .fa {
   margin: 0;
 }
 table#sample-table-3.table tbody td {
-  color: #000000;
+  color: #404040;
 }
 table#sample-table-3.table tbody .tr-dropdown {
   background-color: rgba(0, 0, 0, 0.06);
@@ -2587,13 +2596,16 @@ table#sample-table-3.table tbody .tr-dropdown {
 table#sample-table-3.table tbody tr:hover td {
   background-color: transparent;
 }
+table#sample-table-3.table tbody td.tool-cell {
+  text-align: right;
+}
 table#sample-table-3.table tbody td.tool-cell .btn-group .btn {
   background: transparent;
   border: none;
   padding: 0px 3px;
 }
 table#sample-table-3.table tbody td.tool-cell .btn-group .btn i {
-  color: #a6a6a6;
+  color: #999999;
   font-size: 1.5em;
 }
 table#sample-table-3.table tbody td.tool-cell .btn-group ul.dropdown-menu li a {
@@ -2664,6 +2676,7 @@ table#sample-table-3.table form .campo-arquivo {
   color: #404040;
   display: block;
   font-size: 1em;
+  margin: 0;
 }
 .area-conteudo-hash form button.btn {
   background-color: #2d6eb0;

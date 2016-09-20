@@ -6,7 +6,7 @@
 
         <{{tag}} type="submit"
                 data-toggle="tooltip" data-placement="left" title="{{data.nome}}"
-                class="{{ data.metadata.ws_class | default("btn btn-transparent btn-xs tooltips") }} {{ tipo }}"
+                class="{{ data.metadata.ws_class | default("btn btn-transparent btn-xs tooltips btn-add") }} {{ tipo }}"
 
                 {% for key in data.metadata|keys %}
                     {% if key not in camposIgnorados %}
