@@ -1,12 +1,11 @@
-<div class="container-inscricao col-md-12">
+<div class="container-inscricao col-md-12 definir-senha">
     <div class="container-form">
         <form method="POST" id="aceite" action="{{ formAction }}">
             <div class="suport-text">
                 <h1>{{ nome }}, Parabéns!</h1>
-                {#<h2>#}Falta pouco para você ter em seu poder umas das ferramentas mais impressionantes da campanha de 2016, o HASH PRÉ-CAMPANHA.{#</h2>#}
-                {#<h2>#}Antes de prosseguir, troque sua senha:{#</h2>#}
+                <h2>Falta pouco para você ter em seu poder umas das ferramentas mais impressionantes da campanha de 2016, o HASH Campanha 2016. <br>Antes de prosseguir, cadastre sua nova senha:</h2>
             </div>
-            <div class="box-form-inscricao">
+            <div class="box-form-inscricao box-senha">
                 <p>
                     <label>
                         Digite sua nova senha:
@@ -26,9 +25,9 @@
                     </label>
                 </p>
             </div>
-            <div class="suport-text">
-                <h1>{{ 'aceite_termo_servico_e_privacidade'|zftranslate }}</h1>
-                <h2>Depois leia e aceite os termos abaixo.</h2>
+            <div class="suport-text termos">
+                <h3>{{ 'aceite_termo_servico_e_privacidade'|zftranslate }}</h3>
+                <h4>Depois leia e aceite os termos abaixo.</h4>
             </div>
             <div class="box-form-inscricao">
                 <h1></h1>
@@ -51,7 +50,7 @@
                             <button type="submit">{{ 'next'|zftranslate }}</button>
                         </div>
                     </div>
-                    <input type="hidden" name="tipoinstalacao" class="" value="{{ tipoinstalacao }}" /> 
+                    <input type="hidden" name="tipoinstalacao" class="" value="{{ tipoinstalacao }}" />
             </div>
         </form>
     </div>
@@ -68,15 +67,15 @@
       </div>
       <div class="modal-body">
         <p><strong>Respeitamos suas informações.</strong></p>
-        <p>Quando você se cadastra na plataforma HASH, no módulo pré-campanha, nós coletamos algumas informações pessoais:<p>
+        <p>Quando você se cadastra na plataforma HASH, no módulo HASH Campanha 2016, nós coletamos algumas informações pessoais:<p>
         <ul>
             <li>Nome;</li>
-            <li>Dados do(s) comitê(s) de pré-campanha do(s) candidato(s)</li>
+            <li>Dados do(s) comitê(s) de HASH Campanha 2016 do(s) candidato(s)</li>
             <li>E-mail</li>
             <li>Telefone</li>
             <li>Nova senha para acesso a plataforma HASH;</li>
         </ul>
-        <p>Temos 2 (dois) objetivos ao coletarmos essa informação. O primeiro é conceder acesso à plataforma  HASH, no módulo pré-campanha, a partir do e-mail e senha cadastrados. O segundo objetivo - e motivo de coletarmos seu nome, dados do comitê de pré-campanha do seu candidato, seu telefone e também seu e-mail - é termos a possibilidade de entrarmos em contato com você para lhe oferecer ajuda durante o uso da ferramenta.
+        <p>Temos 2 (dois) objetivos ao coletarmos essa informação. O primeiro é conceder acesso à plataforma  HASH, no módulo HASH Campanha 2016, a partir do e-mail e senha cadastrados. O segundo objetivo - e motivo de coletarmos seu nome, dados do comitê de HASH Campanha 2016 do seu candidato, seu telefone e também seu e-mail - é termos a possibilidade de entrarmos em contato com você para lhe oferecer ajuda durante o uso da ferramenta.
         As suas informações serão coletadas, usadas e tratadas única e exclusivamente para que as funcionalidades contratadas sejam efetivamente usadas por você e pelo comitê que você desejar seguir, e serão armazenadas em ambiente seguro e de acesso restrito, atendendo a preservação da intimidade, da vida privada, da honra e da imagem das partes direta ou indiretamente envolvidas.</p>
         <p> Caso você deseje alterar suas informações, basta entrar no sistema HASH (http://hash.ws) e clicar em "Editar Perfil" acessível ao lado do crachá de seu usuário, para tanto você deverá estar autenticado na plataforma HASH.</p>
         <p>Suas informações nunca serão fornecidas a nenhuma outra empresa que não a Titanium Tech, mas se mesmo assim você desejar removê-la envie um e-mail para suporte@hash.ws a partir do e-mail que você informou no cadastro ao HASH com o assunto "Excluir minha conta". Sua conta será excluída juntamente com todos seus dados.</p>

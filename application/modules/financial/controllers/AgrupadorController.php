@@ -325,7 +325,6 @@ class Financial_AgrupadorController extends App_Controller_Action_TwigCrud
             switch (strtolower($extensao)) {
                 case 'ofx':
                     $idMaster = $this->import();
-                    // @todo validar unicidade (não duplicar)
                     $this->_bo->processUpload($idMaster,$tipoMovimento);
                     break;
                 case 'pdf':

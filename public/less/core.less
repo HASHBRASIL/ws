@@ -14,10 +14,11 @@ html, html                      { min-height: 100%; font-size: @font-size; font-
 body                            { min-height: 100%; -webkit-font-smoothing: antialiased !important;}
 main                            { height: 100%; position: relative; max-width: 1265px; /* background: url(../img/bg-noise.jpg); */ border-right: 1px solid #efeded;}
 .area-sidebar                   { width: @sidebar-width; z-index: @zindex; float: left; margin-bottom: 55px;}
-.area-top                       { overflow: hidden; height: 60px; border-bottom: 1px solid #efeded;}
+.area-top                       { overflow: hidden; height: 65px; border-bottom: 1px solid #efeded;}
 .area-conteudo                  { overflow: hidden; margin-right: 0; min-height: 768px; padding: 20px 0 110px;
     &.chat-opened               { margin-right: @chat-width; }
     .content-wrapper            { margin-left: 0; }
+    .panel-white                { border: 0px;}
 }
 .area-chat                      { background: white; width: @chat-width; position: fixed; top: 0px; right: 0; height: 100%; padding-top: @top-height; .transition(); }
 
@@ -49,7 +50,7 @@ main                            { height: 100%; position: relative; max-width: 1
 
 .area-conteudo-hash             {
     .container-form-action      {
-        .btn                    { background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%); font-size: 1em; font-weight: bold; padding: 5px 10px;}
+        .btn                    { font-size: 1em; font-weight: bold; padding: 5px 10px; margin: 0;}
     }
 }
 

@@ -718,7 +718,7 @@ input[type="color"]:focus {
 }
 .table > tbody > tr > td {
   border-bottom: 1px solid #e2e2e4;
-  color: #5b5b60 !important;
+  color: #5b5b60;
   border-top: none;
 }
 .table > tbody > tr > td img {

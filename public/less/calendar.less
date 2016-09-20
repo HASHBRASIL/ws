@@ -1,0 +1,43 @@
+.ui-datepicker                                                                  {
+    &.ui-widget-content                                                         { background-color: @cor-branco !important; border: 1px solid lighten(@azul, 45%); .box-shadow(0 0 8px lighten(@azul, 65%));
+        .ui-widget-header                                                       { background-color: transparent !important;
+            span                                                                { color: lighten(@cor-preto, 10%);}
+            .ui-datepicker-title                                                {
+                span                                                            { font-weight: bold;}
+            }
+            .ui-datepicker-prev                                                 {
+                span                                                            { background-image: none !important; text-indent: 0;
+                    &:before                                                    { content: '\f053'; display: block; font-family: FontAwesome; left: 0;}
+                }
+            }
+            .ui-datepicker-next                                                 {
+                span                                                            { background-image: none !important; text-indent: 0;
+                    &:before                                                    { content: '\f054'; display: block; font-family: FontAwesome; right: 0;}
+                }
+            }
+            .ui-state-hover                                                     { background: none !important; border: none !important;}
+        }
+        table.ui-datepicker-calendar                                            {
+            thead                                                               {
+                tr                                                              {
+                    th                                                          { background-color: transparent;
+                        span                                                    { font-weight: bold !important;}
+                    }
+                }
+            }
+            tbody                                                               {
+                td                                                              {
+                    a                                                           { text-align: center;
+                        &.ui-state-default                                      { background: none !important; border: 0;
+                            &:hover                                             { background-color: lighten(@azul, 76%)!important;}
+                        }
+                    }
+                    &.ui-datepicker-today                                       { background-color: lighten(@azul, 20%); .rounded(3px);
+                        a                                                       { color: @cor-branco !important; font-weight: bold !important;}
+                        &:hover                                                 { background-color: transparent;}
+                    }
+                }
+            }
+        }
+    }
+}

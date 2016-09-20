@@ -13,10 +13,10 @@
                 {{ forms.input('id', view.vo.plc_id, 'hidden') }}
                 <div class="row">
                     <div class="col-md-12">
-                        <fieldset>
-                            <legend>
-                                {{ 'Formulário' | zftranslate }}
-                            </legend>
+                        <fieldset class="form-plano-contas">
+                            {# <legend>
+                                {{ 'Plano de contas' | zftranslate }}
+                            </legend> #}
                             <div class="row">
 
                                 {{ row.formgroup('Plano de Conta Pai', forms.select('plc_id_pai', view.vo.plc_id_pai, view.planoContasCombo, 'select2-skin', {'required' : ''}), 'col-md-4') }}
@@ -33,14 +33,15 @@
                                 {#'id_grupo' => 'Time'#}
 
                             </div>
-                            <div class="row">
-                                {{ row.formgroup('Descrição*', forms.textarea('plc_descricao', view.vo.plc_descricao), 'col-md-4') }}
-                            </div>
+
                             <div class="row">
                                 {#{{ row.formgroup('Permitir Lançamentos', forms.checkbox('plc_oculta', view.vo.plc_oculta, {1: 'Sim', 2: 'Não'}), 'col-md-4') }}#}
                                 {{ row.formgroup('Permitir Lançamentos', forms.checkbox('plc_oculta', view.vo.plc_oculta, {1: 'Sim'}), 'col-md-4') }}
 
                                 {{ row.formgroup('Grupo de Contas', forms.select('grc_id', view.vo.grc_id, view.grupoContasCombo, 'select2-skin', {'required' : ''}), 'col-md-4') }}
+                            </div>
+                            <div class="row descricao">
+                                {{ row.formgroup('Descrição*', forms.textarea('plc_descricao', view.vo.plc_descricao), 'col-md-12') }}
                             </div>
                         </fieldset>
                     </div>

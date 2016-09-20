@@ -18,21 +18,19 @@ table.table     { font-family: @arimo;
     tbody                           {
         tr                          {
             &:nth-child(even)       { background: fade(@cor-preto, 2%); }
-            td                      { padding: 8px 15px 0px 15px;
+            &:hover                 { background-color: #f9f9f9;}
+            td                      { padding: 5px; text-align: left;
                 &:last-child        {  }
-                &.tool-cell         { padding-top: 4px; padding-bottom: 4px;
+                &.tool-cell         { padding-top: 4px; padding-bottom: 4px; text-align: right;
                     // button          { margin-left: 5px; width: 25px; height: 25px;
                     //     // .glyphicon  { left: -4px; }
                     //     .fa         { left: -4px; }
                     // }
+                    //
+                    .dropdown-menu.pull-right   { border: 0; .rounded(0px); top: 25px; right: -1px;}
                 }
             }
 
-        }
-    }
-    tfoot       {
-        tr      {
-            td  {  }
         }
     }
 }
@@ -41,14 +39,14 @@ table                               {
     thead                           {
         tr                          {
             th                      { background-color: lighten(@cor-preto, 92%); color: fade(@cor-preto, 65%);
-                span, i             { color: lighten(@cor-preto, 35%);}
+                span, i             { color: lighten(@cor-preto, 40%);}
             }
         }
     }
     &.table-striped                 {
         tbody                       {
             tr                      {
-                &:nth-of-type(odd)  { background-color: transparent;}
+                // &:nth-of-type(odd)  { background-color: transparent;}
             }
         }
     }
@@ -119,16 +117,21 @@ table                               {
 
 table#sample-table-3.table                          {
     thead                                           {
-        th                                          { padding: 10px 5px;
-            .fa                                     { margin: 0;}
+        th                                          { background-color: transparent; border-bottom: 2px solid lighten(@cor-preto, 76%);  padding: 5px; text-align: left; vertical-align: bottom;
+            &.expand                                {
+                span                                { color: inherit;}
+            }
+            .fa                                     { color: lighten(@cor-preto, 70%); margin: 0;}
         }
     }
     tbody                                           {
+        td                                          { color: lighten(@cor-preto, 25%); }
         .tr-dropdown                                { background-color: fade(@cor-preto, 6%);}
-        td.tool-cell                                {
+        tr:hover td                                 { background-color: transparent;}
+        td.tool-cell                                { text-align: right;
             .btn-group                              {
                 .btn                                { background: transparent; border: none; padding: 0px 3px;
-                    i                               { color: lighten(@cor-preto, 65%); font-size: 1.5em;}
+                    i                               { color: lighten(@cor-preto, 60%); font-size: 1.5em;}
                 }
                 ul.dropdown-menu                    {
                     li                              {
@@ -137,6 +140,7 @@ table#sample-table-3.table                          {
                                 &.icofont-bill,
                                 &.icofont-flash     { font-size: 2em;}
                                 &.icofont-users     { font-size: 1.8em;}
+                                &:hover             { color: lighten(@cor-preto, 35%);}
                             }
                             &:hover, &:focus        { background-color: transparent;}
                         }
@@ -145,7 +149,7 @@ table#sample-table-3.table                          {
             }
         }
     }
-    button                                          { background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%); font-size: 1em; font-weight: bold;
+    button                                          { background-color: darken(@cor-azul, 25%); border: 0px; color: @cor-branco; font-size: 1em; font-weight: bold; border: 0;
         .caret                                      { display: none;}
     }
     form                                            {
@@ -173,11 +177,13 @@ table#sample-table-3.table                          {
 .area-conteudo-hash                         {
     fieldset                                {
         .form-group                         {
-            label                           { display: block;}
+            label                           { color: lighten(@cor-preto, 25%); display: block; font-size: 1em; margin: 0;}
         }
     }
     form                                    {
-        button.btn                          { background-color: lighten(@cor-preto, 25%); color: lighten(@cor-preto, 70%); font-size: 1em; font-weight: bold; margin: 0 20px 20px;}
+        button.btn                          { background-color: darken(@cor-azul, 25%); border: 0px; color: @cor-branco; font-size: 1em; margin: 0 20px 20px;
+            &:hover                         { background-color: darken(@cor-azul, 40%);}
+        }
     }
 }
 

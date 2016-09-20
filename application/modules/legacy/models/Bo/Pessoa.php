@@ -135,7 +135,8 @@
                 $arrTime[] = $item['id'];
             }
             $strTime = implode(',',$arrTime);
-            return $this->_dao->countGrid2($strTime,$tipopessoa,$classificacao,$filtros);   
+
+            return $this->_dao->countGrid2($strTime,$tipopessoa,$classificacao,$filtros);
         }
 
         public function getPessoaByCpfCnpj($cpfCnpj)
@@ -300,7 +301,7 @@
                 $idPessoa
             );
 
-            // -- Armazenando o nome do produto
+            // -- Armazenando o nome do produto - para instalação na configuração do workspace
             if (!empty($produto)) {
                 if (!is_array($produto)) {
                     $produto = [$produto];
@@ -405,6 +406,21 @@
                 throw $ex;
             }
         }
+
+        /**
+         * Instala os módulos do produto indicado em $nomeProduto.
+         *
+         * Caso $nomeProduto não esteja preenchido, é feito uma busca na base de
+         * dados pelo meta Config_Model_Bo_TipoInformacao::META_PRODUTOINICIAL,
+         * essa informação é criada pelo instalador ao salvar os produtos solicitados
+         * durante a inscrição (via url).
+         *
+         * @param type $idPessoa
+         * @param type $idGrupoTime
+         * @param string[] $nomeProduto O nome do produto ou produtos para instalação.
+         * @param type $imagemTroca
+         * @throws App_Validate_Exception
+         */
 
         public function instalaModulosDoProduto($idPessoa, $idGrupoTime, $nomeProduto = null,  $imagemTroca = NULL)
         {
