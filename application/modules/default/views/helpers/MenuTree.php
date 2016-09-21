@@ -33,6 +33,8 @@ class Zend_View_Helper_MenuTree extends Zend_View_Helper_FormElement
                     if ( $arvore->hasChildren() ) {
                         $filho = $this->menuTree($arvore->getChildren());
 
+                        $translation = Zend_Registry::get('Zend_Translate')->translate($this->servicos[$key]['metanome']);
+
                         if ($filho) {
 
                             $html .= "<li class='has-sub'>";
@@ -41,8 +43,8 @@ class Zend_View_Helper_MenuTree extends Zend_View_Helper_FormElement
                             // $html .= "<i class='{$icon}'></i>";
                             $html .= $this->_servicos[$key]['nome'];
                             //$html .= "<i class='fa fa-angle-right'></i>";
-                            if(!empty($this->servicos[$key]['metanome'])){
-                                $html.="<i class='fa fa-question-circle' aria-hidden='true' title='" .   Zend_Registry::get('Zend_Translate')->translate($this->servicos[$key]['metanome']) . "'></i>";
+                            if($translation !== $this->servicos[$key]['metanome']){
+                                $html.="<i class='fa fa-question-circle' aria-hidden='true' title='" .$translation. "'></i>";
                             }
                             $html .= "</span>";
                             //$html .= "</a>";
@@ -64,8 +66,8 @@ class Zend_View_Helper_MenuTree extends Zend_View_Helper_FormElement
                             // $html .= "<i class='{$icon}'></i>";
                             $html .= $this->_servicos[$key]['nome']; 
                             $html .= "</a>";
-                            if(!empty($this->_servicos[$key]['metanome'])){
-                                $html.="<i class='fa fa-question-circle' aria-hidden='true' title='" .  Zend_Registry::get('Zend_Translate')->translate($this->_servicos[$key]['metanome']) . "'></i>";
+                            if($translation !== $this->servicos[$key]['metanome']){
+                                $html.="<i class='fa fa-question-circle' aria-hidden='true' title='" .$translation. "'></i>";
                             }
                             $html .= "</span>";
                             $html .= "</li>";

@@ -105,7 +105,15 @@
                                     <?php echo $modulo['nome']; ?>
                                         <?php if(!empty($modulo['metanome'])){ ?>
                                 </span>
-                                <i class="icofont icofont-question-circle" aria-hidden="true" title="<?php echo Zend_Registry::get('Zend_Translate')->translate($modulo['metanome']); ?>"></i>
+                                <?php 
+                                    $translation = Zend_Registry::get('Zend_Translate')->translate($modulo['metanome']);
+                                    if($translation != $modulo['metanome']){
+                                ?>
+                                    <i class="icofont icofont-question-circle" aria-hidden="true" title="<?php echo $translation ?>"></i>
+                                <?php 
+                                    }
+                                ?>
+                                
                                 <?php } ?>
                                 <i class="fa fa-angle-right" aria-hidden="true"></i>
 
