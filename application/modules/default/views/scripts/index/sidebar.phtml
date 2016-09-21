@@ -84,23 +84,37 @@
                 </header> -->
                 <ul>
                     <?php
-                    foreach ($identity->time['modulos'] as $key => $modulo):
-                        if ($this->isAllowed($modulo['id_servico'])) : ?>
-                            <li>
-                                <a class="modulo <?php if($identity->modulo['id'] == $modulo['id_servico']){ echo 'active'; } ?>"
-                                   name="<?php echo $identity->servicos[$modulo['id_servico']]['nome']; ?>"
-                                   id="<?php echo $modulo['id_servico']?>"
-                                   href="#">
-                                    <i class="img-item <?php echo isset($identity->servicos[$modulo['id_servico']]['metadata']['ws_icon']) ? $identity->servicos[$modulo['id_servico']]['metadata']['ws_icon'] : 'icon-cog' ?>"></i>
-                                    <span><?php echo $identity->servicos[$modulo['id_servico']]['nome']; ?><?php if(!empty($identity->servicos[$modulo['id_servico']]['metanome'])){ ?></span><i class="icofont icofont-question-circle" aria-hidden="true" title="<?php echo Zend_Registry::get('Zend_Translate')->translate($identity->servicos[$modulo['id_servico']]['metanome']); ?>"></i><?php } ?>
-                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                </a>
-                                <div class="submenu">
-                                    <?php echo $this->partial('menu_novo.phtml', 'default', array('idModulo' => $modulo['id_servico']))?>
-                                </div>
-                            </li>
-                        <?php endif;
-                    endforeach;?>
+                    $modulosPai = array();
+                    foreach ($identity->time['modulos'] as $key => $modulo){
+                        if ($this->isAllowed($modulo['id_servico']) && $identity->servicos[$modulo['id_servico']]['visivel']){
+                            $modulosPai[] = $identity->servicos[$modulo['id_servico']];
+                        }
+                    }
+                    usort($modulosPai, function($a, $b){ return $a < $b; });
+
+                    foreach ($modulosPai as $modulo){
+                    ?>
+                        <li>
+                            <a class="modulo <?php if($identity->modulo['id'] == $modulo['id']){ echo 'active'; } ?>"
+                               name="<?php echo $modulo['nome']; ?>"
+                               id="<?php echo $modulo['id']?>"
+                               href="#">
+
+                                <i class="img-item <?php echo isset($modulo['metadata']['ws_icon']) ? $modulo['metadata']['ws_icon'] : 'icon-cog' ?>"></i>
+                                <span>
+                                    <?php echo $modulo['nome']; ?>
+                                        <?php if(!empty($modulo['metanome'])){ ?>
+                                </span>
+                                <i class="icofont icofont-question-circle" aria-hidden="true" title="<?php echo Zend_Registry::get('Zend_Translate')->translate($modulo['metanome']); ?>"></i>
+                                <?php } ?>
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+
+                            </a>
+                            <div class="submenu">
+                                <?php echo $this->partial('menu_novo.phtml', 'default', array('idModulo' => $modulo['id']))?>
+                            </div>
+                        </li>
+                    <?php } ?>
                 </ul>
             </nav>
         </section>
