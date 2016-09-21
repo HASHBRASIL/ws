@@ -637,37 +637,53 @@ $(document).ready(function(){
                     break;
 
                 case 'dropdowntopo':
-                    /* depois criar uma função pra isso... agora só estou fazendo acontecer by toinsane GHP*/
+
                     if( $('.dropdown-content').length == 0 ){
+
+                        var botao = $(this);
+                        var classeFilho = botao.children('i').attr('class');
+                        botao   .addClass('active')
+                                .attr('disabled', 'disabled')
+                                .children('i')
+                                .attr('class', 'fa active fa-spinner fa-pulse');
+                        
                         var div     = $(this).closest('div').addClass('box-dropdown');
                         var row     = $(this).closest('tr');
                         var countTd = row.find('td').length;
                         var tr      = $(document.createElement('tr'));
                         var td      = $(document.createElement('td')).attr('colspan', countTd).addClass('dropdown-content');
 
-                        //Seta o valor do id da linha caso não seja undefined
+
                         var data = {};
                         if ( $(this).closest('tr').attr('data-id') != undefined ) {
                            data[field] = $(this).closest('tr').attr('data-id');
                         }
 
                         td.appendTo(tr);
-                        tr.prependTo(div);
+                        tr.appendTo(div);
 
                         $.ajax({
-                            type: "GET",
                             url:  "home.php?servico=" + servico,
                             data: data,
                             success: function(response, status, XMLHttpRequest) {
-
-                                if (processAjaxSuccess(response, status, XMLHttpRequest) == false) {
-                                    return;
-                                }
+                                
+                                botao.removeAttr('disabled').children('i').attr('class', classeFilho);
+                                
+                                if (processAjaxSuccess(response, status, XMLHttpRequest) == false) { return; }
 
                                 td.html( response );
-                                $(document).trigger('custom');
+                                //$(document).trigger('custom');
                             }
                         });
+                    }else{
+
+                        $('.dropdown-content').parent().remove();
+                        
+                        if($(this).hasClass('active')){
+                            $(this).removeClass('active');
+                        }else{
+                            $(this).trigger('click');
+                        }
                     }
                     break;
 
@@ -895,14 +911,14 @@ $(document).ready(function(){
 });
 
 $(document).on('custom', function() {
-
-
-
-    $('.dropdown-toggle').click(function(){
-        if($(this).parent().children('.dropdown-menu').css('display') == 'none'){
+    
+        $('.tool-cell .dropdown-toggle').click(function(){
+        console.log($(this));
+        var estado = $(this).parent().children('.dropdown-menu').css('display');
+        $('.tool-cell .dropdown-toggle').parent().children('.dropdown-menu').hide();
+        
+        if(estado == 'none'){
             $(this).parent().children('.dropdown-menu').show();
-        }else{
-            $(this).parent().children('.dropdown-menu').hide();
         }
     });
 
@@ -976,12 +992,6 @@ $(document).on('custom', function() {
         });
         e.preventDefault();
     });
-
-
-
-
-
-
 
     $('.datepicker-skin').datepicker({
         dateFormat: 'dd/mm/yy',
