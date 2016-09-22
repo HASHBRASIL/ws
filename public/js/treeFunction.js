@@ -129,8 +129,11 @@ $(document).ready(function()
         "types" : {
             "#" : {"max_depth" : 5, "valid_children" : ["root"]},
             "root" : {"icon" : "glyphicon glyphicon-file", "valid_children" : ["detalhe", "root"]},
+            "time" : {'icon' : "fa fa-users"},
+            "site" : {'icon' : "fa fa-sitemap"},
+            "mensageria-time" : {'icon' : "ico-mensageria-time"},
+            "mensageria" : {'icon' : "fa fa-hashtag"},
             "default" : {'icon' : "fa fa-folder-o"},
-            "site" : {'icon' : "fa fa-sitemap"}
         },
         "plugins" : [
             "dnd", "contextmenu", "search", "state", "types", "json_data"

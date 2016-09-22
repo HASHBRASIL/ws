@@ -149,9 +149,9 @@ class Config_Model_Bo_Grupo extends App_Model_Bo_Abstract
         return $this->_dao->listGruposOrfaos();
     }
 
-    public function listGruposAbaixo($uuid)
+    public function listGruposAbaixo($uuid, $params = array())
     {
-        return $this->_dao->listGruposAbaixo( $uuid );
+        return $this->_dao->listGruposAbaixo( $uuid, $params);
     }
     public function listGruposFilho($uuid)
     {

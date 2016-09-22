@@ -144,7 +144,7 @@ $(document).ready(function()
               }
         },
         "types" : {
-            "#" : {"max_depth" : 5, "valid_children" : ["root"]},
+            "#" : {"max_depth" : -1, 'max_children' : -1, "valid_children" : ["root"]},
             "root" : {"icon" : "glyphicon glyphicon-file", "valid_children" : ["detalhe", "root"]},
             "default" : {'icon' : "fa fa-folder-o"},
             "site" : {'icon' : "fa fa-sitemap"}
