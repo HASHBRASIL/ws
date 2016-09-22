@@ -16,13 +16,18 @@ class Config_Model_Dao_Grupo extends App_Model_Dao_Abstract
         'pcprep'   => 'p.nome'
     );
 
-    public function listGruposAbaixo( $uuid )
+    public function listGruposAbaixo( $uuid, $params = array())
     {
+        if(isset($params['mensageria'])){
+            $mensageiria1 = ',(SELECT rgp.nomehash FROM rl_grupo_pessoa rgp where g1.id = rgp.id_grupo limit 1)';
+            $mensageiria2 = ',(SELECT rgp.nomehash FROM rl_grupo_pessoa rgp where g2.id = rgp.id_grupo limit 1)';
+        }
+        
         $select = $this->_db->prepare(
                 'WITH RECURSIVE grupos as (
-                        SELECT * FROM tb_grupo g1 WHERE g1.id = ?
+                        SELECT * '.$mensageiria1.' FROM tb_grupo g1 WHERE g1.id = ?
                         UNION ALL
-                        select  g2.* from tb_grupo as g2 INNER JOIN grupos ON g2.id_pai = grupos.id
+                        select  g2.* '.$mensageiria2.' from tb_grupo as g2 INNER JOIN grupos ON g2.id_pai = grupos.id
                 )
                 select * from grupos g');
 

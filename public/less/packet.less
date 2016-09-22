@@ -1757,4 +1757,32 @@ fieldset {
 }
 
 
+@font-face {
+  font-family: 'ico-mensageria-time';
+  src:  url('../font/mensageria-time/icomoon.eot?j250jl');
+  src:  url('../font/mensageria-time/icomoon.eot?j250jl#iefix') format('embedded-opentype'),
+    url('../font/mensageria-time/icomoon.ttf?j250jl') format('truetype'),
+    url('../font/mensageria-time/icomoon.woff?j250jl') format('woff'),
+    url('../font/mensageria-time/icomoon.svg?j250jl#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change font */
+  font-family: 'ico-mensageria-time' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fonts:before {
+  content: "\e900";
+}
