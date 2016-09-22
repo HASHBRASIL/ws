@@ -60,11 +60,19 @@ class Content_ServicoController extends App_Controller_Action_Twig
     {
         try {
             $idPai = $this->getRequest()->getParam('idPai');
+            
             if (empty($idPai)) {
                 throw new App_Validate_Exception('novo_servico_id_pai_vazio_exception');
             }
+            
+            
+            
+            
 
             $dadosRequisicao = $this->getRequest()->getParams();
+            
+            if ($dadosRequisicao['idPai'] == 'pai') { $dadosRequisicao['idPai'] = null; }
+            
             $dados = [
                 'id' => $dadosRequisicao['uuid'],
                 'id_pai' => $dadosRequisicao['idPai'],
