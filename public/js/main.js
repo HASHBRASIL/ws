@@ -878,7 +878,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-    $('body').on('click', '.tool-cell .dropdown-toggle', function(){
+    $('body').on('click', '.tool-cell .dropdown-toggle, .container-form-action .dropdown-toggle', function(){
         var estado = $(this).parent().children('.dropdown-menu').css('display');
         $('.tool-cell .dropdown-toggle, .container-form-action .dropdown-toggle').parent().children('.dropdown-menu').hide();
 
