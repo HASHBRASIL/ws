@@ -93,36 +93,41 @@ class Content_GrupoController extends App_Controller_Action
                     'type'   => $grupo['id_pai'],
                 );
 
-                $grupos = $modelGrupo->listGruposAbaixo($grupo['id']);
+                $grupos = $modelGrupo->listGruposAbaixo($grupo['id'], array('mensageria' => true));
 
                 foreach( $grupos as $subGrupo )
                 {
                     $parent = empty($subGrupo['id_pai']) ? '#' : $subGrupo['id_pai'];
                     $nome = empty($subGrupo['nome']) ? 'S/N' : $subGrupo['nome'];
-
+                    $ramo = array( 'id'     => $subGrupo['id'], 'parent' => $parent, 'text'   => $nome);
+                    
                     $novaArvore[] = (object) array(
                         'id'     => $subGrupo['id'],
                         'parent' => $parent,
                         'text'   => $nome,
-                        'type'   => $subGrupo['id_pai'],
+                        'type'   => "site"
                     );
                 }
             }
 
         }else{
-            $grupos = $modelGrupo->listGruposAbaixo($idTimeEscolhido);
-
+            $grupos = $modelGrupo->listGruposAbaixo($idTimeEscolhido, array('mensageria' => true));
+      
             foreach( $grupos as $grupo )
             {
                 $parent = empty($grupo['id_pai']) ? '#' : $grupo['id_pai'];
                 $nome = empty($grupo['nome']) ? 'S/N' : $grupo['nome'];
-
-                $novaArvore[] = (object) array(
-                    'id'     => $grupo['id'],
-                    'parent' => $parent,
-                    'text'   => $nome,
-                    'type'   => $grupo['id_pai'],
-                );
+                $ramo = array( 'id'     => $grupo['id'], 'parent' => $parent, 'text'   => $nome);
+                
+                if(!empty($grupo['nomehash'])){
+                    $ramo['type'] = 'mensageria';
+                }else if(!empty($grupo['id_representacao'])){
+                    $ramo['type'] = 'time';
+                }else if(!empty($grupo['nomehash']) && !empty($grupo['id_representacao'])) {
+                    $ramo['type'] = 'mensageria-time';
+                }
+                
+                $novaArvore[] = (object) $ramo;
             }
         }
 

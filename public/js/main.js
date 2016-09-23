@@ -597,6 +597,7 @@ $(document).ready(function(){
         if (comportamento == 'action' && show == 'dropdown') {
             show = 'dropdowntopo';
         }
+
         if(typeof(callbackTableFilter) == 'function'){
             e.preventDefault();
             callbackTableFilter($(this).closest('tr').attr('data-id'));
@@ -672,7 +673,7 @@ $(document).ready(function(){
                                 if (processAjaxSuccess(response, status, XMLHttpRequest) == false) { return; }
 
                                 td.html( response );
-                                //$(document).trigger('custom');
+                                $(document).trigger('custom');
                             }
                         });
                     }else{
@@ -724,8 +725,6 @@ $(document).ready(function(){
                     //console.log( $('.dropdown-content').length )
                     $(this).closest('table').find('tr').removeClass('tr-dropdown')
 
-
-
                     if( $('.dropdown-content').length == 0 ){
                         var botao = $(this);
 
@@ -756,7 +755,6 @@ $(document).ready(function(){
                                 if (processAjaxSuccess(response, status, XMLHttpRequest) == false) {
                                     return;
                                 }
-
                                 botao.children('.fa').remove()
                                 botao.children('i').show();
                                 td.addClass('dropdown-inline form-table');
@@ -810,37 +808,6 @@ $(document).ready(function(){
             }
         }
     });
-
-    //$.ajaxSetup({
-    //    //timeout: 30000, // definir o timeout default do sistema.
-    //    error: function(response, status, XMLHttpRequest) {
-    //
-    //        // tratamento default de ajax.
-    //
-    //        var msg;
-    //        if (status == 'timeout') {
-    //            msg = 'A requisição demorou mais tempo que deveria, tente novamente.';
-    //        } else if (response.status == 401) { // erro default para caso não esteja logado.
-    //            top.window.location.reload();
-    //            msg = 'Sessão expirada.';
-    //        } else { // erro default no sistema.
-    //            msg = 'Foi detectado um comportamento inesperado e os administradores já foram alertados deste evento.';
-    //        }
-    //
-    //        // @todo msg de erro.
-    //        bootbox.alert(response.msg);
-    //    },
-    //    // @todo desligado por enqnt, até padronizar todas as telas.
-    //    //success: function(result, status, xhr) {
-    //    //    processAjaxSuccess(response, status, XMLHttpRequest);
-    //    //}
-    //});
-
-    /**
-     *
-     *   SCRIPT PARA ADICIONAR UM NOVO CAMPO AO FORMULARIO e/ou REMOVE-LO
-     *
-     **/
 
     $('main').on('click', '[data-duplicate]', function(e){
         e.preventDefault();
@@ -910,22 +877,15 @@ $(document).ready(function(){
 
 });
 
-$(document).on('custom', function() {
-    
-        $('.tool-cell .dropdown-toggle').click(function(){
-        console.log($(this));
+$(document).ready(function(){
+    $('body').on('click', '.tool-cell .dropdown-toggle', function(){
         var estado = $(this).parent().children('.dropdown-menu').css('display');
-        $('.tool-cell .dropdown-toggle').parent().children('.dropdown-menu').hide();
-        
-        if(estado == 'none'){
-            $(this).parent().children('.dropdown-menu').show();
-        }
+        $('.tool-cell .dropdown-toggle, .container-form-action .dropdown-toggle').parent().children('.dropdown-menu').hide();
+
+        if(estado === 'none'){ $(this).parent().children('.dropdown-menu').show(); }
     });
 
-    $('[data-toggle="tooltip"]').tooltip();
-
-    $('.block-backsidebar').click(function(){
-
+    $('body').on('click', '.block-backsidebar', function(){
         $('.area-sidebar').addClass('hidden-xs');
         $('.area-sidebar').addClass('hidden-sm');
         $('.area-sidebar').addClass('visible-lg');
@@ -933,7 +893,7 @@ $(document).on('custom', function() {
         $('.block-backsidebar').fadeOut('fast');
     });
 
-    $('.btn-menu-open').click(function(){
+    $('body').on('click', '.btn-menu-open', function(){
 
         $('.area-sidebar').removeClass('hidden-xs');
         $('.area-sidebar').removeClass('hidden-sm');
@@ -942,35 +902,21 @@ $(document).on('custom', function() {
         $('.block-backsidebar').fadeIn('fast');
     });
 
-    //$( ".date" ).datepicker({
-    //    dateFormat: 'dd/mm/yy',
-    //    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
-    //    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-    //    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-    //    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-    //    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
-    //});
-
-    // @todo ajustar mascara para mostrar valor mesmo sem clicar no campo.
-    $('.decimal').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
-
-    PNotify.prototype.options.styling = "bootstrap3";
-
-    $("#selectEntity").change(function(){
+     $('body').on('change', "#selectEntity", function(){
         callAjax({id_grupo: $(this).children('option:selected').val()}, '#listMenu', 'includes/listMenu.php');
     });
 
-    $("#selectEntitytopo").change(function(){
+    $('body').on('change', "#selectEntitytopo", function(){
         callAjax({id_grupo: $(this).children('option:selected').val()}, '#listMenutopo', 'includes/listMenu.php');
     });
 
-    $("#formUpdate button[type=submit]").click(function(e){
+    $('body').on('click', "#formUpdate button[type=submit]", function(e){
 
         $("button[type=submit]", $(this).parents("form")).removeAttr("clicked");
         $(this).attr("clicked", "true");
     });
 
-    $("#formUpdate").submit(function(e){
+    $('body').on('submit', "#formUpdate", function(e){
 
         var val = $("button[type=submit][clicked=true]").attr('id');
         if(val == 'duplicateMaster'){
@@ -992,6 +938,17 @@ $(document).on('custom', function() {
         });
         e.preventDefault();
     });
+
+});
+
+$(document).on('custom', function() {
+   
+    $('[data-toggle="tooltip"]').tooltip();
+
+    // @todo ajustar mascara para mostrar valor mesmo sem clicar no campo.
+    $('.decimal').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+
+    PNotify.prototype.options.styling = "bootstrap3";
 
     $('.datepicker-skin').datepicker({
         dateFormat: 'dd/mm/yy',
@@ -1027,7 +984,6 @@ $(document).on('custom', function() {
     $('.messagelist .msg').each(function(){
         msg($(this).html(), $(this).attr('data-type'), 'Aviso');
     });
-
 });
 
 function transportaDados (  ) {
