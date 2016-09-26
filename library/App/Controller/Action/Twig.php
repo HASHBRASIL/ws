@@ -345,7 +345,7 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
             }
         }
 
-        $retorno = array('ib' => $id_master, 'caminho' => $filePath, 'original' => $fileName, 'ocr' => $dadosOcr); // @todo oq é isso?! ", 'id_tib' => $tibArquivo[0]);"
+        $retorno = array('ib' => $id_master, 'caminho' => $filePath, 'original' => $fileName, 'ocr' => $dadosOcr);
 
         return $retorno;
     }

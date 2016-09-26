@@ -9,24 +9,7 @@
 <div class="panel panel-white">
     <div class="row box-table-container panel-body table-responsive">
         <form class="form-tree uploadform" method="POST" action="">
-            <select name="id_grupo" id="grupo" class="select-times select2-skin">
-                {% for t in grupos %}
-                    <option value="{{ t.id }}" {% if t.id == idTimeEscolhido %} selected {% endif %}>
-                        {{ t.nome2 }}
-                    </option>
-                {% endfor %}
-            </select>
-
-            {#<select name="idTipoEscolhido" class="select-tipo">#}
-            {#<option value="grupos" {% if 'grupos' == idTipoEscolhido %} selected {% endif %}>#}
-            {#grupos#}
-            {#</option>#}
-            {#<option value="servicos" {% if 'servicos' == idTipoEscolhido %} selected {% endif %}>#}
-            {#serviços#}
-            {#</option>#}
-            {#</select>#}
-
-            <input type="submit" value="Atualizar">
+            <input type="hidden" name="id_ib" id="id_ib" value="" />
 
         </form>
 

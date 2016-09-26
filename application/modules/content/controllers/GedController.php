@@ -7,6 +7,12 @@ class Content_GedController extends App_Controller_Action_Twig {
      */
     protected $_bo;
 
+    public function gridIbAction()
+    {
+        $this->gridGrupoAction();
+        $this->view->file = 'grid-ib.html.twig';
+    }
+
     public function gridGrupoAction()
     {
         // pegar query para listar documentos
@@ -45,6 +51,7 @@ class Content_GedController extends App_Controller_Action_Twig {
 
         $filhos = $this->identity->servicos[$this->servico['id']]['filhos'];
         $data = array();
+
         foreach ($filhos as $idFilho => $filho) {
             if ($filho['ws_comportamento'] == 'filter') {
                 $data['servico'] = $idFilho;
@@ -59,7 +66,7 @@ class Content_GedController extends App_Controller_Action_Twig {
         $this->view->data['idTimeEscolhido'] = $idGrupo;
 
 //        $this->view->data = array('filedir' => $filedir->url);
-//        echo $this->_gridSelect->__toString();
+        echo $this->_gridSelect->__toString();
 
     }
 
@@ -128,10 +135,11 @@ class Content_GedController extends App_Controller_Action_Twig {
 
             switch (strtolower($extensao)) {
                 case 'ofx':
-                    $response = array(
-                        'success' => false,
-                        'msg' => $this->_translate->translate("Formato nao compativel")
-                    );
+                    $retornoPai = $this->_saveFile($fileContents, $fileName);
+//                    $response = array(
+//                        'success' => false,
+//                        'msg' => $this->_translate->translate("Formato nao compativel")
+//                    );
 //                    $idMaster = $this->import();
 //                    // @todo validar unicidade (não duplicar)
 //                    $this->_bo->processUpload($idMaster, $tipoMovimento);
@@ -148,12 +156,11 @@ class Content_GedController extends App_Controller_Action_Twig {
 
                     $fileone = realpath($filedir->path . $retornoPai['caminho']);
 
-
                     $fileTransformation = new Spatie\PdfToImage\Pdf($fileone);
 
                     foreach (range(1, $fileTransformation->getNumberOfPages()) as $pageNumber) {
                         $fileContents = $fileTransformation->setPage($pageNumber)->getImageData("xpto.jpg");
-                        $retorno = $this->_saveFile($fileContents, $pageNumber . ".jpg", $retornoPai['ib'], $ocr);
+                        $retorno = $this->_saveFile($fileContents, $fileName . '-' . $pageNumber . ".jpg", $retornoPai['ib'], $ocr);
 
 //                        $boRlAgrupadorFinanceiroIb->adicionarVinculo($retorno, null);
 
@@ -161,7 +168,13 @@ class Content_GedController extends App_Controller_Action_Twig {
                     }
 
                     break;
-                // break omitido intensionalmente
+                case 'doc':
+                    //Fall through to next case;
+                case 'xls':
+                    //Fall through to next case;
+                    // estes formatos não tem OCR. simplesmente salva
+                    $ocr = false;
+                    // break omitido intensionalmente
                 case 'png':
                     //Fall through to next case;
                 case 'gif':
