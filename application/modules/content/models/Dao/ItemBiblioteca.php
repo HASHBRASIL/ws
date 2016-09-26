@@ -633,14 +633,13 @@ DML;
             ->join(array('tib4' => 'tp_itembiblioteca'), 'ib4.id_tib = tib4.id', array())
             ->join(array('rlgi' => 'rl_grupo_item'), 'rlgi.id_item = ib.id', array())
             ->join(array('g' => 'tb_grupo'), 'rlgi.id_grupo = g.id', array())
-            ->joinLeft(array('rlvi' => 'rl_vinculo_item'), 'rlvi.id_ib_principal = ib.id', array())
+            ->joinLeft(array('rlvi' => 'rl_vinculo_item'), 'rlvi.id_ib_vinculado = ib.id', array())
 
 //            ->joinLeft(array('tim' => new Zend_Db_Expr("(select * from tp_itembiblioteca_metadata where metanome = 'ws_tib')")),'tib.id = tim.id_tib', array())
 //            ->joinLeft(array('timcombo' => new Zend_Db_Expr("(select * fro    m tp_itembiblioteca_metadata where metanome = 'ws_comboform')")),'tib.id = timcombo.id_tib', array())
 //            ->joinLeft(array('tibcampo' => 'tp_itembiblioteca'),'tibcampo.id_tib_pai::varchar = tim.valor::varchar and tibcampo.metanome = timcombo.valor',array())
 //            ->joinLeft(array('ibcombo' => 'tb_itembiblioteca'),'ibcombo.id_ib_pai::varchar = ib.valor::varchar and ibcombo.id_tib = tibcampo.id', array())
 
-            ->where('rlgi.id_grupo = ?', $idGrupo)
             // pegando o nome do arquivo
             ->where('tib2.id = ?', '99696bec-ca4a-484c-a68e-78dbc19c1ce1')
             ->where('tib3.id = ?', '3633182d-368d-47fd-a9c7-172c28f4f3b2')
@@ -656,7 +655,8 @@ DML;
         if ($idTib) {
             $select->where('rlvi.id_ib_principal = ?', $idTib);
         } else {
-            $select->where('rlvi.id_ib_vinculado is null');
+            $select->where('rlvi.id_ib_vinculado is null')
+                   ->where('rlgi.id_grupo = ?', $idGrupo);
         }
 
 //        echo $select->__toString();

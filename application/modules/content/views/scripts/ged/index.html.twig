@@ -12,7 +12,7 @@
     <div class="col-md-6">
 
         <form class="form-tree uploadform" method="POST" action="">
-            <select name="id_grupo" id="grupo" class="select-times">
+            <select name="id_grupo" id="grupo" class="select-times select2-skin">
                 {% for t in grupos %}
                     <option value="{{ t.id }}" {% if 'grupos' == idTipoEscolhido %} selected {% endif %} >
                         {{ t.nome2 }}
