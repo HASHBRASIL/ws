@@ -9,14 +9,15 @@
 <div class="panel panel-white">
     <div class="row box-table-container panel-body table-responsive">
         <form class="form-tree uploadform" method="POST" action="">
-            <select name="id_grupo" id="grupo" class="select-times select2-skin">
-                {% for t in grupos %}
-                    <option value="{{ t.id }}" {% if t.id == idTimeEscolhido %} selected {% endif %}>
-                        {{ t.nome2 }}
-                    </option>
-                {% endfor %}
-            </select>
-
+            <div class="col-md-4">
+                <select name="id_grupo" id="grupo" class="select-times select2-skin">
+                    {% for t in grupos %}
+                        <option value="{{ t.id }}" {% if t.id == idTimeEscolhido %} selected {% endif %}>
+                            {{ t.nome2 }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
             {#<select name="idTipoEscolhido" class="select-tipo">#}
             {#<option value="grupos" {% if 'grupos' == idTipoEscolhido %} selected {% endif %}>#}
             {#grupos#}
@@ -25,9 +26,9 @@
             {#serviços#}
             {#</option>#}
             {#</select>#}
-
-            <input type="submit" value="Atualizar">
-
+            <div class="col-md-2">
+                <input type="submit" value="Atualizar">
+            </div>
         </form>
 
         <table id="sample-table-3" class="table table-striped table-hover paginacao" data-servico="{{ paginacao.id }}" >
