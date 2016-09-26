@@ -5,20 +5,22 @@
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="js/jquery-file-upload/css/jquery.fileupload.css">
 
-<span class="btn btn-success fileinput-button">
-        <i class="glyphicon glyphicon-plus"></i>
+<div class="field-file">
+    <span class="btn btn-success fileinput-button">
+            {# <i class="icofont icofont-upload-alt"></i> #}
 
-        <span>{{ 'Arquivo(s)' | zftranslate }} </span>
+            {# <span>{{ 'Arquivo(s)' | zftranslate }} </span> #}
+            <h2>Arraste o arquivo aqui ou clique na imagem para selecionar o arquivo.</h2>
+            <input id="fileupload" type="file" name="file" multiple><i class="icofont icofont-upload-alt"></i>
+        </span>
+    <div id="progress" class="progress">
+        <div class="progress-bar progress-bar-success"></div>
+    </div>
 
-        <input id="fileupload" type="file" name="file" multiple>
-    </span>
-<div id="progress" class="progress">
-    <div class="progress-bar progress-bar-success"></div>
+    <div id="files" class="files"></div>
+
+    <br>
 </div>
-
-<div id="files" class="files"></div>
-
-<br>
 
 {#<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>#}
 <script src="js/jquery-file-upload/js/jquery.ui.widget.js"></script>
