@@ -705,6 +705,7 @@ table.table tbody tr td.form-table:hover {
   background-color: #fcfcfc;
   border: 1px solid #ebebeb;
   padding: 20px 20px 0;
+  text-align: center;
 }
 .container-fluid .field-file .btn {
   background-color: transparent;
@@ -712,9 +713,10 @@ table.table tbody tr td.form-table:hover {
   color: #e6e6e6;
   font-size: 10em;
   height: 170px;
+  margin-bottom: 0;
 }
 .container-fluid .field-file h2 {
-  color: ighten(#000, 70%);
+  color: #b3b3b3;
   font-family: 'Arimo', sans-serif;
   font-weight: bold;
   font-size: 0.1em;
@@ -728,17 +730,24 @@ table.table tbody tr td.form-table:hover {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+  margin-bottom: 0;
+  height: 10px;
 }
-.box-table-container form.uploadform {
-  margin: 0 0 30px;
+.box-table-container form.uploadform,
+.box-form-container form.uploadform {
+  display: inline-block;
+  margin: 10px 0 30px;
+  width: 100%;
 }
-.box-table-container form.uploadform select.select-times {
+.box-table-container form.uploadform select.select-times,
+.box-form-container form.uploadform select.select-times {
   background-color: #f2f2f2;
   border: 0;
   height: 30px;
   outline: none;
 }
-.box-table-container form.uploadform input {
+.box-table-container form.uploadform input,
+.box-form-container form.uploadform input {
   background-color: #007ad0;
   border: 0px;
   color: #fff;
@@ -748,6 +757,17 @@ table.table tbody tr td.form-table:hover {
   border-radius: 2px;
   padding: 5px 15px;
   outline: none;
+  margin: 5px 0 0 10px;
+}
+.box-table-container form.uploadform *[class^="col-"],
+.box-form-container form.uploadform *[class^="col-"] {
+  padding: 0;
+}
+.form-tree.uploadform {
+  margin: 0 0 10px;
+}
+.form-tree.uploadform select {
+  margin: 0 10px;
 }
 form fieldset .descricao textarea {
   font-size: 1em;
