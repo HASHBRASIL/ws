@@ -125,6 +125,18 @@ class Informacao extends Base
     		return false;
     	}
     }
+       
+    function listaInformacoes($id_pessoa)
+    {   
+        $stmt = $this->dbh->prepare('select *, tp.metanome from tb_informacao tb
+                                    JOIN tp_informacao tp ON tb.id_tinfo = tp.id
+                                     where tb.id_pessoa = :id_pessoa');
+    
+    	$stmt->bindValue(':id_pessoa', $id_pessoa);
+    	$stmt->execute();
+    
+    	return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     
     function informacaoComValorJaCadastrado($id_tinfo, $id_pessoa, $valor)
     {
