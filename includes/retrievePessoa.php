@@ -22,8 +22,10 @@
     $pessoa = new Pessoa();
     $itemBiblioteca = new ItemBiblioteca();
     $tib = new TpItemBiblioteca();
-
+    $modelInfo = new Informacao();
+    
     $rsPessoa = $pessoa->getPessoaById($uuidPessoa);
+    $infos = $modelInfo->listaInformacoes($uuidPessoa);
 
     $rowPessoa = current($rsPessoa);
 
@@ -95,4 +97,16 @@
 
     $twig->addGlobal('servico', $SERVICO);
     $twig->addGlobal('rastro', $rastro);
+    
+    foreach($arrayCampos as $chave => $valor)
+    {
+        foreach($arrayCampos[$chave] as $schave => $svalor)
+        {
+            foreach($infos as $info){
+                if($info['metanome'] == $arrayCampos[$chave][$schave]['metanome'])
+                $arrayCampos[$chave][$schave]['valor'] = $info['valor'];
+            }
+        }
+    }
+    
     echo $twig->render('form.html.twig', array('perfis' => $arPerfil, 'campos' => $arrayCampos, 'id' => $uuidPessoa, 'pessoa' => $rowPessoa));
