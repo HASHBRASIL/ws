@@ -4,7 +4,7 @@
     {% set ids = { 'usr' : session.USUARIO.ID, 'time' : session.TIME.ID, 'servico': data.id, 'servico_pai' : data.id_pai} %}
     {% spaceless %}
 
-        <li type="submit" tooltip-placement="top" title="tooltipo conteúdo"
+        <li type="submit" tooltip-placement="top" title="{{ data.descricao }}"
                 class="{{ data.metadata.ws_class | default("btn btn-transparent btn-xs  tooltips") }} {{ tipo }}"
 
                 {% for key in data.metadata|keys %}

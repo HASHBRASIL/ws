@@ -7,6 +7,49 @@ class Content_GedController extends App_Controller_Action_Twig {
      */
     protected $_bo;
 
+    public function uploadArquivosAction()
+    {
+        $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
+
+        $this->view->filedir = $filedir;
+
+        $this->identity  = Zend_Auth::getInstance()->getIdentity();
+
+        $id = $this->getParam('id');
+
+        if (!$id) {
+            $id =  $this->identity->time['id'];
+        }
+
+        $filhos = $this->identity->servicos[$this->servico['id']]['filhos'];
+        $data = array();
+
+        foreach ($filhos as $idFilho => $filho) {
+            if ($filho['ws_comportamento'] == 'filter') {
+                $data['servico'] = $idFilho;
+            }
+        }
+
+        $idGrupo = $this->getParam('id_grupo') ? $this->getParam('id_grupo') : $this->identity->grupo['id'];
+
+        $modelGrupo = new Config_Model_Bo_Grupo();
+        $grupos = $modelGrupo->listGruposFilho($id);
+
+        $this->view->data['grupos'] = $grupos;
+
+        $this->view->data['idTimeEscolhido'] = $idGrupo;
+
+        $filhos = $this->identity->servicos[$this->servico['id']]['filhos'];
+        $data = array();
+        foreach ($filhos as $id => $filho) {
+            if ($filho['ws_comportamento'] == 'filter') {
+                $data['servico'] = $id;
+            }
+        }
+
+        $this->view->data = array('data' => $data, 'posted' => $this->getAllParams());
+    }
+
     public function gridIbAction()
     {
         $this->gridGrupoAction();
@@ -150,22 +193,22 @@ class Content_GedController extends App_Controller_Action_Twig {
                     //Fall through to next case;
                 case 'tiff':
 
-                    $retornoPai = $this->_saveFile($fileContents, $fileName);
+                    $retornoPai = $this->_saveFile($fileContents, $fileName, null, $ocr);
 
-                    $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
-
-                    $fileone = realpath($filedir->path . $retornoPai['caminho']);
-
-                    $fileTransformation = new Spatie\PdfToImage\Pdf($fileone);
-
-                    foreach (range(1, $fileTransformation->getNumberOfPages()) as $pageNumber) {
-                        $fileContents = $fileTransformation->setPage($pageNumber)->getImageData("xpto.jpg");
-                        $retorno = $this->_saveFile($fileContents, $fileName . '-' . $pageNumber . ".jpg", $retornoPai['ib'], $ocr);
-
-//                        $boRlAgrupadorFinanceiroIb->adicionarVinculo($retorno, null);
-
-                        $data[] = $retorno;
-                    }
+//                    $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
+//
+//                    $fileone = realpath($filedir->path . $retornoPai['caminho']);
+//
+//                    $fileTransformation = new Spatie\PdfToImage\Pdf($fileone);
+//
+//                    foreach (range(1, $fileTransformation->getNumberOfPages()) as $pageNumber) {
+//                        $fileContents = $fileTransformation->setPage($pageNumber)->getImageData("xpto.jpg");
+//                        $retorno = $this->_saveFile($fileContents, $fileName . '-' . $pageNumber . ".jpg", $retornoPai['ib'], $ocr);
+//
+////                        $boRlAgrupadorFinanceiroIb->adicionarVinculo($retorno, null);
+//
+//                        $data[] = $retorno;
+//                    }
 
                     break;
                 case 'doc':

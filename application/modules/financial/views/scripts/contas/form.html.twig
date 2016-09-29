@@ -11,7 +11,7 @@
         {#</div>#}
         <div class="panel-body">
             <form method="POST" action="home.php?servico={{ params.servico }}">
-                {{ forms.input('id_grupo', view.vo.id_grupo, 'hidden') }}
+                {#{{ forms.input('id_grupo', view.vo.id_grupo, 'hidden') }}#}
                 {{ forms.input('id', view.vo.con_id, 'hidden') }}
                 <div class="row">
                     <div class="col-md-12">
@@ -46,6 +46,12 @@
                                 {{ row.formgroup('Tipo da Conta', forms.select('tcb_id', view.vo.tcb_id, view.tipoContaBancoCombo, 'select2-skin'), 'col-md-3') }}
                                 {#{{ row.formgroup('Registro Público', forms.checkbox('register_public', null), 'col-md-3') }}#}
                             </div>
+                            <div class="row">
+                                {% set selectPessoa = forms.select('id_grupo',  view.vo.id_grupo, view.comboGrupo, 'select2-skin') %}
+                                {{ row.formgroup('Time', selectPessoa, 'col-md-4') }}
+                            </div>
+
+
                         </fieldset>
                     </div>
                 </div>

@@ -1,0 +1,51 @@
+
+{% include 'header-content.html.twig' %}
+{% set paginacao = false %}
+{% for filho in servico.filhos %}
+    {% if filho.metadata.ws_comportamento == 'paginacao' %}
+        {% set paginacao = filho %}
+    {% endif %}
+{% endfor %}
+<div class="panel panel-white">
+    <div class="row box-table-container panel-body table-responsive">
+
+        <form class="form-tree uploadform" method="POST" action="">
+            <input type="hidden" name="id_grupo" value="" />
+            <input type="hidden" name="id_tib" value="{{ posted.id_tib }}" />
+
+            <div>
+                <label class="pull-left">Fazer OCR: </label>
+                <select name="ocr">
+                    <option value="0">{{ 'Não' | zftranslate }}</option>
+                    <option value="1" selected="selected">{{ 'Sim' | zftranslate }}</option>
+                </select>
+            </div>
+        </form>
+
+        <script>
+
+            $(function () {
+                $(".uploadform input[name='id_grupo']").val($('#grupo').val());
+            });
+
+        </script>
+
+        {% include 'dragndrop2.html.twig' %}
+
+        <form class="form-tree uploadform" method="POST" action="">
+            <div class="col-md-4">
+                <select name="id_grupo" id="grupo" class="select-times select2-skin">
+                    {% for t in grupos %}
+                        <option value="{{ t.id }}" {% if t.id == idTimeEscolhido %} selected {% endif %}>
+                            {{ t.nome2 }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="Atualizar">
+            </div>
+        </form>
+
+    </div>
+</div>
