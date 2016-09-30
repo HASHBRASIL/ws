@@ -1685,24 +1685,16 @@ HTML;
 
     public function processaArquivosAction()
     {
+        $this->identity  = Zend_Auth::getInstance()->getIdentity();
+        $servico = $this->identity->servicos[$this->getParam('servico')];
 
         $boItemBiblioteca = new Content_Model_Bo_ItemBiblioteca();
 
-        $boItemBiblioteca->processaArquivos();
+        while(1==1) {
+            $boItemBiblioteca->processaArquivos($servico);
+            exit('rodou 1 vez');
+            sleep(1);
+        }
 
-//                    $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
-//
-//                    $fileone = realpath($filedir->path . $retornoPai['caminho']);
-//
-//                    $fileTransformation = new Spatie\PdfToImage\Pdf($fileone);
-//
-//                    foreach (range(1, $fileTransformation->getNumberOfPages()) as $pageNumber) {
-//                        $fileContents = $fileTransformation->setPage($pageNumber)->getImageData("xpto.jpg");
-//                        $retorno = $this->_saveFile($fileContents, $fileName . '-' . $pageNumber . ".jpg", $retornoPai['ib'], $ocr);
-//
-////                        $boRlAgrupadorFinanceiroIb->adicionarVinculo($retorno, null);
-//
-//                        $data[] = $retorno;
-//                    }
     }
 }

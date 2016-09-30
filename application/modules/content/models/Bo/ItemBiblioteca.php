@@ -56,8 +56,8 @@ class Content_Model_Bo_ItemBiblioteca extends App_Model_Bo_Abstract
             'query' => $this->_dao->getItemBibliotecaGrid($id_tib, $id_grupo, $options),
             'count' => $this->_dao->getFalseCount()
         );
-        
-        
+
+
         return $retorno;
     }
 
@@ -299,8 +299,90 @@ class Content_Model_Bo_ItemBiblioteca extends App_Model_Bo_Abstract
         return $this->_dao->getFolderByGrupoByTib($idGrupo, $servico, $idTib);
     }
 
-    public function processaArquivos()
+    public function processaArquivos($servico)
     {
+
+        $googleVision = new App_Model_Bo_Vision();
+        $registro = $this->_dao->getPendente($servico);
+        $boTib = new Config_Model_Bo_Tib();
+
+        $this->_dao->beginTransaction();
+
+        // caminho para os arquivos
+        $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
+
+        // pega o caminho real
+        $file = realpath($filedir->path . $registro['arquivo']);
+
+        var_dump($registro);exit;
+
+        $extensao = substr(strrchr($file, "."),1);
+
+        $data = array();
+
+        switch (strtolower($extensao)) {
+            case 'pdf':
+                //Fall through to next case;
+            case 'tif':
+                //Fall through to next case;
+            case 'tiff':
+
+                // prepara para transformar o arquivo pdf
+                $fileTransformation = new Spatie\PdfToImage\Pdf($file);
+
+                // para cada pagina!
+                foreach (range(1, $fileTransformation->getNumberOfPages()) as $pageNumber) {
+                    // pega o conteudo jpg
+                    $fileContents = $fileTransformation->setPage($pageNumber)->getImageData("xpto.jpg");
+
+                    // salva arquivo no banco de dados
+                    $retorno = $this->saveFile($fileContents, $registro['titulo'] . '-' . $pageNumber . ".jpg", $registro['id_pai']);
+
+                    // processa no google vision!
+                    $retornoOcr = $googleVision->process($fileContents);
+
+                    // pega dentro da array de retorno do google a parte que importa
+                    $textoOcr = $retornoOcr['responses'][0]['textAnnotations'][0]['description'];
+
+                    // pega o id do tib ocr
+                    $arrOcr = $boTib->getByMetanome('ocr');
+
+                    // salva o dado do OCR
+                    $dadosOcr = $this->persiste(false, $arrOcr[0]['id'], $registro['id_criador'], $registro['id_ib_pai'], $textoOcr);
+                }
+
+                break;
+            // break omitido intensionalmente
+            case 'png':
+                //Fall through to next case;
+            case 'gif':
+                //Fall through to next case;
+            case 'jpg':
+                //Fall through to next case;
+            case 'jpe':
+                //Fall through to next case;
+            case 'jpeg':
+
+                // processa no google vision!
+                $retornoOcr = $googleVision->process(file_get_contents($file));
+
+                // pega dentro da array de retorno do google a parte que importa
+                $textoOcr = $retornoOcr['responses'][0]['textAnnotations'][0]['description'];
+
+                // pega o id do tib ocr
+                $arrOcr = $boTib->getByMetanome('ocr');
+
+                // salva o dado do OCR
+                $dadosOcr = $this->persiste(false, $arrOcr[0]['id'], $registro['id_criador'], $registro['id_ib_pai'], $textoOcr);
+
+
+                break;
+            default:
+                throw new Exception("Extensão do arquivo não suportado.");
+                break;
+        }
+
+        // @todo muda a situacao para outra!
 
     }
 }

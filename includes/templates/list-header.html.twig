@@ -6,7 +6,7 @@
         </div>
     </th>
 {% for field in header %}
-        <th data-field="field" class="expand">
+        <th data-field="field" class="expand" style="{{ (field.tipo == 'hidden') ? ' display:none' }}">
 
             <span>{{ field.label }}</span>
 

@@ -485,4 +485,122 @@ abstract class App_Model_Bo_Abstract
     {
         $this->_servico = $servico;
     }
+
+    public function saveFile($fileContents, $fileName, $idPai = null, $ocr = null)
+    {
+        $identity  = Zend_Auth::getInstance()->getIdentity();
+
+        $boIb = new Content_Model_Bo_ItemBiblioteca();
+        $boTib = new Config_Model_Bo_Tib();
+        $boRlGI = new Content_Model_Bo_RlGrupoItem();
+        $boRlVI = new Content_Model_Bo_RlVinculoItem();
+        $objGrupo = new Config_Model_Bo_Grupo();
+
+        $dadosOcr = null;
+        $arqs = array();
+        $extension = substr(strrchr($fileName, "."),1);
+
+        if (isset($this->_servico['id_grupo'])){
+
+            $grupo = $this->_servico['id_grupo'];
+        } elseif (isset($this->_servico['ws_grupo'])){
+            $grupos = $objGrupo->getGruposByIDPaiByMetanome($identity->time['id'],$this->_servico['ws_grupo']);
+
+            if(!empty($grupos)){
+                $grupo = current($grupos)['id'];
+            } else {
+                echo "Grupo destino não encontrado. Favor verificar metadata.";
+                die();
+            }
+        } else {
+            $grupo = $identity->grupo['id'];
+        }
+
+        $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
+
+        $id_ib = UUID::v4();
+        $nome   =   $id_ib . '.' . $extension;
+
+        $newFolder  =   $filedir->path . $identity->time['id'] . '/';
+
+        $retorno    =   $identity->time['id'] . '/';
+
+        if ( !file_exists($newFolder) ){
+            mkdir( $newFolder, 0755 );
+        }
+
+        $newFolder  =   $newFolder . $grupo . '/';
+        $retorno    =   $retorno . $grupo . '/';
+        if ( !file_exists($newFolder) ) {
+            mkdir($newFolder, 0755);
+        }
+
+        file_put_contents($newFolder . $nome, $fileContents);
+
+        // @todo coloca o arquivo no google cloud!
+
+        $filePath = $retorno . $nome;
+
+        if (isset($this->_servico['ws_arqcampo'])) {
+            $arrCampo = $boTib->getById($this->_servico['ws_arqcampo']);
+            if (isset($this->_servico['ws_arqnome'])) {
+                $arrNome = $boTib->getById($this->_servico['ws_arqnome']);
+            }
+            if (isset($this->_servico['ws_arqstatus'])) {
+                $arrStatus = $boTib->getById($this->_servico['ws_arqstatus']);
+            }
+            if (isset($this->_servico['ws_arqdata'])) {
+                $arrData = $boTib->getById($this->_servico['ws_arqdata']);
+            }
+            //$arrCampoMaster = $boTib->getById($arrCampo[0]['id_tib_pai']);
+
+            $id_master = $boIb->persiste(false,$arrCampo[0]['id_tib_pai'],$identity->id,null,null);
+
+            $id_ib = $boIb->persiste(false,$arrCampo[0]['id'],$identity->id,$id_master,null);
+
+            if($arrNome){
+                $id_nome = $boIb->persiste(false,$arrNome[0]['id'],$identity->id,$id_master, $fileName);
+            }
+
+            if($arrStatus) {
+                if ($ocr == true) {
+                    $status = 'OCR';
+                } else {
+                    $status = 'NOVO';
+                }
+                $id_status = $boIb->persiste(false,$arrStatus[0]['id'],$identity->id,$id_master, $status);
+            }
+
+            if($arrData) {
+                $id_data = $boIb->persiste(false,$arrData[0]['id'],$identity->id,$id_master, date('d/m/Y H:i:s'));
+            }
+
+//            if ($ocr == true) {
+//                // @todo faz regra OCR
+//                $googleVision = new App_Model_Bo_Vision();
+//
+//                $retornoOcr = $googleVision->process($fileContents);
+//
+//                $textoOcr = $retornoOcr['responses'][0]['textAnnotations'][0]['description'];
+//
+//                $arrOcr = $boTib->getByMetanome('ocr');
+//
+//                $dadosOcr = $boIb->persiste(false,$arrOcr[0]['id'],$identity->id,$id_master,$textoOcr);
+//            }
+
+            // @todo seria aqui para gerar imagem peq para visualizar
+
+            $boIb->persiste($id_ib,null,null,null,$filePath);
+
+            $boRlGI->relacionaItem($grupo, $id_master);
+
+            if ($idPai) {
+                $boRlVI->relacionaItem($idPai, $id_master);
+            }
+        }
+
+        $retorno = array('ib' => $id_master, 'caminho' => $filePath, 'original' => $fileName, 'ocr' => $dadosOcr);
+
+        return $retorno;
+    }
 }

@@ -8,7 +8,7 @@
     </td>
 
     {% for field in header %}
-        <td data-field="{{ field.campo }}"></td>
+        <td data-field="{{ field.campo }}" style="{{ (field.tipo == 'hidden') ? ' display:none' }}"></td>
     {% endfor %}
 {#
     <td class="tool-cell"> {% include 'list-action.html.twig' %} </td> #}
@@ -31,7 +31,7 @@
 
         {% for field in header %}
             {#{{ @todo codigo de alinhamento temporário }}#}
-            <td data-field="{{ field.campo }}" data-field-type="{{field.tipo|default('text')}}" class="expand" {{ (field.filtro == 'number_format') ? ' align="right"' : ' align="left"' }}>
+            <td data-field="{{ field.campo }}" style="{{ (field.tipo == 'hidden') ? ' display:none' }}" data-field-type="{{field.tipo|default('text')}}" class="expand" {{ (field.filtro == 'number_format') ? ' align="right"' : ' align="left"' }}>
                 {% if field.tipo == 'image' %}
                     {% if row[field.campo] is not empty %}
                         <img src="{{ view.filedir.url }}{{ row[field.campo] }}" width="{{ view.filedir.url|tamanhoimagem(row[field.campo], '100') }}" class="img-rounded"/>

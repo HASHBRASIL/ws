@@ -67,7 +67,7 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
 
         $options = $this->getAllParams();
         $paramsPaginator = $options;
-        
+
         if( isset($options['searchFields']) && ($options['searchFields']) ) {
             $this->identity->{$options['servico']} = $options;
         }else if(isset($this->identity->{$options['servico']}['searchFields']) && ($this->identity->{$options['servico']}['searchFields']) ) {
@@ -100,11 +100,11 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
         }
 
         //options['countGridSelect'] = $this->_gridSelect['count'];
-        
+
         if($this->_countGridSelect) {
             $options['countGridSelect'] = $this->_countGridSelect;
-        }        
-        
+        }
+
         $paginator = $this->_bo->paginator($options);
 
         $this->view->paginator = $paginator;
@@ -242,117 +242,7 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
 
     protected function _saveFile($fileContents, $fileName, $idPai = null, $ocr = null) {
 
-        $boIb = new Content_Model_Bo_ItemBiblioteca();
-        $boTib = new Config_Model_Bo_Tib();
-        $boRlGI = new Content_Model_Bo_RlGrupoItem();
-        $boRlVI = new Content_Model_Bo_RlVinculoItem();
-        $objGrupo = new Config_Model_Bo_Grupo();
+        $this->_bo->saveFile($fileContents, $fileName, $idPai, $ocr);
 
-        $dadosOcr = null;
-        $arqs = array();
-        $extension = substr(strrchr($fileName, "."),1);
-
-        if (isset($this->servico['id_grupo'])){
-
-            $grupo = $this->servico['id_grupo'];
-        } elseif (isset($this->servico['ws_grupo'])){
-            $grupos = $objGrupo->getGruposByIDPaiByMetanome($this->identity->time['id'],$this->servico['ws_grupo']);
-
-            if(!empty($grupos)){
-                $grupo = current($grupos)['id'];
-            } else {
-                echo "Grupo destino não encontrado. Favor verificar metadata.";
-                die();
-            }
-        } else {
-            $grupo = $this->identity->grupo['id'];
-        }
-
-        $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
-
-        $id_ib = UUID::v4();
-        $nome   =   $id_ib . '.' . $extension;
-
-        $newFolder  =   $filedir->path . $this->identity->time['id'] . '/';
-
-        $retorno    =   $this->identity->time['id'] . '/';
-
-        if ( !file_exists($newFolder) ){
-            mkdir( $newFolder, 0755 );
-        }
-
-        $newFolder  =   $newFolder . $grupo . '/';
-        $retorno    =   $retorno . $grupo . '/';
-        if ( !file_exists($newFolder) ) {
-            mkdir($newFolder, 0755);
-        }
-
-        file_put_contents($newFolder . $nome, $fileContents);
-
-        // @todo coloca o arquivo no google cloud!
-
-        $filePath = $retorno . $nome;
-
-        if (isset($this->servico['ws_arqcampo'])) {
-            $arrCampo = $boTib->getById($this->servico['ws_arqcampo']);
-            if (isset($this->servico['ws_arqnome'])) {
-                $arrNome = $boTib->getById($this->servico['ws_arqnome']);
-            }
-            if (isset($this->servico['ws_arqstatus'])) {
-                $arrStatus = $boTib->getById($this->servico['ws_arqstatus']);
-            }
-            if (isset($this->servico['ws_arqdata'])) {
-                $arrData = $boTib->getById($this->servico['ws_arqdata']);
-            }
-            //$arrCampoMaster = $boTib->getById($arrCampo[0]['id_tib_pai']);
-
-            $id_master = $boIb->persiste(false,$arrCampo[0]['id_tib_pai'],$this->identity->id,null,null);
-
-            $id_ib = $boIb->persiste(false,$arrCampo[0]['id'],$this->identity->id,$id_master,null);
-
-            if($arrNome){
-                $id_nome = $boIb->persiste(false,$arrNome[0]['id'],$this->identity->id,$id_master, $fileName);
-            }
-
-            if($arrStatus) {
-                if ($ocr == true) {
-                    $status = 'OCR';
-                } else {
-                    $status = 'NOVO';
-                }
-                $id_status = $boIb->persiste(false,$arrStatus[0]['id'],$this->identity->id,$id_master, $status);
-            }
-
-            if($arrData) {
-                $id_data = $boIb->persiste(false,$arrData[0]['id'],$this->identity->id,$id_master, date('d/m/Y H:i:s'));
-            }
-
-//            if ($ocr == true) {
-//                // @todo faz regra OCR
-//                $googleVision = new App_Model_Bo_Vision();
-//
-//                $retornoOcr = $googleVision->process($fileContents);
-//
-//                $textoOcr = $retornoOcr['responses'][0]['textAnnotations'][0]['description'];
-//
-//                $arrOcr = $boTib->getByMetanome('ocr');
-//
-//                $dadosOcr = $boIb->persiste(false,$arrOcr[0]['id'],$this->identity->id,$id_master,$textoOcr);
-//            }
-
-            // @todo seria aqui para gerar imagem peq para visualizar
-
-            $boIb->persiste($id_ib,null,null,null,$filePath);
-
-            $boRlGI->relacionaItem($grupo, $id_master);
-
-            if ($idPai) {
-                $boRlVI->relacionaItem($idPai, $id_master);
-            }
-        }
-
-        $retorno = array('ib' => $id_master, 'caminho' => $filePath, 'original' => $fileName, 'ocr' => $dadosOcr);
-
-        return $retorno;
     }
 }
