@@ -56,7 +56,7 @@
             parent::gridAction();
             
             $modelServico     = new Config_Model_Bo_Servico();
-            $servicoPaginador = $modelServico->getServicoEmUmaArvore($this->servico['id'], 'PAGINADORAJAX');
+            $servicoPaginador = $modelServico->getServicoEmFerramentas('PAGINADORAJAXPESSOA');
             
             $this->view->data['linkPaginador'] = $servicoPaginador['id'];
 
@@ -120,10 +120,10 @@
             parent::gridAction();
             
             $modelServico     = new Config_Model_Bo_Servico();
-            $servicoPaginador = $modelServico->getServicoEmUmaArvore($this->servico['id'], 'PAGINADORAJAX');
+            
+            $servicoPaginador = $modelServico->getServicoEmFerramentas('PAGINADORAJAXPESSOA');
             
             $this->view->data['linkPaginador'] = $servicoPaginador['id'];
-            echo 2;
         } 
 
         function importacontatoAction () {
