@@ -294,4 +294,9 @@ class Content_Model_Bo_ItemBiblioteca extends App_Model_Bo_Abstract
     public function getFolderByGrupoByTib($idGrupo, $servico, $idTib = null) {
         return $this->_dao->getFolderByGrupoByTib($idGrupo, $servico, $idTib);
     }
+
+    public function processaArquivos()
+    {
+
+    }
 }

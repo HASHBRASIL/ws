@@ -25,7 +25,7 @@
             //'con_digito' => 'Dígito da Conta',
             'bco_nome' => 'Banco',
             'tcb_descricao' => 'Tipo Conta',
-            //'nome' => 'Time'
+            'nome' => 'Time'
         );
 
         /**

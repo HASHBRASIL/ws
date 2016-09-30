@@ -44,7 +44,13 @@ class Financial_Model_Dao_Contas extends App_Model_Dao_Abstract
         $identity = Zend_Auth::getInstance()->getIdentity();
 
         // @todo ver com o fernando qual a regra para mostrar as contas (times filhos e outros configurações)
-        $select->where("fin_tb_contas.id_grupo = ?", $identity->time['id']);
+        $data = array();
+
+        foreach ($identity->timesColigados as $time) {
+            $data[] = $time['id'];
+        }
+
+        $select->where("fin_tb_contas.id_grupo in (?)", $data);
 
         $select->where('ativo = ?', self::ATIVO);
 

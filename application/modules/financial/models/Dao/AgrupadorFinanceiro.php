@@ -97,7 +97,14 @@ class Financial_Model_Dao_AgrupadorFinanceiro extends App_Model_Dao_Abstract
             ->joinInner(array('wk' => 'tb_grupo'), 'wk.id = agpf.id_grupo', array("nome"));
 
         $identity = Zend_Auth::getInstance()->getIdentity();
-        $select->where("agpf.id_grupo = ?", $identity->time['id']);
+
+        $data = array();
+        foreach ($identity->timesColigados as $time) {
+            $data[] = $time['id'];
+        }
+
+        $select->where("agpf.id_grupo in (?)", $data);
+//        $select->where("agpf.id_grupo = ?", $identity->time['id']);
 
         $select->where('agpf.ativo = ?', App_Model_Dao_Abstract::ATIVO);
 
