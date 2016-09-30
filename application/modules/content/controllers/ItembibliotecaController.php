@@ -74,7 +74,7 @@ class Content_ItembibliotecaController extends App_Controller_Action_Twig {
         parent::gridAction();
         
         $modelServico     = new Config_Model_Bo_Servico();
-        $servicoPaginador = $modelServico->getServicoEmUmaArvore($this->servico['id'], 'PAGINADORAJAX');
+        $servicoPaginador = $modelServico->getServicoEmFerramentas('PAGINADORAJAXIB');
 
         $this->view->data['linkPaginador'] = $servicoPaginador['id'];
         $this->view->data['paramsPaginator']['id_tib'] = $this->servico['id_tib'];

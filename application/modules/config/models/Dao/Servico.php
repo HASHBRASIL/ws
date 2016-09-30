@@ -84,6 +84,24 @@ DML;
         return $select->fetchAll();
     }
 
+    public function getServicoEmFerramentas($metanome)
+    {
+        $query = 'with recursive servicosBusca AS (
+                        with recursive servicos AS (
+                    select * from tb_servico where id_pai is null AND metanome = \'GESTAODEFERRAMENTAS\'
+                    union 
+                               select tbs.* from tb_servico tbs
+                               JOIN servicos s ON s.id_pai = tbs.id
+                       ) select * from servicos where id_pai is null
+                union 
+                       select tbs2.* from tb_servico tbs2
+                       JOIN servicosBusca s ON s.id = tbs2.id_pai
+               ) SELECT * FROM servicosBusca WHERE metanome = ? LIMIT 1';
+        
+        
+        return $this->_db->query($query, array($metanome))->fetch();
+    }
+    
     public function getServicoEmUmaArvore($id_servico, $metanome)
     {
         $query = 'with recursive servicosBusca AS (

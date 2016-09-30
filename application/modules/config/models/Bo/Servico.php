@@ -43,6 +43,11 @@ class Config_Model_Bo_Servico extends App_Model_Bo_Abstract
             self::META_GESTAOPESSOAS
         ]);
     }
+    
+    public function getServicoEmFerramentas($metanome)
+    {
+        return $this->_dao->getServicoEmFerramentas($metanome);
+    }
 
     public function getServicoEmUmaArvore($id_servico, $metanome)
     {
