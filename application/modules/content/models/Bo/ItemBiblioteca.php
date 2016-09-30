@@ -10,6 +10,10 @@ class Content_Model_Bo_ItemBiblioteca extends App_Model_Bo_Abstract
      */
     protected $_dao;
 
+    public $fieldsFilter = array(
+        'ocr'      			  => 'hidden',
+    );
+
     /**
      * @var integer
      */
