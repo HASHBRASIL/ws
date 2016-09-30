@@ -80,7 +80,7 @@
             
             $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
             $bO = array('cache_dir'=> APPLICATION_PATH.'/general/cache');
-            $cache = Zend_cache::factory('Core', 'File', $fO, $bO);
+            $cache = Zend_Cache::factory('Core', 'File', $fO, $bO);
             Zend_Paginator::setCache($cache);
             
             $paginator  ->setCurrentPageNumber( !empty($params['page']) ? $params['page'] : 1)
