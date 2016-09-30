@@ -21,33 +21,32 @@ class Content_GedController extends App_Controller_Action_Twig {
             $id =  $this->identity->time['id'];
         }
 
-        $filhos = $this->identity->servicos[$this->servico['id']]['filhos'];
-        $data = array();
-
-        foreach ($filhos as $idFilho => $filho) {
-            if ($filho['ws_comportamento'] == 'filter') {
-                $data['servico'] = $idFilho;
-            }
-        }
-
         $idGrupo = $this->getParam('id_grupo') ? $this->getParam('id_grupo') : $this->identity->grupo['id'];
 
         $modelGrupo = new Config_Model_Bo_Grupo();
         $grupos = $modelGrupo->listGruposFilho($id);
 
-        $this->view->data['grupos'] = $grupos;
+        $data['grupos'] = $grupos;
 
-        $this->view->data['idTimeEscolhido'] = $idGrupo;
+        $data['idTimeEscolhido'] = $idGrupo;
 
         $filhos = $this->identity->servicos[$this->servico['id']]['filhos'];
-        $data = array();
+
+
         foreach ($filhos as $id => $filho) {
             if ($filho['ws_comportamento'] == 'filter') {
-                $data['servico'] = $id;
+                $idServico = $id;
             }
         }
 
-        $this->view->data = array('data' => $data, 'posted' => $this->getAllParams());
+        $data['data']['servico'] = $idServico;
+        $data['posted']  = $this->getAllParams();
+
+        $this->view->file = 'upload-arquivos.html.twig';
+
+        $this->view->data = $data;
+//        echo "<PRE>";;
+//        var_dump($data);
     }
 
     public function gridIbAction()
@@ -65,6 +64,8 @@ class Content_GedController extends App_Controller_Action_Twig {
         $header[] = array('campo' => 'arquivo', 'label' => 'Documento', 'tipo' => 'image');
         $header[] = array('campo' => 'titulo', 'label' => 'Título');
         $header[] = array('campo' => 'dt_publicacao', 'label' => 'Data', 'tipo' => 'data');
+        $header[] = array('campo' => 'status', 'label' => 'Situação');
+        $header[] = array('campo' => 'ocr', 'label' => 'ocr', 'tipo' => 'hidden');
 //        $header[] = array('campo' => 'con_numero', 'label' => 'Número da Conta');
 //        $header[] = array('campo' => 'con_digito', 'label' => 'Dígito da Conta');
 //        $header[] = array('campo' => 'bco_nome', 'label' => 'Banco');
@@ -82,7 +83,6 @@ class Content_GedController extends App_Controller_Action_Twig {
         $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
 
         $this->view->filedir = $filedir;
-
 
         $this->identity  = Zend_Auth::getInstance()->getIdentity();
 

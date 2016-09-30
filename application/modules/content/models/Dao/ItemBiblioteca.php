@@ -10,6 +10,18 @@ class Content_Model_Dao_ItemBiblioteca extends App_Model_Dao_Abstract
 
     protected $_rowClass = 'Content_Model_Vo_ItemBiblioteca';
 
+    public $searchFields = array(
+        'arquivo' => "ib3.valor",
+        'titulo' => 'ib2.valor',
+        'nome_grupo' => 'g.nome',
+        'dt_publicacao' => 'ib4.valor',
+        'status' => 'ib5.valor',
+        'ocr' => 'ib6.valor'
+    );
+
+
+
+
     public function getItemBiblioteca ($time) {
 
         $db = Zend_Db_Table::getDefaultAdapter();
@@ -617,13 +629,19 @@ DML;
 
     public function getFolderByGrupoByTib($idGrupo, $servico, $idTib = null) {
 
-//        $this->servico
-
-//        var_dump($servico);exit;
-
         $select = $this->select()->setIntegrityCheck(false);
 
-        $select->from(array('ib' => 'tb_itembiblioteca'), array('ib2.valor as titulo', 'ib3.valor as arquivo', 'g.nome as nome_grupo', 'ib4.valor as dt_publicacao', 'ib.id_tib', 'ib.id', 'rlvi.id_ib_vinculado'))
+        $select->from(array('ib' => 'tb_itembiblioteca'), array(
+            'ib2.valor as titulo',
+            'ib3.valor as arquivo',
+            'g.nome as nome_grupo',
+            'ib4.valor as dt_publicacao',
+            'ib5.valor as status',
+            'ib6.valor as ocr',
+            'ib.id_tib',
+            'ib.id',
+            'rlvi.id_ib_vinculado'
+        ))
             ->join(array('tib' => 'tp_itembiblioteca'), 'ib.id_tib = tib.id', array())
             ->join(array('ib2' => 'tb_itembiblioteca'), 'ib.id = ib2.id_ib_pai', array())
             ->join(array('tib2' => 'tp_itembiblioteca'), 'ib2.id_tib = tib2.id', array())
@@ -631,26 +649,19 @@ DML;
             ->join(array('tib3' => 'tp_itembiblioteca'), 'ib3.id_tib = tib3.id', array())
             ->join(array('ib4' => 'tb_itembiblioteca'), 'ib.id = ib4.id_ib_pai', array())
             ->join(array('tib4' => 'tp_itembiblioteca'), 'ib4.id_tib = tib4.id', array())
+            ->join(array('ib5' => 'tb_itembiblioteca'), 'ib.id = ib5.id_ib_pai', array())
+            ->join(array('tib5' => 'tp_itembiblioteca'), 'ib5.id_tib = tib5.id', array())
+            ->joinLeft(array('ib6' => 'tb_itembiblioteca'), "ib.id = ib6.id_ib_pai", array())
+            ->joinLeft(array('tib6' => 'tp_itembiblioteca'), "ib6.id_tib = tib6.id and tib6.id = '{$servico['metadata']['ws_arqstatus']}'", array())
             ->join(array('rlgi' => 'rl_grupo_item'), 'rlgi.id_item = ib.id', array())
             ->join(array('g' => 'tb_grupo'), 'rlgi.id_grupo = g.id', array())
             ->joinLeft(array('rlvi' => 'rl_vinculo_item'), 'rlvi.id_ib_vinculado = ib.id', array())
 
-//            ->joinLeft(array('tim' => new Zend_Db_Expr("(select * from tp_itembiblioteca_metadata where metanome = 'ws_tib')")),'tib.id = tim.id_tib', array())
-//            ->joinLeft(array('timcombo' => new Zend_Db_Expr("(select * fro    m tp_itembiblioteca_metadata where metanome = 'ws_comboform')")),'tib.id = timcombo.id_tib', array())
-//            ->joinLeft(array('tibcampo' => 'tp_itembiblioteca'),'tibcampo.id_tib_pai::varchar = tim.valor::varchar and tibcampo.metanome = timcombo.valor',array())
-//            ->joinLeft(array('ibcombo' => 'tb_itembiblioteca'),'ibcombo.id_ib_pai::varchar = ib.valor::varchar and ibcombo.id_tib = tibcampo.id', array())
-
-            // pegando o nome do arquivo
-            ->where('tib2.id = ?', '99696bec-ca4a-484c-a68e-78dbc19c1ce1')
-            ->where('tib3.id = ?', '3633182d-368d-47fd-a9c7-172c28f4f3b2')
-            ->where('tib4.id = ?', 'e2204ca0-3dfe-11e6-847b-0ff2a4830130');
-
-//            ->where('tib4.id = ?', $servico['metadata']['ws_arqdata']);
-
-//            ->orWhere('tib2.metanome = ?', 'imglocal')
-//            ->orWhere('tib2.metanome = ?)', 'titulo');
-
-//            ->order(array('ib.id_ib_pai', 'tib.metanome'));
+            // pegando os dados do arquivo
+            ->where('tib2.id = ?', $servico['metadata']['ws_arqnome']) // ws_arqnome
+            ->where('tib3.id = ?', $servico['metadata']['ws_arqcampo']) // ws_arqcampo
+            ->where('tib4.id = ?', $servico['metadata']['ws_arqdata']) // ws_arqdata
+            ->where('tib5.id = ?', $servico['metadata']['ws_arqstatus']); // ws_arqstatus
 
         if ($idTib) {
             $select->where('rlvi.id_ib_principal = ?', $idTib);
@@ -659,13 +670,59 @@ DML;
                    ->where('rlgi.id_grupo = ?', $idGrupo);
         }
 
-//        echo $select->__toString();
-//        exit;
         return $select;
 
-//        exit;
-//        $rows = $this->fetchAll($select);
-//        return $rows;
+    }
+
+    public function getPendente($servico)
+    {
+
+        $select = $this->select()->setIntegrityCheck(false);
+
+        $select->from(array('ib' => 'tb_itembiblioteca'), array(
+            'ib2.valor as titulo',
+            'ib3.valor as arquivo',
+            'ib4.valor as dt_publicacao',
+            'ib5.valor as status',
+            'ib6.valor as ocr',
+            'ib6.id as id_ocr',
+            'ib5.id as id_status',
+            'ib.id_tib',
+            'ib.id',
+            'ib.id_ib_pai',
+            'ib.id_criador'
+        ))
+            ->join(array('tib' => 'tp_itembiblioteca'), 'ib.id_tib = tib.id', array())
+            ->join(array('ib2' => 'tb_itembiblioteca'), 'ib.id = ib2.id_ib_pai', array())
+            ->join(array('tib2' => 'tp_itembiblioteca'), 'ib2.id_tib = tib2.id', array())
+            ->join(array('ib3' => 'tb_itembiblioteca'), 'ib.id = ib3.id_ib_pai', array())
+            ->join(array('tib3' => 'tp_itembiblioteca'), 'ib3.id_tib = tib3.id', array())
+            ->join(array('ib4' => 'tb_itembiblioteca'), 'ib.id = ib4.id_ib_pai', array())
+            ->join(array('tib4' => 'tp_itembiblioteca'), 'ib4.id_tib = tib4.id', array())
+            ->join(array('ib5' => 'tb_itembiblioteca'), 'ib.id = ib5.id_ib_pai', array())
+            ->join(array('tib5' => 'tp_itembiblioteca'), 'ib5.id_tib = tib5.id', array())
+            ->join(array('ib6' => 'tb_itembiblioteca'), "ib.id = ib6.id_ib_pai", array())
+            ->join(array('tib6' => 'tp_itembiblioteca'), "ib6.id_tib = tib6.id and tib6.id = '{$servico['metadata']['ws_arqstatus']}'", array())
+            ->join(array('rlgi' => 'rl_grupo_item'), 'rlgi.id_item = ib.id', array())
+            ->order('ib.dt_criacao asc')
+
+            // pegando os dados do arquivo
+            ->where('tib2.id = ?', $servico['metadata']['ws_arqnome']) // ws_arqnome
+            ->where('tib3.id = ?', $servico['metadata']['ws_arqcampo']) // ws_arqcampo
+            ->where('tib4.id = ?', $servico['metadata']['ws_arqdata']) // ws_arqdata
+            ->where('tib5.id = ?', $servico['metadata']['ws_arqstatus']); // ws_arqstatus
+
+        $select->where('ib5.valor = ?', 'OCR');
+
+        echo $select->__toString();
+        exit;
+
+        $row = $this->fetchRow($select);
     }
 
 }
+//
+//    ->where('tib2.id = ?', '99696bec-ca4a-484c-a68e-78dbc19c1ce1') // ws_arqnome
+//->where('tib3.id = ?', '3633182d-368d-47fd-a9c7-172c28f4f3b2') // ws_arqcampo
+//->where('tib3.id = ?', '3633182d-368d-47fd-a9c7-172c28f4f3b2') // ws_arqsattu
+//->where('tib4.id = ?', 'e2204ca0-3dfe-11e6-847b-0ff2a4830130'); // ws_arqdata
