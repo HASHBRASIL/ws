@@ -315,24 +315,30 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
             }
 
             if($arrStatus) {
-                $id_status = $boIb->persiste(false,$arrStatus[0]['id'],$this->identity->id,$id_master,'NOVO');
+                if ($ocr == true) {
+                    $status = 'OCR';
+                } else {
+                    $status = 'NOVO';
+                }
+                $id_status = $boIb->persiste(false,$arrStatus[0]['id'],$this->identity->id,$id_master, $status);
             }
+
             if($arrData) {
                 $id_data = $boIb->persiste(false,$arrData[0]['id'],$this->identity->id,$id_master, date('d/m/Y H:i:s'));
             }
 
-            if ($ocr == true) {
-                // @todo faz regra OCR
-                $googleVision = new App_Model_Bo_Vision();
-
-                $retornoOcr = $googleVision->process($fileContents);
-
-                $textoOcr = $retornoOcr['responses'][0]['textAnnotations'][0]['description'];
-
-                $arrOcr = $boTib->getByMetanome('ocr');
-
-                $dadosOcr = $boIb->persiste(false,$arrOcr[0]['id'],$this->identity->id,$id_master,$textoOcr);
-            }
+//            if ($ocr == true) {
+//                // @todo faz regra OCR
+//                $googleVision = new App_Model_Bo_Vision();
+//
+//                $retornoOcr = $googleVision->process($fileContents);
+//
+//                $textoOcr = $retornoOcr['responses'][0]['textAnnotations'][0]['description'];
+//
+//                $arrOcr = $boTib->getByMetanome('ocr');
+//
+//                $dadosOcr = $boIb->persiste(false,$arrOcr[0]['id'],$this->identity->id,$id_master,$textoOcr);
+//            }
 
             // @todo seria aqui para gerar imagem peq para visualizar
 
