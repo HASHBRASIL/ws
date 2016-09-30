@@ -97,7 +97,6 @@
 
         public function selectGrid($time, $classificacao, $perfis, $gridHeader)
         {
-
             $grpBo = new Config_Model_Bo_Grupo();
 
             $retPrm = $grpBo->getTimesPermissao($time);
@@ -109,10 +108,16 @@
             $strTime = implode(',',$arrTime);
             //x($strTime);
 
-            return $this->_dao->selectGrid($strTime, $classificacao, $perfis, $gridHeader);
+            $retorno = array(
+                'query' => $this->_dao->selectGrid($strTime, $classificacao, $perfis, $gridHeader),
+                'count' => $this->_dao->getFalseCount()
+            );
+
+            return $retorno;
         }
 
-        public function selectGrid2($time,$tipopessoa,$informacao,$classificacao,$filtros) {
+        public function selectGrid2($time,$tipopessoa,$informacao,$classificacao,$filtros)
+        {
             $grpBo = new Config_Model_Bo_Grupo();
 
             $retPrm = $grpBo->getTimesPermissao($time);
@@ -122,7 +127,13 @@
                 $arrTime[] = $item['id'];
             }
             $strTime = implode(',',$arrTime);
-            return $this->_dao->selectGrid2($strTime,$tipopessoa,$informacao,$classificacao,$filtros);
+            
+            $retorno = array(
+                'query' => $this->_dao->selectGrid2($strTime,$tipopessoa,$informacao,$classificacao,$filtros),
+                'count' => $this->_dao->getFalseCount()
+            );
+
+            return $retorno;
         }
 
         public function countGrid2($time,$tipopessoa,$classificacao,$filtros) {

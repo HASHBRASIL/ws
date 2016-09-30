@@ -48,8 +48,13 @@ class Content_Model_Bo_ItemBiblioteca extends App_Model_Bo_Abstract
     }
 
     public function getItemBibliotecaGrid($id_tib, $id_grupo, $options = null) {
-        $data = $this->_dao->getItemBibliotecaGrid($id_tib, $id_grupo, $options);
-        return $data;
+        $retorno = array(
+            'query' => $this->_dao->getItemBibliotecaGrid($id_tib, $id_grupo, $options),
+            'count' => $this->_dao->getFalseCount()
+        );
+        
+        
+        return $retorno;
     }
 
     public function listItemBiblioteca($id_tib, $id_grupo) {

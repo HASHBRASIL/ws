@@ -44,6 +44,11 @@ class Config_Model_Bo_Servico extends App_Model_Bo_Abstract
         ]);
     }
 
+    public function getServicoEmUmaArvore($id_servico, $metanome)
+    {
+        return $this->_dao->getServicoEmUmaArvore($id_servico, $metanome);
+    }
+    
     public function getModulosByGrupo($idGrupo)
     {
         return $this->_dao->getModulosByGrupo($idGrupo);
@@ -135,5 +140,14 @@ class Config_Model_Bo_Servico extends App_Model_Bo_Abstract
                 $servicoMetaBo->salvarMetanome($metadado);
             }
         }
+    }
+    
+        
+    /*
+     * @TODO PASSAR PARA O CMS.
+     */
+    public function listServicosPermitidos($id_pesssoa, $id_grupo, $params = array())
+    {
+        return $this->_dao->listServicosPermitidos($id_pesssoa, $id_grupo, $params);
     }
 }

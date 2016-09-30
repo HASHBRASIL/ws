@@ -549,7 +549,7 @@ $(document).ready(function(){
                         }
                     });
                     /* depois criar uma função pra isso... agora só estou fazendo acontecer by toinsane GHP*/
-                    if( $('.dropdown-content').length == 0 ){
+                    //if( $('.dropdown-content').length == 0 ){
                         var div     = $(this).closest('div');
                         var row     = $(this).closest('tr');
                         var countTd = row.find('td').length;
@@ -577,7 +577,7 @@ $(document).ready(function(){
                                 $(document).trigger('custom');
                             }
                         });
-                    }
+                    //}
                     break;
             default:
                 break;

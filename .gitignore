@@ -215,3 +215,4 @@ composer.lock
 public/log/
 public/uploaded/log/
 public/uploaded/
+application/general/cache/
