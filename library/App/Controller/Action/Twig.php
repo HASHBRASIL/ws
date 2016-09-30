@@ -66,7 +66,8 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
 //      $this->_initGrid();
 
         $options = $this->getAllParams();
-
+        $paramsPaginator = $options;
+        
         if( isset($options['searchFields']) && ($options['searchFields']) ) {
             $this->identity->{$options['servico']} = $options;
         }else if(isset($this->identity->{$options['servico']}['searchFields']) && ($this->identity->{$options['servico']}['searchFields']) ) {
@@ -98,17 +99,17 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
             $options['fields'] = array_column($this->header, 'label', 'campo');
         }
 
+        //options['countGridSelect'] = $this->_gridSelect['count'];
+        
         if($this->_countGridSelect) {
             $options['countGridSelect'] = $this->_countGridSelect;
-        }
-
+        }        
+        
         $paginator = $this->_bo->paginator($options);
 
         $this->view->paginator = $paginator;
-
-        $this->view->data = array('data' => $paginator, 'header' => $this->header);
-
-        $this->view->file = 'paginator.html.twig';
+        $this->view->data      = array('data' => $paginator, 'header' => $this->header, 'paramsPaginator' => $paramsPaginator);
+        $this->view->file      = 'paginator.html.twig';
     }
 
     public function imprimirAction()
@@ -239,7 +240,6 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
         return $retorno;
     }
 
-
     protected function _saveFile($fileContents, $fileName, $idPai = null, $ocr = null) {
 
         $boIb = new Content_Model_Bo_ItemBiblioteca();
@@ -349,7 +349,4 @@ abstract class App_Controller_Action_Twig extends App_Controller_Action
 
         return $retorno;
     }
-
-
 }
-

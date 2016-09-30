@@ -1,8 +1,9 @@
 <?php
+    $masters = array();
+    $dbh->beginTransaction();
+    $commitado = false;
+    try {
 
-try {
-        $masters = array();
-        $dbh->beginTransaction();
         require_once "UUID.php";
 
         $data = $_REQUEST;
@@ -30,38 +31,29 @@ try {
         } else {
         	$grupo = $identity->time['id'];
         }
-
-		preg_match('/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/', $nome, $nome_uuid);
- 
-		if ( count( $nome_uuid ) == 2 ){
+        
+        $campos = $tpInformacao->getTpInformacaoByPerfis($SERVICO['metadata']['ws_perfil']);
+        $arPerfil = explode(',', $SERVICO['metadata']['ws_perfil']);
+        
+        if ( UUID::is_uuid($nome)){
            $rsPessoa = $tpInformacao->getTpInformacaoByPerfisByPessoaByGrupo($SERVICO['metadata']['ws_perfil'], $nome, $grupo,true);
            
             if (count($rsPessoa) > 0) {
                 $flashMsg = new flashMsg();
-	            $flashMsg->error('já existem dados salvos para esta pessoa/entidade como '.$SERVICO['ws_target'].' em seu grupo.',true);
+	            $flashMsg->error('jï¿½ existem dados salvos para esta pessoa/entidade como '.$SERVICO['ws_target'].' em seu grupo.',true);
 	    	
 	            $s = new Servico();
 	            $p = $s->pegaPai($SERVICO['id_pai']);	             
 	            parseJsonTarget($p['id']);
             }
-        }
-        
-        $campos = $tpInformacao->getTpInformacaoByPerfis($SERVICO['metadata']['ws_perfil']);
-        $arPerfil = explode(',', $SERVICO['metadata']['ws_perfil']);
-       
-        foreach($campos as $campo) {
-            $arCampos[$campo['perfil']][] = $campo;
-        }
-       
-        
-        if ( count( $nome_uuid ) == 2 ){
-        	$uuidPessoa = $nome;
-        	} else {
-        	$uuidPessoa = UUID::v4();
+            $uuidPessoa = $nome;
+        }else{
+            $uuidPessoa = UUID::v4();
             $queryInsertPessoa = $dbh->prepare("INSERT INTO tb_pessoa (id, dtype, dt_inclusao, nome) VALUES (:id, 'TbPessoa', (select current_timestamp), :nome);");
             $queryInsertPessoa->bindParam(':id', $uuidPessoa);
             $queryInsertPessoa->bindParam(':nome', $nome);
             $queryInsertPessoa->execute();
+            
             if ( in_array('PF', explode(',', $SERVICO['ws_perfil']))){
                 foreach($campos as $campo) {
                     if($campo['metanome']=='NOMEPESSOA'){
@@ -70,45 +62,11 @@ try {
                 }
             }
         }
-        
-		$objRlVinculoPessoa =	new	RlVinculoPessoa();
-        $objPessoa			=	new Pessoa(); 
-        if ( in_array('PF', explode(',', $SERVICO['ws_perfil']))){
-        	
-        	preg_match('/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/', $nomemae, $mae);
-        	preg_match('/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/', $nomepai, $pai);
-        	
-        	if ( count( $mae ) == 2 ){
-				$objRlVinculoPessoa->criarVinculo('MAE', $uuidPessoa, $grupo, $nomemae );			
-        	}
-        	else{
-        		$uuidMae = UUID::v4();
-        		$objPessoa->criaPessoa( $uuidMae, $nomemae);
-        		$objRlVinculoPessoa->criarVinculo('MAE', $uuidPessoa, $grupo, $uuidMae );
-                foreach($campos as $campo) {
-                    if($campo['metanome']=='NOMEMAE'){
-                        $data[$campo['id'].'_'.$campo['metanome']] = $uuidMae;
-                    }
-                }
-        	}
-        	
-        	if ( count( $pai ) == 2 ){
-				$objRlVinculoPessoa->criarVinculo('PAI', $uuidPessoa, $grupo, $nomepai );    		
-        	}
-        	else{
-        		$uuidPai = UUID::v4();
-        		$objPessoa->criaPessoa( $uuidPai, $nomepai);
-        		$objRlVinculoPessoa->criarVinculo('PAI', $uuidPessoa, $grupo, $uuidPai );
-                foreach($campos as $campo) {
-                    if($campo['metanome']=='NOMEPAI'){
-                        $data[$campo['id'].'_'.$campo['metanome']] = $uuidPai;
-                    }
-                }
-        	}
-        	//$objRlVinculoPessoa->criarVinculo('CONTATO', $uuidPessoa, $grupo );
-        }
-       	$objRlVinculoPessoa->criarVinculo($SERVICO['ws_classificacao'], $uuidPessoa, $grupo );
 
+        foreach($campos as $campo) {
+            $arCampos[$campo['perfil']][] = $campo;
+        }
+       
         $idPaiTipo = null;
         $idNulo = null;
 
@@ -152,14 +110,54 @@ try {
                     }
                 //} else {
                 //    if ($campo['obrigatorio']) {
-                //        parseJson(true, 'Campo obrigatório não preenchido ' . $campo['nome']);
+                //        parseJson(true, 'Campo obrigatï¿½rio nï¿½o preenchido ' . $campo['nome']);
                 //    }
                 //}
             }
         }
         
         $dbh->commit();
-    
+        $commitado = true;
+        
+        $objRlVinculoPessoa =	new RlVinculoPessoa();
+        $objPessoa	    =	new Pessoa();
+        
+        if ( in_array('PF', explode(',', $SERVICO['ws_perfil']))){
+        	
+        	preg_match('/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/', $nomemae, $mae);
+        	preg_match('/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/', $nomepai, $pai);
+        	
+        	if ( count( $mae ) == 2 ){
+                        $objRlVinculoPessoa->criarVinculo('MAE', $uuidPessoa, $grupo, $nomemae );			
+        	} else{
+        		$uuidMae = UUID::v4();
+        		$objPessoa->criaPessoa( $uuidMae, $nomemae);
+        		$objRlVinculoPessoa->criarVinculo('MAE', $uuidPessoa, $grupo, $uuidMae );
+                foreach($campos as $campo) {
+                    if($campo['metanome']=='NOMEMAE'){
+                        $data[$campo['id'].'_'.$campo['metanome']] = $uuidMae;
+                    }
+                }
+        	}
+        	
+        	if ( count( $pai ) == 2 ){
+				$objRlVinculoPessoa->criarVinculo('PAI', $uuidPessoa, $grupo, $nomepai );    		
+        	}
+        	else{
+        		$uuidPai = UUID::v4();
+        		$objPessoa->criaPessoa( $uuidPai, $nomepai);
+        		$objRlVinculoPessoa->criarVinculo('PAI', $uuidPessoa, $grupo, $uuidPai );
+                foreach($campos as $campo) {
+                    if($campo['metanome']=='NOMEPAI'){
+                        $data[$campo['id'].'_'.$campo['metanome']] = $uuidPai;
+                    }
+                }
+        	}
+        	//$objRlVinculoPessoa->criarVinculo('CONTATO', $uuidPessoa, $grupo );
+        }
+        
+       	$objRlVinculoPessoa->criarVinculo($SERVICO['ws_classificacao'], $uuidPessoa, $grupo );
+
         if (isset($SERVICO['metadata']['ws_target']) && ($SERVICO['metadata']['ws_target'])) {
         	$servico = new Servico();
         	$servicoDestino = $servico->getServiceByMetanome($SERVICO['metadata']['ws_target']);
@@ -180,10 +178,11 @@ try {
 
     } catch (PDOException $e) {
         // @todo verificar se vai ter algum tratamento especial para PDO.
-        $dbh->rollBack();
+        if(!$commitado){ $dbh->rollBack(); }
+        
         parseJson(true, $e->getMessage(), $e->getTraceAsString());
     } catch (exception $e) {
-        $dbh->rollBack();
+        if(!$commitado){ $dbh->rollBack(); }
         parseJson(true, $e->getMessage(), $e->getTraceAsString());
     }
 
