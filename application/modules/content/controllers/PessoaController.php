@@ -45,26 +45,67 @@
             $this->header[] = array('campo' => 'nome', 'label' => 'Nome');
             $this->header[] = array('campo' => 'nome2', 'label' => 'Sobrenome');
 
-            $ret = $this->_bo->selectGrid($this->_grupo, $this->servico['metadata']['ws_classificacao'],$this->servico['metadata']['ws_perfil'], null);
+            $busca = $this->_bo->selectGrid($this->_grupo, $this->servico['metadata']['ws_classificacao'], $this->servico['metadata']['ws_perfil'], null);
 
             // // x($ret);
             // x($ret->__toString());
 
-            $this->_gridSelect = $ret;
-
+            $this->_gridSelect      = $busca['query'];
+            $this->_countGridSelect = $busca['count'];
+            
             parent::gridAction();
+            
+            $modelServico     = new Config_Model_Bo_Servico();
+            $servicoPaginador = $modelServico->getServicoEmFerramentas('PAGINADORAJAXPESSOA');
+            
+            $this->view->data['linkPaginador'] = $servicoPaginador['id'];
+
         } 
 
+        public function getPaginationAction()
+        {
+            $this->_helper->layout->disableLayout();
+
+            $params = $this->getRequest()->getParam('params');
+            
+            foreach($params as $key => $value) { $this->setParam($key, $value); }
+
+            $busca  = $this->_bo->selectGrid2(  $this->identity->time['id'], 
+                                                $this->servico['ws_tipopessoa'],
+                                                null,
+                                                $this->servico['ws_classificacao'],
+                                                json_decode($params['filtro']), true);
+            
+            $paginator = Zend_Paginator::factory($busca['query']);
+            
+            $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
+            $bO = array('cache_dir'=> APPLICATION_PATH.'/general/cache');
+            $cache = Zend_cache::factory('Core', 'File', $fO, $bO);
+            Zend_Paginator::setCache($cache);
+            
+            $paginator  ->setCurrentPageNumber( !empty($params['page']) ? $params['page'] : 1)
+                        ->setItemCountPerPage( !empty($params['itens']) ? $params['itens'] : 50)
+                        ->setPageRange(6);
+
+            $this->view->paginator = $paginator;
+            $this->view->data      = array('data' => $paginator, 'header' => $this->header);
+            $this->view->file      = 'pagination.html.twig';
+        }
+        
         function grid2Action () {
 
-            
-            $filtros;
             if(isset($this->servico['ws_filtro'])) {
                 $filtros = json_decode($this->servico['ws_filtro']);
             }
             //$this->_gridSelect = $this->_bo->selectGrid2($this->identity->time['id'],$this->servico['ws_tipopessoa'],$this->servico['ws_informacao'],$this->servico['ws_classificacao'],$filtros);
-            $this->_gridSelect = $this->_bo->selectGrid2($this->identity->time['id'],$this->servico['ws_tipopessoa'],null,$this->servico['ws_classificacao'],$filtros);
-            $this->_countGridSelect = $this->_bo->countGrid2($this->identity->time['id'],$this->servico['ws_tipopessoa'],$this->servico['ws_classificacao'],$filtros);
+            $busca = $this->_bo->selectGrid2($this->identity->time['id'],$this->servico['ws_tipopessoa'],null,$this->servico['ws_classificacao'],$filtros);
+
+            //$this->_countGridSelect = $this->_bo->countGrid2($this->identity->time['id'],$this->servico['ws_tipopessoa'],$this->servico['ws_classificacao'],$filtros);
+  
+            $this->_gridSelect      = $busca['query'];
+            $this->_countGridSelect = $busca['count'];
+            
+            
             $this->header = array();
             $this->header[] = array('campo' => 'nome', 'label' => 'Nome');
             $this->header[] = array('campo' => 'nome2', 'label' => 'Sobrenome');
@@ -75,8 +116,14 @@
                     $this->header[] = array('campo' => "info{$cnt}", 'label' => strtolower($inf));
                 }
             }
-
+            
             parent::gridAction();
+            
+            $modelServico     = new Config_Model_Bo_Servico();
+            
+            $servicoPaginador = $modelServico->getServicoEmFerramentas('PAGINADORAJAXPESSOA');
+            
+            $this->view->data['linkPaginador'] = $servicoPaginador['id'];
         } 
 
         function importacontatoAction () {

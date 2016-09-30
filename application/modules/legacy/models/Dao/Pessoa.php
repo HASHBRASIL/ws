@@ -153,12 +153,15 @@
             return $select;
         }
 
-        public function selectGrid2($time,$tipopessoa,$informacao,$classificacao,$filtros) {
-            $arrTimes = explode(',',$time);
-            $newArrTimes = array();
+        public function selectGrid2($time, $tipopessoa, $informacao, $classificacao, $filtros)
+        {
+            $arrTimes       = explode(',', $time);
+            $newArrTimes    = array();
+
             foreach($arrTimes as $tm) {
                 $newArrTimes[] = "(rvp.id_grupo = '" . $tm . "')";
             }
+
             $strTimes = implode(' or ', $newArrTimes);
 
             $lstInf = explode(',',$informacao);
@@ -210,7 +213,9 @@
                     $select1->where("fil{$cnt}.idx_valor @@ to_tsquery('{$fil->valor}')");
                 }
             }
-
+            
+            $select1->order('pes.dt_criacao DESC');
+            
             //$arrSelect[] = $select1;
 
             // foreach($arrCampoCmp as $campo => $data) {
@@ -239,8 +244,6 @@
             //     // }
             //     $arrSelect[] = $tmpSql;
             // }
-
-            //x($select1->__toString());
 
             return $select1;
         }

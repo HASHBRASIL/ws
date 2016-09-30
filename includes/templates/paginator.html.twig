@@ -16,10 +16,25 @@
             </tbody>
         </table>
 
+
+            
         <div class="row_list_bottom">
 
-            {% include 'pagination.html.twig' %}
-
+            {% if linkPaginador is empty %}
+                {% include 'pagination.html.twig' %}
+            {% else %}
+                              <script>
+                    $(document).ready(function(){
+                        $.post('home.php/?servico={{linkPaginador}}', {'params' : {{paramsPaginator|json_encode()|raw}} }, function(d){
+                            $('#paginador_requested').html(d);
+                        });
+                    });
+                </script>
+                <div id="paginador_requested">
+                    <center><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></center>
+                </div>
+            {% endif %}
+            
             {% if data.getPages(pageCount) is defined %}
 
                 {% if data.getPages.totalItemCount > 3000 %}

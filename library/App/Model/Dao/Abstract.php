@@ -48,6 +48,16 @@ abstract class App_Model_Dao_Abstract extends Zend_Db_Table_Abstract
         return $this->fetchAll($where);
     }
 
+    public function getFalseCount()
+    {
+        $select = $this ->select()->setIntegrityCheck(false)    
+                        ->from(array('pg_catalog.pg_tables'),
+                        array( Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => 'tablename' ))
+                        ->limit(1);
+
+        return $select;
+    }
+        
     public function fetch($criteria = null, $order = null, $count = null, $offset = null)
     {
         return $this->fetchAll($criteria, $order, $count, $offset);

@@ -28,10 +28,37 @@ class Content_ItembibliotecaController extends App_Controller_Action_Twig {
             $this->_grupo = $this->identity->grupo['id'];
         }
     }
+    
+    
+    public function getPaginationAction()
+    {
+        $this->_helper->layout->disableLayout();
 
-    function gridAction() {
+        $params = $this->getRequest()->getParam('params');
+
+        foreach($params as $key => $value) { $this->setParam($key, $value); }
+
+        $busca = $this->_bo->getItemBibliotecaGrid($params['id_tib'], $params['_grupo']);
+
+        $paginator = Zend_Paginator::factory($busca['query']);
+
+        $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
+        $bO = array('cache_dir'=> APPLICATION_PATH.'/general/cache');
+        $cache = Zend_cache::factory('Core', 'File', $fO, $bO);
+        Zend_Paginator::setCache($cache);
 
 
+        $paginator  ->setCurrentPageNumber( !empty($params['page']) ? $params['page'] : 1)
+                    ->setItemCountPerPage( !empty($params['itens']) ? $params['itens'] : 50)
+                    ->setPageRange(6);
+
+        $this->view->paginator = $paginator;
+        $this->view->data      = array('data' => $paginator, 'header' => $this->header);
+        $this->view->file      = 'pagination.html.twig';
+    }
+    
+    function gridAction()
+    {
         $modelTPIB = new Content_Model_Bo_TpItemBiblioteca();
 
         $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
@@ -39,14 +66,23 @@ class Content_ItembibliotecaController extends App_Controller_Action_Twig {
         $this->header = $modelTPIB->getBasicConfigHeader($this->servico);
 
         $select = $this->_bo->getItemBibliotecaGrid($this->servico['id_tib'], $this->_grupo);
-        $this->_gridSelect = $select;
+
+        $this->_gridSelect = $select['query'];
+        $this->_countGridSelect = $select['count'];
         $this->view->filedir = $filedir;
 
         parent::gridAction();
+        
+        $modelServico     = new Config_Model_Bo_Servico();
+        $servicoPaginador = $modelServico->getServicoEmFerramentas('PAGINADORAJAXIB');
+
+        $this->view->data['linkPaginador'] = $servicoPaginador['id'];
+        $this->view->data['paramsPaginator']['id_tib'] = $this->servico['id_tib'];
+        $this->view->data['paramsPaginator']['_grupo'] = $this->_grupo;
     }
 
-    public function createAction() {
-
+    public function createAction()
+    {
         $templateItemBiblioteca = new Config_Model_Bo_Tib();
 
         $itemBiblioteca = $this->_bo;
@@ -114,7 +150,8 @@ class Content_ItembibliotecaController extends App_Controller_Action_Twig {
         $this->view->data = array('perfis' => array($perfil), 'campos' => $campos);
     }
 
-    public function insertAction() {
+    public function insertAction()
+    {
         $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
         $post = $this->getRequest()->getPost();
         $params = $this->getRequest()->getParams();
@@ -229,9 +266,8 @@ class Content_ItembibliotecaController extends App_Controller_Action_Twig {
         $this->_helper->json($response);
     }
 
-    public function retrieveAction() {
-
-
+    public function retrieveAction()
+    {
         $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
         $pathRastro = new Rastro();
         $rastro = $pathRastro->getPath($this->servico['id']);
@@ -316,7 +352,8 @@ class Content_ItembibliotecaController extends App_Controller_Action_Twig {
         $this->view->data = array('perfis' => array($perfil), 'campos' => $campos, 'id' => $idItemBiblioteca, 'filedir' => $filedir->url);
     }
 
-    public function updateAction() {
+    public function updateAction()
+    {
         $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
         $post = $this->getRequest()->getPost();
         $idIbMaster = $this->getRequest()->getParam('id');
