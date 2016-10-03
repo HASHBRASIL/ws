@@ -193,7 +193,7 @@
                 $rowPai->id     = $uuid;
             }
 
-            $rowPai->dt_inclusao = new zend_db_expr('now()');
+            $rowPai->dt_criacao = new zend_db_expr('now()');
             $rowPai->dtype = 'TbPessoa';
             if($nome2){
                 $rowPai->nome2 = $nome2;
