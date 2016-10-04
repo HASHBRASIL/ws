@@ -26,6 +26,18 @@ class Financial_ContasController extends App_Controller_Action_TwigCrud
 
         $this->view->bancoCombo = $bancoObj->getPairs();
         $this->view->tipoContaBancoCombo = $tipoContaBancoObj->getPairs();
+
+
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        $data = array();
+
+        foreach ($identity->timesColigados as $time) {
+            $data[$time['id']] = $time['nome'];
+        }
+
+        $this->view->comboGrupo = $data;
+
+
     }
 
     public function creditoAction()

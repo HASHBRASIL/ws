@@ -7,6 +7,48 @@ class Content_GedController extends App_Controller_Action_Twig {
      */
     protected $_bo;
 
+    public function uploadArquivosAction()
+    {
+        $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
+
+        $this->view->filedir = $filedir;
+
+        $this->identity  = Zend_Auth::getInstance()->getIdentity();
+
+        $id = $this->getParam('id');
+
+        if (!$id) {
+            $id =  $this->identity->time['id'];
+        }
+
+        $idGrupo = $this->getParam('id_grupo') ? $this->getParam('id_grupo') : $this->identity->grupo['id'];
+
+        $modelGrupo = new Config_Model_Bo_Grupo();
+        $grupos = $modelGrupo->listGruposFilho($id);
+
+        $data['grupos'] = $grupos;
+
+        $data['idTimeEscolhido'] = $idGrupo;
+
+        $filhos = $this->identity->servicos[$this->servico['id']]['filhos'];
+
+
+        foreach ($filhos as $id => $filho) {
+            if ($filho['ws_comportamento'] == 'filter') {
+                $idServico = $id;
+            }
+        }
+
+        $data['data']['servico'] = $idServico;
+        $data['posted']  = $this->getAllParams();
+
+        $this->view->file = 'upload-arquivos.html.twig';
+
+        $this->view->data = $data;
+//        echo "<PRE>";;
+//        var_dump($data);
+    }
+
     public function gridIbAction()
     {
         $this->gridGrupoAction();
@@ -22,6 +64,8 @@ class Content_GedController extends App_Controller_Action_Twig {
         $header[] = array('campo' => 'arquivo', 'label' => 'Documento', 'tipo' => 'image');
         $header[] = array('campo' => 'titulo', 'label' => 'Título');
         $header[] = array('campo' => 'dt_publicacao', 'label' => 'Data', 'tipo' => 'data');
+        $header[] = array('campo' => 'status', 'label' => 'Situação');
+        $header[] = array('campo' => 'ocr', 'label' => 'ocr', 'tipo' => 'hidden');
 //        $header[] = array('campo' => 'con_numero', 'label' => 'Número da Conta');
 //        $header[] = array('campo' => 'con_digito', 'label' => 'Dígito da Conta');
 //        $header[] = array('campo' => 'bco_nome', 'label' => 'Banco');
@@ -39,7 +83,6 @@ class Content_GedController extends App_Controller_Action_Twig {
         $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
 
         $this->view->filedir = $filedir;
-
 
         $this->identity  = Zend_Auth::getInstance()->getIdentity();
 
@@ -150,22 +193,22 @@ class Content_GedController extends App_Controller_Action_Twig {
                     //Fall through to next case;
                 case 'tiff':
 
-                    $retornoPai = $this->_saveFile($fileContents, $fileName);
+                    $retornoPai = $this->_saveFile($fileContents, $fileName, null, $ocr);
 
-                    $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
-
-                    $fileone = realpath($filedir->path . $retornoPai['caminho']);
-
-                    $fileTransformation = new Spatie\PdfToImage\Pdf($fileone);
-
-                    foreach (range(1, $fileTransformation->getNumberOfPages()) as $pageNumber) {
-                        $fileContents = $fileTransformation->setPage($pageNumber)->getImageData("xpto.jpg");
-                        $retorno = $this->_saveFile($fileContents, $fileName . '-' . $pageNumber . ".jpg", $retornoPai['ib'], $ocr);
-
-//                        $boRlAgrupadorFinanceiroIb->adicionarVinculo($retorno, null);
-
-                        $data[] = $retorno;
-                    }
+//                    $filedir = Zend_Registry::getInstance()->get('config')->get('filedir');
+//
+//                    $fileone = realpath($filedir->path . $retornoPai['caminho']);
+//
+//                    $fileTransformation = new Spatie\PdfToImage\Pdf($fileone);
+//
+//                    foreach (range(1, $fileTransformation->getNumberOfPages()) as $pageNumber) {
+//                        $fileContents = $fileTransformation->setPage($pageNumber)->getImageData("xpto.jpg");
+//                        $retorno = $this->_saveFile($fileContents, $fileName . '-' . $pageNumber . ".jpg", $retornoPai['ib'], $ocr);
+//
+////                        $boRlAgrupadorFinanceiroIb->adicionarVinculo($retorno, null);
+//
+//                        $data[] = $retorno;
+//                    }
 
                     break;
                 case 'doc':

@@ -12,7 +12,8 @@ class Base
 
     function __construct()
     {
-        $dbh = new PDO( 'pgsql:host=hash.cs72ftezvham.sa-east-1.rds.amazonaws.com;port=5432;dbname=hash;user=titaniumtech;password=TitaniuM2016#$%' );
+        $dbh = new PDO( 'pgsql:host=104.197.114.2;port=5432;dbname=hash;user=titaniumtech;password=TitaniuM2016#$%' );
+
         $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
         $this->dbh = $dbh;
     }

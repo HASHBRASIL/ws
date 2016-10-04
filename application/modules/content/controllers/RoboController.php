@@ -1682,4 +1682,19 @@ HTML;
 
         return $infoCracha;
     }
+
+    public function processaArquivosAction()
+    {
+        $this->identity  = Zend_Auth::getInstance()->getIdentity();
+        $servico = $this->identity->servicos[$this->getParam('servico')];
+
+        $boItemBiblioteca = new Content_Model_Bo_ItemBiblioteca();
+
+        while(1==1) {
+            $boItemBiblioteca->processaArquivos($servico);
+            exit('rodou 1 vez');
+            sleep(1);
+        }
+
+    }
 }

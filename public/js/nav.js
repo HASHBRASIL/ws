@@ -168,10 +168,20 @@ function changeGrupo(id){
 }
 
 function changeTime(id){
+    
+    if($('.lista-times .carregando-time').length > 0){ return false; }
+    $('#'+id).attr("disabled", 'disabled');
+    $('#'+id).append('<i class="carregando-time fa fa-spinner fa-pulse fa-1x fa-fw"></i>');
+    
     $.ajax({
         type: "POST",
         url: 'auth/grupo/change-time',
         data: { id: id},
+        error : function(){
+            alert('Erro ao carregar página');
+            $('#'+id).removeAttr("disabled");
+            $('#'+id+' .fa').fadeOut().stop().remove();
+        },
         success: function(data){
             if(data.success == true) {
                 window.location.href = 'default';
