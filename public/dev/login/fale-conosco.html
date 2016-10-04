@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="{{app.description}}">
+        <meta name="keywords" content="app, responsive, angular, bootstrap, dashboard, admin">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <title data-ng-bind="pageTitle()"></title>
+        <script src="assets/js/wow.min.js"></script>
+        <!-- Google fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="assets/css//font-awesome.min.css">
+        <!-- Packet CSS -->
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/slick.css">
+        <link rel="stylesheet" href="assets/css/slick-theme.css">
+        <link rel="stylesheet" href="assets/css/plugins.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+
+        <link rel="stylesheet" href="assets/css/main.css">
+        <!-- Packet Theme -->
+        <link rel="stylesheet" data-ng-href="assets/css/themes/{{ app.layout.theme }}.css" />
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="favicon.ico" />
+        <script>
+            wow = new WOW(
+              {
+                animateClass: 'animated',
+                offset:       100,
+                callback:     function(box) {
+                  console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+                }
+              }
+            );
+            wow.init();
+            document.getElementById('moar').onclick = function() {
+                var section = document.createElement('section');
+                section.className = 'section--purple wow fadeInDown';
+                this.parentNode.insertBefore(section, this);
+            };
+        </script>
+    </head>
+    <body ng-controller="AppCtrl" class="ng-scope">
+        <!-- uiView:  -->
+        <div id="app" class="lyt-2 ng-scope app-navbar-fixed app-sidebar-fixed fale-conosco">
+                <!-- start: LANDING PAGE -->
+                <div class="landing-page">
+                    <div id="section-0" class="content-fale-conosco">
+                        <div class="navbar navbar-default" id="landing-header">
+                            <!-- start: TOP NAVIGATION CONTAINER -->
+                            <div class="container">
+                                <div class="navbar-header">
+                                    <!-- start: RESPONSIVE MENU TOGGLER -->
+                                    <a class="landing-menu-toggler btn btn-red hidden-sm hidden-md hidden-lg mobile-button" id="landing-menu-toggler">
+                                        <span class="sr-only">Toggle navigation</span> <i class="fa fa-bars"></i>
+                                    </a>
+                                    <!-- end: RESPONSIVE MENU TOGGLER -->
+                                    <!-- start: LOGO -->
+                                    <a href="index.html" class="navbar-brand">
+                                        <img src="assets/images/logo.png" alt="Clip-Two">
+                                    </a>
+                                    <!-- end: LOGO -->
+                                </div>
+                                <div class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="active"><a href="#">Home</a></li>
+                                        <li><a href="http://blog.titaniumtech.com.br/">Blog</a></li>
+                                        <li><a href="http://suporte.titaniumtech.com.br/">Suporte</a></li>
+                                        <li><a href="#">Contato</a></li>
+                                        <li><a href="#">Login</a></li>
+                                    </ul>
+                                    <!-- start: MENU TOGGLER FOR MOBILE DEVICES -->
+                                    <div class="close-handle visible-xs-block menu-toggler">
+                                        <div class="arrow-left"></div>
+                                        <div class="arrow-right"></div>
+                                    </div>
+                                    <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
+                                </div>
+                            </div>
+                            <!-- end: TOP NAVIGATION CONTAINER -->
+                        </div>
+                        <section class="container-fluid container-fullw padding-bottom-30">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-fale-conosco">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <h2>Fale conosco</h2>
+                                                <h5>Envie-nos a sua necessidade, elogio ou sugestão. Teremos um grande prazer em ouvi-lo. </h5>
+                                            </div>
+                                            <form>
+                                                <div class="item-form col-md-12 col-sm-12 col-xs-12">
+                                                    <label>Nome:</label>
+                                                    <input type="text">
+                                                </div>
+                                                <div class="item-form col-md-8 col-sm-12 col-xs-12">
+                                                    <label>E-mail:</label>
+                                                    <input type="email" required>
+                                                </div>
+                                                <div class="item-form col-md-4 col-sm-12 col-xs-12">
+                                                    <label>Telefone:</label>
+                                                    <input type="text" required>
+                                                </div>
+                                                <div class="item-form col-md-12 col-sm-12 col-xs-12">
+                                                    <label>Assunto:</label>
+                                                    <select>
+                                                        <option>Selecione</option>
+                                                        <option value="">Lorem ipsum</option>
+                                                        <option value="">Lorem ipsum 2</option>
+                                                        <option value="">Lorem ipsum 3</option>
+                                                    </select>
+                                                </div>
+                                                <div class="item-form col-md-12 col-sm-12 col-xs-12">
+                                                    <label>Mensagem:</label>
+                                                    <textarea></textarea>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 btn-action">
+                                                    <button class="btn-enviar btn btn-dark-blue">Enviar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- start: SECTION 5 -->
+                    <div id="section-5">
+                        <section class="container-fluid container-fullw padding-bottom-30 section-contact">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2 class="text-center">Entre em contato</h2>
+                                        <p class="center margin-bottom-30">
+                                            Veja aqui como entrar em contato com a Titanium.
+                                            Estaremos encantados em ouvir a sua necessidade, elogio ou sugestão.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-lg-offset-3">
+                                        <address>
+                                            <!-- <h4 class="margin-bottom-5 text-red">Escritório:</h4> -->
+                                            SAAN Quadra 2 Lote 675
+                                            <br>
+                                            BRASIL - BRASÍLIA - DF
+                                            <br>
+                                            +55 6130358333
+                                        </address>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <!-- <h4 class="margin-bottom-5 text-red">Get in touch</h4> -->
+                                        <p>
+                                            suporte@hash.ws - <a href="http://suporte.hash.ws">suporte.hash.ws</a>
+                                        </p>
+                                        <!-- <button class="btn-contato btn btn-default">Fale Conosco</button> -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <a href="#" class="btn btn-red margin-top-30">
+                                            Assine a nossa newsletter
+                                        </a>
+                                        <p class="margin-top-10">
+                                            Siga-nos nas redes sociais:
+                                        </p>
+                                        <div class="social-icons">
+                                            <ul>
+                                                <li class="social-twitter">
+                                                    <a target="_blank" href="#">
+                                                        Twitter
+                                                    </a>
+                                                </li>
+                                                <li class="social-linkedin">
+                                                    <a target="_blank" href="#">
+                                                        Linkedin
+                                                    </a>
+                                                </li>
+                                                <li class="social-facebook">
+                                                    <a target="_blank" href="#">
+                                                        Facebook
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <p class="margin-top-20">
+                                            ©  2016 TITANIUM TECH
+                                            <br>
+                                            <a href="http://termodeuso.hash.ws" target="_blank">Termo de uso</a> | <a href="http://privacidade.hash.ws" target="_blank">Política de privacidade</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- end: SECTION 5 -->
+                </div>
+                <!-- end: LANDING PAGE -->
+
+            </div>
+        </div>
+        <!-- jQuery -->
+        <script src="assets/js/jquery.min.js"></script>
+        <!-- Packet Scripts -->
+        <script src="assets/js/landing-header.js"></script>
+        <script src="assets/js/slick.min.js"></script>
+        <script src="assets/js/countUp.min.js"></script>
+        <script>
+            var options = {
+              useEasing : true,
+              useGrouping : true,
+              separator : ',',
+              decimal : '.',
+              prefix : '',
+              suffix : ''
+            };
+            var c1 = new CountUp("c1", 0, 8522, 0, 2.5, options);
+            var c2 = new CountUp("c2", 0, 532, 0, 2.5, options);
+            var c3 = new CountUp("c3", 0, 118, 0, 2.5, options);
+            var c4 = new CountUp("c4", 0, 4832, 0, 2.5, options);
+            c1.start();
+            c2.start();
+            c3.start();
+            c4.start();
+        </script>
+    </body>
+</html>
