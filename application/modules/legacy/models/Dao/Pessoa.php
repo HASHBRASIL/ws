@@ -501,41 +501,17 @@ QUERY;
 
             $identity = Zend_Auth::getInstance()->getIdentity();
 
-            // x($term,false);
-            // x($identity->time['id']);
+            $sqlLimit = 'limit ?';
+            
+            if (!is_numeric($limit)) {
+                $limit = 1000;
+            }
 
-
-            // $where = $this->getDefaultAdapter()->quoteInto("'?'", "%$term%");
-            // $time = $this->getDefaultAdapter()->quoteInto("'?'", $identity->time['id']);
-            // $offset = $this->getDefaultAdapter()->quoteInto("?", $page*$limit);
-            // $limit = $this->getDefaultAdapter()->quoteInto("?", (int) $limit);
-
-//             $query = <<<QUERY
-// select pes.id,json_object(array_agg(tinf.metanome),array_agg(inf.valor)) as obj from (select distinct id from (select id,valor from (select pes.id,inf.valor from rl_grupo_informacao rgi join tb_pessoa pes on (rgi.id_pessoa = pes.id)
-// join (select gs.id from (select id,id_pai,id_representacao from (with recursive gettimes as (select id,id_pai,id_representacao from tb_grupo where id = :time1
-// union select g.id,g.id_pai,g.id_representacao from tb_grupo g join gettimes gt on (gt.id_pai = g.id))select gs.id, gs.id_pai, gs.id_representacao from gettimes gs
-// join tb_grupo_metadata tgm on (gs.id = tgm.id_grupo) where tgm.metanome = 'ws_infopublica') cima union select id,id_pai,id_representacao from
-// (with recursive getfilhos as (select id,id_pai,id_representacao from tb_grupo where id = :time2 union select g.id,g.id_pai,g.id_representacao from tb_grupo g join
-// getfilhos gf on (gf.id = g.id_pai) ) select id,id_pai,id_representacao from getfilhos) baixo) gs where gs.id_representacao is not null) grp on (rgi.id_grupo = grp.id)
-// join tb_informacao inf on (pes.id = inf.id_pessoa and inf.id = rgi.id_info) join tp_informacao tinf on (inf.id_tinfo = tinf.id) where tinf.metanome in ('NOMEFANTASIA')
-// and inf.valor ilike :cons1 union select pes.id,inf.valor from rl_grupo_informacao rgi join tb_pessoa pes on (rgi.id_pessoa = pes.id) join (select gs.id from
-// (select id,id_pai,id_representacao from (with recursive gettimes as ( select id,id_pai,id_representacao from tb_grupo where id = :time3 union
-// select g.id,g.id_pai,g.id_representacao from tb_grupo g join gettimes gt on (gt.id_pai = g.id))select gs.id, gs.id_pai, gs.id_representacao from gettimes gs
-// join tb_grupo_metadata tgm on (gs.id = tgm.id_grupo) where tgm.metanome = 'ws_infopublica') cima union select id,id_pai,id_representacao from
-// (with recursive getfilhos as (select id,id_pai,id_representacao from tb_grupo where id = :time4 union select g.id,g.id_pai,g.id_representacao from tb_grupo g join
-// getfilhos gf on (gf.id = g.id_pai)) select id,id_pai,id_representacao from getfilhos) baixo) gs where gs.id_representacao is not null) grp on (rgi.id_grupo = grp.id)
-// join tb_informacao inf on (pes.id = inf.id_pessoa and inf.id = rgi.id_info) join tp_informacao tinf on (inf.id_tinfo = tinf.id) where tinf.metanome in ('RAZAOSOCIAL')
-// and inf.valor ilike :cons2 union select pes.id,inf.valor from rl_grupo_informacao rgi join tb_pessoa pes on (rgi.id_pessoa = pes.id) join (select gs.id from
-// (select id,id_pai,id_representacao from (with recursive gettimes as (select id,id_pai,id_representacao from tb_grupo where id = :time5 union select g.id,g.id_pai,
-// g.id_representacao from tb_grupo g join gettimes gt on (gt.id_pai = g.id))select gs.id, gs.id_pai, gs.id_representacao from gettimes gs
-// join tb_grupo_metadata tgm on (gs.id = tgm.id_grupo) where tgm.metanome = 'ws_infopublica') cima union select id,id_pai,id_representacao from ( with recursive
-// getfilhos as (select id,id_pai,id_representacao from tb_grupo where id = :time6 union select g.id,g.id_pai,g.id_representacao from tb_grupo g join getfilhos gf on
-// (gf.id = g.id_pai)) select id,id_pai,id_representacao from getfilhos ) baixo) gs where gs.id_representacao is not null) grp on (rgi.id_grupo = grp.id)
-// join tb_informacao inf on (pes.id = inf.id_pessoa and inf.id = rgi.id_info) join tp_informacao tinf on (inf.id_tinfo = tinf.id) where tinf.metanome in ('NOMEPESSOA')
-// and inf.valor ilike :cons3) consulta order by valor) cons limit :limit offset :offset) pes join tb_informacao inf on (inf.id_pessoa = pes.id) join tp_informacao tinf on (inf.id_tinfo = tinf.id) where tinf.metanome =
-// ANY(string_to_array('NOMEPESSOA,RAZAOSOCIAL,NOMEFANTASIA',',')) group by pes.id
-// QUERY;
-
+            if($page >= 1){
+                $sqlLimit = 'limit ? OFFSET ?';
+                $limit = array($limit, ($page - 1 ) * $limit);
+            }
+                
             $query="SELECT id, case when ts_rank_cd(idx_nome, plainto_tsquery(?)) >= ts_rank_cd(idx_nome2, plainto_tsquery(?)) then nome
                     when ts_rank_cd(idx_nome, plainto_tsquery(?)) < ts_rank_cd(idx_nome2, plainto_tsquery(?)) then nome2
                     end as text
@@ -543,22 +519,12 @@ QUERY;
                     SELECT id, nome, nome2, idx_nome, idx_nome2
                       FROM tb_pessoa_teste_indice
                       WHERE ((idx_nome @@ plainto_tsquery(?)) or (idx_nome2 @@ plainto_tsquery(?)))
-                    ) AS t1 ORDER BY ts_rank_cd(idx_nome, plainto_tsquery(?)) DESC, ts_rank_cd(idx_nome, plainto_tsquery(?)) DESC limit ?;";
+                    ) AS t1 ORDER BY ts_rank_cd(idx_nome, plainto_tsquery(?)) DESC, ts_rank_cd(idx_nome, plainto_tsquery(?)) DESC $sqlLimit;";
 
             $db = Zend_Db_Table::getDefaultAdapter();
 
             $stmt = $db->prepare($query);
-            // $stmt->bindParam(':time1',$identity->time['id']);
-            // $stmt->bindParam(':time2',$identity->time['id']);
-            // $stmt->bindParam(':time3',$identity->time['id']);
-            // $stmt->bindParam(':time4',$identity->time['id']);
-            // $stmt->bindParam(':time5',$identity->time['id']);
-            // $stmt->bindParam(':time6',$identity->time['id']);
-            // $stmt->bindValue(':cons1',"%$term%");
-            // $stmt->bindValue(':cons2',"%$term%");
-            // $stmt->bindValue(':cons3',"%$term%");
-            // $stmt->bindParam(':limit',$limit);
-            // $stmt->bindValue(':offset',$page*$limit);
+
             $stmt->bindValue(1,$term);
             $stmt->bindValue(2,$term);
             $stmt->bindValue(3,$term);
@@ -567,7 +533,15 @@ QUERY;
             $stmt->bindValue(6,$term);
             $stmt->bindValue(7,$term);
             $stmt->bindValue(8,$term);
-            $stmt->bindValue(9,$limit);
+            
+            if(is_array($limit)){
+                $stmt->bindValue(9,$limit[0]);
+                $stmt->bindValue(10,$limit[1]);
+            }else{
+                $stmt->bindValue(9,$limit);
+            }
+            
+            
             $stmt->execute();
             $rows = $stmt->fetchAll();
 
