@@ -256,6 +256,11 @@ abstract class App_Model_Bo_Abstract
         }
 
         //x($select->__toString());
+
+        if(is_array($select) && isset($select['query'])){
+            $select = $select['query'];
+        }
+        
         $this->_dao->fetchPaginator($select, $options);
 //        var_dump($select->__toString());
 //        exit;
