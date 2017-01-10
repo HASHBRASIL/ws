@@ -3,7 +3,7 @@
     //require_once "UUID.php";
     //require_once "functions.php";
     x($SERVICO);
-    $fieldsPessoa      = str_replace( ' ', '', "id,        metanome,                  nome, dt_inclusao" );
+    $fieldsPessoa      = str_replace( ' ', '', "id,        metanome,                  nome, dt_criacao" );
     $valuesPessoa      = str_replace( ' ', '', ":idPessoa, 'teste_criacao_insertime', :nome" );
     $queryPessoa       = $dbh->prepare( "INSERT INTO tb_pessoa( $fieldsPessoa ) VALUES( $valuesPessoa, ( select current_timestamp ) )" );
 
