@@ -49,7 +49,7 @@
             $uuidPessoa = $nome;
         }else{
             $uuidPessoa = UUID::v4();
-            $queryInsertPessoa = $dbh->prepare("INSERT INTO tb_pessoa (id, dtype, dt_inclusao, nome) VALUES (:id, 'TbPessoa', (select current_timestamp), :nome);");
+            $queryInsertPessoa = $dbh->prepare("INSERT INTO tb_pessoa (id, dtype, dt_criacao, nome) VALUES (:id, 'TbPessoa', (select current_timestamp), :nome);");
             $queryInsertPessoa->bindParam(':id', $uuidPessoa);
             $queryInsertPessoa->bindParam(':nome', $nome);
             $queryInsertPessoa->execute();
