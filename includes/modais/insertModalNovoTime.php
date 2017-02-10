@@ -14,7 +14,7 @@
     $descricaoForm     = $_POST['descricao'];
     $userId            = $_POST['userID'];
 
-    $fieldsPessoa      = str_replace( ' ', '', "id,        metanome,                  nome, dt_inclusao" );
+    $fieldsPessoa      = str_replace( ' ', '', "id,        metanome,                  nome, dt_criacao" );
     $valuesPessoa      = str_replace( ' ', '', ":idPessoa, 'teste_criacao_insertime', :nome" );
     $queryPessoa       = $dbh->prepare( "INSERT INTO tb_pessoa( $fieldsPessoa ) VALUES( $valuesPessoa, ( select current_timestamp ) )" );
 
