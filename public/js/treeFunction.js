@@ -126,6 +126,7 @@ $(document).ready(function()
                   "data_callback": function(){alert(444)},
               }
         },
+        
         "types" : {
             "#" : {"max_depth" : 5, "valid_children" : ["root"]},
             "root" : {"icon" : "glyphicon glyphicon-file", "valid_children" : ["detalhe", "root"]},
@@ -134,14 +135,21 @@ $(document).ready(function()
             "mensageria-time" : {'icon' : "ico-mensageria-time"},
             "mensageria" : {'icon' : "fa fa-hashtag"},
             "default" : {'icon' : "fa fa-folder-o"},
+        }, "dnd"  :   {
+            "drop_target"   :   true,
+            "drag_check"    :   function(data) { return true;  } 
         },
         "plugins" : [
-            "dnd", "contextmenu", "search", "state", "types", "json_data"
+            "dnd", "contextmenu", "search", "state", "types"/*, "json_data"*/
         ]
-    }).on('paste.jstree', function(e, data){    
-        //evento para colar
-    }).on('select_node.jstree', selecionaNode)
+    })
+//    .on('paste.jstree', function(e, data){    
+//        //evento para colar
+//        console.log(333)
+//    })
+    .on('select_node.jstree', selecionaNode)
     .on("move_node.jstree", function (e, data) {
+        console.log(data)
         var objeto = {  
                         'uuid' : data.node.id,
                         'idPai' : data.node.parent,
@@ -192,6 +200,9 @@ $(document).ready(function()
             salvaGrupo({nome : param1.text, idPai : param2.id, pos : param3});
         }else if('rename_node' === nomeEvento){
             salvaGrupo({nome : param3, uuid : param1.id, idPai : param2.id});
+        }else if('move_node' === nomeEvento){
+            console.log(arguments)
+            return true;
         }
     }
 
